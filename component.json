@@ -15,5 +15,8 @@
   "repository": "wooorm/franc",
   "scripts" : [
     "index.js"
+  ],
+  "json" : [
+    "data.json"
   ]
 }
