@@ -76,4 +76,4 @@ On a MacBook Air, it runs 86 tests, 8 times per second (total: 602 op/s).
 
 ## License
 
-  MIT
+  LGPL
