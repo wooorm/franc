@@ -1,0 +1,19 @@
+{
+  "name": "franc",
+  "version": "0.0.1",
+  "description": "Detect the language of text",
+  "license": "LGPL",
+  "keywords": [
+    "natural",
+    "language",
+    "writing",
+    "system",
+    "language",
+    "detect",
+    "guess"
+  ],
+  "repository": "wooorm/franc",
+  "scripts" : [
+    "index.js"
+  ]
+}

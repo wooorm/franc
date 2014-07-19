@@ -1,0 +1,61 @@
+{
+  "name": "franc",
+  "version": "0.0.1",
+  "description": "Detect the language of text",
+  "license": "LGPL",
+  "keywords": [
+    "natural",
+    "language",
+    "writing",
+    "system",
+    "language",
+    "detect",
+    "guess"
+  ],
+  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "devDependencies": {
+    "eslint": "^0.7.4",
+    "istanbul": "^0.3.0",
+    "jscs": "^1.5.3",
+    "matcha": "^0.5.0",
+    "mocha": "~1.20.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/franc.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/franc.spec.js",
+    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/franc.spec.js",
+    "lint": "npm run lint-api && npm run lint-test && npm run lint-benchmark && npm run lint-style",
+    "lint-api": "node_modules/.bin/eslint index.js build-fixtures-file.js build-supported-languages.js --env node --env browser --rule 'quotes: [2, single]'",
+    "lint-test": "node_modules/.bin/eslint spec/franc.spec.js --env node --env mocha --rule 'quotes: [2, single]'",
+    "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global 'suite, bench, set' --rule 'quotes: [2, single]'",
+    "lint-style": "node_modules/.bin/jscs index.js build-fixtures-file.js build-supported-languages.js benchmark/index.js spec/franc.spec.js --reporter=inline",
+    "install-browser-test": "npm install browserify",
+    "build-fixtures": "node build-fixtures-file.js",
+    "build-supported-languages": "node build-supported-languages.js",
+    "build-browser-test": "node_modules/.bin/browserify spec/franc.spec.js -o spec/browser.spec.js",
+    "install-benchmark": "npm install guesslanguage languagedetect vac",
+    "benchmark": "node_modules/.bin/matcha",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/franc.spec.js",
+    "prepublish": "npm run build-fixtures && npm run build-supported-languages",
+    "make": "npm run lint && npm run coverage"
+  },
+  "testling": {
+    "files": "spec/franc.spec.js",
+    "harness": "mocha",
+    "browsers": [
+      "iexplore/latest",
+      "chrome/latest",
+      "chrome/canary",
+      "firefox/latest",
+      "firefox/nightly",
+      "opera/latest",
+      "opera/next",
+      "safari/latest",
+      "iphone/latest",
+      "android-browser/latest"
+    ]
+  }
+}
