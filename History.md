@@ -1,5 +1,5 @@
 
-n.n.n / 2014-07-21
+0.1.0 / 2014-07-21
 ==================
 
  * Rewrote data.json to be much smaller, half its gziped weight (fixes #3)
