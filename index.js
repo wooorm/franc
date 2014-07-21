@@ -41,6 +41,22 @@ var models,
 
 models = require('./data.json');
 
+(function () {
+    var languageModel, languageName, iterator, length, newModel;
+
+    for (languageName in models) {
+        languageModel = models[languageName].split('|');
+
+        iterator = -1;
+        length = languageModel.length;
+        models[languageName] = newModel = {};
+
+        while (++iterator < length) {
+            newModel[languageModel[iterator]] = iterator;
+        }
+    }
+})();
+
 MAX_LENGTH = 4096;
 MIN_LENGTH = 10;
 MAX_DIFFERENCE = 300;
