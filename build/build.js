@@ -566,11 +566,12 @@ buttonElement.addEventListener('click', detectLanguage);
 wrapperElement.style.display = 'none';
 
 function detectLanguage() {
-    visualiseResults(franc.all(inputElement.textContent));
+    visualiseResults(franc.all(inputElement.value));
 }
 
 function visualiseResults(results) {
     wrapperElement.style.display = '';
+    console.log('visualiseResults');
     cleanOutputElement();
     results = results.map(createResult);
     
@@ -578,6 +579,7 @@ function visualiseResults(results) {
         outputElement.appendChild(node);
     });
 
+    console.log('visualiseResults:2');
     results[0].classList.add('franc__probable')
 }
 
