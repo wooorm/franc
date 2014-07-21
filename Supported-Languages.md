@@ -1,9 +1,9 @@
 Supported Languages:
 =================
 
-† — Almost all language codes are in iso-639-2, two-letter if available, otherwise three-letter. Both pt-BR (Brazilian Portuguese) and pt-PT (European Portuguese) are the only exceptions.
-‡ — Undetermined languages will result in the "und" language code
-§ — Portuguese
+- † — Almost all language codes are in iso-639-2, two-letter if available, otherwise three-letter. Both pt-BR (Brazilian Portuguese) and pt-PT (European Portuguese) are the only exceptions.
+- ‡ — Undetermined languages will result in the "und" language code
+- § — Portuguese
 
 | name | iso-639-2† | example |
 |:----:|:---------:|:-------:|

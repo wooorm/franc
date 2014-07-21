@@ -10,11 +10,11 @@ fs.writeFileSync('Supported-Languages.md',
     'Supported Languages:\n' +
     '=================\n' +
     '\n' +
-    '† — Almost all language codes are in iso-639-2, two-letter if ' +
+    '- † — Almost all language codes are in iso-639-2, two-letter if ' +
     'available, otherwise three-letter. Both pt-BR (Brazilian Portuguese) ' +
     'and pt-PT (European Portuguese) are the only exceptions.\n' +
-    '‡ — Undetermined languages will result in the "und" language code\n' +
-    '§ — Portuguese\n' +
+    '- ‡ — Undetermined languages will result in the "und" language code\n' +
+    '- § — Portuguese\n' +
     '\n' +
     '| name | iso-639-2† | example |\n' +
     '|:----:|:---------:|:-------:|\n' +
