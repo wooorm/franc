@@ -45,6 +45,8 @@ franc.all('Heghlu\'meH QaQ jajvam').slice(0, 3); /*
 franc.all(''); // [ [ 'und', 1 ] ]
 ```
 
+**Note!** Franc returns the `"und"` language code for an undetermined language. this happens when the input value is to short to give a significant answer.
+
 ## Supported languages
 
 franc supports 86 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
