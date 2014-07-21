@@ -3,7 +3,7 @@
   "private" : true,
   "repository": "wooorm/franc-gh-pages",
   "dependencies": {
-    "wooorm/franc": "^0.0.2"
+    "wooorm/franc": "0.1.0"
   },
   "scripts": [
     "index.js"
