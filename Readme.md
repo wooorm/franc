@@ -4,14 +4,19 @@ Detect the language of text.
 
 ## Installation
 
-NPM:
+npm:
 ```sh
 $ npm install franc
 ```
 
-Component.js:
+Component:
 ```sh
 $ component install wooorm/franc
+```
+
+Bower:
+```sh
+$ bower install franc
 ```
 
 ## Usage
