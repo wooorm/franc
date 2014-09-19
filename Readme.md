@@ -29,32 +29,35 @@ franc('এটি একটি ভাষা একক IBM স্ক্রিপ�
 franc('Alle mennesker er født frie og'); // "no"
 franc(''); // "und"
 
-franc.all('O Brasil caiu 26 posições em'); /*
+franc.all('O Brasil caiu 26 posições em');
+/*
  * [
- *   [ 'pt-BR', 5242 ],
- *   [ 'pt-PT', 7293 ],
- *   [ 'pt', 6181 ],
- *   [ 'ca', 6991 ],
- *   [ 'es', 7074 ],
+ *   [ 'pt-BR', 4342 ],
+ *   [ 'pt-PT', 6393 ],
+ *   [ 'pt', 5281 ],
+ *   [ 'ca', 6091 ],
+ *   [ 'cs', 6137 ]
  *   ...
  * ]
  */
 
-franc.all('Heghlu\'meH QaQ jajvam').slice(0, 3); /*
+franc.all('Heghlu\'meH QaQ jajvam').slice(0, 3);
+/*
  * [
- *   [ 'tlh', 4624 ], // 'eH, tlhIngan, 'e' H*'t*gh QaQ!
- *   [ 'az', 5929 ],
- *   [ 'lv', 6084 ]
+ *   [ 'tlh', 4253 ], // 'eH, tlhIngan, 'e' H*'t*gh QaQ!
+ *   [ 'haw', 5472 ],
+ *   [ 'az', 5537 ]
  * ]
  */
+
 franc.all(''); // [ [ 'und', 1 ] ]
 ```
 
-**Note!** Franc returns the `"und"` language code for an undetermined language. this happens when the input value is to short to give a significant answer.
+> Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is to short to give a significant answer.
 
 ## Supported languages
 
-franc supports 86 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 86 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
 ## Other Language detection libraries
 
@@ -71,14 +74,14 @@ $ npm run install-benchmark # Just once of course.
 $ npm run benchmark
 ```
 
-On a MacBook Air, it runs 86 tests, 8 times per second (total: 602 op/s).
+On a MacBook Air, it runs 86 tests, 11 times per second (total: 946 op/s).
 
 ```
          benchmarks * 86 paragraphs in different languages
-  8 op/s » franc -- this module
-  5 op/s » guesslanguage
-  4 op/s » languagedetect
-  5 op/s » vac
+  11 op/s » franc -- this module
+   7 op/s » guesslanguage
+   6 op/s » languagedetect
+   6 op/s » vac
 ```
 
 ## License
