@@ -13,10 +13,10 @@
     "guess"
   ],
   "repository": "wooorm/franc",
-  "scripts" : [
+  "scripts": [
     "index.js"
   ],
-  "json" : [
+  "json": [
     "data.json"
   ]
 }
