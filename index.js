@@ -36,33 +36,94 @@
 
 var models,
     utilities,
-    MAX_LENGTH, MIN_LENGTH, MAX_DIFFERENCE, SINGLETONS, UNDETERMINED,
-    ALL_LATIN, CYRILLIC, ARABIC, DEVANAGARI, PT,
-    unicodeBlocks, singletonsLength, unicodeBlockCount;
+    FOURTY_PERCENT,
+    TWENTY_PERCENT,
+    MAX_LENGTH,
+    MIN_LENGTH,
+    MAX_DIFFERENCE,
+    SINGLETONS,
+    ALL_LATIN,
+    CYRILLIC,
+    ARABIC,
+    DEVANAGARI,
+    PT,
+    unicodeBlocks,
+    singletonsLength,
+    unicodeBlockCount;
+
+/**
+ * Load `trigram-utils`.
+ */
 
 utilities = require('trigram-utils');
 
+/**
+ * Load trigram data files.
+ */
+
 models = require('./data.json');
 
+/**
+ * Construct trigram dictionaries.
+ */
+
 (function () {
-    var languageModel, languageName, iterator, length, newModel;
+    var languageModel,
+        languageName,
+        index,
+        newModel;
 
     for (languageName in models) {
         languageModel = models[languageName].split('|');
 
-        iterator = -1;
-        length = languageModel.length;
+        index = languageModel.length;
         models[languageName] = newModel = {};
 
-        while (++iterator < length) {
-            newModel[languageModel[iterator]] = iterator;
+        while (index--) {
+            newModel[languageModel[index]] = index;
         }
     }
 })();
 
+/**
+ * Maximum sample length.
+ */
+
 MAX_LENGTH = 4096;
+
+/**
+ * Minimum sample length.
+ */
+
 MIN_LENGTH = 10;
+
+/**
+ * The maximum distance to add when a given trigram does
+ * not exist in a trigram dictionary.
+ */
+
 MAX_DIFFERENCE = 300;
+
+/**
+ * When the characters of certain scripts account for
+ * 40% (or higher) of a string, the string is tested
+ * against fewer than all trigrams.
+ */
+
+FOURTY_PERCENT = 0.4;
+
+/**
+ * When the characters of certain scripts account for
+ * 20% (or higher) of a string, the string is tested
+ * against fewer than all trigrams.
+ */
+
+TWENTY_PERCENT = 0.2;
+
+/**
+ * Some scripts are exclusivly used by a single language.
+ * This list contains this mapping.
+ */
 
 SINGLETONS = [
   ['armenian', 'hy'],
@@ -86,9 +147,16 @@ SINGLETONS = [
   ['tibetan', 'bo']
 ];
 
+/**
+ * Cached length of the above singletons.
+ */
+
 singletonsLength = SINGLETONS.length;
 
-UNDETERMINED = [['und', 1]];
+/**
+ * A list of all languages which use the Latin
+ * script (both basic and extended).
+ */
 
 ALL_LATIN = [
     /* Basic Latin */
@@ -101,15 +169,34 @@ ALL_LATIN = [
     'sq', 'sv', 'tl', 'tr', 've', 'vi'
 ];
 
+/**
+ * A list of all languages which use the Cyrillic script.
+ */
+
 CYRILLIC = ['bg', 'kk', 'ky', 'mk', 'mn', 'ru', 'sr', 'uk', 'uz'];
+
+/**
+ * A list of all languages which use the Arabic script.
+ */
 
 ARABIC = ['ar', 'fa', 'ps', 'ur'];
 
+/**
+ * A list of all languages which use the Devanagari script.
+ */
+
 DEVANAGARI = ['hi', 'ne'];
+
+/**
+ * The two supported portuguese languages.
+ */
 
 PT = ['pt-BR', 'pt-PT'];
 
-/* Unicode block expressions. */
+/**
+ * Expressions to match certain scripts.
+ */
+
 unicodeBlocks = [
     ['arabic', /[\u0600-\u06FF]/g],
     ['arabicPresentationFormsA', /[\uFB50-\uFDFF]/g],
@@ -147,37 +234,49 @@ unicodeBlocks = [
     ['tibetan', /[\u0F00-\u0FFF]/g]
 ];
 
+/**
+ * Cached length of the above script expression.
+ */
+
 unicodeBlockCount = unicodeBlocks.length;
 
 /**
- * Deep regular sort on the number at `1` in both objects. E.g. [1, 5, 20];
+ * Deep regular sort on the number at `1` in both objects.
  *
- * @param {Array} a
- * @param {Array} b
- * @api private
+ * @example
+ *   > [[0, 20], [0, 1], [0, 5]].sort(sort);
+ *   // [[0, 1], [0, 5], [0, 20]]
+ *
+ * @param {{1: number}} a
+ * @param {{1: number}} b
  */
+
 function sort(a, b) {
     return a[1] - b[1];
 }
 
 /**
- * Get the ditsance between an array of trigram--count tuples, and a
- * language-model
+ * Get the distance between an array of trigram--count tuples,
+ * and a language dictionary.
  *
- * @param {Array<string, number>[]} trigrams - An array containing
- *     trigram--count tupples.
- * @param {Object} model - A language model.
- * @return {number} - The difference between the two.
- * @api private
+ * @param {Array.<Array.<string, number>>} trigrams - An
+ *   array containing trigram--count tupples.
+ * @param {Object.<string, number>} model - Object
+ *   containing weighted trigrams.
+ * @return {number} - The distance between the two.
  */
-function getDistance(trigrams, model) {
-    var distance = 0,
-        iterator = -1,
-        length = trigrams.length,
-        trigram, difference;
 
-    while (++iterator < length) {
-        trigram = trigrams[iterator];
+function getDistance(trigrams, model) {
+    var distance,
+        index,
+        trigram,
+        difference;
+
+    distance = 0;
+    index = trigrams.length;
+
+    while (index--) {
+        trigram = trigrams[index];
 
         if (trigram[0] in model) {
             difference = trigram[1] - model[trigram[0]];
@@ -196,51 +295,58 @@ function getDistance(trigrams, model) {
 }
 
 /**
- * Get the difference between an array of trigram--count tuples, and multiple
- * languages.
+ * Get the distance between an array of trigram--count tuples,
+ * and multiple languages.
  *
- * @param {Array<string, number>[]} trigrams - An array containing
- *     trigram--count tupples.
- * @param {string[]} languages - A list of languages.
- * @return {Array<string, number>[]} - An array containing language--distance
- *     tupples.
- * @api private
+ * @param {Array.<Array.<string, number>>} trigrams - An
+ *   array containing trigram--count tupples.
+ * @param {Array.<string>} languages - multiple language
+ *   codes to test against.
+ * @return {Array.<Array.<string, number>>} An array
+ *   containing language--distance tuples.
  */
+
 function getDistances(trigrams, languages) {
-    var distances, iterator, length, language, model;
+    var distances,
+        index,
+        language,
+        model;
 
     distances = [];
-    iterator = -1;
-    length = languages.length;
+    index = languages.length;
 
-    while (++iterator < length) {
-        language = languages[iterator];
+    while (index--) {
+        language = languages[index];
         model = models[language];
 
-        distances[iterator] = [language, getDistance(trigrams, model)];
+        distances[index] = [language, getDistance(trigrams, model)];
     }
 
     return distances.sort(sort);
 }
 
 /**
- * Get an object listing how many characters in a certain script occur in
- * the given value.
+ * Get an object listing, from a given value, per script
+ * the ammount of characters.
  *
- * @param {string} value - The value to parse.
- * @return {Object.<string, number>} - An object containing each script in
- *     `unicodeBlocks`, and how many times characters in that script occur
- *     in the given value.
- * @api private
+ * @param {string} value - The value to test.
+ * @return {Object.<string, number>} An object with scripts
+ *   as keys and character occurrance couns as values.
  */
-function getScripts(value) {
-    var iterator = -1,
-        scripts = {},
-        length = value.length,
-        script, count;
 
-    while (++iterator < unicodeBlockCount) {
-        script = unicodeBlocks[iterator];
+function getScripts(value) {
+    var index,
+        scripts,
+        length,
+        script,
+        count;
+
+    index = unicodeBlockCount;
+    scripts = {};
+    length = value.length;
+
+    while (index--) {
+        script = unicodeBlocks[index];
         count = value.match(script[1]);
 
         scripts[script[0]] = (count ? count.length : 0) / length;
@@ -250,18 +356,37 @@ function getScripts(value) {
 }
 
 /**
- * Get a list of probably languages the given source is in.
+ * Create a single tuple as a list of tuples from a given
+ * language code.
  *
- * @param {string} value - The value to parse.
- * @return {Array.<string, number>[]} - An array containing
- *     language--probability tuples.
- * @api public
+ * @param {Array.<string, number>} An single
+ *   language--distance tuple.
+ * @return {Array.<Array.<string, number>>} An array
+ *   containing a single language--distance.
  */
+
+function singleLanguageTuples(language) {
+    return [[language, 1]];
+}
+
+/**
+ * Get a list of probable languages the given value is
+ * written in.
+ *
+ * @param {string} value - The value to test.
+ * @return {Array.<Array.<string, number>>} An array
+ *   containing language--distance tuples.
+ */
+
 function detectAll(value) {
-    var scripts, distances, iterator, singleton, trigrams;
+    var scripts,
+        distances,
+        index,
+        singleton,
+        trigrams;
 
     if (!value) {
-        return UNDETERMINED.concat();
+        return singleLanguageTuples('und');
     }
 
     value = value.substr(0, MAX_LENGTH);
@@ -271,61 +396,61 @@ function detectAll(value) {
     if (
         scripts.hangulSyllables +
         scripts.hangulJamo +
-        scripts.hangulCompatibilityJamo >= 0.4
+        scripts.hangulCompatibilityJamo >= FOURTY_PERCENT
     ) {
-        return [['ko', 1]];
+        return singleLanguageTuples('ko');
     }
 
-    if (scripts.greekAndCoptic >= 0.4) {
-        return [['el', 1]];
+    if (scripts.greekAndCoptic >= FOURTY_PERCENT) {
+        return singleLanguageTuples('el');
     }
 
     if (
         scripts.hiragana +
         scripts.katakana +
-        scripts.katakanaPhoneticExtensions >= 0.2
+        scripts.katakanaPhoneticExtensions >= TWENTY_PERCENT
     ) {
-        return [['ja', 1]];
+        return singleLanguageTuples('ja');
     }
 
     if (
         scripts.CJKUnifiedIdeographs +
         scripts.bopomofo +
         scripts.bopomofoExtended +
-        scripts.xangXiRadicals >= 0.4
+        scripts.xangXiRadicals >= FOURTY_PERCENT
     ) {
-        return [['zh', 1]];
+        return singleLanguageTuples('zh');
     }
 
     if (value.length < MIN_LENGTH) {
-        return UNDETERMINED.concat();
+        return singleLanguageTuples('und');
     }
 
-    iterator = -1;
+    index = singletonsLength;
 
-    while (++iterator < singletonsLength) {
-        singleton = SINGLETONS[iterator];
+    while (index--) {
+        singleton = SINGLETONS[index];
 
-        if (scripts[singleton[0]] >= 0.4) {
-            return [[singleton[1], 1]];
+        if (scripts[singleton[0]] >= FOURTY_PERCENT) {
+            return singleLanguageTuples(singleton[1]);
         }
     }
 
     trigrams = utilities.asTuples(value);
 
-    if (scripts.cyrillic >= 0.4) {
+    if (scripts.cyrillic >= FOURTY_PERCENT) {
         return getDistances(trigrams, CYRILLIC);
     }
 
     if (
         scripts.arabic +
         scripts.arabicPresentationFormsA +
-        scripts.arabicPresentationFormsB >= 0.4
+        scripts.arabicPresentationFormsB >= FOURTY_PERCENT
     ) {
         return getDistances(trigrams, ARABIC);
     }
 
-    if (scripts.devanagari >= 0.4) {
+    if (scripts.devanagari >= FOURTY_PERCENT) {
         return getDistances(trigrams, DEVANAGARI);
     }
 
@@ -339,16 +464,25 @@ function detectAll(value) {
 }
 
 /**
- * Get the most probable languages the given source is in.
+ * Get the most probable language the given value is
+ * written in.
  *
- * @param {string} value - The value to parse.
- * @return {string} - The most probable language.
- * @api public
+ * @param {string} value - The value to test.
+ * @param {string} The most probable language.
  */
+
 function detect(value) {
     return detectAll(value)[0][0];
 }
 
+/**
+ * Expose `detectAll` on `franc`.
+ */
+
 detect.all = detectAll;
+
+/**
+ * Expose `franc`.
+ */
 
 module.exports = detect;
