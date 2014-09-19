@@ -12,10 +12,12 @@
     "detect",
     "guess"
   ],
+  "dependencies": {
+    "trigram-utils": "^0.0.2"
+  },
   "authors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
-  "keywords": [
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/franc.git"

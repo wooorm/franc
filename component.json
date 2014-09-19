@@ -12,6 +12,9 @@
     "detect",
     "guess"
   ],
+  "dependencies": {
+    "wooorm/trigram-utils": "^0.0.2"
+  },
   "repository": "wooorm/franc",
   "scripts": [
     "index.js"

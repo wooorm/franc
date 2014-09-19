@@ -12,6 +12,9 @@
     "detect",
     "guess"
   ],
+  "dependencies": {
+    "trigram-utils": "^0.0.2"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "devDependencies": {
     "eslint": "^0.8.0",
