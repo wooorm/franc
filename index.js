@@ -35,9 +35,12 @@
 'use strict';
 
 var models,
+    utilities,
     MAX_LENGTH, MIN_LENGTH, MAX_DIFFERENCE, SINGLETONS, UNDETERMINED,
     ALL_LATIN, CYRILLIC, ARABIC, DEVANAGARI, PT,
     unicodeBlocks, singletonsLength, unicodeBlockCount;
+
+utilities = require('trigram-utils');
 
 models = require('./data.json');
 
@@ -158,81 +161,6 @@ function sort(a, b) {
 }
 
 /**
- * Get trigrams from a given value.
- *
- * @example Pads the start and end of the value.
- *     getTrigrams('a') // ['  a', ' a ', 'a  '];
- *
- * @param {string} value
- * @return {string[]} - An array containing the trigrams;
- * @api private
- */
-function getTrigrams(value) {
-    var iterator = -3,
-        trigrams = [],
-        length;
-
-    value = value.split('');
-    length = value.length;
-
-    while (++iterator < length) {
-        trigrams[iterator + 2] = (value[iterator] || ' ') +
-            (value[iterator + 1] || ' ') +
-            (value[iterator + 2] || ' ');
-    }
-
-    return trigrams;
-}
-
-/**
- * Get an object with trigrams as its attributes, and their occurence count
- * as their values
- *
- * @param {string} value
- * @return {Object.<string, number>} - Object containing weighted trigrams.
- * @api private
- */
-function getObjectModel(value) {
-    var trigrams = getTrigrams(value),
-        objectModel = {},
-        iterator = -1,
-        length = trigrams.length,
-        trigram;
-
-    while (++iterator < length) {
-        trigram = trigrams[iterator];
-
-        if (trigram in objectModel) {
-            objectModel[trigram]++;
-        } else {
-            objectModel[trigram] = 1;
-        }
-    }
-
-    return objectModel;
-}
-
-/**
- * Get the array containing trigram--count tuples from a given value.
- *
- * @param {string} value
- * @return {Array<string, number>[]} - An array containing trigram--count
- *     tupples.
- * @api private
- */
-function getCountedTrigrams(value) {
-    var objectModel = getObjectModel(value),
-        countedTrigrams = [],
-        trigram;
-
-    for (trigram in objectModel) {
-        countedTrigrams.push([trigram, objectModel[trigram]]);
-    }
-
-    return countedTrigrams;
-}
-
-/**
  * Get the ditsance between an array of trigram--count tuples, and a
  * language-model
  *
@@ -336,10 +264,7 @@ function detectAll(value) {
         return UNDETERMINED.concat();
     }
 
-    value = value
-        .substr(0, MAX_LENGTH)
-        .replace(/[\u0021-\u0040]+/g, '')
-        .toLowerCase();
+    value = value.substr(0, MAX_LENGTH);
 
     scripts = getScripts(value);
 
@@ -386,7 +311,7 @@ function detectAll(value) {
         }
     }
 
-    trigrams = getCountedTrigrams(value);
+    trigrams = utilities.asTuples(value);
 
     if (scripts.cyrillic >= 0.4) {
         return getDistances(trigrams, CYRILLIC);
