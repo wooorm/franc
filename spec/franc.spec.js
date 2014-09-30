@@ -1,12 +1,11 @@
 'use strict';
 
-var franc, data, assert, fixtures, namedLanguages;
+var franc, assert, fixtures, languages;
 
 franc = require('..');
-data = require('../lib/data.json');
 fixtures = require('./fixtures.json');
 assert = require('assert');
-namedLanguages = require('../data/iso-639-2-languages.json');
+languages = require('../script/languages');
 
 describe('franc()', function () {
     it('should be of type `function`', function () {
@@ -22,7 +21,7 @@ describe('franc()', function () {
     });
 
     it('should work on weird values', function () {
-        assert(franc('the the the the the ') === 'en');
+        assert(franc('the the the the the ') === 'eng');
     });
 });
 
@@ -53,7 +52,7 @@ describe('franc.all()', function () {
     it('should work on weird values', function () {
         var result = franc.all('the the the the the ');
 
-        assert(result[0][0] === 'en');
+        assert(result[0][0] === 'eng');
         assert(result[0].length === 2);
     });
 });
@@ -62,7 +61,9 @@ describe('algorithm', function () {
     var language;
 
     function classifyLanguage(input, output) {
-        var namedLanguage = namedLanguages[output];
+        var namedLanguage;
+
+        namedLanguage = languages[output];
 
         it('should classify `' + input + '` as `' + output + '` (' +
             namedLanguage + ')',
@@ -84,18 +85,20 @@ describe('algorithm', function () {
 });
 
 describe('Unit tests', function () {
-    var languages;
+    var supported;
 
     // All key-ed trigrams
-    languages = Object.keys(data);
+    supported = Object.keys(require('../data/supported-languages.json'));
 
     // All singletons;
-    languages = languages.concat(
-        'hy|he|bn|pa|el|gu|or|ta|te|kn|ml|si|th|lo|bo|my|ka|mn|km'.split('|')
+    supported = supported.concat(
+        Object.keys(require('../data/supported-script-languages.json'))
     );
 
-    languages.forEach(function (language) {
-        var namedLanguage = namedLanguages[language];
+    supported.forEach(function (language) {
+        var namedLanguage;
+
+        namedLanguage = languages[language];
 
         it('should have a fixture for `' + language + '` (' + namedLanguage +
             ')', function () {
