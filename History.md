@@ -1,4 +1,13 @@
 
+n.n.n / 2014-09-30
+==================
+
+ * Update Readme.md and benchmark for recent changes
+ * Update spec for b8bb1a6
+ * Refactor API to return ISO-639-3 codes instead of 639-2
+ * Add generation of ISO-639-3 codes, remove 639-2 support
+ * Add ISO-639-3 names file, remove ISO-639-2 names file
+
 0.2.0-rc.1 / 2014-09-30
 ==================
 
