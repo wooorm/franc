@@ -1,5 +1,5 @@
 
-n.n.n / 2014-09-30
+0.2.0-rc.1 / 2014-09-30
 ==================
 
  * Update Supported-Languages.md for recent changes
