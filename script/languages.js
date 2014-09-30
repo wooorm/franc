@@ -21,6 +21,7 @@ langs.all().forEach(function (language) {
 })
 
 data.ace = 'Aceh';
+data.ada = 'Dangme';
 data.arb = 'Arabic, Standard';
 data.azj = 'Azerbaijani, North';
 data.ceb = 'Cebuano';
