@@ -68,6 +68,7 @@ Supported Languages:
 | Vietnamese | vie | Với nhận thức rằng: V |
 | Xhosa | xho | Njengoko iimfanelo zesidi |
 | Zulu | zul | Ngokunjalo ukwamukelwa ng |
+| Assyrian | aii | ܡܢ ܣܒܒ ܡܘܕܝܬܐ ܒܐܝܩܪܐ ܫܪܫܢ |
 | Japanese | jpn | 人類社会のすべての構成員の固有の尊厳と平等で譲るこ |
 | Korean | kor | 모든 인류 구성원의 천부의 존엄성과 동등하고 |
 | Chinese, Mandarin | cmn | 鉴于对人类家庭所有成员的固有尊严及其平等的和不移的 |
