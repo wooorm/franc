@@ -20,6 +20,7 @@ langs.all().forEach(function (language) {
     data[language[3]] = language.name;
 })
 
+data.ace = 'Aceh';
 data.arb = 'Arabic, Standard';
 data.azj = 'Azerbaijani, North';
 data.ceb = 'Cebuano';

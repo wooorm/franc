@@ -5,6 +5,7 @@ Supported Languages:
 
 | name | iso-639-3 | example |
 |:----:|:---------:|:-------:|
+|  | ace | Ta bileung‐bileung ranub |
 | Afrikaans | afr | AANGESIEN erkenning vir d |
 | Arabic, Standard | arb | لمّا كان الاعتراف بالكرام |
 | Azerbaijani, North | azj | Bəşər ailəsinin bütün üzv |
