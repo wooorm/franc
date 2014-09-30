@@ -1,8 +1,8 @@
 var fs = require('fs'),
     fixtures = require('../spec/fixtures.json'),
-    languages = require('../data/iso-639-2-languages.json');
+    languages = require('./languages');
 
-languages.und = '‡ **Special: Case for unknown language**';
+languages.und = '† **Special: Case for unknown language**';
 
 fs.writeFileSync('Supported-Languages.md',
     'Supported Languages:\n' +
@@ -10,7 +10,7 @@ fs.writeFileSync('Supported-Languages.md',
     '\n' +
     '- † — Undetermined languages will result in the "und" language code\n' +
     '\n' +
-    '| name | iso-639-2 | example |\n' +
+    '| name | iso-639-3 | example |\n' +
     '|:----:|:---------:|:-------:|\n' +
 
     Object.keys(fixtures).map(function (languageCode) {
