@@ -3,13 +3,10 @@
 var franc, data, assert, fixtures, namedLanguages;
 
 franc = require('..');
-data = require('../data.json');
+data = require('../lib/data.json');
 fixtures = require('./fixtures.json');
 assert = require('assert');
-namedLanguages = require('./iso-639-2-languages.json');
-
-namedLanguages['pt-BR'] = 'Portuguese (Brazilian)';
-namedLanguages['pt-PT'] = 'Portuguese (European)';
+namedLanguages = require('../data/iso-639-2-languages.json');
 
 describe('franc()', function () {
     it('should be of type `function`', function () {
@@ -103,13 +100,8 @@ describe('Unit tests', function () {
         it('should have a fixture for `' + language + '` (' + namedLanguage +
             ')', function () {
                 assert.doesNotThrow(function () {
-                    if (language in fixtures) {
-                        return;
-                    }
-
-                    /* Portuguese will break down into pt-BR and pt-PT. */
                     /* istanbul ignore else */
-                    if (language === 'pt') {
+                    if (language in fixtures) {
                         return;
                     }
 
