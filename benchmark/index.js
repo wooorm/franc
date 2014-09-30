@@ -47,7 +47,7 @@ function forEveryLanguage(callback) {
     }
 }
 
-suite('benchmarks * 86 paragraphs in different languages', function () {
+suite('benchmarks * 82 paragraphs in different languages', function () {
     set('iterations', 30);
     set('type', 'static');
 

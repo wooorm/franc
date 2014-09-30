@@ -24,40 +24,31 @@ $ bower install franc
 ```js
 var franc = require('franc');
 
-franc('Alle menslike wesens word vry'); // "af"
-franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); // "bn"
-franc('Alle mennesker er født frie og'); // "no"
+franc('Alle menslike wesens word vry'); // "afr"
+franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); // "ben"
+franc('Alle mennesker er født frie og'); // "nob"
 franc(''); // "und"
 
 franc.all('O Brasil caiu 26 posições em');
 /*
  * [
- *   [ 'pt-BR', 4342 ],
- *   [ 'pt-PT', 6393 ],
- *   [ 'pt', 5281 ],
- *   [ 'ca', 6091 ],
- *   [ 'cs', 6137 ]
+ *   [ 'por', 5507 ],
+ *   [ 'lat', 6384 ],
+ *   [ 'lav', 6391 ],
+ *   [ 'cat', 6432 ],
+ *   [ 'spa', 6481 ]
  *   ...
- * ]
- */
-
-franc.all('Heghlu\'meH QaQ jajvam').slice(0, 3);
-/*
- * [
- *   [ 'tlh', 4253 ], // 'eH, tlhIngan, 'e' H*'t*gh QaQ!
- *   [ 'haw', 5472 ],
- *   [ 'az', 5537 ]
  * ]
  */
 
 franc.all(''); // [ [ 'und', 1 ] ]
 ```
 
-> Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is to short to give a significant answer.
+> Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is too short to give a significant answer.
 
 ## Supported languages
 
-**franc** supports 86 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 82 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
 ## Other Language detection libraries
 
@@ -74,16 +65,16 @@ $ npm run install-benchmark # Just once of course.
 $ npm run benchmark
 ```
 
-On a MacBook Air, it runs 86 tests, 11 times per second (total: 946 op/s).
+On a MacBook Air, it runs 82 tests, 10 times per second (total: 820 op/s).
 
 ```
-         benchmarks * 86 paragraphs in different languages
-  11 op/s » franc -- this module
-   7 op/s » guesslanguage
-   6 op/s » languagedetect
-   6 op/s » vac
+         benchmarks * 82 paragraphs in different languages
+  10 op/s » franc -- this module
+   6 op/s » guesslanguage
+   4 op/s » languagedetect
+   5 op/s » vac
 ```
 
 ## License
 
-  LGPL
+LGPL © Titus Wormer
