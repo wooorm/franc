@@ -1,4 +1,23 @@
 
+n.n.n / 2014-09-30
+==================
+
+ * Update Supported-Languages.md for recent changes
+ * Update spec for recent API changes
+ * Remove support for three languages
+ * Update bower.json, component.json for recent directory refactor
+ * Update fixtures
+ * Update data to new and current trigrams
+ * Move ISO codes to data directory
+ * Add Portuguese to ISO codes
+ * Update npm scripts to lint new files, handle renames
+ * Update fixture generation script
+ * Add trigram generation script
+ * Add mapping between ISO and UDHR keys
+ * Add trigrams and udhr as dev-dependencies
+ * Move scrips and API files
+ * Remove fixtures
+
 0.1.1 / 2014-09-19
 ==================
 
