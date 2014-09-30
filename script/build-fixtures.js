@@ -1,30 +1,81 @@
 'use strict';
 
-var fixtures = {},
-    iterator = -1,
-    directory = './spec',
-    fixtureDirectory = directory + '/fixtures',
-    files, file, filename, fixture, fs, extensionIndex;
+/**
+ * Dependencies.
+ */
 
-fs = require('fs');
+var supported,
+    supportedScripts,
+    customFixtures,
+    udhr;
 
-files = fs.readdirSync(fixtureDirectory);
+supported = require('../data/supported-languages');
+customFixtures = require('../data/custom-fixtures');
+supportedScripts = require('../data/supported-script-languages');
+udhr = require('udhr').json();
 
-while (files[++iterator]) {
-    file = files[iterator];
-    extensionIndex = file.indexOf('.txt');
+/**
+ * Merge script- and trigram-detection: both need
+ * fixtures.
+ */
 
-    if (extensionIndex === -1) {
-        continue;
+Object.keys(supportedScripts).forEach(function (key) {
+    supported[key] = supportedScripts[key];
+});
+
+/**
+ * Get fixtures from UDHR preamble's.
+ */
+
+var data;
+
+data = {};
+
+Object.keys(supported).forEach(function (key) {
+    var udhrKey,
+        preamble;
+
+    udhrKey = supported[key];
+
+    try {
+        preamble = udhr[udhrKey].preamble.para;
+    } catch (exception) {
+        console.log(
+            'Could not access preamble for `' + key + '` ' +
+            '(' + udhrKey + ')'
+        );
+
+        if (udhrKey in customFixtures) {
+            preamble = customFixtures[udhrKey];
+
+            console.log(
+                '  - Could access preamble for `' + key + '` ' +
+                '(' + udhrKey + ') from custom fixtures.'
+            );
+        } else {
+            throw exception;
+        }
     }
 
-    filename = file.substr(0, extensionIndex);
-    fixture = fs.readFileSync(fixtureDirectory + '/' + file, 'utf-8');
+    /**
+     * Some preamble
+     */
 
-    fixtures[filename] = fixture.trim();
-}
+    preamble = preamble.slice(0, 200);
 
-fixtures = JSON.stringify(fixtures, null, 4);
-fs.writeFileSync(directory + '/fixtures.json', fixtures);
+    data[key] = preamble;
+});
 
-module.exports = fixtures;
+/**
+ * Add a fixture for `und`: Undetermined languages.
+ */
+
+data.und = '';
+
+data = JSON.stringify(data, 0, 2);
+
+/**
+ * Write.
+ */
+
+require('fs').writeFileSync('spec/fixtures.json', data);
