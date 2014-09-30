@@ -1,95 +1,90 @@
 Supported Languages:
 =================
 
-- † — Almost all language codes are in iso-639-2, two-letter if available, otherwise three-letter. Both pt-BR (Brazilian Portuguese) and pt-PT (European Portuguese) are the only exceptions.
-- ‡ — Undetermined languages will result in the "und" language code
-- § — Portuguese
+- † — Undetermined languages will result in the "und" language code
 
-| name | iso-639-2† | example |
+| name | iso-639-2 | example |
 |:----:|:---------:|:-------:|
-| Afrikaans | af | Alle menslike wesens word |
-| Arabic | ar | يولد جميع الناس أحراراً م |
-| Azerbaijani | az | Bütün insanlar ləyaqət və |
-| Bulgarian | bg | Всички хора се раждат сво |
-| Bengali | bn | সমস্ত মানুষ স্বাধীনভাবে স |
-| Tibetan | bo | སྐྱེ་བོ་རེ་རེར་གསལ་བསྒྲགས |
-| Catalan; Valencian | ca | Tots els éssers humans ne |
-| Cebuano | ceb | Ang tanan katawhan gipaka |
-| Czech | cs | Francouzský ministr finan |
-| Welsh | cy | Genir pawb yn rhydd ac yn |
-| Danish | da | Alle mennesker er født fr |
-| German | de | Alle Menschen sind frei u |
-| Greek, Modern (1453-) | el | 'Ολοι οι άνθρωποι γεννιού |
-| English | en | All human beings are born |
-| Spanish; Castilian | es | Todos los seres humanos n |
-| Estonian | et | Kõik inimesed sünnivad va |
-| Basque | eu | Gizon-emakume guztiak ask |
-| Persian | fa | تمام افراد بشر آزاد به دن |
-| Finnish | fi | Kaikki ihmiset syntyvät v |
-| French | fr | Tous les êtres humains na |
-| Gujarati | gu | પ્રતિષ્ઠા અને અધિકારોની દ |
-| Hausa | ha | Su dai yan-adam, ana haif |
-| Hawaiian | haw | Hānau kū'oko'a 'ia nā kān |
-| Hebrew | he | כל בני האדם נולדו בני חור |
-| Hindi | hi | रेल दुर्घटनाओं की रोकथाम |
-| Croatian | hr | Sva ljudska bića rađaju s |
-| Hungarian | hu | Minden emberi lény szabad |
-| Armenian | hy | Բոլոր մարդիկ ծնվում են ազ |
-| Indonesian | id | Semua orang dilahirkan me |
-| Icelandic | is | Hver maður er borinn frjá |
-| Italian | it | Tutti gli esseri umani na |
-| Japanese | ja | すべての人間は、生まれながらにして自由であり、かつ |
-| Georgian | ka | ყველა ადამიანი იბადება თა |
-| Kazakh | kk | Барлық адамдар тумысынан |
-| Central Khmer | km | មនុស្សទាំងអស់កើតមកមានសេរី |
-| Kannada | kn | ಎಲ್ಲಾ ಮಾನವರೂ ಸ್ವತಂತ್ರರಾಗಿ |
-| Korean | ko | ㅎㅏㄴㄱㅡㄹ for 한글 |
-| Kirghiz; Kyrgyz | ky | Ба дык адамда ө з беделин |
-| Latin | la | Omnes homines dignitate e |
-| Lao | lo | ມະນຸດທຸກຄົນເກີດມາມີກຽດສັກ |
-| Lithuanian | lt | Visi žmonės gimsta laisvi |
-| Latvian | lv | Visi cilvēki piedzimst br |
-| Macedonian | mk | на јавното мислење покажу |
-| Malayalam | ml | മനുഷ്യരെല്ലാവരും തുല്യാവക |
-| Mongolian | mn | Хүн бүр төрж мэндлэхдээ э |
-| Burmese | my | လူတိုင်းသည် တူညီ လွတ်လပ်သ |
-| Nepali | ne | हरेक वल्लो डाँडाबाट हेर्द |
-| Dutch; Flemish | nl | Alle mensen worden vrij e |
-| Norwegian | no | Alle mennesker er født fr |
-| Ndebele, South; South Ndebele | nr | UmSebenzi wesiTjhaba weza |
-| Pedi; Sepedi; Northern Sotho | nso | Batho ka moka ba belegwe |
+| Afrikaans | af | AANGESIEN erkenning vir d |
+| Arabic | ar | لمّا كان الاعتراف بالكرام |
+| Azerbaijani | az | Bəşər ailəsinin bütün üzv |
+| Bulgarian | bg | Като взе предвид, че приз |
+| Catalan; Valencian | ca | Considerant que el recone |
+| Cebuano | ceb | Samtamg ang pag-ila sa ti |
+| Czech | cs | U vědomí toho, že uznání |
+| Welsh | cy | Gan mai cydnabod urddas c |
+| Danish | da | Da anerkendelse af den me |
+| German | de | Da die Anerkennung der an |
+| English | en | Whereas recognition of th |
+| Spanish; Castilian | es | Considerando que la liber |
+| Estonian | et | Pidades silmas, et inimko |
+| Basque | eu | Kontuan izanik munduko as |
+| Persian | fa | از آنجا که شناسائی حیثیت |
+| Finnish | fi | Kun ihmiskunnan kaikkien |
+| French | fr | Considérant que la reconn |
+| Hausa | ha | Ganin cewa ƴanci da adalc |
+| Hawaiian | haw | ‘Oiai, ‘o ka ho’omaopop ‘ |
+| Hindi | hi | चूंकि मानव परिवार के सभी |
+| Croatian | hr | Budući da su priznavanje |
+| Hungarian | hu | Tekintettel arra, hogy az |
+| Indonesian | id | Menimbang bahwa pengakuan |
+| Icelandic | is | Það ber að viðurkenna, að |
+| Italian | it | Considerato che il ricono |
+| Kazakh | kk | Адам баласы үйелменінің б |
+| Kirghiz; Kyrgyz | ky | Адамзат үй‐бүлөсүнүн бард |
+| Latin | la | Omnium humanae gentis par |
+| Lithuanian | lt | Atsižvelgdama į tai, kad |
+| Latvian | lv | Ievērojot, ka visiem cilv |
+| Macedonian | mk | Бидејќи признавањето на в |
+| Mongolian | mn | Хүн төрөлхтөний гэр бүлий |
+| Norwegian | no | Da anerkjennelsen av menn |
+| Nepali | ne | मानव परिवारका सबै सदस्यहर |
+| Dutch; Flemish | nl | Overwegende, dat erkennin |
+| Ndebele, South; South Ndebele | nr | Loba isimilo lenhlonipho |
+| Pedi; Sepedi; Northern Sotho | nso | Le ge re dutše re tseba g |
+| Polish | pl | ZWAŻYWSZY, że uznanie prz |
+| Portuguese | pt | Considerando que o reconh |
+| Romanian; Moldavian; Moldovan | ro | Considerând că recunoaște |
+| Russian | ru | Принимая во внимание, что |
+| Slovak | sk | Vo vedomí že uznanie prir |
+| Slovenian | sl | ker pomeni priznanje prir |
+| Somali | so | Iyadoo aqoonsiga sharafta |
+| Albanian | sq | Mbasi njohja e dinjitetit |
+| Serbian | sr | Пошто је признавање урође |
+| Swati | ss | Njengoba kwatiswa ngekuba |
+| Sotho, Southern | st | Ka hona he, ho amohela se |
+| Swedish | sv | Enär erkännandet av det i |
+| Swahili | sw | Kwa kuwa kukiri heshima y |
+| Tagalog | tl | Sapagkat ang pagkilala sa |
+| Tswana | tn | Go ntse jalo gore kamogel |
+| Turkish | tr | İnsanlık ailesinin bütün |
+| Tsonga | ts | Hi ku xixima le svaku a k |
+| Ukrainian | uk | Беручи до уваги, що визна |
+| Urdu | ur | چونکہ ہر انسان کی ذاتی عز |
+| Uzbek | uz | Инсон оиласи барча аъзола |
+| Venda | ve | Vhunga u ḓivhea ha u dzhi |
+| Vietnamese | vi | Với nhận thức rằng: V |
+| Xhosa | xh | Njengoko iimfanelo zesidi |
+| Zulu | zu | Ngokunjalo ukwamukelwa ng |
+| Japanese | ja | 人類社会のすべての構成員の固有の尊厳と平等で譲るこ |
+| Korean | ko | 모든 인류 구성원의 천부의 존엄성과 동등하고 |
+| Chinese | zh | 鉴于对人类家庭所有成员的固有尊严及其平等的和不移的 |
+| Armenian | hy | Քանզի մարդկային ընտանիքի |
+| Hebrew | he | הואיל והכרה בכבוד הטבעי א |
+| Bengali | bn | যেহেতু মানব পরিবারের সকল |
+| Panjabi; Punjabi | pa | ਜਦ ਕਿ ਮਨੁੱਖੀ ਪਰਿਵਾਰ ਦੇ ਸਾ |
+| Greek, Modern (1453-) | el | Επειδή η αναγνώριση της α |
+| Gujarati | gu | કેમ કે માનવકુટુંબના દરેક |
 | Oriya | or | ସବୁ ମନୁଷ୍ୟ ଜନ୍ମୁକାଳରୁ ସ୍ଵ |
-| Panjabi; Punjabi | pa | ਸਾਰਾ ਮਨੁੱਖੀ ਪਰਿਵਾਰ ਆਪਣੀ ਮ |
-| Polish | pl | Wszyscy ludzie rodzą się |
-| Pushto; Pashto | ps | زه کولای شي چې بښنه وغواړ |
-| § **Portuguese (Brazilian)** | pt-BR | O Brasil caiu 26 posições |
-| § **Portuguese (European)** | pt-PT | Eu te peço, me deixa ser |
-| Romanian; Moldavian; Moldovan | ro | Toate ființele umane se n |
-| Russian | ru | Все люди рождаются свобод |
-| Sinhala; Sinhalese | si | සියලූ මනුෂ්‍යයෝ නිදහස්ව උ |
-| Slovak | sk | Všetci ľudia sa rodia slo |
-| Slovenian | sl | Vsi ljudje se rodijo svob |
-| Somali | so | Aadanaha dhammaantiis wux |
-| Albanian | sq | Të gjithë njerëzit lindin |
-| Serbian | sr | Cвa људскa бићa рaђajу сe |
-| Swati | ss | Bonkhe bantfu batalwa bak |
-| Sotho, Southern | st | Batho bohle ba tswetswe b |
-| Swedish | sv | Alla människor är födda f |
-| Swahili | sw | Watu wote wamezaliwa huru |
-| Tamil | ta | மனிதப் பிறவியினர் சகலரும் |
+| Tamil | ta | மனிதக் குடும்பத்தினைச் சே |
 | Telugu | te | ప్రతిపత్తిస్వత్వముల విషయమ |
-| Thai | th | เราทุกคนเกิดมาอย่างอิสระ |
-| Tagalog | tl | Ang lahat ng tao'y isinil |
-| Klingon; tlhIngan-Hol | tlh | Heghlu'meH QaQ jajvam |
-| Tswana | tn | Batho botlhe ba tsetswe b |
-| Turkish | tr | Bütün insanlar hür, haysi |
-| Tsonga | ts | Mina ndza yi vona huku |
-| Ukrainian | uk | Всі люди народжуються віл |
+| Kannada | kn | ಮಾನವ ಕುಟುಂಬದ ಸಮಸ್ತ ಸದಸ್ಯರ |
+| Malayalam | ml | മനുഷ്യ സമുദായത്തിന്റെ ജന് |
+| Sinhala; Sinhalese | si | සියලූ මනුෂ්‍යයෝ නිදහස්ව උ |
+| Thai | th | โดยที่การยอมรับนับถือเกีย |
+| Lao | lo | ດ້ວຍເຫດວ່າ: ການຮັບຮູ້ກຽດຕ |
+| Tibetan | bo | ༈ འགྲོ་བ་མིའི་ཁྱིམ་ཚང་ཁག་ |
+| Burmese | my | လူခပ်သိမ်း၏မျိုးရိုးဂုဏ်သ |
+| Georgian | ka | ვინაიდან ადამიანთა ოჯახის |
+| Central Khmer | km | ដោយយល់ឃើញថា ការទទួលស្គាល់ |
 | ‡ **Special: Case for unknown language** | und |  |
-| Urdu | ur | دفعہ ۱: تمام انسان آزاد ا |
-| Uzbek | uz | Барча одамлар эрҝин, қадр |
-| Venda | ve | Vhathu vhoṱhe vha bebwa v |
-| Vietnamese | vi | Tất cả mọi người sinh ra |
-| Xhosa | xh | IsiXhosa yenye yeelwimi z |
-| Chinese | zh | 人人生而自由﹐在尊嚴和權利上一律平等。他們賦有理性 |
-| Zulu | zu | Ezisemthethweni imibhalo |
