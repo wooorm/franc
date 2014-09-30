@@ -17,9 +17,10 @@
   },
   "repository": "wooorm/franc",
   "scripts": [
-    "index.js"
+    "index.js",
+    "lib/franc.js"
   ],
   "json": [
-    "data.json"
+    "lib/data.json"
   ]
 }

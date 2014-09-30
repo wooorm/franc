@@ -31,6 +31,8 @@
     "coverage",
     "node_modules",
     "benchmark",
-    "spec"
+    "spec",
+    "scripts",
+    "data"
   ]
 }
