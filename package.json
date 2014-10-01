@@ -23,8 +23,10 @@
     "langs": "^1.0.1",
     "matcha": "^0.5.0",
     "mocha": "^1.20.0",
+    "speakers": "^0.0.1",
     "trigrams": "^0.0.3",
-    "udhr": "0.0.5"
+    "udhr": "0.0.5",
+    "unicode-7.0.0": "^0.1.5"
   },
   "repository": {
     "type": "git",
@@ -35,19 +37,20 @@
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/franc.spec.js",
     "lint": "npm run lint-api && npm run lint-test && npm run lint-benchmark && npm run lint-style",
     "lint-api": "node_modules/.bin/eslint index.js lib/franc.js --env node --env browser --rule 'quotes: [2, single]'",
-    "lint-script": "node_modules/.bin/eslint script/languages.js script/build-fixtures.js script/build-data.js script/build-support.js --env node --rule 'quotes: [2, single]'",
+    "lint-script": "node_modules/.bin/eslint script/languages.js script/build-fixtures.js script/build-data.js script/build-support.js script/build-languages.js --env node --rule 'quotes: [2, single]'",
     "lint-test": "node_modules/.bin/eslint spec/franc.spec.js --env node --env mocha --rule 'quotes: [2, single]'",
     "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global 'suite, bench, set' --rule 'quotes: [2, single]'",
-    "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/languages.js script/build-data.js script/build-fixtures.js script/build-support.js benchmark/index.js spec/franc.spec.js --reporter=inline",
+    "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/languages.js script/build-data.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark/index.js spec/franc.spec.js --reporter=inline",
     "install-browser-test": "npm install browserify",
     "build-fixtures": "node script/build-fixtures.js",
     "build-data": "node script/build-data.js",
     "build-support": "node script/build-support.js",
+    "build-languages": "node script/build-languages.js",
     "build-browser-test": "node_modules/.bin/browserify spec/franc.spec.js -o spec/browser.spec.js",
     "install-benchmark": "npm install guesslanguage languagedetect vac",
     "benchmark": "node_modules/.bin/matcha",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/franc.spec.js",
-    "prepublish": "npm run build-data && npm run build-fixtures && npm run build-support",
+    "prepublish": "npm run build-data && npm run build-fixtures && npm run build-languages && npm run build-support",
     "make": "npm run lint && npm run coverage"
   },
   "testling": {
