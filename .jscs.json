@@ -126,7 +126,6 @@
     "maximumLineLength": 78,
     "requireCapitalizedConstructors": true,
     "safeContextKeyword": "self",
-    "requireDotNotation": true,
     "disallowYodaConditions": true,
     "validateJSDoc": {
         "checkParamNames": true,
