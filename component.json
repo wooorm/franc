@@ -18,7 +18,9 @@
   "repository": "wooorm/franc",
   "scripts": [
     "index.js",
-    "lib/franc.js"
+    "lib/franc.js",
+    "lib/expressions.js",
+    "lib/singletons.js"
   ],
   "json": [
     "lib/data.json"
