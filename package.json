@@ -41,7 +41,7 @@
     "lint-test": "node_modules/.bin/eslint spec/franc.spec.js --env node --env mocha --rule 'quotes: [2, single]'",
     "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global 'suite, bench, set' --rule 'quotes: [2, single]'",
     "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark/index.js spec/franc.spec.js --reporter=inline",
-    "install-browser-test": "npm install browserify",
+    "install-benchmark": "npm install guesslanguage languagedetect vac",
     "build-languages": "node script/build-languages.js",
     "build-fixtures": "node script/build-fixtures.js",
     "build-support": "node script/build-support.js",
