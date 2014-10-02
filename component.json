@@ -1,6 +1,6 @@
 {
   "name": "franc",
-  "version": "0.1.1",
+  "version": "0.2.0-rc.2",
   "description": "Detect the language of text",
   "license": "LGPL",
   "keywords": [
@@ -17,9 +17,12 @@
   },
   "repository": "wooorm/franc",
   "scripts": [
-    "index.js"
+    "index.js",
+    "lib/franc.js",
+    "lib/expressions.js",
+    "lib/singletons.js"
   ],
   "json": [
-    "data.json"
+    "lib/data.json"
   ]
 }

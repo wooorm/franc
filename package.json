@@ -1,6 +1,6 @@
 {
   "name": "franc",
-  "version": "0.1.1",
+  "version": "0.2.0-rc.2",
   "description": "Detect the language of text",
   "license": "LGPL",
   "keywords": [
@@ -20,8 +20,13 @@
     "eslint": "^0.8.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.5.3",
+    "langs": "^1.0.1",
     "matcha": "^0.5.0",
-    "mocha": "^1.20.0"
+    "mocha": "^1.20.0",
+    "speakers": "^0.0.1",
+    "trigrams": "^0.0.3",
+    "udhr": "0.0.5",
+    "unicode-7.0.0": "^0.1.5"
   },
   "repository": {
     "type": "git",
@@ -30,19 +35,21 @@
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/franc.spec.js",
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/franc.spec.js",
-    "lint": "npm run lint-api && npm run lint-test && npm run lint-benchmark && npm run lint-style",
-    "lint-api": "node_modules/.bin/eslint index.js build-fixtures-file.js build-supported-languages.js --env node --env browser --rule 'quotes: [2, single]'",
+    "lint": "npm run lint-api && npm run lint-script && npm run lint-test && npm run lint-benchmark && npm run lint-style",
+    "lint-api": "node_modules/.bin/eslint index.js lib/franc.js --env node --env browser --rule 'quotes: [2, single]'",
+    "lint-script": "node_modules/.bin/eslint script/build-fixtures.js script/build-support.js script/build-languages.js --env node --rule 'quotes: [2, single], dot-notation: false'",
     "lint-test": "node_modules/.bin/eslint spec/franc.spec.js --env node --env mocha --rule 'quotes: [2, single]'",
     "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global 'suite, bench, set' --rule 'quotes: [2, single]'",
-    "lint-style": "node_modules/.bin/jscs index.js build-fixtures-file.js build-supported-languages.js benchmark/index.js spec/franc.spec.js --reporter=inline",
+    "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark/index.js spec/franc.spec.js --reporter=inline",
     "install-browser-test": "npm install browserify",
-    "build-fixtures": "node build-fixtures-file.js",
-    "build-supported-languages": "node build-supported-languages.js",
+    "build-languages": "node script/build-languages.js",
+    "build-fixtures": "node script/build-fixtures.js",
+    "build-support": "node script/build-support.js",
     "build-browser-test": "node_modules/.bin/browserify spec/franc.spec.js -o spec/browser.spec.js",
     "install-benchmark": "npm install guesslanguage languagedetect vac",
     "benchmark": "node_modules/.bin/matcha",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/franc.spec.js",
-    "prepublish": "npm run build-fixtures && npm run build-supported-languages",
+    "prepublish": "npm run build-languages && npm run build-fixtures && npm run build-support",
     "make": "npm run lint && npm run coverage"
   },
   "testling": {

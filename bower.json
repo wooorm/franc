@@ -26,11 +26,15 @@
     ".*",
     "*.log",
     "*.md",
+    "*.yml",
     "component.json",
     "package.json",
-    "coverage",
-    "node_modules",
     "benchmark",
+    "components",
+    "coverage",
+    "data",
+    "node_modules",
+    "script",
     "spec"
   ]
 }
