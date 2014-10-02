@@ -3,4 +3,6 @@ bower_components
 components
 .DS_Store
 coverage
+build
+*.log
 .travis.yml

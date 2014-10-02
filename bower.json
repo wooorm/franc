@@ -30,6 +30,7 @@
     "component.json",
     "package.json",
     "benchmark",
+    "build",
     "components",
     "coverage",
     "data",
