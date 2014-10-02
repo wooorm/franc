@@ -1,6 +1,16 @@
-# franc [![Build Status](https://travis-ci.org/wooorm/franc.svg?branch=master)](https://travis-ci.org/wooorm/franc) [![Coverage Status](https://img.shields.io/coveralls/wooorm/franc.svg)](https://coveralls.io/r/wooorm/franc?branch=master)
+# ![franc](http://wooorm.com/franc.png)
+
+[![Build Status](https://travis-ci.org/wooorm/franc.svg?branch=master)](https://travis-ci.org/wooorm/franc) [![Coverage Status](https://img.shields.io/coveralls/wooorm/franc.svg)](https://coveralls.io/r/wooorm/franc?branch=master)
 
 Detect the language of text.
+
+# What’s so cool about franc?
+
+1. **franc** support more languages<sup>(†)</sup> than any other library, or Google;
+2. **franc** is easily forked to support 300+ languages;
+3. **franc** is just as fast as the competition.
+
+† - If humans write in the language, on the web, and the language has more than one million speakers, **franc** detects it.
 
 ## Installation
 
@@ -26,17 +36,24 @@ var franc = require('franc');
 
 franc('Alle menslike wesens word vry'); // "afr"
 franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); // "ben"
-franc('Alle mennesker er født frie og'); // "nob"
+franc('Alle mennesker er født frie og'); // "nno"
 franc(''); // "und"
 
 franc.all('O Brasil caiu 26 posições em');
 /*
  * [
  *   [ 'por', 5507 ],
- *   [ 'lat', 6384 ],
+ *   [ 'glg', 6270 ],
+ *   [ 'src', 6292 ],
  *   [ 'lav', 6391 ],
  *   [ 'cat', 6432 ],
- *   [ 'spa', 6481 ]
+ *   [ 'spa', 6481 ],
+ *   [ 'bos', 6509 ],
+ *   [ 'tpi', 6526 ],
+ *   [ 'hrv', 6532 ],
+ *   [ 'snn', 6556 ],
+ *   [ 'bam', 6693 ],
+ *   [ 'sco', 6695 ],
  *   ...
  * ]
  */
@@ -48,24 +65,17 @@ franc.all(''); // [ [ 'und', 1 ] ]
 
 ## Supported languages
 
-**franc** supports 82 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 168 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
 ## Other Language detection libraries
 
-- [richtr/guessLanguage.js](https://github.com/richtr/guessLanguage.js) — Just as fast, contains a few bugs, not really maintained;
-- [FGRibreau/node-language-detect](https://github.com/FGRibreau/node-language-detect) — Supports less languages, slower.
-- [Legify/vac](https://github.com/FGRibreau/Legify/vac) — Supports less languages, slower.
+- [richtr/guessLanguage.js](https://github.com/richtr/guessLanguage.js);
+- [FGRibreau/node-language-detect](https://github.com/FGRibreau/node-language-detect);
+- [Legify/vac](https://github.com/Legify/vac).
 
 ## Benchmark
 
-Run the benchmark yourself:
-
-```sh
-$ npm run install-benchmark # Just once of course.
-$ npm run benchmark
-```
-
-On a MacBook Air, it runs 169 tests, 2 times per second (total: 338 op/s).
+On a MacBook Air, it runs 169 paragraphs 2 times per second (total: 338 op/s).
 
 ```
          benchmarks * 169 paragraphs in different languages
@@ -74,6 +84,8 @@ On a MacBook Air, it runs 169 tests, 2 times per second (total: 338 op/s).
   2 op/s » languagedetect
   2 op/s » vac
 ```
+
+(I’ll work on a better benchmark soon)
 
 ## License
 
