@@ -51,21 +51,5 @@
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/franc.spec.js",
     "prepublish": "npm run build-languages && npm run build-fixtures && npm run build-support",
     "make": "npm run lint && npm run coverage"
-  },
-  "testling": {
-    "files": "spec/franc.spec.js",
-    "harness": "mocha",
-    "browsers": [
-      "iexplore/latest",
-      "chrome/latest",
-      "chrome/canary",
-      "firefox/latest",
-      "firefox/nightly",
-      "opera/latest",
-      "opera/next",
-      "safari/latest",
-      "iphone/latest",
-      "android-browser/latest"
-    ]
   }
 }
