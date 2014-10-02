@@ -4,66 +4,48 @@
  * Dependencies.
  */
 
-var supported,
-    supportedScripts,
+var support,
     customFixtures,
     udhr;
 
-supported = require('../data/supported-languages');
+support = require('../data/support');
 customFixtures = require('../data/custom-fixtures');
-supportedScripts = require('../data/supported-script-languages');
 udhr = require('udhr').json();
 
 /**
- * Merge script- and trigram-detection: both need
- * fixtures.
- */
-
-Object.keys(supportedScripts).forEach(function (key) {
-    supported[key] = supportedScripts[key];
-});
-
-/**
- * Get fixtures from UDHR preamble's.
+ * Get fixtures from UDHR preambles and notes.
  */
 
 var data;
 
 data = {};
 
-Object.keys(supported).forEach(function (key) {
+Object.keys(support).forEach(function (code) {
     var udhrKey,
-        preamble;
+        fixture;
 
-    udhrKey = supported[key];
+    udhrKey = support[code].udhr;
 
-    try {
-        preamble = udhr[udhrKey].preamble.para;
-    } catch (exception) {
-        console.log(
-            'Could not access preamble for `' + key + '` ' +
-            '(' + udhrKey + ')'
-        );
-
-        if (udhrKey in customFixtures) {
-            preamble = customFixtures[udhrKey];
-
-            console.log(
-                '  - Could access preamble for `' + key + '` ' +
-                '(' + udhrKey + ') from custom fixtures.'
-            );
-        } else {
-            throw exception;
+    if (udhrKey in customFixtures) {
+        fixture = customFixtures[udhrKey];
+    } else if (udhrKey in udhr) {
+        if (udhr[udhrKey].preamble && udhr[udhrKey].preamble.para) {
+            fixture = udhr[udhrKey].preamble.para;
+        } else if (udhr[udhrKey].note && udhr[udhrKey].note[0]) {
+            fixture = udhr[udhrKey].note[0].para;
         }
     }
 
-    /**
-     * Some preamble
-     */
+    if (!fixture) {
+        throw new Error(
+            'Could not access preamble or note for `' + code + '` ' +
+            '(' + udhrKey + ')'
+        );
+    }
 
-    preamble = preamble.slice(0, 200);
+    fixture = fixture.slice(0, 200);
 
-    data[key] = preamble;
+    data[code] = fixture;
 });
 
 /**
