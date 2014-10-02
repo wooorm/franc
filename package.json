@@ -45,8 +45,6 @@
     "build-languages": "node script/build-languages.js",
     "build-fixtures": "node script/build-fixtures.js",
     "build-support": "node script/build-support.js",
-    "build-browser-test": "node_modules/.bin/browserify spec/franc.spec.js -o spec/browser.spec.js",
-    "install-benchmark": "npm install guesslanguage languagedetect vac",
     "benchmark": "node_modules/.bin/matcha",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/franc.spec.js",
     "prepublish": "npm run build-languages && npm run build-fixtures && npm run build-support",
