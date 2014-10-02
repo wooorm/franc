@@ -1,11 +1,11 @@
 'use strict';
 
-var franc, assert, fixtures, languages;
+var franc, support, assert, fixtures;
 
 franc = require('..');
-fixtures = require('./fixtures.json');
+support = require('../data/support');
+fixtures = require('./fixtures');
 assert = require('assert');
-languages = require('../script/languages');
 
 describe('franc()', function () {
     it('should be of type `function`', function () {
@@ -20,8 +20,12 @@ describe('franc()', function () {
         assert(franc('XYZ') === 'und');
     });
 
+    it('should return "und" on a missing value', function () {
+        assert(franc() === 'und');
+    });
+
     it('should work on weird values', function () {
-        assert(franc('the the the the the ') === 'eng');
+        assert(franc('the the the the the ') === 'sco');
     });
 });
 
@@ -49,71 +53,50 @@ describe('franc.all()', function () {
         assert(result.length === 1);
     });
 
+    it('should return [["und", 1]] on a missing value', function () {
+        var result = franc.all();
+
+        assert(result[0][0] === 'und');
+        assert(result[0][1] === 1);
+        assert(result[0].length === 2);
+        assert(result.length === 1);
+    });
+
     it('should work on weird values', function () {
         var result = franc.all('the the the the the ');
 
-        assert(result[0][0] === 'eng');
+        assert(result[0][0] === 'sco');
         assert(result[0].length === 2);
+        assert(result[1][0] === 'eng');
+        assert(result[1].length === 2);
     });
 });
 
 describe('algorithm', function () {
-    var language;
+    function classifyLanguage(input, language) {
+        var example;
 
-    function classifyLanguage(input, output) {
-        var namedLanguage;
+        example = input.replace(/\n/g, '\\n').slice(0, 20) + '...';
 
-        namedLanguage = languages[output];
+        describe(language.iso6393, function () {
+            it('should classify `' + example + '` as ' + language.name,
+                function () {
+                    var result = franc(input);
 
-        it('should classify `' + input + '` as `' + output + '` (' +
-            namedLanguage + ')',
-            function () {
-                var result = franc(input);
-                /* istanbul ignore if */
-                if (result !== output) {
-                    throw new Error(
-                        'Expected ' + output + ', but got `' + result + '`'
-                    )
-                }
-            }
-        );
-    }
-
-    for (language in fixtures) {
-        classifyLanguage(fixtures[language], language);
-    }
-});
-
-describe('Unit tests', function () {
-    var supported;
-
-    // All key-ed trigrams
-    supported = Object.keys(require('../data/supported-languages.json'));
-
-    // All singletons;
-    supported = supported.concat(
-        Object.keys(require('../data/supported-script-languages.json'))
-    );
-
-    supported.forEach(function (language) {
-        var namedLanguage;
-
-        namedLanguage = languages[language];
-
-        it('should have a fixture for `' + language + '` (' + namedLanguage +
-            ')', function () {
-                assert.doesNotThrow(function () {
-                    /* istanbul ignore else */
-                    if (language in fixtures) {
-                        return;
+                    /* istanbul ignore if */
+                    if (result !== language.iso6393) {
+                        console.log(franc.all(input).slice(0, 10));
+                        throw new Error(
+                            'Expected ' + language.iso6393 + ', ' +
+                            ' got `' + result + '`'
+                        )
                     }
+                }
+            );
+        });
+    }
 
-                    /* istanbul ignore next */
-                    throw new Error(
-                        'Unit tests should cover `' + language + '`'
-                    );
-                });
-            }
-        );
+    Object.keys(support).forEach(function (iso6393) {
+        classifyLanguage(fixtures[iso6393], support[iso6393]);
     });
 });
