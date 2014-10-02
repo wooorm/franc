@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html class="franc">
   <head>
+    <meta charset="utf-8" />
     <title>Franc live</title>
-    <style>
-    </style>
   </head>
   <body>
     <h1>Franc — Detect the language of text</h1>
     <p>A quick demo of <a href="https://github.com/wooorm/franc/">wooorm/franc</a>.</p>
-    <p>Just paste (or write) some text in the text area below, and press "Detect language".</p>
-    <p>Please raise any issues on <a href="https://github.com/wooorm/franc/issues">github</a>.</p>
-    <button class="franc__action" style="display: block;margin-bottom:1em">Detect language</button>
-    <textarea class="franc__input" rows="20" cols="80" autofocus>Enter some text here
-Todos los seres humanos nacen libres e iguales en dignidad y derechos y, dotados como están de razón y conciencia, deben comportarse fraternalmente los unos con los otros.</textarea>
+    <p>Just paste (or write) some text in the text area below.</p>
+    <p>Please raise any issues on <a href="https://github.com/wooorm/franc/issues">GitHub</a>.</p>
+    <p>Refresh this page to see another example, one out of the <a href="https://github.com/wooorm/franc/blob/master/Supported-Languages.md">168 supported languages</a>!</p>
+    <textarea class="franc__input" rows="20" cols="80" autofocus></textarea>
     <div class="franc__wrapper">
         <h2>Probability</h2>
-        <p>(No idea what these language codes are? check out <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">this list of ISO 639 codes</a>)</p>
+        <p>(No idea what these language codes are? check out <a href="http://www-01.sil.org/iso639-3/default.asp">this list of ISO 639-3 codes</a>)</p>
         <ol class="franc__output"></ol>
     </div>
     <script src="build/build.js"></script>

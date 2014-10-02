@@ -1,13 +1,26 @@
 var franc = require('franc');
+var fixtures = require('./fixtures.json');
+var debounce = require('debounce');
+var examples;
+var key;
+
+examples = [];
+
+for (key in fixtures) {
+    examples.push(fixtures[key]);
+}
 
 var inputElement = document.getElementsByTagName('textarea')[0];
 var outputElement = document.getElementsByTagName('ol')[0];
-var buttonElement = document.getElementsByTagName('button')[0];
 var wrapperElement = document.getElementsByTagName('div')[0];
 
-buttonElement.addEventListener('click', detectLanguage);
+inputElement.addEventListener('input', debounce(detectLanguage, 50));
 
-wrapperElement.style.display = 'none';
+inputElement.value = getExample();
+
+function getExample() {
+    return examples[Math.floor(Math.random() * examples.length)];
+}
 
 function detectLanguage() {
     visualiseResults(franc.all(inputElement.value));
@@ -15,22 +28,16 @@ function detectLanguage() {
 
 function visualiseResults(results) {
     wrapperElement.style.display = '';
-    console.log('visualiseResults');
-    cleanOutputElement();
-    results = results.map(createResult);
-    
-    results.forEach(function (node) {
-        outputElement.appendChild(node);
-    });
 
-    console.log('visualiseResults:2');
-    results[0].classList.add('franc__probable')
-}
-
-function cleanOutputElement() {
     while (outputElement.firstElementChild) {
         outputElement.removeChild(outputElement.firstElementChild);
     }
+
+    results = results.map(createResult);
+
+    results.forEach(function (node) {
+        outputElement.appendChild(node);
+    });
 }
 
 function createResult(result, n) {
@@ -40,3 +47,5 @@ function createResult(result, n) {
 
     return node;
 }
+
+detectLanguage();
