@@ -47,31 +47,36 @@ function forEveryLanguage(callback) {
     }
 }
 
-suite('benchmarks * 82 paragraphs in different languages', function () {
-    set('iterations', 30);
-    set('type', 'static');
+suite(
+    'benchmarks * ' +
+    Object.keys(fixtures).length +
+    ' paragraphs in different languages',
+    function () {
+        set('iterations', 10);
+        set('type', 'static');
 
-    bench('franc -- this module', function () {
-        forEveryLanguage(function (language, fixture) {
-            franc(fixture);
+        bench('franc -- this module', function () {
+            forEveryLanguage(function (language, fixture) {
+                franc(fixture);
+            });
         });
-    });
 
-    bench('guesslanguage', function () {
-        forEveryLanguage(function (language, fixture) {
-            guessLanguage(fixture);
+        bench('guesslanguage', function () {
+            forEveryLanguage(function (language, fixture) {
+                guessLanguage(fixture);
+            });
         });
-    });
 
-    bench('languagedetect', function () {
-        forEveryLanguage(function (language, fixture) {
-            languageDetect(fixture);
+        bench('languagedetect', function () {
+            forEveryLanguage(function (language, fixture) {
+                languageDetect(fixture);
+            });
         });
-    });
 
-    bench('vac', function () {
-        forEveryLanguage(function (language, fixture) {
-            vac(fixture);
+        bench('vac', function () {
+            forEveryLanguage(function (language, fixture) {
+                vac(fixture);
+            });
         });
-    });
-});
+    }
+);
