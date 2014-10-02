@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Dependencies.
  */
@@ -20,10 +22,7 @@ scripts = require('unicode-7.0.0').scripts;
  * Data.
  */
 
-var support,
-    topLanguages;
-
-support = {};
+var topLanguages;
 
 topLanguages = [];
 
@@ -34,7 +33,7 @@ topLanguages = [];
 
 var THRESHOLD;
 
-THRESHOLD = 1000000
+THRESHOLD = 1e6;
 
 /**
  * Transform scripts into global expressions.
@@ -77,12 +76,9 @@ function all(object, key) {
 function getScriptInformation(code) {
     var declaration,
         content,
-        info,
         length,
-        name,
         scriptInformation;
 
-    info = information[code];
     declaration = declarations[code];
     content = all(declaration, 'para').join('');
     length = content.length;
@@ -152,9 +148,7 @@ function getUDHRKeyfromISO(iso) {
     }
 
     Object.keys(information).forEach(function (udhrCode) {
-        var info,
-            currentVersionIndex,
-            previousVersionIndex;
+        var info;
 
         info = information[udhrCode];
 
@@ -197,6 +191,12 @@ Object.keys(speakers).forEach(function (iso6393) {
             'name' : language.name,
             'iso6393' : iso6393
         });
+    } else {
+        console.log(
+            'Ignoring unpopular language `' + iso6393 + '` (' +
+            language.name + '), which has ' + language.speakers +
+            ' speakers.'
+        );
     }
 });
 
@@ -277,14 +277,23 @@ topLanguages = topLanguages.filter(function (language) {
 });
 
 /**
+ * Create a map of which languages should be supported.
+ */
+
+var languages = {};
+
+topLanguages.forEach(function (language) {
+    languages[language.iso6393] = language;
+});
+
+/**
  * Japanese is different.
  */
 
-var japanese;
-
 topLanguages = topLanguages.filter(function (language) {
     if (language.iso6393 === 'jpn') {
-        japanese = language;
+        language.script = 'Hiragana, Katakana, and Han';
+
         return false;
     }
 
@@ -292,8 +301,8 @@ topLanguages = topLanguages.filter(function (language) {
 });
 
 /**
+ * Transform the scripts object into a single key.
  * Throw when more than one scripts are in use.
- * Also, transform the scripts object into a single key.
  */
 
 topLanguages.forEach(function (language) {
@@ -334,7 +343,8 @@ topLanguages.forEach(function (language) {
  */
 
 var singletons,
-    regulars;
+    regulars,
+    regularExpressions;
 
 singletons = {};
 regulars = {};
@@ -368,31 +378,41 @@ singletons.jpn = new RegExp(
 );
 
 /**
+ * Supported languages.
+ */
+
+var support;
+
+support = {};
+
+/**
  * Write singletons.
  */
 
-fs.writeFileSync('data/singleton-expressions.js', (function () {
+fs.writeFileSync('lib/singletons.js', (function () {
     var expressions;
 
     expressions = Object.keys(singletons).map(function (key) {
-        return key + ': ' + singletons[key]
+        support[key] = languages[key];
+
+        return key + ': ' + singletons[key];
     }).join(',\n  ');
 
-    return 'module.exports = {\n  ' + expressions + '\n};\n'
+    return 'module.exports = {\n  ' + expressions + '\n};\n';
 })());
 
 /**
  * Write regulars.
  */
 
-fs.writeFileSync('data/regular-expressions.js', (function () {
+fs.writeFileSync('lib/expressions.js', (function () {
     var expressions;
 
     expressions = Object.keys(regularExpressions).map(function (script) {
-        return script + ': ' + regularExpressions[script]
+        return script + ': ' + regularExpressions[script];
     }).join(',\n  ');
 
-    return 'module.exports = {\n  ' + expressions + '\n};\n'
+    return 'module.exports = {\n  ' + expressions + '\n};\n';
 })());
 
 /**
@@ -400,7 +420,7 @@ fs.writeFileSync('data/regular-expressions.js', (function () {
  * which languages.
  */
 
-fs.writeFileSync('data/language-map.json', (function () {
+fs.writeFileSync('lib/data.json', (function () {
     var languages;
 
     languages = {};
@@ -412,8 +432,10 @@ fs.writeFileSync('data/language-map.json', (function () {
 
         regulars[script].forEach(function (language) {
             if (trigrams[language.udhr]) {
+                support[language.iso6393] = language;
+
                 scriptObject[language.iso6393] =
-                    trigrams[language.udhr].join('|');
+                    trigrams[language.udhr].concat().reverse().join('|');
             } else {
                 console.log(
                     'Popular language without trigrams: ' +
@@ -427,3 +449,15 @@ fs.writeFileSync('data/language-map.json', (function () {
 
     return JSON.stringify(languages, 0, 2);
 })());
+
+/**
+ * Write info on which languages are supported.
+ */
+
+fs.writeFileSync('data/support.json', JSON.stringify(support, 0, 2));
+
+console.log(
+    'In total, franc now has support for ' +
+    Object.keys(support).length +
+    ' languages.'
+);
