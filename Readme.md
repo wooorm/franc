@@ -65,14 +65,14 @@ $ npm run install-benchmark # Just once of course.
 $ npm run benchmark
 ```
 
-On a MacBook Air, it runs 82 tests, 10 times per second (total: 820 op/s).
+On a MacBook Air, it runs 169 tests, 2 times per second (total: 338 op/s).
 
 ```
-         benchmarks * 82 paragraphs in different languages
-  10 op/s » franc -- this module
-   6 op/s » guesslanguage
-   4 op/s » languagedetect
-   5 op/s » vac
+         benchmarks * 169 paragraphs in different languages
+  2 op/s » franc -- this module
+  2 op/s » guesslanguage
+  2 op/s » languagedetect
+  2 op/s » vac
 ```
 
 ## License
