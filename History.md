@@ -1,5 +1,5 @@
 
-n.n.n / 2014-10-02
+0.2.0 / 2014-10-02
 ==================
 
  * Add code-climate badge to Readme.md
