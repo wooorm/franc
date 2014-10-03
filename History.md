@@ -1,4 +1,12 @@
 
+n.n.n / 2014-10-03
+==================
+
+ * Update speakers to 0.0.2
+ * Merge pull request #7 from jeffhuys/master
+ * Spelling fix
+ * Add link in Readme.md on how to fork franc for more supported languages
+
 0.2.0 / 2014-10-02
 ==================
 
