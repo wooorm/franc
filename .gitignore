@@ -1,4 +1,5 @@
 node_modules
+build/fixtures.json
 bower_components
 components
 .DS_Store
