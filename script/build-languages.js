@@ -292,7 +292,9 @@ topLanguages.forEach(function (language) {
 
 topLanguages.forEach(function (language) {
     if (language.iso6393 === 'jpn') {
-        language.script = ['Hiragana, Katakana, and Han'];
+        language.script = {
+            'Hiragana, Katakana, and Han' : 0.8
+        };
     }
 });
 

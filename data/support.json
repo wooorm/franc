@@ -1,11 +1,4 @@
 {
-  "jpn": {
-    "speakers": 125000000,
-    "name": "Japanese",
-    "iso6393": "jpn",
-    "udhr": "jpn",
-    "script": "0"
-  },
   "cmn": {
     "speakers": 885000000,
     "name": "Mandarin Chinese",
@@ -19,6 +12,13 @@
     "iso6393": "ben",
     "udhr": "ben",
     "script": "Bengali"
+  },
+  "jpn": {
+    "speakers": 125000000,
+    "name": "Japanese",
+    "iso6393": "jpn",
+    "udhr": "jpn",
+    "script": "Hiragana, Katakana, and Han"
   },
   "kor": {
     "speakers": 75000000,
