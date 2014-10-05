@@ -124,14 +124,14 @@ overrides = {
     'deu' : 'deu_1996',
     'mai' : 'mai',
     'ron' : 'ron_2006',
-    'hau' : 'hau_NG', // no reason.
+    'hau' : 'hau_NG', /* no reason. */
     'tgl' : 'tgl',
     'ell' : 'ell_monotonic',
     'nya' : 'nya_chinyanja',
     'lin' : 'lin',
     'hat' : 'hat_popular',
     'pes' : 'pes_1',
-    'aka' : 'aka_asante', // seems to be more popular?
+    'aka' : 'aka_asante', /* seems to be more popular? */
     'tzm' : 'tzm',
     'khk' : 'khk',
     'cjk' : 'cjk',
@@ -352,7 +352,7 @@ var data,
     regularExpressions;
 
 data = {};
-regularExpressions = {}; // Ha!
+regularExpressions = {}; /* Ha! */
 
 Object.keys(languagesByScripts).forEach(function (script) {
     var languages;
@@ -378,12 +378,9 @@ Object.keys(languagesByScripts).forEach(function (script) {
 
 regularExpressions.jpn = new RegExp(
     expressions.Hiragana.source + '|' +
-    expressions.Katakana.source,// + '|' +
-    // expressions.Han.source,
+    expressions.Katakana.source,
     'g'
 );
-
-// support.jpn = languages[0];
 
 /**
  * Write data.
