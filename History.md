@@ -1,4 +1,17 @@
 
+n.n.n / 2014-10-05
+==================
+
+ * Fix strict version range of trigram-utils in component.json
+ * Remove lib/singletons.js from component
+ * Remove extraneous comments in scripts
+ * Add markdown-table as a dependency
+ * Fix a bug where Japanese was stored without script information
+ * Merge branch 'feature/loosen-unique-script-margin'
+ * Fix multi-language unique script support
+ * Update trigrams, udhr
+ * Remove langs from dev-dependencies
+
 0.2.1 / 2014-10-03
 ==================
 
