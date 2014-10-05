@@ -19,8 +19,7 @@
   "scripts": [
     "index.js",
     "lib/franc.js",
-    "lib/expressions.js",
-    "lib/singletons.js"
+    "lib/expressions.js"
   ],
   "json": [
     "lib/data.json"
