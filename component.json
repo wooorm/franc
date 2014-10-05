@@ -3,8 +3,8 @@
   "private": true,
   "repository": "wooorm/franc-gh-pages",
   "dependencies": {
-    "wooorm/franc": "0.2.0",
-    "component/debounce": "^1.0.0"
+    "component/debounce": "^1.0.0",
+    "wooorm/franc": "^0.2.2"
   },
   "scripts": [
     "index.js"
