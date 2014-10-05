@@ -1,4 +1,11 @@
 {
+  "jpn": {
+    "speakers": 125000000,
+    "name": "Japanese",
+    "iso6393": "jpn",
+    "udhr": "jpn",
+    "script": "0"
+  },
   "cmn": {
     "speakers": 885000000,
     "name": "Mandarin Chinese",
@@ -153,13 +160,6 @@
     "udhr": "aii",
     "script": "Syriac"
   },
-  "jpn": {
-    "speakers": 125000000,
-    "name": "Japanese",
-    "iso6393": "jpn",
-    "udhr": "jpn",
-    "script": "Hiragana, Katakana, and Han"
-  },
   "spa": {
     "speakers": 332000000,
     "name": "Spanish",
@@ -237,18 +237,18 @@
     "udhr": "pol",
     "script": "Latin"
   },
-  "swh": {
-    "speakers": 30000000,
-    "name": "Swahili (individual language)",
-    "iso6393": "swh",
-    "udhr": "swh",
-    "script": "Latin"
-  },
   "gax": {
     "speakers": 30000000,
     "name": "Borana-Arsi-Guji Oromo",
     "iso6393": "gax",
     "udhr": "gax",
+    "script": "Latin"
+  },
+  "swh": {
+    "speakers": 30000000,
+    "name": "Swahili (individual language)",
+    "iso6393": "swh",
+    "udhr": "swh",
     "script": "Latin"
   },
   "sun": {
@@ -279,25 +279,18 @@
     "udhr": "hau_NG",
     "script": "Latin"
   },
-  "bos": {
-    "speakers": 21000000,
-    "name": "Bosnian",
-    "iso6393": "bos",
-    "udhr": "bos_latn",
-    "script": "Latin"
-  },
-  "srp": {
-    "speakers": 21000000,
-    "name": "Serbian",
-    "iso6393": "srp",
-    "udhr": "srp_latn",
-    "script": "Latin"
-  },
   "hrv": {
     "speakers": 21000000,
     "name": "Croatian",
     "iso6393": "hrv",
     "udhr": "hrv",
+    "script": "Latin"
+  },
+  "bos": {
+    "speakers": 21000000,
+    "name": "Bosnian",
+    "iso6393": "bos",
+    "udhr": "bos_latn",
     "script": "Latin"
   },
   "nld": {
@@ -307,11 +300,11 @@
     "udhr": "nld",
     "script": "Latin"
   },
-  "ckb": {
-    "speakers": 20000000,
-    "name": "Central Kurdish",
-    "iso6393": "ckb",
-    "udhr": "ckb",
+  "srp": {
+    "speakers": 21000000,
+    "name": "Serbian",
+    "iso6393": "srp",
+    "udhr": "srp_latn",
     "script": "Latin"
   },
   "yor": {
@@ -319,6 +312,13 @@
     "name": "Yoruba",
     "iso6393": "yor",
     "udhr": "yor",
+    "script": "Latin"
+  },
+  "ckb": {
+    "speakers": 20000000,
+    "name": "Central Kurdish",
+    "iso6393": "ckb",
+    "udhr": "ckb",
     "script": "Latin"
   },
   "uzn": {
@@ -377,6 +377,13 @@
     "udhr": "plt",
     "script": "Latin"
   },
+  "mad": {
+    "speakers": 10000000,
+    "name": "Madurese",
+    "iso6393": "mad",
+    "udhr": "mad",
+    "script": "Latin"
+  },
   "nya": {
     "speakers": 10000000,
     "name": "Nyanja",
@@ -389,13 +396,6 @@
     "name": "Chimborazo Highland Quichua",
     "iso6393": "qug",
     "udhr": "qug",
-    "script": "Latin"
-  },
-  "mad": {
-    "speakers": 10000000,
-    "name": "Madurese",
-    "iso6393": "mad",
-    "udhr": "mad",
     "script": "Latin"
   },
   "kin": {
@@ -510,18 +510,18 @@
     "udhr": "lua",
     "script": "Latin"
   },
-  "fin": {
-    "speakers": 6000000,
-    "name": "Finnish",
-    "iso6393": "fin",
-    "udhr": "fin",
-    "script": "Latin"
-  },
   "run": {
     "speakers": 6000000,
     "name": "Rundi",
     "iso6393": "run",
     "udhr": "run",
+    "script": "Latin"
+  },
+  "fin": {
+    "speakers": 6000000,
+    "name": "Finnish",
+    "iso6393": "fin",
+    "udhr": "fin",
     "script": "Latin"
   },
   "slk": {
@@ -545,6 +545,13 @@
     "udhr": "dan",
     "script": "Latin"
   },
+  "suk": {
+    "speakers": 5000000,
+    "name": "Sukuma",
+    "iso6393": "suk",
+    "udhr": "suk",
+    "script": "Latin"
+  },
   "als": {
     "speakers": 5000000,
     "name": "Tosk Albanian",
@@ -557,13 +564,6 @@
     "name": "Norwegian Bokmål",
     "iso6393": "nob",
     "udhr": "nob",
-    "script": "Latin"
-  },
-  "suk": {
-    "speakers": 5000000,
-    "name": "Sukuma",
-    "iso6393": "suk",
-    "udhr": "suk",
     "script": "Latin"
   },
   "sag": {
@@ -601,13 +601,6 @@
     "udhr": "sot",
     "script": "Latin"
   },
-  "umb": {
-    "speakers": 4000000,
-    "name": "Umbundu",
-    "iso6393": "umb",
-    "udhr": "umb",
-    "script": "Latin"
-  },
   "glg": {
     "speakers": 4000000,
     "name": "Galician",
@@ -620,6 +613,13 @@
     "name": "Lithuanian",
     "iso6393": "lit",
     "udhr": "lit",
+    "script": "Latin"
+  },
+  "umb": {
+    "speakers": 4000000,
+    "name": "Umbundu",
+    "iso6393": "umb",
+    "udhr": "umb",
     "script": "Latin"
   },
   "bcl": {
@@ -650,18 +650,18 @@
     "udhr": "ban",
     "script": "Latin"
   },
-  "knc": {
-    "speakers": 3500000,
-    "name": "Central Kanuri",
-    "iso6393": "knc",
-    "udhr": "knc",
-    "script": "Latin"
-  },
   "bug": {
     "speakers": 3500000,
     "name": "Buginese",
     "iso6393": "bug",
     "udhr": "bug",
+    "script": "Latin"
+  },
+  "knc": {
+    "speakers": 3500000,
+    "name": "Central Kanuri",
+    "iso6393": "knc",
+    "udhr": "knc",
     "script": "Latin"
   },
   "ibb": {
@@ -678,32 +678,11 @@
     "udhr": "lug",
     "script": "Latin"
   },
-  "lun": {
-    "speakers": 3000000,
-    "name": "Lunda",
-    "iso6393": "lun",
-    "udhr": "lun",
-    "script": "Latin"
-  },
   "war": {
     "speakers": 3000000,
     "name": "Waray (Philippines)",
     "iso6393": "war",
     "udhr": "war",
-    "script": "Latin"
-  },
-  "kmb": {
-    "speakers": 3000000,
-    "name": "Kimbundu",
-    "iso6393": "kmb",
-    "udhr": "kmb",
-    "script": "Latin"
-  },
-  "ace": {
-    "speakers": 3000000,
-    "name": "Achinese",
-    "iso6393": "ace",
-    "udhr": "ace",
     "script": "Latin"
   },
   "tzm": {
@@ -713,11 +692,32 @@
     "udhr": "tzm",
     "script": "Latin"
   },
+  "ace": {
+    "speakers": 3000000,
+    "name": "Achinese",
+    "iso6393": "ace",
+    "udhr": "ace",
+    "script": "Latin"
+  },
   "bam": {
     "speakers": 3000000,
     "name": "Bambara",
     "iso6393": "bam",
     "udhr": "bam",
+    "script": "Latin"
+  },
+  "lun": {
+    "speakers": 3000000,
+    "name": "Lunda",
+    "iso6393": "lun",
+    "udhr": "lun",
+    "script": "Latin"
+  },
+  "kmb": {
+    "speakers": 3000000,
+    "name": "Kimbundu",
+    "iso6393": "kmb",
+    "udhr": "kmb",
     "script": "Latin"
   },
   "wol": {
@@ -783,11 +783,11 @@
     "udhr": "bci",
     "script": "Latin"
   },
-  "epo": {
+  "pam": {
     "speakers": 2000000,
-    "name": "Esperanto",
-    "iso6393": "epo",
-    "udhr": "epo",
+    "name": "Pampanga",
+    "iso6393": "pam",
+    "udhr": "pam",
     "script": "Latin"
   },
   "tpi": {
@@ -797,11 +797,11 @@
     "udhr": "tpi",
     "script": "Latin"
   },
-  "pam": {
+  "epo": {
     "speakers": 2000000,
-    "name": "Pampanga",
-    "iso6393": "pam",
-    "udhr": "pam",
+    "name": "Esperanto",
+    "iso6393": "epo",
+    "udhr": "epo",
     "script": "Latin"
   },
   "tiv": {
