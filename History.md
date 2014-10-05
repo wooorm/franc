@@ -1,5 +1,5 @@
 
-n.n.n / 2014-10-05
+0.2.2 / 2014-10-05
 ==================
 
  * Fix strict version range of trigram-utils in component.json
