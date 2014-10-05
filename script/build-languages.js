@@ -290,14 +290,10 @@ topLanguages.forEach(function (language) {
  * Japanese is different.
  */
 
-topLanguages = topLanguages.filter(function (language) {
+topLanguages.forEach(function (language) {
     if (language.iso6393 === 'jpn') {
-        language.script = 'Hiragana, Katakana, and Han';
-
-        return false;
+        language.script = ['Hiragana, Katakana, and Han'];
     }
-
-    return true;
 });
 
 /**
@@ -339,45 +335,6 @@ topLanguages.forEach(function (language) {
 });
 
 /**
- * Get singletons and regulars.
- */
-
-var singletons,
-    regulars,
-    regularExpressions;
-
-singletons = {};
-regulars = {};
-regularExpressions = {}; // Ha!
-
-Object.keys(languagesByScripts).forEach(function (script) {
-    var language;
-
-    if (languagesByScripts[script].length > 1) {
-        if (!regularExpressions[script]) {
-            regularExpressions[script] = expressions[script];
-        }
-
-        regulars[script] = languagesByScripts[script];
-    } else {
-        language = languagesByScripts[script][0];
-
-        singletons[language.iso6393] = expressions[script];
-    }
-});
-
-/**
- * Push Japanese to singletons
- */
-
-singletons.jpn = new RegExp(
-    expressions.Hiragana.source + '|' +
-    expressions.Katakana.source + '|' +
-    expressions.Han.source,
-    'g'
-);
-
-/**
  * Supported languages.
  */
 
@@ -386,23 +343,48 @@ var support;
 support = {};
 
 /**
- * Write singletons.
+ * Get languages by scripts.
  */
 
-fs.writeFileSync('lib/singletons.js', (function () {
-    var expressions;
+var data,
+    regularExpressions;
 
-    expressions = Object.keys(singletons).map(function (key) {
-        support[key] = languages[key];
+data = {};
+regularExpressions = {}; // Ha!
 
-        return key + ': ' + singletons[key];
-    }).join(',\n  ');
+Object.keys(languagesByScripts).forEach(function (script) {
+    var languages;
 
-    return 'module.exports = {\n  ' + expressions + '\n};\n';
-})());
+    languages = languagesByScripts[script];
+
+    if (languages.length > 1) {
+        if (!regularExpressions[script]) {
+            regularExpressions[script] = expressions[script];
+        }
+
+        data[script] = languages;
+    } else {
+        support[languages[0].iso6393] = languages[0];
+
+        regularExpressions[languages[0].iso6393] = expressions[script];
+    }
+});
 
 /**
- * Write regulars.
+ * Push Japanese.
+ */
+
+regularExpressions.jpn = new RegExp(
+    expressions.Hiragana.source + '|' +
+    expressions.Katakana.source,// + '|' +
+    // expressions.Han.source,
+    'g'
+);
+
+// support.jpn = languages[0];
+
+/**
+ * Write data.
  */
 
 fs.writeFileSync('lib/expressions.js', (function () {
@@ -425,12 +407,12 @@ fs.writeFileSync('lib/data.json', (function () {
 
     languages = {};
 
-    Object.keys(regulars).forEach(function (script) {
+    Object.keys(data).forEach(function (script) {
         var scriptObject;
 
         scriptObject = {};
 
-        regulars[script].forEach(function (language) {
+        data[script].forEach(function (language) {
             if (trigrams[language.udhr]) {
                 support[language.iso6393] = language;
 
