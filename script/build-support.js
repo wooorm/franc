@@ -1,9 +1,11 @@
 'use strict';
 
 var fs,
+    table,
     support;
 
 fs = require('fs');
+table = require('markdown-table');
 support = require('../data/support');
 
 support = Object.keys(support).sort(function (a, b) {
@@ -23,18 +25,21 @@ fs.writeFileSync('Supported-Languages.md',
     '\n' +
     '- † — Undetermined languages will result in the "und" language code\n' +
     '\n' +
-    '| ISO-639-3 | Name | Script | Speakers |\n' +
-    '| :-------: | :--: | :----: | :------: |\n' +
-
-    support.map(function (language) {
-        return '| ' + [
-            '[' + language.iso6393 + '](http://www-01.sil.org/' +
-            'iso639-3/documentation.asp?id=' + language.iso6393 + ')',
-            language.name,
-            language.script,
-            language.speakers
-        ].join(' | ') + ' |';
-    }).join('\n') +
+    table([
+            ['ISO-639-3', 'Name', 'Script', 'Speakers']
+        ].concat(support.map(function (language) {
+            return [
+                '[' + language.iso6393 + '](http://www-01.sil.org/' +
+                'iso639-3/documentation.asp?id=' + language.iso6393 + ')',
+                language.name,
+                language.script,
+                language.speakers
+            ];
+        })),
+        {
+            'align' : ['c', 'c', 'c', 'r']
+        }
+    ) +
 
     '\n'
 );
