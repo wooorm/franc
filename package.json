@@ -23,8 +23,8 @@
     "matcha": "^0.5.0",
     "mocha": "^1.20.0",
     "speakers": "^0.0.2",
-    "trigrams": "^0.0.3",
-    "udhr": "0.0.5",
+    "trigrams": "^0.0.4",
+    "udhr": "^0.0.7",
     "unicode-7.0.0": "^0.1.5"
   },
   "repository": {
