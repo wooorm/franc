@@ -29,7 +29,7 @@
     "*.yml",
     "component.json",
     "package.json",
-    "benchmark",
+    "benchmark.js",
     "build",
     "components",
     "coverage",

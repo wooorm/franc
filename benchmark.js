@@ -4,8 +4,8 @@
 
 var fixtures, franc, guesslanguage, languagedetect, Vac;
 
-franc = require('..');
-fixtures = require('../spec/fixtures.json');
+franc = require('./');
+fixtures = require('./test/fixtures.json');
 
 try {
     guesslanguage = require('guesslanguage').guessLanguage;
