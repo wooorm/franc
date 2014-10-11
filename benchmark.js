@@ -2,18 +2,36 @@
 
 /* eslint-disable no-cond-assign */
 
-var fixtures, franc, guesslanguage, languagedetect, Vac;
+var fixtures,
+    franc,
+    guesslanguage,
+    languagedetect,
+    exception,
+    Vac;
 
 franc = require('./');
 fixtures = require('./test/fixtures.json');
 
 try {
     guesslanguage = require('guesslanguage').guessLanguage;
+} catch (err) {
+    exception = err;
+}
+
+try {
     languagedetect = new (require('languagedetect'))();
+} catch (err) {
+    exception = err;
+}
+
+try {
     Vac = require('vac');
-} catch (error) {
-    console.log(error);
-    throw new Error(
+} catch (err) {
+    exception = err;
+}
+
+if (exception) {
+    console.log(
         '\u001B[0;31m' +
         'The libraries needed by this benchmark could not be found. ' +
         'Please execute:\n' +
@@ -24,14 +42,19 @@ try {
 
 function guessLanguage(fixture) {
     var result;
+
     guesslanguage.detect(fixture, function (language) {
         result = language;
     });
+
     return result;
 }
 
 function languageDetect(fixture) {
-    var result = languagedetect.detect(fixture, 1)[0];
+    var result;
+
+    result = languagedetect.detect(fixture, 1)[0];
+
     return result && result[0];
 }
 
@@ -40,11 +63,9 @@ function vac(fixture) {
 }
 
 function forEveryLanguage(callback) {
-    var language;
-
-    for (language in fixtures) {
-        callback(language, fixtures[language]);
-    }
+    Object.keys(fixtures).forEach(function (language) {
+        callback(fixtures[language]);
+    });
 }
 
 suite(
@@ -56,27 +77,25 @@ suite(
         set('type', 'static');
 
         bench('franc -- this module', function () {
-            forEveryLanguage(function (language, fixture) {
-                franc(fixture);
-            });
+            forEveryLanguage(franc);
         });
 
-        bench('guesslanguage', function () {
-            forEveryLanguage(function (language, fixture) {
-                guessLanguage(fixture);
+        if (guesslanguage) {
+            bench('guesslanguage', function () {
+                forEveryLanguage(guessLanguage);
             });
-        });
+        }
 
-        bench('languagedetect', function () {
-            forEveryLanguage(function (language, fixture) {
-                languageDetect(fixture);
+        if (languagedetect) {
+            bench('languagedetect', function () {
+                forEveryLanguage(languageDetect);
             });
-        });
+        }
 
-        bench('vac', function () {
-            forEveryLanguage(function (language, fixture) {
-                vac(fixture);
+        if (Vac) {
+            bench('vac', function () {
+                forEveryLanguage(vac);
             });
-        });
+        }
     }
 );
