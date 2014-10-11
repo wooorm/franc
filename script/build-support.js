@@ -8,12 +8,6 @@ fs = require('fs');
 table = require('markdown-table');
 support = require('../data/support');
 
-support = Object.keys(support).sort(function (a, b) {
-    return support[b].speakers - support[a].speakers;
-}).map(function (iso6393) {
-    return support[iso6393];
-});
-
 support.unshift({
     'iso6393' : 'und',
     'name' : '† **Special: Case for unknown language**'

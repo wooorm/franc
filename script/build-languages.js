@@ -119,51 +119,110 @@ function getScriptInformation(code) {
 var overrides;
 
 overrides = {
-    'cmn' : 'cmn_hans',
-    'por' : 'por_PT',
-    'deu' : 'deu_1996',
-    'mai' : 'mai',
-    'ron' : 'ron_2006',
-    'hau' : 'hau_NG', /* no reason. */
-    'tgl' : 'tgl',
-    'ell' : 'ell_monotonic',
-    'nya' : 'nya_chinyanja',
-    'lin' : 'lin',
-    'hat' : 'hat_popular',
-    'pes' : 'pes_1',
-    'aka' : 'aka_asante', /* seems to be more popular? */
-    'tzm' : 'tzm',
-    'khk' : 'khk',
-    'cjk' : 'cjk',
-    'kng' : 'kng',
-    'rmn' : 'rmn',
-    'taq' : 'taq'
+    /**
+     * It doesnt matter which one we take, simplified
+     * or traditional. It all chinese, and all Han-script
+     * characters/
+     */
+
+    'cmn' : ['cmn_hans'],
+
+    /**
+     * Seems to be most popular in Nigeria:
+     *
+     * Source:
+     *  http://www.ethnologue.com/language/hau
+     */
+
+    'hau' : ['hau_NG'],
+
+    /**
+     * Monotonic Greek is modern greek.
+     */
+
+    'ell' : ['ell_monotonic'],
+
+    /**
+     * More popular, Farsi/Persian, instead of Dari
+     *
+     * Source:
+     *  http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=prs1
+     */
+
+    'pes' : ['pes_1'],
+
+    /**
+     * Asante: 2,800,000; Fante: 1,900,000; Akuapem: 555,000.
+     *
+     * Source:
+     *   http://www.ethnologue.com/language/aka
+     */
+
+    'aka' : ['aka_fante', 'aka_asante'],
+
+    /**
+     * Languages with one dated translation, pick the
+     * newest:
+     */
+
+    'deu' : ['deu_1996'],
+    'ron' : ['ron_2006'],
+
+    /**
+     * Pick European Portuguese, maybe not fair, will
+     * have to investigate.
+     */
+
+    'por' : ['por_PT'],
+
+    /**
+     * No real reason.
+     *
+     * Source:
+     *   http://www.ethnologue.com/language/nya
+     */
+
+    'nya' : ['nya_chinyanja'],
+
+    /**
+     * It says ``popular'' in the name?
+     */
+
+    'hat' : ['hat_popular']
 };
 
-function getUDHRKeyfromISO(iso) {
-    var udhr;
+function getUDHRKeysfromISO(iso) {
+    var udhrs;
+
+    udhrs = [];
 
     if (iso in overrides) {
         return overrides[iso];
     }
 
-    Object.keys(information).forEach(function (udhrCode) {
+    Object.keys(information).forEach(function (code) {
         var info;
 
-        info = information[udhrCode];
+        info = information[code];
 
         if (info.ISO === iso) {
-            if (udhr) {
-                console.log(
-                    'Multiple UDHRs for a language:', udhr, udhrCode, iso
-                );
-            }
-
-            udhr = udhrCode;
+            udhrs.push(code);
         }
     });
 
-    return udhr;
+    if (udhrs.length === 1) {
+        return udhrs;
+    }
+
+    /**
+     * Pick the main UDHR.
+     */
+
+    if (udhrs.indexOf(iso) !== -1) {
+        return [iso];
+    }
+
+    return udhrs;
 }
 
 /**
@@ -172,7 +231,15 @@ function getUDHRKeyfromISO(iso) {
 
 function sort(array) {
     return array.concat().sort(function (a, b) {
-        return b.speakers - a.speakers;
+        var diff;
+
+        diff = b.speakers - a.speakers;
+
+        if (diff === 0) {
+            diff = a.iso6393.charCodeAt(0) - b.iso6393.charCodeAt(0);
+        }
+
+        return diff;
     });
 }
 
@@ -201,11 +268,37 @@ Object.keys(speakers).forEach(function (iso6393) {
 });
 
 topLanguages.forEach(function (language) {
+    var udhrs;
+
+    udhrs = getUDHRKeysfromISO(language.iso6393);
+
+    language.udhr = udhrs.pop();
+
+    if (udhrs.length !== 0) {
+        console.log(
+            'Adding multiple UDHRs for `' +
+            language.iso6393 + '`: ' +
+            [language.udhr].concat(udhrs).join(', ')
+        );
+
+        udhrs.forEach(function (udhr) {
+            topLanguages.push({
+                'speakers' : language.speakers,
+                'name' : language.name,
+                'iso6393' : language.iso6393,
+                'udhr' : udhr
+            });
+        });
+    }
+});
+
+topLanguages = sort(topLanguages);
+
+topLanguages.forEach(function (language) {
     var iso;
 
     iso = language.iso6393;
 
-    language.udhr = getUDHRKeyfromISO(iso);
     language.script = getScriptInformation(language.udhr);
 
     /**
@@ -342,7 +435,7 @@ topLanguages.forEach(function (language) {
 
 var support;
 
-support = {};
+support = [];
 
 /**
  * Get languages by scripts.
@@ -366,7 +459,7 @@ Object.keys(languagesByScripts).forEach(function (script) {
 
         data[script] = languages;
     } else {
-        support[languages[0].iso6393] = languages[0];
+        support.push(languages[0]);
 
         regularExpressions[languages[0].iso6393] = expressions[script];
     }
@@ -413,7 +506,7 @@ fs.writeFileSync('lib/data.json', (function () {
 
         data[script].forEach(function (language) {
             if (trigrams[language.udhr]) {
-                support[language.iso6393] = language;
+                support.push(language);
 
                 scriptObject[language.iso6393] =
                     trigrams[language.udhr].concat().reverse().join('|');
@@ -435,10 +528,10 @@ fs.writeFileSync('lib/data.json', (function () {
  * Write info on which languages are supported.
  */
 
-fs.writeFileSync('data/support.json', JSON.stringify(support, 0, 2));
+fs.writeFileSync('data/support.json', JSON.stringify(sort(support), 0, 2));
 
 console.log(
     'In total, franc now has support for ' +
-    Object.keys(support).length +
+    support.length +
     ' languages.'
 );

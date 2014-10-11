@@ -65,7 +65,7 @@ franc.all(''); // [ [ 'und', 1 ] ]
 
 ## Supported languages
 
-**franc** supports 168 languages. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 175 “languages”. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
 ## Other Language detection libraries
 
@@ -75,10 +75,10 @@ franc.all(''); // [ [ 'und', 1 ] ]
 
 ## Benchmark
 
-On a MacBook Air, it runs 169 paragraphs 2 times per second (total: 338 op/s).
+On a MacBook Air, it runs 175 paragraphs 2 times per second (total: 350 op/s).
 
 ```
-         benchmarks * 169 paragraphs in different languages
+         benchmarks * 175 paragraphs in different languages
   2 op/s » franc -- this module
   2 op/s » guesslanguage
   2 op/s » languagedetect

@@ -125,7 +125,7 @@ describe('algorithm', function () {
         });
     }
 
-    Object.keys(support).forEach(function (iso6393) {
-        classifyLanguage(fixtures[iso6393], support[iso6393]);
+    support.forEach(function (language, index) {
+        classifyLanguage(fixtures[index], language);
     });
 });

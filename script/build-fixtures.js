@@ -18,13 +18,13 @@ udhr = require('udhr').json();
 
 var data;
 
-data = {};
+data = [];
 
-Object.keys(support).forEach(function (code) {
+support.forEach(function (language) {
     var udhrKey,
         fixture;
 
-    udhrKey = support[code].udhr;
+    udhrKey = language.udhr;
 
     if (udhrKey in customFixtures) {
         fixture = customFixtures[udhrKey];
@@ -38,14 +38,14 @@ Object.keys(support).forEach(function (code) {
 
     if (!fixture) {
         throw new Error(
-            'Could not access preamble or note for `' + code + '` ' +
-            '(' + udhrKey + ')'
+            'Could not access preamble or note for `' +
+            language.iso6393 + '` ' + '(' + udhrKey + ')'
         );
     }
 
     fixture = fixture.slice(0, 200);
 
-    data[code] = fixture;
+    data.push(fixture);
 });
 
 /**
