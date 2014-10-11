@@ -60,4 +60,4 @@ data = JSON.stringify(data, 0, 2);
  * Write.
  */
 
-require('fs').writeFileSync('spec/fixtures.json', data);
+require('fs').writeFileSync('test/fixtures.json', data);
