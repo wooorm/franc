@@ -1,4 +1,16 @@
 
+n.n.n / 2014-10-11
+==================
+
+ * Refactor bower ignore
+ * Refactor .jscs.json
+ * Refactor .gitignore
+ * Update .npmignore
+ * Refactor benchmark
+ * Move benchmark/ to benchmark.js
+ * Move spec/ to test/
+ * Add support for multi-script languages
+
 0.2.2 / 2014-10-05
 ==================
 
