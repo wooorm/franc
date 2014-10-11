@@ -4,7 +4,7 @@
   "repository": "wooorm/franc-gh-pages",
   "dependencies": {
     "component/debounce": "^1.0.0",
-    "wooorm/franc": "^0.2.2"
+    "wooorm/franc": "^0.2.3"
   },
   "scripts": [
     "index.js"
