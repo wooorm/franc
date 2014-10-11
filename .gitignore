@@ -1,7 +1,7 @@
-node_modules
-bower_components
-components
 .DS_Store
-coverage
-build
 *.log
+bower_components/
+components/
+coverage/
+node_modules/
+build/
