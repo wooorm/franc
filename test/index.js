@@ -56,8 +56,22 @@ describe('franc()', function () {
             assert(franc(fixture) === 'jpn');
         }
     );
-});
 
+    it('should accept blacklist parameter', function () {
+        var lang = franc(fixtures[42]),
+            opts = {
+                blacklist : [lang]
+            };
+        assert.notEqual(franc(fixtures[42], opts), lang);
+    });
+
+    it('should accept whitelist parameter', function () {
+        var opts = {
+            whitelist : ['pol']
+        };
+        assert(franc(fixtures[42], opts) === 'pol');
+    });
+});
 describe('franc.all()', function () {
     it('should be of type `function`', function () {
         assert(typeof franc.all === 'function');
@@ -98,6 +112,24 @@ describe('franc.all()', function () {
         assert(result[0].length === 2);
         assert(result[1][0] === 'eng');
         assert(result[1].length === 2);
+    });
+
+    it('should accept blacklist parameter', function () {
+        var lang = franc(fixtures[42]),
+            opts = {
+                blacklist : [lang]
+            },
+            res = franc.all(fixtures[42], opts);
+        for (var l in res) {
+            assert.notEqual(res[l][0], lang);
+        }
+    });
+
+    it('should accept whitelist parameter', function () {
+        var opts = {
+            whitelist : ['pol']
+        };
+        assert(franc.all(fixtures[42], opts)[0][0] === 'pol');
     });
 });
 
