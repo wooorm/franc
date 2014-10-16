@@ -58,8 +58,10 @@ franc.all('O Brasil caiu 26 posições em');
  * ]
  */
 
-// You can provide whitelist and/or blackilist to speed things up:
-franc.all('O Brasil caiu 26 posições em', {whitelist: ['por', 'src', 'glg', 'spa']});
+/* Provide a whitelist: */
+franc.all('O Brasil caiu 26 posições em', {
+    'whitelist' : ['por', 'src', 'glg', 'spa']
+});
 /*
  * [
  *   [ 'por', 5507 ],
@@ -69,7 +71,10 @@ franc.all('O Brasil caiu 26 posições em', {whitelist: ['por', 'src', 'glg', 's
  * ]
 */
 
-franc.all('O Brasil caiu 26 posições em', {blacklist: ['src', 'glg', 'lav']});
+/* Provide a blacklist: */
+franc.all('O Brasil caiu 26 posições em', {
+    'blacklist' : ['src', 'glg', 'lav']
+});
 /*
  * [
  *   [ 'por', 5507 ],
@@ -86,8 +91,6 @@ franc.all('O Brasil caiu 26 posições em', {blacklist: ['src', 'glg', 'lav']});
  */
 
 franc.all(''); // [ [ 'und', 1 ] ]
-
-
 ```
 
 > Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is too short to give a significant answer.
