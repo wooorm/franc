@@ -1,5 +1,5 @@
 
-n.n.n / 2014-10-16
+0.3.0 / 2014-10-16
 ==================
 
  * Merge branch 'feature/add-white-and-black-list'
