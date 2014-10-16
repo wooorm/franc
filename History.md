@@ -1,4 +1,19 @@
 
+n.n.n / 2014-10-16
+==================
+
+ * Merge branch 'feature/add-white-and-black-list'
+ * Refactor tests
+ * Refactor comment line-wrap in API
+ * Refactor API
+ * Remove competition from Readme.md
+ * Move description of undefined languages in Readme.md
+ * Refactor code-style in useage example in Readme.md
+ * Merge branch 'kamilbielawski-languages_whitelist_and_blacklist' into feature/add-white-and-black-list
+ * Update Readme
+ * Add tests for whitelist and blacklist
+ * Filter languages by whitelist and/or blacklist
+
 0.2.3 / 2014-10-11
 ==================
 
