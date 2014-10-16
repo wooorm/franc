@@ -58,6 +58,9 @@ franc.all('O Brasil caiu 26 posições em');
  * ]
  */
 
+/* "und" is returned for too-short input: */
+franc.all(''); // [ [ 'und', 1 ] ]
+
 /* Provide a whitelist: */
 franc.all('O Brasil caiu 26 posições em', {
     'whitelist' : ['por', 'src', 'glg', 'spa']
@@ -89,11 +92,7 @@ franc.all('O Brasil caiu 26 posições em', {
  *   ...
  * ]
  */
-
-franc.all(''); // [ [ 'und', 1 ] ]
 ```
-
-> Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is too short to give a significant answer.
 
 ## Supported languages
 
