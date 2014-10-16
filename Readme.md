@@ -98,12 +98,6 @@ franc.all('O Brasil caiu 26 posições em', {
 
 **franc** supports 175 “languages”. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
-## Other Language detection libraries
-
-- [richtr/guessLanguage.js](https://github.com/richtr/guessLanguage.js);
-- [FGRibreau/node-language-detect](https://github.com/FGRibreau/node-language-detect);
-- [Legify/vac](https://github.com/Legify/vac).
-
 ## Benchmark
 
 On a MacBook Air, it runs 175 paragraphs 2 times per second (total: 350 op/s).
