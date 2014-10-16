@@ -58,20 +58,45 @@ franc.all('O Brasil caiu 26 posições em');
  * ]
  */
 
+/* "und" is returned for too-short input: */
 franc.all(''); // [ [ 'und', 1 ] ]
-```
 
-> Note!: **franc** returns the `"und"` language code for an undetermined language. This happens when the input value is too short to give a significant answer.
+/* Provide a whitelist: */
+franc.all('O Brasil caiu 26 posições em', {
+    'whitelist' : ['por', 'src', 'glg', 'spa']
+});
+/*
+ * [
+ *   [ 'por', 5507 ],
+ *   [ 'glg', 6270 ],
+ *   [ 'src', 6292 ],
+ *   [ 'spa', 6481 ]
+ * ]
+*/
+
+/* Provide a blacklist: */
+franc.all('O Brasil caiu 26 posições em', {
+    'blacklist' : ['src', 'glg', 'lav']
+});
+/*
+ * [
+ *   [ 'por', 5507 ],
+ *   [ 'cat', 6432 ],
+ *   [ 'spa', 6481 ],
+ *   [ 'bos', 6509 ],
+ *   [ 'tpi', 6526 ],
+ *   [ 'hrv', 6532 ],
+ *   [ 'snn', 6556 ],
+ *   [ 'bam', 6693 ],
+ *   [ 'sco', 6695 ],
+ *   ...
+ * ]
+ */
+```
 
 ## Supported languages
 
 **franc** supports 175 “languages”. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
-
-## Other Language detection libraries
-
-- [richtr/guessLanguage.js](https://github.com/richtr/guessLanguage.js);
-- [FGRibreau/node-language-detect](https://github.com/FGRibreau/node-language-detect);
-- [Legify/vac](https://github.com/Legify/vac).
 
 ## Benchmark
 

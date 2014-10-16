@@ -1,11 +1,40 @@
 'use strict';
 
-var franc, support, assert, fixtures;
+/**
+ * Dependencies.
+ */
+
+var franc,
+    assert,
+    support,
+    fixtures;
 
 franc = require('..');
+assert = require('assert');
 support = require('../data/support');
 fixtures = require('./fixtures');
-assert = require('assert');
+
+/**
+ * Constants;
+ */
+
+var MAGIC_NUMBER,
+    MAGIC_LANGUAGE;
+
+MAGIC_NUMBER = 42;
+
+MAGIC_LANGUAGE = 'pol';
+
+/**
+ * The fixture belonging to magic number should not equal
+ * magic language.
+ */
+
+assert(MAGIC_LANGUAGE !== franc(fixtures[MAGIC_NUMBER]));
+
+/**
+ * Tests.
+ */
 
 describe('franc()', function () {
     it('should be of type `function`', function () {
@@ -31,7 +60,6 @@ describe('franc()', function () {
     /**
      * Inspired by lifthrasiir on hackernews:
      *
-     * Source:
      *   https://news.ycombinator.com/item?id=8405672
      */
 
@@ -56,8 +84,30 @@ describe('franc()', function () {
             assert(franc(fixture) === 'jpn');
         }
     );
-});
 
+    it('should accept blacklist parameter', function () {
+        var language,
+            result;
+
+        language = franc(fixtures[MAGIC_NUMBER]);
+
+        result = franc(fixtures[MAGIC_NUMBER], {
+            'blacklist' : [language]
+        });
+
+        assert(result !== language);
+    });
+
+    it('should accept whitelist parameter', function () {
+        var result;
+
+        result = franc(fixtures[MAGIC_NUMBER], {
+            'whitelist' : [MAGIC_LANGUAGE]
+        });
+
+        assert(result === MAGIC_LANGUAGE);
+    });
+});
 describe('franc.all()', function () {
     it('should be of type `function`', function () {
         assert(typeof franc.all === 'function');
@@ -65,7 +115,9 @@ describe('franc.all()', function () {
 
     it('should return an array containing language--probability tuples',
         function () {
-            var result = franc.all('XYZ');
+            var result;
+
+            result = franc.all('XYZ');
 
             assert(result instanceof Array);
             assert(typeof result[0][0] === 'string');
@@ -74,7 +126,9 @@ describe('franc.all()', function () {
     );
 
     it('should return [["und", 1]] on an undetermined value', function () {
-        var result = franc.all('XYZ');
+        var result;
+
+        result = franc.all('XYZ');
 
         assert(result[0][0] === 'und');
         assert(result[0][1] === 1);
@@ -83,7 +137,9 @@ describe('franc.all()', function () {
     });
 
     it('should return [["und", 1]] on a missing value', function () {
-        var result = franc.all();
+        var result;
+
+        result = franc.all();
 
         assert(result[0][0] === 'und');
         assert(result[0][1] === 1);
@@ -92,12 +148,40 @@ describe('franc.all()', function () {
     });
 
     it('should work on weird values', function () {
-        var result = franc.all('the the the the the ');
+        var result;
+
+        result = franc.all('the the the the the ');
 
         assert(result[0][0] === 'sco');
         assert(result[0].length === 2);
         assert(result[1][0] === 'eng');
         assert(result[1].length === 2);
+    });
+
+    it('should accept blacklist parameter', function () {
+        var shouldBeLanguage,
+            result;
+
+        shouldBeLanguage = franc(fixtures[MAGIC_NUMBER]);
+
+        result = franc.all(fixtures[MAGIC_NUMBER], {
+            'blacklist' : [shouldBeLanguage]
+        });
+
+        result.forEach(function (language) {
+            assert(language[0] !== shouldBeLanguage);
+        });
+    });
+
+    it('should accept whitelist parameter', function () {
+        var result;
+
+        result = franc.all(fixtures[MAGIC_NUMBER], {
+            'whitelist' : [MAGIC_LANGUAGE]
+        });
+
+        assert(result.length === 1);
+        assert(result[0][0] === MAGIC_LANGUAGE);
     });
 });
 
@@ -110,7 +194,9 @@ describe('algorithm', function () {
         describe(language.iso6393, function () {
             it('should classify `' + example + '` as ' + language.name,
                 function () {
-                    var result = franc(input);
+                    var result;
+
+                    result = franc(input);
 
                     /* istanbul ignore if */
                     if (result !== language.iso6393) {
