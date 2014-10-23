@@ -1,4 +1,10 @@
 
+n.n.n / 2014-10-23
+==================
+
+ * Update license from LGPL to MIT
+ * Update mocha, speakers, udhr, trigram-utils
+
 0.3.0 / 2014-10-16
 ==================
 
