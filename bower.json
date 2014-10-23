@@ -2,7 +2,7 @@
   "name": "franc",
   "main": "index.js",
   "description": "Detect the language of text",
-  "license": "LGPL",
+  "license": "MIT",
   "keywords": [
     "natural",
     "language",
