@@ -1,5 +1,5 @@
 
-n.n.n / 2014-10-23
+0.4.0 / 2014-10-23
 ==================
 
  * Update license from LGPL to MIT
