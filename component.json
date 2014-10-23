@@ -13,7 +13,7 @@
     "guess"
   ],
   "dependencies": {
-    "wooorm/trigram-utils": "0.0.2"
+    "wooorm/trigram-utils": "^0.1.0"
   },
   "repository": "wooorm/franc",
   "scripts": [

@@ -13,7 +13,7 @@
     "guess"
   ],
   "dependencies": {
-    "trigram-utils": "^0.0.2"
+    "trigram-utils": "^0.1.0"
   },
   "authors": [
     "Titus Wormer <tituswormer@gmail.com>"
