@@ -1,14 +1,7 @@
 var franc = require('franc');
-var fixtures = require('./fixtures.json');
+var fixtures = require('./fixtures.js');
 var debounce = require('debounce');
-var examples;
 var key;
-
-examples = [];
-
-for (key in fixtures) {
-    examples.push(fixtures[key]);
-}
 
 var inputElement = document.getElementsByTagName('textarea')[0];
 var outputElement = document.getElementsByTagName('ol')[0];
@@ -19,7 +12,7 @@ inputElement.addEventListener('input', debounce(detectLanguage, 50));
 inputElement.value = getExample();
 
 function getExample() {
-    return examples[Math.floor(Math.random() * examples.length)];
+    return fixtures[Math.floor(Math.random() * fixtures.length)];
 }
 
 function detectLanguage() {

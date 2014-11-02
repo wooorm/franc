@@ -7,10 +7,8 @@
     "wooorm/franc": "^0.4.0"
   },
   "scripts": [
+    "fixtures.js",
     "index.js"
-  ],
-  "json": [
-    "fixtures.json"
   ],
   "license": "MIT"
 }
