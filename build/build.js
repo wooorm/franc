@@ -118,7 +118,7 @@ module.exports = function debounce(func, wait, immediate){
 
 });
 
-require.register("wooorm~n-gram@0.0.1", function (exports, module) {
+require.register("wooorm~n-gram@0.1.0", function (exports, module) {
 'use strict';
 
 /**
@@ -216,24 +216,21 @@ nGram.trigram = nGram(3);
 
 });
 
-require.register("wooorm~trigram-utils@0.0.2", function (exports, module) {
-// ==ClosureCompiler==
-// @output_file_name default.js
-// @compilation_level ADVANCED_OPTIMIZATIONS
-// ==/ClosureCompiler==
-
+require.register("wooorm~trigram-utils@0.1.0", function (exports, module) {
 'use strict';
 
-var getTrigrams, EXPRESSION_SYMBOLS, has;
+var getTrigrams,
+    EXPRESSION_SYMBOLS,
+    has;
 
 /**
- * Module dependencies.
+ * Dependencies.
  */
 
-getTrigrams = require('wooorm~n-gram@0.0.1').trigram;
+getTrigrams = require('wooorm~n-gram@0.1.0').trigram;
 
 /**
- * Faster, securer, existence checks.
+ * Cache.
  */
 
 has = Object.prototype.hasOwnProperty;
@@ -281,14 +278,14 @@ has = Object.prototype.hasOwnProperty;
 EXPRESSION_SYMBOLS = /[\u0021-\u0040]+/g;
 
 /**
- * Clean a text input stream.
+ * Clean `value`.
  *
  * @example
  *   > clean('Some dirty  text.')
  *   // 'some dirty text'
  *
- * @param {string} value - the input value.
- * @returns {string} the cleaned value.
+ * @param {string} value
+ * @return {string}
  */
 
 function clean(value) {
@@ -304,7 +301,7 @@ function clean(value) {
 }
 
 /**
- * Deep regular sort on the number at `1` in both objects.
+ * Deep regular sort on item at `1` in both `Object`s.
  *
  * @example
  *   > [[0, 20], [0, 1], [0, 5]].sort(sort);
@@ -321,8 +318,8 @@ function sort(a, b) {
 /**
  * Get clean, padded, trigrams.
  *
- * @param {string} value - the input value.
- * @returns {Array.<string>} the cleaned, padded, tigrams.
+ * @param {string} value
+ * @return {Array.<string>}
  */
 
 function getCleanTrigrams(value) {
@@ -330,11 +327,11 @@ function getCleanTrigrams(value) {
 }
 
 /**
- * Get an object with trigrams as its attributes, and their
- * occurence count as their values
+ * Get an `Object` with trigrams as its attributes, and
+ * their occurence count as their values
  *
  * @param {string} value
- * @return {Object.<string, number>} - Object containing
+ * @return {Object.<string, number>} - `Object` containing
  *   weighted trigrams.
  */
 
@@ -362,12 +359,13 @@ function getCleanTrigramsAsDictionary(value) {
 }
 
 /**
- * Get the array containing trigram--count tuples from a
+ * Get an `Array` containing trigram--count tuples from a
  * given value.
  *
  * @param {string} value
- * @return {Array.<Array.<string, number>>} An array containing
- *   trigram--count tupples, sorted by count (low to high).
+ * @return {Array.<Array.<string, number>>} `Array`
+ *   containing trigram--count tupples, sorted by
+ *   count (low to high).
  */
 
 function getCleanTrigramsAsTuples(value) {
@@ -388,12 +386,12 @@ function getCleanTrigramsAsTuples(value) {
 }
 
 /**
- * Get the array containing trigram--count tuples from a
+ * Get an `Array` containing trigram--count tuples from a
  * given value.
  *
- * @param {Array.<Array.<string, number>>} tuples - the tuples
+ * @param {Array.<Array.<string, number>>} tuples - Tuples
  *   to transform into a dictionary.
- * @return {Object.<string, number>} The dictionary.
+ * @return {Object.<string, number>}
  */
 
 function getCleanTrigramTuplesAsDictionary(tuples) {
@@ -413,7 +411,7 @@ function getCleanTrigramTuplesAsDictionary(tuples) {
 }
 
 /**
- * Export the utilities.
+ * Expose utilities.
  */
 
 module.exports = {
@@ -426,60 +424,14 @@ module.exports = {
 
 });
 
-require.register("wooorm~franc@0.3.0", function (exports, module) {
+require.register("wooorm~franc@0.4.0", function (exports, module) {
 'use strict';
 
-module.exports = require('wooorm~franc@0.3.0/lib/franc.js');
+module.exports = require('wooorm~franc@0.4.0/lib/franc.js');
 
 });
 
-require.register("wooorm~franc@0.3.0/lib/franc.js", function (exports, module) {
-/**
- * Franc:
- *
- *   Copyright (c) 2014 Titus Wormer <tituswormer@gmail.com>
- *   http://github.com/wooorm/franc/
- *
- * Original Python package:
- *
- *   Copyright (c) 2008, Kent S Johnson
- *   http://code.google.com/p/guess-language/
- *
- * Original C++ version for KDE:
- *
- *   Copyright (c) 2006 Jacob R Rideout <kde@jacobrideout.net>
- *   http://websvn.kde.org/branches/work/sonnet-refactoring/
- *     common/nlp/guesslanguage.cpp?view=markup
- *
- * Original Language::Guess Perl module:
- *
- *   Copyright (c) 2004-2006 Maciej Ceglowski
- *   http://web.archive.org/web/20090228163219/http://
- *     languid.cantbedone.org/
- *
- * Note: Language::Guess is GPL-licensed. KDE developers
- * received permission from the author to distribute
- * their port under LGPL:
- *
- *   http://lists.kde.org/?l=kde-sonnet&m=116910092228811&w=2
- *
- * This program is free software: you can redistribute it
- * and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free
- * Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will
- * be useful, but WITHOUT ANY WARRANTY; without even the
- * implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE.
- * See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser
- * General Public License along with this program. If
- * not, see <http://www.gnu.org/licenses/>.
- */
-
+require.register("wooorm~franc@0.4.0/lib/franc.js", function (exports, module) {
 'use strict';
 
 var data,
@@ -490,21 +442,21 @@ var data,
  * Load `trigram-utils`.
  */
 
-utilities = require('wooorm~trigram-utils@0.0.2');
+utilities = require('wooorm~trigram-utils@0.1.0');
 
 /**
  * Load `expressions` (regular expressions matching
  * scripts).
  */
 
-expressions = require('wooorm~franc@0.3.0/lib/expressions.js');
+expressions = require('wooorm~franc@0.4.0/lib/expressions.js');
 
 /**
  * Load `data` (trigram information per language,
  * per script).
  */
 
-data = require('wooorm~franc@0.3.0/lib/data.json');
+data = require('wooorm~franc@0.4.0/lib/data.json');
 
 /**
  * Construct trigram dictionaries.
@@ -813,7 +765,7 @@ module.exports = detect;
 
 });
 
-require.register("wooorm~franc@0.3.0/lib/expressions.js", function (exports, module) {
+require.register("wooorm~franc@0.4.0/lib/expressions.js", function (exports, module) {
 module.exports = {
   cmn: /[\u2E80-\u2E99\u2E9B-\u2EF3\u2F00-\u2FD5\u3005\u3007\u3021-\u3029\u3038-\u303B\u3400-\u4DB5\u4E00-\u9FCC\uF900-\uFA6D\uFA70-\uFAD9]|[\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/g,
   Latin: /[A-Za-z\xAA\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02B8\u02E0-\u02E4\u1D00-\u1D25\u1D2C-\u1D5C\u1D62-\u1D65\u1D6B-\u1D77\u1D79-\u1DBE\u1E00-\u1EFF\u2071\u207F\u2090-\u209C\u212A\u212B\u2132\u214E\u2160-\u2188\u2C60-\u2C7F\uA722-\uA787\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA7FF\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uFB00-\uFB06\uFF21-\uFF3A\uFF41-\uFF5A]/g,
@@ -848,7 +800,7 @@ module.exports = {
 
 });
 
-require.define("wooorm~franc@0.3.0/lib/data.json", {
+require.define("wooorm~franc@0.4.0/lib/data.json", {
   "Latin": {
     "spa": " de|os |de | la|la | y | a |es |ón |ión|rec|ere|der| co|e l|el |en |ien|cho|ent|ech|ció|aci|o a|a p| el|a l|al |as |e d| en|na |ona|s d|da |nte| to|ad |ene|con| pr| su|tod| se|ho |los| pe|per|ers| lo|o d| ti|cia|n d|cio| es|ida|res|a t|tie|ion|rso|te |do | in|son| re| li|to |dad|tad|e s|est|pro|que|men| po|a e|oda|nci| qu| un|ue |ne |n e|s y|lib|su | na|s e|nac|ia |e e|tra| pa|or |ado|a d|nes|ra |se |ual|a c|er |por|com|nal|rta|a s|ber| o |one|s p|dos|rá |sta|les|des|ibe|ser|era|ar |ert|ter| di|ale|l d|nto|hos|del|ica|a a|s n|n c|oci|imi|io |o e|re |y l|e c|ant|cci| as|las|par|ame| cu|ici|ara|enc|s t|ndi| so|o s|mie|tos|una|bre|dic|cla|s l|e a|l p|pre|ntr|o t|ial|y a|nid|n p|a y|man|omo|so |n l| al|ali|s a|no | ig|s s|e p|nta|uma|ten|gua|ade|y e|soc|mo | fu|igu|o p|n t|hum|d d|ran|ria|y d|ada|tiv|l e|cas| ca|vid|l t|s c|ido|das|dis|s i| hu|s o|nad|fun| ma|rac|nda|eli|sar|und| ac|uni|mbr|a u|die|e i|qui|a i| ha|lar| tr|odo|ca |tic|o y|cti|lid|ori|ndo|ari| me|ta |ind|esa|cua|un |ier|tal|esp|seg|ele|ons|ito|ont|iva|s h|d y|nos|ist|rse| le|cie|ide|edi|ecc|ios|l m|r e|med|tor|sti|n a|rim|uie|ple|tri|ibr|sus|lo |ect|pen|y c|an |e h|n s|ern|tar|l y|egu|gur|ura|int|ond|mat|l r|r a|isf|ote",
     "eng": " th|the| an|he |nd |and|ion| of|of |tio| to|to |on | in|al |ati|igh|ght|rig| ri|or |ent|as |ed |is |ll |in | be|e r|ne |one|ver|all|s t|eve|t t| fr|s a| ha| re|ty |ery| or|d t| pr|ht | co| ev|e h|e a|ng |ts |his|ing|be |yon| sh|ce |ree|fre|ryo|n t|her|men|nat|sha|pro|nal|y a|has|es |for| hi|hal|f t|n a|n o|nt | pe|s o| fo|d i|nce|er |ons|res|e s|ect|ity|ly |l b|ry |e e|ers|e i|an |e o| de|cti|dom|edo|eed|hts|ter|ona|re | no| wh| a | un|d f| as|ny |l a|e p|ere| en| na| wi|nit|nte|d a|any|ted| di|ns |sta|th |per|ith|e t|st |e c|y t|om |soc| ar|ch |t o|d o|nti|s e|equ|ve |oci|man| fu|ote|oth|ess| al| ac|wit|ial| ma|uni| se|rea| so| on|lit|int|r t|y o|enc|thi|ual|t a| eq|tat|qua|ive| st|ali|e w|l o|are|f h|con|te |led| is|und|cia|e f|le | la|y i|uma|by | by|hum|f a|ic | hu|ave|ge |r a| wo|o a|ms |com| me|eas|s d|tec| li|n e|en |rat|tit|ple|whe|ate|o t|s r|t f|rot| ch|cie|dis|age|ary|o o|anc|eli|no | fa| su|son|inc|at |nda|hou|wor|t i|nde|rom|oms| ot|g t|eme|tle|iti|gni|s w|itl|duc|d w|whi|act|hic|aw |law| he|ich|min|imi|ort|o s|se |e b|ntr|tra|edu|oun|tan|e d|nst|l p|d n|ld |nta|s i|ble|n p| pu|n s| at|ily|rth|tho|ful|ssi|der|o e|cat|uca|unt|ien| ed|o p|h a|era|ind|pen|sec|n w|omm|r s",
@@ -1015,7 +967,7 @@ require.define("wooorm~franc@0.3.0/lib/data.json", {
 });
 
 require.register("franc-gh-pages", function (exports, module) {
-var franc = require('wooorm~franc@0.3.0');
+var franc = require('wooorm~franc@0.4.0');
 var fixtures = require('franc-gh-pages/fixtures.json');
 var debounce = require('component~debounce@1.0.0');
 var examples;
