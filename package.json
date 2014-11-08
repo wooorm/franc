@@ -36,7 +36,7 @@
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
     "lint": "npm run lint-api && npm run lint-script && npm run lint-test && npm run lint-benchmark && npm run lint-style",
-    "lint-api": "node_modules/.bin/eslint index.js lib/franc.js",
+    "lint-api": "node_modules/.bin/eslint index.js lib/franc.js lib/expressions.js",
     "lint-script": "node_modules/.bin/eslint script/build-fixtures.js script/build-support.js script/build-languages.js --rule 'dot-notation: false'",
     "lint-test": "node_modules/.bin/eslint test/index.js --env mocha",
     "lint-benchmark": "node_modules/.bin/eslint benchmark.js --global suite,bench,set",
