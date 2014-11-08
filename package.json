@@ -35,19 +35,20 @@
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
     "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
     "lint": "npm run lint-api && npm run lint-script && npm run lint-test && npm run lint-benchmark && npm run lint-style",
     "lint-api": "node_modules/.bin/eslint index.js lib/franc.js lib/expressions.js",
     "lint-script": "node_modules/.bin/eslint script/build-fixtures.js script/build-support.js script/build-languages.js --rule 'dot-notation: false'",
     "lint-test": "node_modules/.bin/eslint test/index.js --env mocha",
     "lint-benchmark": "node_modules/.bin/eslint benchmark.js --global suite,bench,set",
     "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark.js test/index.js --reporter=inline",
+    "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install guesslanguage languagedetect vac",
+    "benchmark": "node_modules/.bin/matcha benchmark.js",
     "build-languages": "node script/build-languages.js",
     "build-fixtures": "node script/build-fixtures.js",
     "build-support": "node script/build-support.js",
-    "benchmark": "node_modules/.bin/matcha benchmark.js",
-    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
-    "prepublish": "npm run build-languages && npm run build-fixtures && npm run build-support",
-    "make": "npm run lint && npm run coverage"
+    "build": "npm run build-languages && npm run build-fixtures && npm run build-support",
+    "prepublish": "npm run build"
   }
 }
