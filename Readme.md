@@ -1,6 +1,6 @@
 # ![franc](http://wooorm.com/franc.png)
 
-[![Build Status](https://travis-ci.org/wooorm/franc.svg?branch=master)](https://travis-ci.org/wooorm/franc) [![Coverage Status](https://img.shields.io/coveralls/wooorm/franc.svg)](https://coveralls.io/r/wooorm/franc?branch=master) [![Code Climate](http://img.shields.io/codeclimate/github/wooorm/franc.svg)](https://codeclimate.com/github/wooorm/franc)
+[![Build Status](https://img.shields.io/travis/wooorm/franc.svg?style=flat)](https://travis-ci.org/wooorm/franc) [![Coverage Status](https://img.shields.io/coveralls/wooorm/franc.svg?style=flat)](https://coveralls.io/r/wooorm/franc?branch=master) [![Code Climate](http://img.shields.io/codeclimate/github/wooorm/franc.svg?style=flat)](https://codeclimate.com/github/wooorm/franc)
 
 Detect the language of text.
 
