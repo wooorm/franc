@@ -1,4 +1,19 @@
 
+n.n.n / 2014-11-08
+==================
+
+ * Refactor benchmark
+ * Refactor property sorting in `bower.json`, `package.json`
+ * Refactor `.gitignore`, `.npmignore`, bower ignore sorting
+ * Remove `before_install` travis target
+ * Refactor npm script target order in `package.json`
+ * Add flat badges to `Readme.md`
+ * Add `lib/expressions.js` to `lint-api` target
+ * Add `.eslintrc`
+ * Fix scripts for new eslint rules
+ * Refactor to disallow space after object keys
+ * Update eslint, markdown-table, trigrams
+
 0.4.0 / 2014-10-23
 ==================
 
