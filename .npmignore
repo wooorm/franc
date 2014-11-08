@@ -1,7 +1,7 @@
 .*
 *.log
-build/
 bower_components/
+build/
 components/
 coverage/
 data/
