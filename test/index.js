@@ -6,11 +6,13 @@
 
 var franc,
     assert,
+    iso6393,
     support,
     fixtures;
 
 franc = require('..');
 assert = require('assert');
+iso6393 = require('iso-639-3');
 support = require('../data/support');
 fixtures = require('./fixtures');
 
@@ -201,6 +203,8 @@ describe('algorithm', function () {
                     result.forEach(function (tuple) {
                         assert(tuple[1] <= 1);
                         assert(tuple[1] >= 0);
+
+                        assert(iso6393.has(tuple[0]));
                     });
 
                     result = result[0][0];

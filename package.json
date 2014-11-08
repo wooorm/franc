@@ -22,6 +22,7 @@
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "devDependencies": {
     "eslint": "^0.9.0",
+    "iso-639-3": "^0.1.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.0.0",
     "markdown-table": "0.1.0",
