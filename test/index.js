@@ -92,7 +92,7 @@ describe('franc()', function () {
         language = franc(fixtures[MAGIC_NUMBER]);
 
         result = franc(fixtures[MAGIC_NUMBER], {
-            'blacklist' : [language]
+            'blacklist': [language]
         });
 
         assert(result !== language);
@@ -102,7 +102,7 @@ describe('franc()', function () {
         var result;
 
         result = franc(fixtures[MAGIC_NUMBER], {
-            'whitelist' : [MAGIC_LANGUAGE]
+            'whitelist': [MAGIC_LANGUAGE]
         });
 
         assert(result === MAGIC_LANGUAGE);
@@ -165,7 +165,7 @@ describe('franc.all()', function () {
         shouldBeLanguage = franc(fixtures[MAGIC_NUMBER]);
 
         result = franc.all(fixtures[MAGIC_NUMBER], {
-            'blacklist' : [shouldBeLanguage]
+            'blacklist': [shouldBeLanguage]
         });
 
         result.forEach(function (language) {
@@ -177,7 +177,7 @@ describe('franc.all()', function () {
         var result;
 
         result = franc.all(fixtures[MAGIC_NUMBER], {
-            'whitelist' : [MAGIC_LANGUAGE]
+            'whitelist': [MAGIC_LANGUAGE]
         });
 
         assert(result.length === 1);

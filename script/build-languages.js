@@ -125,7 +125,7 @@ overrides = {
      * characters/
      */
 
-    'cmn' : ['cmn_hans'],
+    'cmn': ['cmn_hans'],
 
     /**
      * Seems to be most popular in Nigeria:
@@ -134,13 +134,13 @@ overrides = {
      *  http://www.ethnologue.com/language/hau
      */
 
-    'hau' : ['hau_NG'],
+    'hau': ['hau_NG'],
 
     /**
      * Monotonic Greek is modern greek.
      */
 
-    'ell' : ['ell_monotonic'],
+    'ell': ['ell_monotonic'],
 
     /**
      * More popular, Farsi/Persian, instead of Dari
@@ -149,7 +149,7 @@ overrides = {
      *  http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=prs1
      */
 
-    'pes' : ['pes_1'],
+    'pes': ['pes_1'],
 
     /**
      * Asante: 2,800,000; Fante: 1,900,000; Akuapem: 555,000.
@@ -158,22 +158,22 @@ overrides = {
      *   http://www.ethnologue.com/language/aka
      */
 
-    'aka' : ['aka_fante', 'aka_asante'],
+    'aka': ['aka_fante', 'aka_asante'],
 
     /**
      * Languages with one dated translation, pick the
      * newest:
      */
 
-    'deu' : ['deu_1996'],
-    'ron' : ['ron_2006'],
+    'deu': ['deu_1996'],
+    'ron': ['ron_2006'],
 
     /**
      * Pick European Portuguese, maybe not fair, will
      * have to investigate.
      */
 
-    'por' : ['por_PT'],
+    'por': ['por_PT'],
 
     /**
      * No real reason.
@@ -182,13 +182,13 @@ overrides = {
      *   http://www.ethnologue.com/language/nya
      */
 
-    'nya' : ['nya_chinyanja'],
+    'nya': ['nya_chinyanja'],
 
     /**
      * It says ``popular'' in the name?
      */
 
-    'hat' : ['hat_popular']
+    'hat': ['hat_popular']
 };
 
 function getUDHRKeysfromISO(iso) {
@@ -254,9 +254,9 @@ Object.keys(speakers).forEach(function (iso6393) {
 
     if (language.speakers >= THRESHOLD) {
         topLanguages.push({
-            'speakers' : language.speakers,
-            'name' : language.name,
-            'iso6393' : iso6393
+            'speakers': language.speakers,
+            'name': language.name,
+            'iso6393': iso6393
         });
     } else {
         console.log(
@@ -283,10 +283,10 @@ topLanguages.forEach(function (language) {
 
         udhrs.forEach(function (udhr) {
             topLanguages.push({
-                'speakers' : language.speakers,
-                'name' : language.name,
-                'iso6393' : language.iso6393,
-                'udhr' : udhr
+                'speakers': language.speakers,
+                'name': language.name,
+                'iso6393': language.iso6393,
+                'udhr': udhr
             });
         });
     }
@@ -386,7 +386,7 @@ topLanguages.forEach(function (language) {
 topLanguages.forEach(function (language) {
     if (language.iso6393 === 'jpn') {
         language.script = {
-            'Hiragana, Katakana, and Han' : 0.8
+            'Hiragana, Katakana, and Han': 0.8
         };
     }
 });

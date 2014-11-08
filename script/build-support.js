@@ -9,8 +9,8 @@ table = require('markdown-table');
 support = require('../data/support');
 
 support.unshift({
-    'iso6393' : 'und',
-    'name' : '† **Special: Case for unknown language**'
+    'iso6393': 'und',
+    'name': '† **Special: Case for unknown language**'
 });
 
 fs.writeFileSync('Supported-Languages.md',
@@ -31,7 +31,7 @@ fs.writeFileSync('Supported-Languages.md',
             ];
         })),
         {
-            'align' : ['c', 'c', 'c', 'r']
+            'align': ['c', 'c', 'c', 'r']
         }
     ) +
 
