@@ -1,36 +1,43 @@
 'use strict';
 
-/* eslint-disable no-cond-assign */
+/**
+ * Dependencies.
+ */
 
 var fixtures,
-    franc,
-    guesslanguage,
-    languagedetect,
-    exception,
-    Vac;
+    franc;
 
 franc = require('./');
 fixtures = require('./test/fixtures.json');
 
+/**
+ * Optional dependencies.
+ */
+
+var hasException,
+    guesslanguage,
+    languagedetect,
+    Vac;
+
 try {
     guesslanguage = require('guesslanguage').guessLanguage;
 } catch (err) {
-    exception = err;
+    hasException = true;
 }
 
 try {
     languagedetect = new (require('languagedetect'))();
 } catch (err) {
-    exception = err;
+    hasException = true;
 }
 
 try {
     Vac = require('vac');
 } catch (err) {
-    exception = err;
+    hasException = true;
 }
 
-if (exception) {
+if (hasException) {
     console.log(
         '\u001B[0;31m' +
         'The libraries needed by this benchmark could not be found. ' +
@@ -39,6 +46,13 @@ if (exception) {
         '\u001B[0m'
     );
 }
+
+/**
+ * Wrap `guesslanguage`.
+ *
+ * @param {string} fixture
+ * @return {string} - Most probable language.
+ */
 
 function guessLanguage(fixture) {
     var result;
@@ -50,6 +64,13 @@ function guessLanguage(fixture) {
     return result;
 }
 
+/**
+ * Wrap `languagedetect`.
+ *
+ * @param {string} fixture
+ * @return {string} - Most probable language.
+ */
+
 function languageDetect(fixture) {
     var result;
 
@@ -58,43 +79,62 @@ function languageDetect(fixture) {
     return result && result[0];
 }
 
+/**
+ * Wrap `vac`.
+ *
+ * @param {string} fixture
+ * @return {string} - Most probable language.
+ */
+
 function vac(fixture) {
     return Object.keys(Vac.detect(fixture, 1))[0];
 }
 
-function forEveryLanguage(callback) {
+/**
+ * Invoke `callback` for every fixture in `fixtures`.
+ *
+ * @param {function(string)} callback
+ */
+
+function eachFixture(callback) {
     Object.keys(fixtures).forEach(function (language) {
         callback(fixtures[language]);
     });
 }
 
+/**
+ * Get fixture count.
+ */
+
+var fixtureCount;
+
+fixtureCount = Object.keys(fixtures).length;
+
 suite(
-    'benchmarks * ' +
-    Object.keys(fixtures).length +
-    ' paragraphs in different languages',
+    'benchmarks * ' + fixtureCount + ' paragraphs in different languages',
     function () {
         set('iterations', 10);
         set('type', 'static');
 
         bench('franc -- this module', function () {
-            forEveryLanguage(franc);
+            eachFixture(franc);
         });
 
         if (guesslanguage) {
             bench('guesslanguage', function () {
-                forEveryLanguage(guessLanguage);
+                eachFixture(guessLanguage);
             });
         }
 
         if (languagedetect) {
             bench('languagedetect', function () {
-                forEveryLanguage(languageDetect);
+                eachFixture(languageDetect);
             });
         }
 
         if (Vac) {
             bench('vac', function () {
-                forEveryLanguage(vac);
+                eachFixture(vac);
             });
         }
     }
