@@ -448,20 +448,21 @@ data = {};
 regularExpressions = {}; /* Ha! */
 
 Object.keys(languagesByScripts).forEach(function (script) {
-    var languages;
+    var languagesByScript;
 
-    languages = languagesByScripts[script];
+    languagesByScript = languagesByScripts[script];
 
-    if (languages.length > 1) {
+    if (languagesByScript.length > 1) {
         if (!regularExpressions[script]) {
             regularExpressions[script] = expressions[script];
         }
 
-        data[script] = languages;
+        data[script] = languagesByScript;
     } else {
-        support.push(languages[0]);
+        support.push(languagesByScript[0]);
 
-        regularExpressions[languages[0].iso6393] = expressions[script];
+        regularExpressions[languagesByScript[0].iso6393] =
+            expressions[script];
     }
 });
 
@@ -480,13 +481,13 @@ regularExpressions.jpn = new RegExp(
  */
 
 fs.writeFileSync('lib/expressions.js', (function () {
-    var expressions;
+    var asString;
 
-    expressions = Object.keys(regularExpressions).map(function (script) {
+    asString = Object.keys(regularExpressions).map(function (script) {
         return script + ': ' + regularExpressions[script];
     }).join(',\n  ');
 
-    return 'module.exports = {\n  ' + expressions + '\n};\n';
+    return 'module.exports = {\n  ' + asString + '\n};\n';
 })());
 
 /**
@@ -495,9 +496,9 @@ fs.writeFileSync('lib/expressions.js', (function () {
  */
 
 fs.writeFileSync('lib/data.json', (function () {
-    var languages;
+    var languagesAsObject;
 
-    languages = {};
+    languagesAsObject = {};
 
     Object.keys(data).forEach(function (script) {
         var scriptObject;
@@ -518,10 +519,10 @@ fs.writeFileSync('lib/data.json', (function () {
             }
         });
 
-        languages[script] = scriptObject;
+        languagesAsObject[script] = scriptObject;
     });
 
-    return JSON.stringify(languages, 0, 2);
+    return JSON.stringify(languagesAsObject, 0, 2);
 })());
 
 /**
