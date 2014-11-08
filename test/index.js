@@ -196,7 +196,14 @@ describe('algorithm', function () {
                 function () {
                     var result;
 
-                    result = franc(input);
+                    result = franc.all(input);
+
+                    result.forEach(function (tuple) {
+                        assert(tuple[1] <= 1);
+                        assert(tuple[1] >= 0);
+                    });
+
+                    result = result[0][0];
 
                     /* istanbul ignore if */
                     if (result !== language.iso6393) {
