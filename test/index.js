@@ -227,6 +227,14 @@ describe('algorithm', function () {
     }
 
     support.forEach(function (language, index) {
-        classifyLanguage(fixtures[index], language);
+        if (fixtures[index] === '') {
+            console.log(
+                'Missing fixture for language `' +
+                language.iso6393 + '` (' +
+                language.name + ').'
+            );
+        } else {
+            classifyLanguage(fixtures[index], language);
+        }
     });
 });

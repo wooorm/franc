@@ -67,10 +67,13 @@ support.forEach(function (language) {
     }
 
     if (!fixture) {
-        throw new Error(
+        console.log(
             'Could not access preamble or note for `' +
-            language.iso6393 + '` ' + '(' + udhrKey + ')'
+            language.iso6393 + '` ' + '(' + udhrKey + ').\n' +
+            'No fixture is generated.'
         );
+
+        fixture = '';
     }
 
     fixture = fixture.slice(0, THRESHOLD >= 1e5 ? 200 : 500);
