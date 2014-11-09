@@ -29,7 +29,7 @@ topLanguages = [];
 /**
  * The minimum number of speakers to be included in
  * `franc`, defaulting to 1,000,000.
- * Can be passed in through en environment variable,
+ * Can be passed in through an environment variable,
  * for example when executing the following:
  *
  * ```sh
