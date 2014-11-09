@@ -1,4 +1,25 @@
 
+n.n.n / 2014-11-09
+==================
+
+ * Update example build-process in `Readme.md`
+ * Update example output in `Readme.md` for changes in 8b339ad
+ * Add explicit mention of maximum supported languages to `Readme.md`
+ * Merge branch 'feature/add-build-cli'
+ * Update docs for new build CLI
+ * Fix typo in `build-languages`
+ * Remove support for `cbs`, `prq`
+ * Add support for languages without fixtures
+ * Add longer fixtures when franc supports 200+ languages
+ * Fix multi-script languages with few divergent characters
+ * Add custom fixtures for `gug`, `gyr`, `eve`
+ * Add option to set threshold through an ENV variable
+ * Add debug statements with language names
+ * Add test for valid iso-639-3 code
+ * Merge branch 'feature/normalize-results'
+ * Add test for normalized distances
+ * Add normalized distances to `all` results
+
 0.4.1 / 2014-11-08
 ==================
 
