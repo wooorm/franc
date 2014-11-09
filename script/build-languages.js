@@ -28,12 +28,29 @@ topLanguages = [];
 
 /**
  * The minimum number of speakers to be included in
- * `franc`: 1,000,000.
+ * `franc`, defaulting to 1,000,000.
+ * Can be passed in through an environment variable,
+ * for example when executing the following:
+ *
+ * ```sh
+ * THRESHOLD=99999 npm run build
+ * ```
  */
 
 var THRESHOLD;
 
-THRESHOLD = 1e6;
+if (process.env.THRESHOLD) {
+    THRESHOLD = Number(process.env.THRESHOLD);
+}
+
+if (THRESHOLD !== THRESHOLD || THRESHOLD === undefined) {
+    THRESHOLD = 1e6;
+}
+
+console.log(
+    'Franc will be created with support for languages ' +
+    'with AT LEAST `' + THRESHOLD + '` speakers.'
+);
 
 /**
  * Transform scripts into global expressions.
@@ -104,7 +121,7 @@ function getScriptInformation(code) {
 
         count = Math.round(count * 100) / 100;
 
-        if (count) {
+        if (count && count > 0.05) {
             scriptInformation[script] = count;
         }
     });
@@ -244,6 +261,33 @@ function sort(array) {
 }
 
 /**
+ * Some languages are blacklisted, no matter what
+ * `threshold` is chosen.
+ */
+
+var BLACKLIST;
+
+BLACKLIST = [
+    /**
+     * `cbs` and `prq` have the same entries:
+     *
+     * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cbs
+     * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cpp
+     * - http://www.unicode.org/udhr/d/udhr_cbs.txt
+     * - http://www.unicode.org/udhr/d/udhr_prq.txt
+     *
+     * To date (9 november, 2014), I have no idea which
+     * is which, thus I cannot guarantee if they will
+     * work.
+     *
+     * I've sent an e-mail out to OHCHR and am waiting
+     * for an answer.
+     */
+    'cbs',
+    'prq'
+];
+
+/**
  * Output.
  */
 
@@ -251,6 +295,17 @@ Object.keys(speakers).forEach(function (iso6393) {
     var language;
 
     language = speakers[iso6393];
+
+    if (BLACKLIST.indexOf(iso6393) !== -1) {
+        console.log(
+            'Ignoring unsafe language `' + iso6393 +
+            '` (' + language.name + '), which has ' +
+            language.speakers + ' speakers. ' +
+            'See the code for reasoning.'
+        );
+
+        return;
+    }
 
     if (language.speakers >= THRESHOLD) {
         topLanguages.push({
@@ -359,8 +414,9 @@ topLanguages = topLanguages.filter(function (language) {
 
     if (!trigrams[language.udhr] && !hasScripts) {
         console.log(
-            'Popular language with neither trigrams nor ' +
-            'scripts: ' + language.iso6393
+            'Ignoring language with neither trigrams nor ' +
+            'scripts: ' + language.iso6393 + ' (' +
+            language.name + ')'
         );
 
         return false;
@@ -513,8 +569,9 @@ fs.writeFileSync('lib/data.json', (function () {
                     trigrams[language.udhr].concat().reverse().join('|');
             } else {
                 console.log(
-                    'Popular language without trigrams: ' +
-                    language.iso6393
+                    'Ignoring language without trigrams: ' +
+                    language.iso6393 + ' (' + language.name +
+                    ')'
                 );
             }
         });

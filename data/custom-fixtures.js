@@ -12,5 +12,36 @@ module.exports = {
      * - http://scriptsource.org/cms/scripts/
      *   page.php?item_id=script_detail_sym&key=Olck.
      */
-    "sat": "ᱫᱟ᱕ ᱨᱮᱡ ᱜᱚᱫ"
+    "sat": "ᱫᱟ᱕ ᱨᱮᱡ ᱜᱚᱫ",
+
+    /**
+     * A prayer from:
+     *
+     * http://www.christusrex.com/www1/pater/JPN-guarani.html
+     */
+
+    "gug": "Ore Ru, yvágape reiméva, toñembojeroviákena nde réra; taoreañuamba ne mborayhu; tojejapo ne rembipota ko yvy ári, yvagapeguáicha. Eme'ê oréve ko árape ore rembi'urâ, opa ára roikotevêva; ehejareíkena oréve ore rembiapo vaikue, rohejareiháicha ore rapichápe hembiapo vaikue orendive. Aníkena reheja roike rojepy'ara'â vai haguáme ha orepe'a opa mba'e vaigui. Amen.",
+
+    /**
+     * From PDF to text by hand, the first few sentences from:
+     *
+     * The non-existing LATIN SMALL LETTER I WITH CIRCUMFLEX AND STROKE
+     * is encoded as LATIN SMALL LETTER I WITH STROKE.
+     *
+     * http://www.language-museum.com/encyclopedia/g/guarayu.php
+     */
+
+    "gyr": "Aracahe tũpa oyapo ɨva ɨvɨ avei no. Yɨpɨndar rumo pɨtuño tẽi. Ndipo vɨtei eté arɨ, yasɨ, yasɨtata avei. Evocoiyase tũpa aipo ehi: \"toime icatu vahe\", ehi. Aheseve voi oime icatu vahe. Ipare aipo ehi: \"Icatu vahe rer-ra raɨ, ndicatui vahe rer-ra evocoiyase pɨtu\", ehi.",
+
+    /**
+     * A prayer from, from PDF to text by hand, and I do not know
+     * Cyrillic so I probably made some errors:
+     *
+     * http://www.christusrex.com/www1/pater/JPN-even.html
+     *
+     * `eve` looks a lot like `evn` and `tgk`. I stopped here, and its a
+     * bit faking, but `franc` seems to detect the below sample correctly
+     */
+
+    "eve": "Мут аманти, нбаанбандудз биси! һии гзрбзс святибдзн; һии Царствас змдзн: һии зһис теер-дз ойдун; нбаанбандуаа-да бидзн; Зрзк инзнит каебзнгзн мутту",
 };

@@ -213,8 +213,12 @@ describe('algorithm', function () {
                     if (result !== language.iso6393) {
                         console.log(franc.all(input).slice(0, 10));
                         throw new Error(
-                            'Expected ' + language.iso6393 + ', ' +
-                            ' got `' + result + '`'
+                            'Expected `' + language.iso6393 +
+                            '` (' +
+                            iso6393.get(language.iso6393).name +
+                            '), got `' + result + '` (' +
+                            iso6393.get(result).name +
+                            ').'
                         )
                     }
                 }
@@ -223,6 +227,14 @@ describe('algorithm', function () {
     }
 
     support.forEach(function (language, index) {
-        classifyLanguage(fixtures[index], language);
+        if (fixtures[index] === '') {
+            console.log(
+                'Missing fixture for language `' +
+                language.iso6393 + '` (' +
+                language.name + ').'
+            );
+        } else {
+            classifyLanguage(fixtures[index], language);
+        }
     });
 });

@@ -13,6 +13,36 @@ customFixtures = require('../data/custom-fixtures');
 udhr = require('udhr').json();
 
 /**
+ * The minimum number of speakers to be included in
+ * `franc`: 1,000,000.
+ */
+
+var THRESHOLD;
+
+if (process.env.THRESHOLD) {
+    THRESHOLD = Number(process.env.THRESHOLD);
+}
+
+if (THRESHOLD !== THRESHOLD || THRESHOLD === undefined) {
+    THRESHOLD = 1e6;
+}
+
+if (THRESHOLD < 1e5) {
+    console.log(
+        'Long fixtures will be created, because ' +
+        'the given threshold (`' + THRESHOLD + '`) ' +
+        'includes language very similar to others.'
+    );
+} else {
+    console.log(
+        'Short fixtures will be created, because ' +
+        'the given threshold (`' + THRESHOLD + '`) ' +
+        'does not include languages very similar to ' +
+        'others.'
+    );
+}
+
+/**
  * Get fixtures from UDHR preambles and notes.
  */
 
@@ -37,13 +67,16 @@ support.forEach(function (language) {
     }
 
     if (!fixture) {
-        throw new Error(
+        console.log(
             'Could not access preamble or note for `' +
-            language.iso6393 + '` ' + '(' + udhrKey + ')'
+            language.iso6393 + '` ' + '(' + udhrKey + ').\n' +
+            'No fixture is generated.'
         );
+
+        fixture = '';
     }
 
-    fixture = fixture.slice(0, 200);
+    fixture = fixture.slice(0, THRESHOLD >= 1e5 ? 200 : 500);
 
     data.push(fixture);
 });
