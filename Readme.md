@@ -7,7 +7,7 @@ Detect the language of text.
 # What’s so cool about franc?
 
 1. **franc** supports more languages<sup>(†)</sup> than any other library, or Google;
-2. **franc** is easily [forked](#supporting-more-or-less-languages) to support 300+ languages;
+2. **franc** is easily [forked](#supporting-more-or-less-languages) to support 335 languages;
 3. **franc** is just as fast as the competition.
 
 † - If humans write in the language, on the web, and the language has more than one million speakers, **franc** detects it.
