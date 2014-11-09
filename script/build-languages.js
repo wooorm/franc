@@ -28,12 +28,29 @@ topLanguages = [];
 
 /**
  * The minimum number of speakers to be included in
- * `franc`: 1,000,000.
+ * `franc`, defaulting to 1,000,000.
+ * Can be passed in through en environment variable,
+ * for example when executing the following:
+ *
+ * ```sh
+ * THRESHOLD=99999 npm run build
+ * ```
  */
 
 var THRESHOLD;
 
-THRESHOLD = 1e6;
+if (process.env.THRESHOLD) {
+    THRESHOLD = Number(process.env.THRESHOLD);
+}
+
+if (THRESHOLD !== THRESHOLD || THRESHOLD === undefined) {
+    THRESHOLD = 1e6;
+}
+
+console.log(
+    'Franc will be created with support for languages ' +
+    'with AT LEAST `' + THRESHOLD + '` speakers.'
+);
 
 /**
  * Transform scripts into global expressions.
