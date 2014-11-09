@@ -103,9 +103,11 @@ franc.all('O Brasil caiu 26 posições em', {
 Supporting more or less languages is easy: fork the project and run the following:
 
 ```sh
-$ npm install
-$ THRESHOLD=-1 npm run build
+$ npm install # Install development dependencies.
+$ THRESHOLD=100000 npm run build # Run the `build` script with an environment variable.
 ```
+
+The above would create a version of **franc** with support for any language with 100,000 or more speakers. To support all languages, even dead ones like Latin, specify `-1`.
 
 ## Benchmark
 
