@@ -359,8 +359,9 @@ topLanguages = topLanguages.filter(function (language) {
 
     if (!trigrams[language.udhr] && !hasScripts) {
         console.log(
-            'Popular language with neither trigrams nor ' +
-            'scripts: ' + language.iso6393
+            'Ignoring language with neither trigrams nor ' +
+            'scripts: ' + language.iso6393 + ' (' +
+            language.name + ')'
         );
 
         return false;
@@ -513,8 +514,9 @@ fs.writeFileSync('lib/data.json', (function () {
                     trigrams[language.udhr].concat().reverse().join('|');
             } else {
                 console.log(
-                    'Popular language without trigrams: ' +
-                    language.iso6393
+                    'Ignoring language without trigrams: ' +
+                    language.iso6393 + ' (' + language.name +
+                    ')'
                 );
             }
         });
