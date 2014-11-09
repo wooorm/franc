@@ -1,5 +1,5 @@
 
-n.n.n / 2014-11-09
+0.5.0 / 2014-11-09
 ==================
 
  * Update example build-process in `Readme.md`
