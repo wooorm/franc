@@ -121,7 +121,7 @@ function getScriptInformation(code) {
 
         count = Math.round(count * 100) / 100;
 
-        if (count) {
+        if (count && count > 0.05) {
             scriptInformation[script] = count;
         }
     });
