@@ -261,6 +261,33 @@ function sort(array) {
 }
 
 /**
+ * Some languages are blacklisted, no matter what
+ * `threshold` is chosen.
+ */
+
+var BLACKLIST;
+
+BLACKLIST = [
+    /**
+     * `cbs` and `prq` have the same entries:
+     *
+     * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cbs
+     * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cpp
+     * - http://www.unicode.org/udhr/d/udhr_cbs.txt
+     * - http://www.unicode.org/udhr/d/udhr_prq.txt
+     *
+     * To date (9 november, 2014), I have no idea which
+     * is which, thus I cannot guarantee if they will
+     * work.
+     *
+     * I've sent an e-mail out to OHCHR and am waiting
+     * for an answer.
+     */
+    'cbs',
+    'prq'
+];
+
+/**
  * Output.
  */
 
@@ -268,6 +295,17 @@ Object.keys(speakers).forEach(function (iso6393) {
     var language;
 
     language = speakers[iso6393];
+
+    if (BLACKLIST.indexOf(iso6393) !== -1) {
+        console.log(
+            'Ignoring unsafe language `' + iso6393 +
+            '` (' + language.name + '), which has ' +
+            language.speakers + ' speakers. ' +
+            'See the code for reasoning.'
+        );
+
+        return;
+    }
 
     if (language.speakers >= THRESHOLD) {
         topLanguages.push({
