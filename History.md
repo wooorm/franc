@@ -1,4 +1,11 @@
 
+n.n.n / 2014-11-19
+==================
+
+ * Add `logo.svg`
+ * Update matcha
+ * Fix incorrect executive file rights
+
 0.5.0 / 2014-11-09
 ==================
 
