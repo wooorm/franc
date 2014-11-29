@@ -94,6 +94,45 @@ franc.all('O Brasil caiu 26 posições em', {
  */
 ```
 
+## CLI
+
+Install:
+```sh
+$ npm install --global franc
+```
+
+Use:
+```
+Usage: franc [options] string
+
+Detect the language of text
+
+Options:
+
+  -h, --help                    output usage information
+  -v, --version                 output version number
+  -w, --whitelist <string>      allow languages
+  -b, --blacklist <string>      disallow languages
+
+Usage:
+
+# output language of value
+$ franc "Alle menslike wesens word vry"
+# afr
+
+# output language from stdin
+$ echo "এটি একটি ভাষা একক IBM স্ক্রিপ্ট" | franc
+# ben
+
+# blacklist certain languages
+$ franc --blacklist por,glg "O Brasil caiu 26 posições em"
+# src
+
+# whitelist certain languages and use stdin
+$ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
+# nob
+```
+
 ## Supported languages
 
 **franc** supports 175 “languages”. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
