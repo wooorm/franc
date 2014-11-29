@@ -129,4 +129,4 @@ Franc is a derivative work from [guess-language](http://code.google.com/p/guess-
 
 ## License
 
-MIT © Titus Wormer
+MIT © [Titus Wormer](http://wooorm.com)
