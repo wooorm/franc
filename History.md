@@ -1,5 +1,5 @@
 
-n.n.n / 2014-11-29
+0.6.1 / 2014-11-29
 ==================
 
  * Add CLI description to `Readme.md`
