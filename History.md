@@ -1,4 +1,15 @@
 
+n.n.n / 2014-11-29
+==================
+
+ * Merge branch 'feature/add-cli'
+ * Add CLI test
+ * Add CLI
+ * Add `cli.js`
+ * Update keywords in `bower.json`, `component.json`, `package.json`
+ * Add link to personal website in `Readme.md`
+ * Update eslint
+
 0.5.1 / 2014-11-19
 ==================
 
