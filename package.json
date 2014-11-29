@@ -10,7 +10,9 @@
     "system",
     "language",
     "detect",
-    "guess"
+    "guess",
+    "cli",
+    "bin"
   ],
   "dependencies": {
     "trigram-utils": "^0.1.0"
@@ -20,6 +22,9 @@
     "url": "https://github.com/wooorm/franc.git"
   },
   "author": "Titus Wormer <tituswormer@gmail.com>",
+  "bin": {
+    "franc": "cli.js"
+  },
   "devDependencies": {
     "eslint": "^0.10.0",
     "iso-639-3": "^0.1.0",
@@ -34,15 +39,19 @@
     "unicode-7.0.0": "^0.1.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
-    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-lib": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
+    "test-cli": "bash ./test/cli.sh",
+    "test-coveralls": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-travis": "npm run test-cli && npm run test-coveralls",
+    "test": "npm run test-lib && npm run test-cli",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
-    "lint": "npm run lint-api && npm run lint-script && npm run lint-test && npm run lint-benchmark && npm run lint-style",
     "lint-api": "node_modules/.bin/eslint index.js lib/franc.js lib/expressions.js",
+    "lint-cli": "node_modules/.bin/eslint cli.js",
     "lint-script": "node_modules/.bin/eslint script/build-fixtures.js script/build-support.js script/build-languages.js --rule 'dot-notation: false'",
     "lint-test": "node_modules/.bin/eslint test/index.js --env mocha",
     "lint-benchmark": "node_modules/.bin/eslint benchmark.js --global suite,bench,set",
-    "lint-style": "node_modules/.bin/jscs index.js lib/franc.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark.js test/index.js --reporter=inline",
+    "lint-style": "node_modules/.bin/jscs index.js lib/franc.js cli.js script/build-fixtures.js script/build-support.js script/build-languages.js benchmark.js test/index.js --reporter=inline",
+    "lint": "npm run lint-api && npm run lint-cli && npm run lint-script && npm run lint-test && npm run lint-benchmark && npm run lint-style",
     "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install guesslanguage languagedetect vac",
     "benchmark": "node_modules/.bin/matcha benchmark.js",

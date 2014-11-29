@@ -10,7 +10,9 @@
     "system",
     "language",
     "detect",
-    "guess"
+    "guess",
+    "cli",
+    "bin"
   ],
   "dependencies": {
     "trigram-utils": "^0.1.0"
@@ -34,6 +36,7 @@
     "node_modules/",
     "script/",
     "test/",
+    "cli.js",
     "benchmark.js",
     "component.json",
     "package.json"
