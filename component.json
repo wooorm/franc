@@ -10,7 +10,9 @@
     "system",
     "language",
     "detect",
-    "guess"
+    "guess",
+    "cli",
+    "bin"
   ],
   "dependencies": {
     "wooorm/trigram-utils": "^0.1.0"
