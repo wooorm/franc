@@ -1,44 +1,60 @@
-var franc = require('franc');
+'use strict';
+
+/**
+ * Dependencies.
+ */
+
+var franc = require('wooorm/franc@0.6.0');
 var fixtures = require('./fixtures.js');
-var debounce = require('debounce');
-var key;
+var debounce = require('component/debounce');
 
-var inputElement = document.getElementsByTagName('textarea')[0];
-var outputElement = document.getElementsByTagName('ol')[0];
-var wrapperElement = document.getElementsByTagName('div')[0];
+/**
+ * DOM elements.
+ */
 
-inputElement.addEventListener('input', debounce(detectLanguage, 50));
+var $input = document.getElementsByTagName('textarea')[0];
+var $output = document.getElementsByTagName('ol')[0];
 
-inputElement.value = getExample();
+/**
+ * Event handler.
+ */
 
-function getExample() {
-    return fixtures[Math.floor(Math.random() * fixtures.length)];
-}
+var oninputchange = debounce(function () {
+    /**
+     * Remove previous results.
+     */
 
-function detectLanguage() {
-    visualiseResults(franc.all(inputElement.value));
-}
-
-function visualiseResults(results) {
-    wrapperElement.style.display = '';
-
-    while (outputElement.firstElementChild) {
-        outputElement.removeChild(outputElement.firstElementChild);
+    while ($output.firstElementChild) {
+        $output.removeChild($output.firstElementChild);
     }
 
-    results = results.map(createResult);
+    /**
+     * Add new results.
+     */
 
-    results.forEach(function (node) {
-        outputElement.appendChild(node);
+    franc.all($input.value).forEach(function (result, n) {
+        var $node = document.createElement('li');
+
+        $node.textContent = result[0] + ': ' + result[1];
+
+        $output.appendChild($node);
     });
-}
+}, 50);
 
-function createResult(result, n) {
-    var node = document.createElement('li');
+/**
+ * Listen.
+ */
 
-    node.textContent = result[0] + ': ' + result[1];
+$input.addEventListener('input', oninputchange);
 
-    return node;
-}
+/**
+ * Add initial content.
+ */
 
-detectLanguage();
+$input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
+
+/**
+ * Provide initial answer.
+ */
+
+oninputchange();

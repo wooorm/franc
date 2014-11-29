@@ -1,437 +1,151 @@
-/**
- * Require the module at `name`.
- *
- * @param {String} name
- * @return {Object} exports
- * @api public
- */
+(function outer(modules, cache, entries){
 
-function require(name) {
-  var module = require.modules[name];
-  if (!module) throw new Error('failed to require "' + name + '"');
+  /**
+   * Global
+   */
 
-  if (!('exports' in module) && typeof module.definition === 'function') {
-    module.client = module.component = true;
-    module.definition.call(this, module.exports = {}, module);
-    delete module.definition;
+  var global = (function(){ return this; })();
+
+  /**
+   * Require `name`.
+   *
+   * @param {String} name
+   * @param {Boolean} jumped
+   * @api public
+   */
+
+  function require(name, jumped){
+    if (cache[name]) return cache[name].exports;
+    if (modules[name]) return call(name, require);
+    throw new Error('cannot find module "' + name + '"');
   }
 
-  return module.exports;
-}
+  /**
+   * Call module `id` and cache it.
+   *
+   * @param {Number} id
+   * @param {Function} require
+   * @return {Function}
+   * @api private
+   */
 
-/**
- * Registered modules.
- */
+  function call(id, require){
+    var m = cache[id] = { exports: {} };
+    var mod = modules[id];
+    var name = mod[2];
+    var fn = mod[0];
 
-require.modules = {};
+    fn.call(m.exports, function(req){
+      var dep = modules[id][1][req];
+      return require(dep ? dep : req);
+    }, m, m.exports, outer, modules, cache, entries);
 
-/**
- * Register module at `name` with callback `definition`.
- *
- * @param {String} name
- * @param {Function} definition
- * @api private
- */
+    // expose as `name`.
+    if (name) cache[name] = cache[id];
 
-require.register = function (name, definition) {
-  require.modules[name] = {
-    definition: definition
-  };
-};
+    return cache[id].exports;
+  }
 
-/**
- * Define a module's exports immediately with `exports`.
- *
- * @param {String} name
- * @param {Generic} exports
- * @api private
- */
+  /**
+   * Require all entries exposing them on global if needed.
+   */
 
-require.define = function (name, exports) {
-  require.modules[name] = {
-    exports: exports
-  };
-};
-require.register("raynos~date-now@v1.0.1", function (exports, module) {
-module.exports = Date.now || now
-
-function now() {
-    return new Date().getTime()
-}
-
-});
-
-require.register("component~debounce@1.0.0", function (exports, module) {
-
-/**
- * Module dependencies.
- */
-
-var now = require('raynos~date-now@v1.0.1');
-
-/**
- * Returns a function, that, as long as it continues to be invoked, will not
- * be triggered. The function will be called after it stops being called for
- * N milliseconds. If `immediate` is passed, trigger the function on the
- * leading edge, instead of the trailing.
- *
- * @source underscore.js
- * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
- * @param {Function} function to wrap
- * @param {Number} timeout in ms (`100`)
- * @param {Boolean} whether to execute at the beginning (`false`)
- * @api public
- */
-
-module.exports = function debounce(func, wait, immediate){
-  var timeout, args, context, timestamp, result;
-  if (null == wait) wait = 100;
-
-  function later() {
-    var last = now() - timestamp;
-
-    if (last < wait && last > 0) {
-      timeout = setTimeout(later, wait - last);
+  for (var id in entries) {
+    if (entries[id]) {
+      global[entries[id]] = require(id);
     } else {
-      timeout = null;
-      if (!immediate) {
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      }
+      require(id);
     }
-  };
+  }
 
-  return function debounced() {
-    context = this;
-    args = arguments;
-    timestamp = now();
-    var callNow = immediate && !timeout;
-    if (!timeout) timeout = setTimeout(later, wait);
-    if (callNow) {
-      result = func.apply(context, args);
-      context = args = null;
-    }
+  /**
+   * Duo flag.
+   */
 
-    return result;
-  };
-};
+  require.duo = true;
 
-});
+  /**
+   * Expose cache.
+   */
 
-require.register("wooorm~n-gram@0.1.1", function (exports, module) {
+  require.cache = cache;
+
+  /**
+   * Expose modules
+   */
+
+  require.modules = modules;
+
+  /**
+   * Return newest require.
+   */
+
+   return require;
+})({
+1: [function(require, module, exports) {
 'use strict';
-
-/**
- * A factory returning a function that converts a given string to n-grams.
- *
- * @example
- *   nGram(2) // [Function]
- *
- * @example
- *   nGram(4) // [Function]
- *
- *
- * @param {number} n - The `n` in n-gram.
- * @throws {Error} When `n` is not a number (incl. NaN), Infinity, or lt 1.
- * @return {Function} A function creating n-grams from a given value.
- */
-
-function nGram(n) {
-    if (
-        typeof n !== 'number' ||
-        n < 1 ||
-        n !== n ||
-        n === Infinity
-    ) {
-        throw new Error(
-            'Type error: `' + n + '` is not a valid argument for n-gram'
-        );
-    }
-
-    /**
-     * Create n-grams from a given value.
-     *
-     * @example
-     *   nGram(4)('n-gram')
-     *   // ['n-gr', '-gra', 'gram']
-     *
-     * @param {*} value - The value to stringify and convert into n-grams.
-     * @return {Array.<string>} n-grams
-     */
-
-    return function (value) {
-        var nGrams = [],
-            index;
-
-        if (value === null || value === undefined) {
-            return nGrams;
-        }
-
-        value = String(value);
-        index = value.length - n + 1;
-
-        if (index < 1) {
-            return [];
-        }
-
-        while (index--) {
-            nGrams[index] = value.substr(index, n);
-        }
-
-        return nGrams;
-    };
-}
-
-/**
- * Export `n-gram`.
- */
-
-module.exports = nGram;
-
-/**
- * Create bigrams from a given value.
- *
- * @example
- *   bigram('n-gram')
- *   // ["n-", "-g", "gr", "ra", "am"]
- *
- * @param {*} value - The value to stringify and convert into bigrams.
- * @return {Array.<string>} bigrams
- */
-
-nGram.bigram = nGram(2);
-
-/**
- * Create trigrams from a given value.
- *
- * @example
- *   trigram('n-gram')
- *   // ["n-g", "-gr", "gra", "ram"]
- *
- * @param {*} value - The value to stringify and convert into trigrams.
- * @return {Array.<string>} trigrams
- */
-
-nGram.trigram = nGram(3);
-
-});
-
-require.register("wooorm~trigram-utils@0.1.0", function (exports, module) {
-'use strict';
-
-var getTrigrams,
-    EXPRESSION_SYMBOLS,
-    has;
 
 /**
  * Dependencies.
  */
 
-getTrigrams = require('wooorm~n-gram@0.1.1').trigram;
+var franc = require('wooorm/franc@0.6.0');
+var fixtures = require('./fixtures.js');
+var debounce = require('component/debounce');
 
 /**
- * Cache.
+ * DOM elements.
  */
 
-has = Object.prototype.hasOwnProperty;
+var $input = document.getElementsByTagName('textarea')[0];
+var $output = document.getElementsByTagName('ol')[0];
 
 /**
- * An expression matching general non-important (as in, for
- * language detection) punctuation marks, symbols, and numbers.
- *
- * | Unicode | Character | Name               |
- * | ------: | :-------: | :----------------- |
- * |  \u0021 |     !     | EXCLAMATION MARK   |
- * |  \u0022 |     "     | QUOTATION MARK     |
- * |  \u0023 |     #     | NUMBER SIGN        |
- * |  \u0024 |     $     | DOLLAR SIGN        |
- * |  \u0025 |     %     | PERCENT SIGN       |
- * |  \u0026 |     &     | AMPERSAND          |
- * |  \u0027 |     '     | APOSTROPHE         |
- * |  \u0028 |     (     | LEFT PARENTHESIS   |
- * |  \u0029 |     )     | RIGHT PARENTHESIS  |
- * |  \u002A |     *     | ASTERISK           |
- * |  \u002B |     +     | PLUS SIGN          |
- * |  \u002C |     ,     | COMMA              |
- * |  \u002D |     -     | HYPHEN-MINUS       |
- * |  \u002E |     .     | FULL STOP          |
- * |  \u002F |     /     | SOLIDUS            |
- * |  \u0030 |     0     | DIGIT ZERO         |
- * |  \u0031 |     1     | DIGIT ONE          |
- * |  \u0032 |     2     | DIGIT TWO          |
- * |  \u0033 |     3     | DIGIT THREE        |
- * |  \u0034 |     4     | DIGIT FOUR         |
- * |  \u0035 |     5     | DIGIT FIVE         |
- * |  \u0036 |     6     | DIGIT SIX          |
- * |  \u0037 |     7     | DIGIT SEVEN        |
- * |  \u0038 |     8     | DIGIT EIGHT        |
- * |  \u0039 |     9     | DIGIT NINE         |
- * |  \u003A |     :     | COLON              |
- * |  \u003B |     ;     | SEMICOLON          |
- * |  \u003C |     <     | LESS-THAN SIGN     |
- * |  \u003D |     =     | EQUALS SIGN        |
- * |  \u003E |     >     | GREATER-THAN SIGN  |
- * |  \u003F |     ?     | QUESTION MARK      |
- * |  \u0040 |     @     | COMMERCIAL AT      |
+ * Event handler.
  */
 
-EXPRESSION_SYMBOLS = /[\u0021-\u0040]+/g;
+var oninputchange = debounce(function () {
+    var results;
 
-/**
- * Clean `value`.
- *
- * @example
- *   > clean('Some dirty  text.')
- *   // 'some dirty text'
- *
- * @param {string} value
- * @return {string}
- */
-
-function clean(value) {
-    if (value === null || value === undefined) {
-        value = '';
+    while ($output.firstElementChild) {
+        $output.removeChild($output.firstElementChild);
     }
 
-    return String(value)
-        .replace(EXPRESSION_SYMBOLS, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .toLowerCase();
-}
+    results = franc.all($input.value).forEach(function (result, n) {
+        var $node = document.createElement('li');
+
+        $node.textContent = result[0] + ': ' + result[1];
+
+        $output.appendChild($node);
+    });
+}, 50);
 
 /**
- * Deep regular sort on item at `1` in both `Object`s.
- *
- * @example
- *   > [[0, 20], [0, 1], [0, 5]].sort(sort);
- *   // [[0, 1], [0, 5], [0, 20]]
- *
- * @param {{1: number}} a
- * @param {{1: number}} b
+ * Listen.
  */
 
-function sort(a, b) {
-    return a[1] - b[1];
-}
+$input.addEventListener('input', oninputchange);
 
 /**
- * Get clean, padded, trigrams.
- *
- * @param {string} value
- * @return {Array.<string>}
+ * Add initial content.
  */
 
-function getCleanTrigrams(value) {
-    return getTrigrams(' ' + clean(value) + ' ');
-}
+$input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
 
 /**
- * Get an `Object` with trigrams as its attributes, and
- * their occurence count as their values
- *
- * @param {string} value
- * @return {Object.<string, number>} - `Object` containing
- *   weighted trigrams.
+ * Provide initial answer.
  */
 
-function getCleanTrigramsAsDictionary(value) {
-    var trigrams,
-        dictionary,
-        index,
-        trigram;
+oninputchange();
 
-    trigrams = getCleanTrigrams(value);
-    dictionary = {};
-    index = trigrams.length;
-
-    while (index--) {
-        trigram = trigrams[index];
-
-        if (has.call(dictionary, trigram)) {
-            dictionary[trigram]++;
-        } else {
-            dictionary[trigram] = 1;
-        }
-    }
-
-    return dictionary;
-}
-
-/**
- * Get an `Array` containing trigram--count tuples from a
- * given value.
- *
- * @param {string} value
- * @return {Array.<Array.<string, number>>} `Array`
- *   containing trigram--count tupples, sorted by
- *   count (low to high).
- */
-
-function getCleanTrigramsAsTuples(value) {
-    var dictionary,
-        tuples,
-        trigram;
-
-    dictionary = getCleanTrigramsAsDictionary(value);
-    tuples = [];
-
-    for (trigram in dictionary) {
-        tuples.push([trigram, dictionary[trigram]]);
-    }
-
-    tuples.sort(sort);
-
-    return tuples;
-}
-
-/**
- * Get an `Array` containing trigram--count tuples from a
- * given value.
- *
- * @param {Array.<Array.<string, number>>} tuples - Tuples
- *   to transform into a dictionary.
- * @return {Object.<string, number>}
- */
-
-function getCleanTrigramTuplesAsDictionary(tuples) {
-    var dictionary,
-        index,
-        tuple;
-
-    dictionary = {};
-    index = tuples.length;
-
-    while (index--) {
-        tuple = tuples[index];
-        dictionary[tuple[0]] = tuple[1];
-    }
-
-    return dictionary;
-}
-
-/**
- * Expose utilities.
- */
-
-module.exports = {
-    'clean' : clean,
-    'trigrams' : getCleanTrigrams,
-    'asDictionary' : getCleanTrigramsAsDictionary,
-    'asTuples' : getCleanTrigramsAsTuples,
-    'tuplesAsDictionary' : getCleanTrigramTuplesAsDictionary
-};
-
-});
-
-require.register("wooorm~franc@0.5.0", function (exports, module) {
+}, {"wooorm/franc@0.6.0":2,"./fixtures.js":3,"component/debounce":4}],
+2: [function(require, module, exports) {
 'use strict';
 
-module.exports = require('wooorm~franc@0.5.0/lib/franc.js');
+module.exports = require('./lib/franc');
 
-});
-
-require.register("wooorm~franc@0.5.0/lib/franc.js", function (exports, module) {
+}, {"./lib/franc":5}],
+5: [function(require, module, exports) {
 'use strict';
 
 var data,
@@ -442,21 +156,21 @@ var data,
  * Load `trigram-utils`.
  */
 
-utilities = require('wooorm~trigram-utils@0.1.0');
+utilities = require('trigram-utils');
 
 /**
  * Load `expressions` (regular expressions matching
  * scripts).
  */
 
-expressions = require('wooorm~franc@0.5.0/lib/expressions.js');
+expressions = require('./expressions.js');
 
 /**
  * Load `data` (trigram information per language,
  * per script).
  */
 
-data = require('wooorm~franc@0.5.0/lib/data.json');
+data = require('./data.json');
 
 /**
  * Construct trigram dictionaries.
@@ -795,9 +509,312 @@ detect.all = detectAll;
 
 module.exports = detect;
 
-});
+}, {"trigram-utils":6,"./expressions.js":7,"./data.json":8}],
+6: [function(require, module, exports) {
+'use strict';
 
-require.register("wooorm~franc@0.5.0/lib/expressions.js", function (exports, module) {
+var getTrigrams,
+    EXPRESSION_SYMBOLS,
+    has;
+
+/**
+ * Dependencies.
+ */
+
+getTrigrams = require('n-gram').trigram;
+
+/**
+ * Cache.
+ */
+
+has = Object.prototype.hasOwnProperty;
+
+/**
+ * An expression matching general non-important (as in, for
+ * language detection) punctuation marks, symbols, and numbers.
+ *
+ * | Unicode | Character | Name               |
+ * | ------: | :-------: | :----------------- |
+ * |  \u0021 |     !     | EXCLAMATION MARK   |
+ * |  \u0022 |     "     | QUOTATION MARK     |
+ * |  \u0023 |     #     | NUMBER SIGN        |
+ * |  \u0024 |     $     | DOLLAR SIGN        |
+ * |  \u0025 |     %     | PERCENT SIGN       |
+ * |  \u0026 |     &     | AMPERSAND          |
+ * |  \u0027 |     '     | APOSTROPHE         |
+ * |  \u0028 |     (     | LEFT PARENTHESIS   |
+ * |  \u0029 |     )     | RIGHT PARENTHESIS  |
+ * |  \u002A |     *     | ASTERISK           |
+ * |  \u002B |     +     | PLUS SIGN          |
+ * |  \u002C |     ,     | COMMA              |
+ * |  \u002D |     -     | HYPHEN-MINUS       |
+ * |  \u002E |     .     | FULL STOP          |
+ * |  \u002F |     /     | SOLIDUS            |
+ * |  \u0030 |     0     | DIGIT ZERO         |
+ * |  \u0031 |     1     | DIGIT ONE          |
+ * |  \u0032 |     2     | DIGIT TWO          |
+ * |  \u0033 |     3     | DIGIT THREE        |
+ * |  \u0034 |     4     | DIGIT FOUR         |
+ * |  \u0035 |     5     | DIGIT FIVE         |
+ * |  \u0036 |     6     | DIGIT SIX          |
+ * |  \u0037 |     7     | DIGIT SEVEN        |
+ * |  \u0038 |     8     | DIGIT EIGHT        |
+ * |  \u0039 |     9     | DIGIT NINE         |
+ * |  \u003A |     :     | COLON              |
+ * |  \u003B |     ;     | SEMICOLON          |
+ * |  \u003C |     <     | LESS-THAN SIGN     |
+ * |  \u003D |     =     | EQUALS SIGN        |
+ * |  \u003E |     >     | GREATER-THAN SIGN  |
+ * |  \u003F |     ?     | QUESTION MARK      |
+ * |  \u0040 |     @     | COMMERCIAL AT      |
+ */
+
+EXPRESSION_SYMBOLS = /[\u0021-\u0040]+/g;
+
+/**
+ * Clean `value`.
+ *
+ * @example
+ *   > clean('Some dirty  text.')
+ *   // 'some dirty text'
+ *
+ * @param {string} value
+ * @return {string}
+ */
+
+function clean(value) {
+    if (value === null || value === undefined) {
+        value = '';
+    }
+
+    return String(value)
+        .replace(EXPRESSION_SYMBOLS, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+}
+
+/**
+ * Deep regular sort on item at `1` in both `Object`s.
+ *
+ * @example
+ *   > [[0, 20], [0, 1], [0, 5]].sort(sort);
+ *   // [[0, 1], [0, 5], [0, 20]]
+ *
+ * @param {{1: number}} a
+ * @param {{1: number}} b
+ */
+
+function sort(a, b) {
+    return a[1] - b[1];
+}
+
+/**
+ * Get clean, padded, trigrams.
+ *
+ * @param {string} value
+ * @return {Array.<string>}
+ */
+
+function getCleanTrigrams(value) {
+    return getTrigrams(' ' + clean(value) + ' ');
+}
+
+/**
+ * Get an `Object` with trigrams as its attributes, and
+ * their occurence count as their values
+ *
+ * @param {string} value
+ * @return {Object.<string, number>} - `Object` containing
+ *   weighted trigrams.
+ */
+
+function getCleanTrigramsAsDictionary(value) {
+    var trigrams,
+        dictionary,
+        index,
+        trigram;
+
+    trigrams = getCleanTrigrams(value);
+    dictionary = {};
+    index = trigrams.length;
+
+    while (index--) {
+        trigram = trigrams[index];
+
+        if (has.call(dictionary, trigram)) {
+            dictionary[trigram]++;
+        } else {
+            dictionary[trigram] = 1;
+        }
+    }
+
+    return dictionary;
+}
+
+/**
+ * Get an `Array` containing trigram--count tuples from a
+ * given value.
+ *
+ * @param {string} value
+ * @return {Array.<Array.<string, number>>} `Array`
+ *   containing trigram--count tupples, sorted by
+ *   count (low to high).
+ */
+
+function getCleanTrigramsAsTuples(value) {
+    var dictionary,
+        tuples,
+        trigram;
+
+    dictionary = getCleanTrigramsAsDictionary(value);
+    tuples = [];
+
+    for (trigram in dictionary) {
+        tuples.push([trigram, dictionary[trigram]]);
+    }
+
+    tuples.sort(sort);
+
+    return tuples;
+}
+
+/**
+ * Get an `Array` containing trigram--count tuples from a
+ * given value.
+ *
+ * @param {Array.<Array.<string, number>>} tuples - Tuples
+ *   to transform into a dictionary.
+ * @return {Object.<string, number>}
+ */
+
+function getCleanTrigramTuplesAsDictionary(tuples) {
+    var dictionary,
+        index,
+        tuple;
+
+    dictionary = {};
+    index = tuples.length;
+
+    while (index--) {
+        tuple = tuples[index];
+        dictionary[tuple[0]] = tuple[1];
+    }
+
+    return dictionary;
+}
+
+/**
+ * Expose utilities.
+ */
+
+module.exports = {
+    'clean': clean,
+    'trigrams': getCleanTrigrams,
+    'asDictionary': getCleanTrigramsAsDictionary,
+    'asTuples': getCleanTrigramsAsTuples,
+    'tuplesAsDictionary': getCleanTrigramTuplesAsDictionary
+};
+
+}, {"n-gram":9}],
+9: [function(require, module, exports) {
+'use strict';
+
+/**
+ * A factory returning a function that converts a given string to n-grams.
+ *
+ * @example
+ *   nGram(2) // [Function]
+ *
+ * @example
+ *   nGram(4) // [Function]
+ *
+ *
+ * @param {number} n - The `n` in n-gram.
+ * @throws {Error} When `n` is not a number (incl. NaN), Infinity, or lt 1.
+ * @return {Function} A function creating n-grams from a given value.
+ */
+
+function nGram(n) {
+    if (
+        typeof n !== 'number' ||
+        n < 1 ||
+        n !== n ||
+        n === Infinity
+    ) {
+        throw new Error(
+            'Type error: `' + n + '` is not a valid argument for n-gram'
+        );
+    }
+
+    /**
+     * Create n-grams from a given value.
+     *
+     * @example
+     *   nGram(4)('n-gram')
+     *   // ['n-gr', '-gra', 'gram']
+     *
+     * @param {*} value - The value to stringify and convert into n-grams.
+     * @return {Array.<string>} n-grams
+     */
+
+    return function (value) {
+        var nGrams = [],
+            index;
+
+        if (value === null || value === undefined) {
+            return nGrams;
+        }
+
+        value = String(value);
+        index = value.length - n + 1;
+
+        if (index < 1) {
+            return [];
+        }
+
+        while (index--) {
+            nGrams[index] = value.substr(index, n);
+        }
+
+        return nGrams;
+    };
+}
+
+/**
+ * Export `n-gram`.
+ */
+
+module.exports = nGram;
+
+/**
+ * Create bigrams from a given value.
+ *
+ * @example
+ *   bigram('n-gram')
+ *   // ["n-", "-g", "gr", "ra", "am"]
+ *
+ * @param {*} value - The value to stringify and convert into bigrams.
+ * @return {Array.<string>} bigrams
+ */
+
+nGram.bigram = nGram(2);
+
+/**
+ * Create trigrams from a given value.
+ *
+ * @example
+ *   trigram('n-gram')
+ *   // ["n-g", "-gr", "gra", "ram"]
+ *
+ * @param {*} value - The value to stringify and convert into trigrams.
+ * @return {Array.<string>} trigrams
+ */
+
+nGram.trigram = nGram(3);
+
+}, {}],
+7: [function(require, module, exports) {
 module.exports = {
   cmn: /[\u2E80-\u2E99\u2E9B-\u2EF3\u2F00-\u2FD5\u3005\u3007\u3021-\u3029\u3038-\u303B\u3400-\u4DB5\u4E00-\u9FCC\uF900-\uFA6D\uFA70-\uFAD9]|[\uD840-\uD868\uD86A-\uD86C][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D]|\uD87E[\uDC00-\uDE1D]/g,
   Latin: /[A-Za-z\xAA\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02B8\u02E0-\u02E4\u1D00-\u1D25\u1D2C-\u1D5C\u1D62-\u1D65\u1D6B-\u1D77\u1D79-\u1DBE\u1E00-\u1EFF\u2071\u207F\u2090-\u209C\u212A\u212B\u2132\u214E\u2160-\u2188\u2C60-\u2C7F\uA722-\uA787\uA78B-\uA78E\uA790-\uA7AD\uA7B0\uA7B1\uA7F7-\uA7FF\uAB30-\uAB5A\uAB5C-\uAB5F\uAB64\uFB00-\uFB06\uFF21-\uFF3A\uFF41-\uFF5A]/g,
@@ -830,9 +847,9 @@ module.exports = {
   aii: /[\u0700-\u070D\u070F-\u074A\u074D-\u074F]/g
 };
 
-});
-
-require.define("wooorm~franc@0.5.0/lib/data.json", {
+}, {}],
+8: [function(require, module, exports) {
+module.exports = {
   "Latin": {
     "spa": " de|os |de | la|la | y | a |es |ón |ión|rec|ere|der| co|e l|el |en |ien|cho|ent|ech|ció|aci|o a|a p| el|a l|al |as |e d| en|na |ona|s d|da |nte| to|ad |ene|con| pr| su|tod| se|ho |los| pe|per|ers| lo|o d| ti|cia|n d|cio| es|ida|res|a t|tie|ion|rso|te |do | in|son| re| li|to |dad|tad|e s|est|pro|que|men| po|a e|oda|nci| qu| un|ue |ne |n e|s y|lib|su | na|s e|nac|ia |e e|tra| pa|or |ado|a d|nes|ra |se |ual|a c|er |por|com|nal|rta|a s|ber| o |one|s p|dos|rá |sta|les|des|ibe|ser|era|ar |ert|ter| di|ale|l d|nto|hos|del|ica|a a|s n|n c|oci|imi|io |o e|re |y l|e c|ant|cci| as|las|par|ame| cu|ici|ara|enc|s t|ndi| so|o s|mie|tos|una|bre|dic|cla|s l|e a|l p|pre|ntr|o t|ial|y a|nid|n p|a y|man|omo|so |n l| al|ali|s a|no | ig|s s|e p|nta|uma|ten|gua|ade|y e|soc|mo | fu|igu|o p|n t|hum|d d|ran|ria|y d|ada|tiv|l e|cas| ca|vid|l t|s c|ido|das|dis|s i| hu|s o|nad|fun| ma|rac|nda|eli|sar|und| ac|uni|mbr|a u|die|e i|qui|a i| ha|lar| tr|odo|ca |tic|o y|cti|lid|ori|ndo|ari| me|ta |ind|esa|cua|un |ier|tal|esp|seg|ele|ons|ito|ont|iva|s h|d y|nos|ist|rse| le|cie|ide|edi|ecc|ios|l m|r e|med|tor|sti|n a|rim|uie|ple|tri|ibr|sus|lo |ect|pen|y c|an |e h|n s|ern|tar|l y|egu|gur|ura|int|ond|mat|l r|r a|isf|ote",
     "eng": " th|the| an|he |nd |and|ion| of|of |tio| to|to |on | in|al |ati|igh|ght|rig| ri|or |ent|as |ed |is |ll |in | be|e r|ne |one|ver|all|s t|eve|t t| fr|s a| ha| re|ty |ery| or|d t| pr|ht | co| ev|e h|e a|ng |ts |his|ing|be |yon| sh|ce |ree|fre|ryo|n t|her|men|nat|sha|pro|nal|y a|has|es |for| hi|hal|f t|n a|n o|nt | pe|s o| fo|d i|nce|er |ons|res|e s|ect|ity|ly |l b|ry |e e|ers|e i|an |e o| de|cti|dom|edo|eed|hts|ter|ona|re | no| wh| a | un|d f| as|ny |l a|e p|ere| en| na| wi|nit|nte|d a|any|ted| di|ns |sta|th |per|ith|e t|st |e c|y t|om |soc| ar|ch |t o|d o|nti|s e|equ|ve |oci|man| fu|ote|oth|ess| al| ac|wit|ial| ma|uni| se|rea| so| on|lit|int|r t|y o|enc|thi|ual|t a| eq|tat|qua|ive| st|ali|e w|l o|are|f h|con|te |led| is|und|cia|e f|le | la|y i|uma|by | by|hum|f a|ic | hu|ave|ge |r a| wo|o a|ms |com| me|eas|s d|tec| li|n e|en |rat|tit|ple|whe|ate|o t|s r|t f|rot| ch|cie|dis|age|ary|o o|anc|eli|no | fa| su|son|inc|at |nda|hou|wor|t i|nde|rom|oms| ot|g t|eme|tle|iti|gni|s w|itl|duc|d w|whi|act|hic|aw |law| he|ich|min|imi|ort|o s|se |e b|ntr|tra|edu|oun|tan|e d|nst|l p|d n|ld |nta|s i|ble|n p| pu|n s| at|ily|rth|tho|ful|ssi|der|o e|cat|uca|unt|ien| ed|o p|h a|era|ind|pen|sec|n w|omm|r s",
@@ -996,9 +1013,9 @@ require.define("wooorm~franc@0.5.0/lib/data.json", {
     "heb": "ות |ים |כל |ת ה| כל|דם |אדם|יות| של| זכ|ל א| אד|של |ל ה|אי |ויו|כאי|ת ו|י ל|זכא| ול|לא | וה|רות|זכו|ית |ירו|ין | או|ם ז| לא| הח|או | הא| וב| המ|חיר|ת ל|יים|ם ל|את |ת ב|ת ש|רה |ון | לה|נה |כוי|ותי|ה ש|ו ל|ו ב| הו|ת א|ם ב|ם ו|תו | את|לה |ני |אומ| במ|דה |א י|ה ה|ה ב|על |ם ה| על|הוא|וך |ה א|בוד|וד |ואי|נות|ה ו|ת כ|י ה|יה |ם ש|ו ו| שה|ם א|ו כ|ינו|ן ה| שו|שוו|החי|כות|לאו|בות|דות|ה ל|לית|ה מ| בי|וה |וא | הי| לפ|ור | לב|ל ב|בחי|הכר|לו |ת מ|ן ש|החו|ה כ| בכ|ומי|בין|ן ו|ן ל|רוי|פלי|ולה|ליה| הז|חינ| לע| בנ|יבו|חוק| אח|חבר| יה| חי|מי |ירה| חו|האד|ווה|חופ|ופש|וק |נו |יו |ל מ|מדי|כבו| הע|נוך| הד|י א|י ו| הכ|בני|עה |ו א|רצו|דינ|בזכ|מות|יפו| אל|סוד|לם |איש|רך | אי|הגנ|הם |פי |ם כ|חות|ל ו|איל|ילי|תיה|כלל|אלי|יסו|האו|זש | בא|ר א|ו ה|זו |אחר| הפ| בע| בז|משפ| בה| לח|דרך|ומו| בח| דר| מע|ל י|תוך|מנו| בש|לל |רבו| למ|פני| לק|תם |שה |שית|ללא|לפי|היה|מעש|דו |שות|להג|וצי|שוא|אין|וי |תי |ונו|ליל| לו|חיי|ל ז| זו|היא|יא |נתו|ה פ|לת |ובי| לכ|ך ה|יל |י ש|שיו|ן ב|עול|המד|ודה|ולם| ומ|א ה|ולא| בת|הכל| סו| מש| עב|סוצ|ארצ| אר|ציא|ד א|לחי|הן |יחס| יח|יאל|הזכ|ם נ| שר|בו |עבו|היס| לי|ת ז|פול|יהי|גבל|תיו|המא|שהי|א ל|מאו| יו|ותו|ישי|גנה|פשי|וחד|יהם|חרו|לכל|ידה|עות|ונה|ום |חה |עם |שרי|ם י|שר |והח| אש| הג|ק ב|הפל|נשו|הגב|ד ו",
     "ydd": " פֿ|ון |ער |ן א| אַ|דער|ט א| או|און|אַר|ען |פֿו| אױ| אי|ן פ|ֿון|רעכ| דע| רע|עכט|פֿא|ן ד|כט | די|די |אַ |אױף|ױף |ֿאַ| זײ| גע|אַל|אָס| אָ|ונג| הא|האָ|זײַ| מע|אָל|נג |װאָ|ַן |אַנ|רײַ| װא|ָס |באַ| יע|יעד|ניט|ן ז|ר א|יט |אָט|אָר|עדע|מען|זאָ|ָט |פֿר|ײַן| בא|טן |אין|ן ג|ין |ן װ|נאַ|ֿרײ|ר ה| זא|לעכ|ע א|אָד|ַ ר|ענט|אַצ|ַצי|אָנ| צו| װע|יז |מענ|ָדע|איז|ן מ|ַלע|בן |ר מ|טער| מי| פּ|מיט|טלע|ָל |עכע|ײט |ַנד|ע פ|לע |געז|לאַ|אַפ|עזע|ראַ| ני|ַפֿ|רן |ײַנ|נען|טיק|כע |פֿע|יע |הײט|ַהײ|נטש|ײַה|ט ד|ן ב|לן |ן נ|פֿט|שאַ|רונ| זי| װי|ט פ| דא|טאָ|דיק|קן |ר פ|ר ג|יקן|אָב|ף א|אַק|קער|ערע|כער|י פ|ות |ַרב|פּר|קט |עם |יאָ|ציע|ציא|יט־|צו |ישע| קײ|ן ק|סער| גל|דאָ|ונט|גן |ַרא|יקע| טא|ענע|לײַ|שן |ַנע|יק |טאַ|ס א|עט |נגע|ט־א|ָנא|־אי|יקט|נטע|ײנע|־ני|ָר |װער|י א|ן י|יך |זיך|ער־|ערן|אױס|ָבן|נדע|ָסע|װי |ֿעל|ר־נ|ן ה| גר|גלײ| צי|ראָ|זעל|עלק|נד |לקע|אָפ| כּ|ט װ|ג א| נא|ט צ|ר ד|עס |דור|גען|קע |ג פ|ֿט |ן ל|שע |ר ז|רע |ײטן|פּע|קלא|קײט|יטע|ים |ס ז|ײַ | דו|אַט| לא|ר װ|קײנ|עלש|י ד|לשא|יות|נט |ַרז|ע ר|ל ז|אַמ|ן ש| שו|אינ|נטל| הי|בעט|ָפּ|ף פ|ײַכ|בער|ן צ|מאָ| שט| לע|גער|ורך|רך |נעם|גרו|פֿן|לער|װעל|ע מ|ום |שפּ|ך א|יונ|רבע|עפֿ|טעט|ן כ|רעס|ערצ|ז א|עמע|ם א|שטע|כן |רט |י ג|סן |נער|ליט|ט ז|נעמ|ּרא|היו|אַש|ת װ|אומ|ק א|יבע|ֿן |ץ א|פֿי|ײן |ם ט"
   }
-});
-
-require.register("franc-gh-pages/fixtures.js", function (exports, module) {
+};
+}, {}],
+3: [function(require, module, exports) {
 module.exports = [
   "鉴于对人类家庭所有成员的固有尊严及其平等的和不移的权利的承认,乃是世界自由、正义与和平的基础,\n鉴于对人权的无视和侮蔑已发展为野蛮暴行,这些暴行玷污了人类的良心,而一个人人享有言论和信仰自由并免予恐惧和匮乏的世界的来临,已被宣布为普通人民的最高愿望,\n鉴于为使人类不致迫不得已铤而走险对暴政和压迫进行反叛,有必要使人权受法治的保护,\n鉴于有必要促进各国间友好关系的发展,\n鉴于各联合国国家的人民已在联",
   "Considerando que la libertad, la justicia y la paz en el mundo tienen por base el reconocimiento de la dignidad intrínseca y de los derechos iguales e inalienables de todos los miembros de la familia ",
@@ -1177,54 +1194,68 @@ module.exports = [
   "Dikhindor so o prinzaripen e manuśenqe somandrune demnimnasqoro thaj e barabar aj bixasaraver hakaja savorre zenenqere and-i manuśikani famělia si i bàza e mestimnasqi, e ćaće krisaqi aj e aćhõmnasqi "
 ];
 
-});
+}, {}],
+4: [function(require, module, exports) {
 
-require.register("franc-gh-pages", function (exports, module) {
-var franc = require('wooorm~franc@0.5.0');
-var fixtures = require('franc-gh-pages/fixtures.js');
-var debounce = require('component~debounce@1.0.0');
-var key;
+/**
+ * Module dependencies.
+ */
 
-var inputElement = document.getElementsByTagName('textarea')[0];
-var outputElement = document.getElementsByTagName('ol')[0];
-var wrapperElement = document.getElementsByTagName('div')[0];
+var now = require('date-now');
 
-inputElement.addEventListener('input', debounce(detectLanguage, 50));
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing.
+ *
+ * @source underscore.js
+ * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+ * @param {Function} function to wrap
+ * @param {Number} timeout in ms (`100`)
+ * @param {Boolean} whether to execute at the beginning (`false`)
+ * @api public
+ */
 
-inputElement.value = getExample();
+module.exports = function debounce(func, wait, immediate){
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
 
-function getExample() {
-    return fixtures[Math.floor(Math.random() * fixtures.length)];
-}
+  function later() {
+    var last = now() - timestamp;
 
-function detectLanguage() {
-    visualiseResults(franc.all(inputElement.value));
-}
+    if (last < wait && last > 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      }
+    }
+  };
 
-function visualiseResults(results) {
-    wrapperElement.style.display = '';
-
-    while (outputElement.firstElementChild) {
-        outputElement.removeChild(outputElement.firstElementChild);
+  return function debounced() {
+    context = this;
+    args = arguments;
+    timestamp = now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
     }
 
-    results = results.map(createResult);
+    return result;
+  };
+};
 
-    results.forEach(function (node) {
-        outputElement.appendChild(node);
-    });
+}, {"date-now":10}],
+10: [function(require, module, exports) {
+module.exports = Date.now || now
+
+function now() {
+    return new Date().getTime()
 }
 
-function createResult(result, n) {
-    var node = document.createElement('li');
-
-    node.textContent = result[0] + ': ' + result[1];
-
-    return node;
-}
-
-detectLanguage();
-
-});
-
-require("franc-gh-pages");
+}, {}]}, {}, {"1":""})
