@@ -39,8 +39,11 @@
     "unicode-7.0.0": "^0.1.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
-    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-lib": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
+    "test-cli": "bash ./test/cli.sh",
+    "test-coveralls": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
+    "test-travis": "npm run test-cli && npm run test-coveralls",
+    "test": "npm run test-lib && npm run test-cli",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
     "lint-api": "node_modules/.bin/eslint index.js lib/franc.js lib/expressions.js",
     "lint-cli": "node_modules/.bin/eslint cli.js",
