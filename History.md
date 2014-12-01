@@ -1,4 +1,10 @@
 
+n.n.n / 2014-12-01
+==================
+
+ * Update markdown-table
+ * Add explicit mention of stdin encoding to CLI
+
 0.6.1 / 2014-11-29
 ==================
 
