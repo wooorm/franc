@@ -31,7 +31,7 @@ fs.writeFileSync('Supported-Languages.md',
             ];
         })),
         {
-            'align': ['c', 'c', 'c', 'r']
+            'align': 'c'
         }
     ) +
 
