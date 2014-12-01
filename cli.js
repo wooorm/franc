@@ -51,7 +51,7 @@ function help() {
         '$ ' + command + ' "Alle menslike wesens word vry"',
         '# afr',
         '',
-        '# output language from stdin',
+        '# output language from stdin (expects utf8)',
         '$ echo "এটি একটি ভাষা একক IBM স্ক্রিপ্ট" | ' + command,
         '# ben',
         '',
