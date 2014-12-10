@@ -89,7 +89,7 @@
  * Dependencies.
  */
 
-var franc = require('wooorm/franc@0.6.0');
+var franc = require('wooorm/franc@0.7.0');
 var fixtures = require('./fixtures.js');
 var debounce = require('component/debounce');
 
@@ -105,13 +105,19 @@ var $output = document.getElementsByTagName('ol')[0];
  */
 
 var oninputchange = debounce(function () {
-    var results;
+    /**
+     * Remove previous results.
+     */
 
     while ($output.firstElementChild) {
         $output.removeChild($output.firstElementChild);
     }
 
-    results = franc.all($input.value).forEach(function (result, n) {
+    /**
+     * Add new results.
+     */
+
+    franc.all($input.value).forEach(function (result, n) {
         var $node = document.createElement('li');
 
         $node.textContent = result[0] + ': ' + result[1];
@@ -138,7 +144,7 @@ $input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
 
 oninputchange();
 
-}, {"wooorm/franc@0.6.0":2,"./fixtures.js":3,"component/debounce":4}],
+}, {"wooorm/franc@0.7.0":2,"./fixtures.js":3,"component/debounce":4}],
 2: [function(require, module, exports) {
 'use strict';
 

@@ -1,7 +1,9 @@
-node_modules
-build/fixtures.json
-bower_components
-components
 .DS_Store
-coverage
 *.log
+bower_components/
+build/
+components/
+coverage/
+dist/
+node_modules/
+test/
