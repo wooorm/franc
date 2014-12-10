@@ -1,5 +1,5 @@
 
-n.n.n / 2014-12-10
+0.7.0 / 2014-12-10
 ==================
 
  * Merge branch 'feature/add-browser-version'
