@@ -29,6 +29,21 @@ Bower:
 $ bower install franc
 ```
 
+AMD ([info](#browser)):
+```js
+require(['path/to/dist/franc.js'], function (franc) {
+    franc('Alle menslike wesens word vry'); // "afr"
+});
+```
+
+Browser globals ([info](#browser)):
+```html
+<script src="path/to/dist/franc.js" charset="utf-8"></script>
+<script>
+    franc('Alle menslike wesens word vry'); // "afr"
+</script>
+```
+
 ## Usage
 
 ```js
@@ -147,6 +162,14 @@ $ THRESHOLD=100000 npm run build # Run the `build` script with an environment va
 ```
 
 The above would create a version of **franc** with support for any language with 100,000 or more speakers. To support all languages, even dead ones like Latin, specify `-1`.
+
+## Browser
+
+I’ve compiled three versions of **franc** for use in the browser. They’re [UMD](http://ryanflorence.com/2013/es6-modules-and-browser-app-delivery/) compliant: they work with [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md), [CommonJS](http://www.commonjs.org), and `<script>`s.
+
+- [dist/franc.js](dist/franc.js) — **franc** with support for languages with 8 million or more speakers (75 languages);
+- [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with more 100,000 or more speakers (175 languages, the same as the [node or component](Supported-Languages.md) version);
+- [dist/franc-all.js](dist/franc-all.js) — **franc** with support for languages all languages (335 languages, carful, huge!).
 
 ## Benchmark
 
