@@ -43,7 +43,7 @@
   },
   "scripts": {
     "test-lib": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
-    "test-browser": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports -t 5000 test/browser.js",
+    "test-browser": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports -t 10000 test/browser.js",
     "test-cli": "bash ./test/cli.sh",
     "test-coveralls": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
     "test-travis": "npm run test-cli && npm run test-browser && npm run test-coveralls",
