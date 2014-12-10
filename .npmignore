@@ -6,6 +6,7 @@ build/
 components/
 coverage/
 data/
+dist/
 node_modules/
 script/
 test/
