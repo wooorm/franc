@@ -26,7 +26,9 @@
     "franc": "cli.js"
   },
   "devDependencies": {
+    "browserify": "^7.0.0",
     "eslint": "^0.10.0",
+    "esmangle": "^1.0.0",
     "iso-639-3": "^0.1.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.0.0",
@@ -55,10 +57,19 @@
     "make": "npm run lint && npm run coverage",
     "install-benchmark": "npm install guesslanguage languagedetect vac",
     "benchmark": "node_modules/.bin/matcha benchmark.js",
+    "build-browser-bundle-top": "THRESHOLD=8000000 npm run build-languages && node_modules/.bin/browserify lib/franc.js --standalone franc --outfile dist/franc.js",
+    "build-browser-bundle-most": "npm run build-languages && node_modules/.bin/browserify lib/franc.js --standalone franc --outfile dist/franc-most.js",
+    "build-browser-bundle-all": "THRESHOLD=-1 npm run build-languages && node_modules/.bin/browserify lib/franc.js --standalone franc --outfile dist/franc-all.js",
+    "build-browser-bundle": "npm run build-browser-bundle-top && npm run build-browser-bundle-all && npm run build-browser-bundle-most",
+    "build-browser-uglify-top": "node_modules/.bin/esmangle dist/franc.js -o dist/franc.js",
+    "build-browser-uglify-most": "node_modules/.bin/esmangle dist/franc-most.js -o dist/franc-most.js",
+    "build-browser-uglify-all": "node_modules/.bin/esmangle dist/franc-all.js -o dist/franc-all.js",
+    "build-browser-uglify": "npm run build-browser-uglify-top && npm run build-browser-uglify-most && npm run build-browser-uglify-all",
+    "build-browser": "npm run build-browser-bundle && npm run build-browser-uglify",
     "build-languages": "node script/build-languages.js",
     "build-fixtures": "node script/build-fixtures.js",
     "build-support": "node script/build-support.js",
-    "build": "npm run build-languages && npm run build-fixtures && npm run build-support",
+    "build": "npm run build-browser && npm run build-fixtures && npm run build-support",
     "prepublish": "npm run build"
   }
 }
