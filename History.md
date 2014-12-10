@@ -1,4 +1,12 @@
 
+n.n.n / 2014-12-10
+==================
+
+ * Merge branch 'feature/add-browser-version'
+ * Update docs for browser versions
+ * Add browser-globals and browser-amd tests
+ * Add browser versions; add browser generation to build
+
 0.6.2 / 2014-12-01
 ==================
 
