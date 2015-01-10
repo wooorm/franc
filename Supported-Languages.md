@@ -149,8 +149,8 @@ Supported Languages:
 | [bci](http://www-01.sil.org/iso639-3/documentation.asp?id=bci) |                  Baoulé                  |            Latin            |  2130000  |
 | [epo](http://www-01.sil.org/iso639-3/documentation.asp?id=epo) |                 Esperanto                |            Latin            |  2000000  |
 | [pam](http://www-01.sil.org/iso639-3/documentation.asp?id=pam) |                 Pampanga                 |            Latin            |  2000000  |
-| [tpi](http://www-01.sil.org/iso639-3/documentation.asp?id=tpi) |                 Tok Pisin                |            Latin            |  2000000  |
 | [tiv](http://www-01.sil.org/iso639-3/documentation.asp?id=tiv) |                    Tiv                   |            Latin            |  2000000  |
+| [tpi](http://www-01.sil.org/iso639-3/documentation.asp?id=tpi) |                 Tok Pisin                |            Latin            |  2000000  |
 | [ssw](http://www-01.sil.org/iso639-3/documentation.asp?id=ssw) |                   Swati                  |            Latin            |  1670000  |
 | [nyn](http://www-01.sil.org/iso639-3/documentation.asp?id=nyn) |                 Nyankole                 |            Latin            |  1643193  |
 | [iii](http://www-01.sil.org/iso639-3/documentation.asp?id=iii) |                Sichuan Yi                |              Yi             |  1600000  |
@@ -158,8 +158,8 @@ Supported Languages:
 | [lav](http://www-01.sil.org/iso639-3/documentation.asp?id=lav) |                  Latvian                 |            Latin            |  1550000  |
 | [quz](http://www-01.sil.org/iso639-3/documentation.asp?id=quz) |               Cusco Quechua              |            Latin            |  1500000  |
 | [rmy](http://www-01.sil.org/iso639-3/documentation.asp?id=rmy) |                Vlax Romani               |            Latin            |  1500000  |
-| [sco](http://www-01.sil.org/iso639-3/documentation.asp?id=sco) |                   Scots                  |            Latin            |  1500000  |
 | [src](http://www-01.sil.org/iso639-3/documentation.asp?id=src) |           Logudorese Sardinian           |            Latin            |  1500000  |
+| [sco](http://www-01.sil.org/iso639-3/documentation.asp?id=sco) |                   Scots                  |            Latin            |  1500000  |
 | [tso](http://www-01.sil.org/iso639-3/documentation.asp?id=tso) |                  Tsonga                  |            Latin            |  1500000  |
 | [men](http://www-01.sil.org/iso639-3/documentation.asp?id=men) |           Mende (Sierra Leone)           |            Latin            |  1480000  |
 | [fon](http://www-01.sil.org/iso639-3/documentation.asp?id=fon) |                    Fon                   |            Latin            |  1436000  |

@@ -1002,16 +1002,16 @@
   },
   {
     "speakers": 2000000,
-    "name": "Tok Pisin",
-    "iso6393": "tpi",
-    "udhr": "tpi",
+    "name": "Tiv",
+    "iso6393": "tiv",
+    "udhr": "tiv",
     "script": "Latin"
   },
   {
     "speakers": 2000000,
-    "name": "Tiv",
-    "iso6393": "tiv",
-    "udhr": "tiv",
+    "name": "Tok Pisin",
+    "iso6393": "tpi",
+    "udhr": "tpi",
     "script": "Latin"
   },
   {
@@ -1065,16 +1065,16 @@
   },
   {
     "speakers": 1500000,
-    "name": "Scots",
-    "iso6393": "sco",
-    "udhr": "sco",
+    "name": "Logudorese Sardinian",
+    "iso6393": "src",
+    "udhr": "src",
     "script": "Latin"
   },
   {
     "speakers": 1500000,
-    "name": "Logudorese Sardinian",
-    "iso6393": "src",
-    "udhr": "src",
+    "name": "Scots",
+    "iso6393": "sco",
+    "udhr": "sco",
     "script": "Latin"
   },
   {
