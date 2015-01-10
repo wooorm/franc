@@ -32,8 +32,9 @@ topLanguages = [];
  * Can be passed in through an environment variable,
  * for example when executing the following:
  *
- * ```sh
- * THRESHOLD=99999 npm run build
+ * ```bash
+ * export THRESHOLD=99999
+ * npm run build
  * ```
  */
 
