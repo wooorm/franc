@@ -29,7 +29,7 @@
     "browserify": "^7.0.0",
     "eslint": "^0.10.0",
     "esmangle": "^1.0.0",
-    "iso-639-3": "^0.1.0",
+    "iso-639-3": "^0.2.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.0.0",
     "markdown-table": "0.2.0",
