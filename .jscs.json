@@ -1,4 +1,20 @@
 {
+  "plugins": [
+    "jscs-jsdoc"
+  ],
+  "jsDoc": {
+    "checkAnnotations": "jsdoc3",
+    "checkParamNames": true,
+    "requireParamTypes": true,
+    "checkRedundantParams": true,
+    "checkReturnTypes": true,
+    "checkRedundantReturns": true,
+    "requireReturnTypes": true,
+    "checkTypes": "strictNativeCase",
+    "checkRedundantAccess": true,
+    "enforceExistence": true,
+    "requireHyphenBeforeDescription": true
+  },
   "requireCurlyBraces": [
     "if",
     "else",
@@ -22,15 +38,15 @@
   "requireSpaceBeforeBlockStatements": true,
   "requireParenthesesAroundIIFE": true,
   "requireSpacesInConditionalExpression": true,
-  "requireSpacesInFunctionExpression": {
-    "beforeOpeningCurlyBrace": true
-  },
   "requireSpacesInAnonymousFunctionExpression": {
     "beforeOpeningRoundBrace": true,
     "beforeOpeningCurlyBrace": true
   },
   "requireSpacesInNamedFunctionExpression": {
     "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "requireSpacesInFunctionExpression": {
     "beforeOpeningCurlyBrace": true
   },
   "requireMultipleVarDecl": true,
