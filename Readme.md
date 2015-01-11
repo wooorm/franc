@@ -205,4 +205,4 @@ Franc is a derivative work from [guess-language](http://code.google.com/p/guess-
 
 ## License
 
-MIT © [Titus Wormer](http://wooorm.com)
+[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
