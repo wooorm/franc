@@ -14,29 +14,34 @@ Detect the language of text.
 
 ## Installation
 
-npm:
-```sh
+[npm](https://docs.npmjs.com/cli/install):
+
+```bash
 $ npm install franc
 ```
 
-Component:
-```sh
+[Component.js](https://github.com/componentjs/component):
+
+```bash
 $ component install wooorm/franc
 ```
 
-Bower:
-```sh
+[Bower](http://bower.io/#install-packages):
+
+```bash
 $ bower install franc
 ```
 
-AMD ([info](#browser)):
-```js
+[AMD](http://requirejs.org/docs/whyamd.html#amd) ([info](#browser)):
+
+```javascript
 require(['path/to/dist/franc.js'], function (franc) {
     franc('Alle menslike wesens word vry'); // "afr"
 });
 ```
 
 Browser globals ([info](#browser)):
+
 ```html
 <script src="path/to/dist/franc.js" charset="utf-8"></script>
 <script>
@@ -46,7 +51,7 @@ Browser globals ([info](#browser)):
 
 ## Usage
 
-```js
+```javascript
 var franc = require('franc');
 
 franc('Alle menslike wesens word vry'); // "afr"
@@ -112,12 +117,14 @@ franc.all('O Brasil caiu 26 posições em', {
 ## CLI
 
 Install:
-```sh
+
+```bash
 $ npm install --global franc
 ```
 
 Use:
-```
+
+```text
 Usage: franc [options] string
 
 Detect the language of text
@@ -156,9 +163,10 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 Supporting more or less languages is easy: fork the project and run the following:
 
-```sh
+```bash
 $ npm install # Install development dependencies.
-$ THRESHOLD=100000 npm run build # Run the `build` script with an environment variable.
+$ export THRESHOLD=100000 # Set minimum speakers to a 100,000.
+$ npm run build # Run the `build` script.
 ```
 
 The above would create a version of **franc** with support for any language with 100,000 or more speakers. To support all languages, even dead ones like Latin, specify `-1`.
@@ -175,7 +183,7 @@ I’ve compiled three versions of **franc** for use in the browser. They’re [U
 
 On a MacBook Air, it runs 175 paragraphs 2 times per second (total: 350 op/s).
 
-```
+```text
          benchmarks * 175 paragraphs in different languages
   2 op/s » franc -- this module
   2 op/s » guesslanguage
