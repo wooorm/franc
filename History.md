@@ -1,4 +1,26 @@
 
+n.n.n / 2015-01-11
+==================
+
+  * Update CLI-usage in `Readme.md`
+  * Refactor test/cli.sh, add more tests
+  * Update CLI with pipe-in detection, other small fixes
+  * Fix ANSI colouring in `test/cli.sh`
+  * Update copyright notice in `LICENSE` to include 2015
+  * Add link to whole license in `Readme.md`
+  * Add Duo as an instalation method in `Readme.md`
+  * Fix typo's re browser-build in `Readme.md`
+  * Add links to installation methods in `Readme.md`
+  * Refactor to adhere to strict jsdoc style
+  * Add jscs-jsdoc configuration to `.jscs.json`
+  * Add jscs-jsdoc as a dev-dependency
+  * Refactor npm scripts for changes in npm
+  * Update browserify
+  * Update eslint
+  * Update markdown-table
+  * Update iso-639-3
+  * Update browser test timeout (to fix failing travis)
+
 0.7.0 / 2014-12-10
 ==================
 
