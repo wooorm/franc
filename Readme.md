@@ -131,7 +131,7 @@ $ npm install --global franc
 Use:
 
 ```text
-Usage: franc [options] string
+Usage: franc [options] <string>
 
 Detect the language of text
 
@@ -144,11 +144,11 @@ Options:
 
 Usage:
 
-# output language of value
+# output language
 $ franc "Alle menslike wesens word vry"
 # afr
 
-# output language from stdin
+# output language from stdin (expects utf8)
 $ echo "এটি একটি ভাষা একক IBM স্ক্রিপ্ট" | franc
 # ben
 
@@ -156,7 +156,7 @@ $ echo "এটি একটি ভাষা একক IBM স্ক্রিপ�
 $ franc --blacklist por,glg "O Brasil caiu 26 posições em"
 # src
 
-# whitelist certain languages and use stdin
+# output language from stdin with whitelist
 $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 # nob
 ```
