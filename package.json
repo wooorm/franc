@@ -51,7 +51,7 @@
     "test-travis": "npm run test-coveralls && npm run test-browser && npm run test-cli",
     "test": "npm run test-lib && npm run test-browser && npm run test-cli",
     "lint-api": "eslint index.js lib/franc.js lib/expressions.js",
-    "lint-cli": "eslint cli.js",
+    "lint-cli": "eslint --rule no-process-exit:false cli.js",
     "lint-script": "eslint --rule dot-notation:false script/build-fixtures.js script/build-support.js script/build-languages.js",
     "lint-test": "eslint --env mocha test/index.js test/browser.js",
     "lint-benchmark": "eslint --global suite,bench,set benchmark.js",
