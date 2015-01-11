@@ -61,6 +61,6 @@ try "Version: short"
     ./cli.js -v > /dev/null 2>&1 || code=$?
     assert $code 0
 
-echo "\033[32m\n(✓) Passed $tests assertions without errors\033[0m";
+printf "\033[32m\n(✓) Passed $tests assertions without errors\033[0m\n";
 
 exit 0
