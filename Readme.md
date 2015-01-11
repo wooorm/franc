@@ -32,6 +32,12 @@ $ component install wooorm/franc
 $ bower install franc
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var franc = require('wooorm/franc');
+```
+
 [AMD](http://requirejs.org/docs/whyamd.html#amd) ([info](#browser)):
 
 ```javascript
