@@ -3,7 +3,7 @@
 
 typeset -i tests=0
 
-function try {
+function it {
     let tests+=1;
     description="$1";
 }
@@ -17,50 +17,57 @@ function assert {
     fi
 }
 
-try "Value"
+it "Should accept an argument"
     result=`./cli.js "Alle menslike wesens word vry"` 2> /dev/null
     assert $result "afr"
 
-try "Stdin"
+it "Should accept multiple arguments"
+    result=`./cli.js "Alle" "menslike" "wesens" "word" "vry"` 2> /dev/null
+    assert $result "afr"
+
+it "Should accept stdin"
     result=`echo "Alle menslike wesens word vry" | ./cli.js` 2> /dev/null
     assert $result "afr"
 
-try "Whitelist: long"
+it "Should fail when no values are piped in and no values are given"
+    code=0
+    ./cli.js > /dev/null 2>&1 || code=$?
+    assert $code 1
+
+it "Should accept \`--whitelist\`"
     result=`./cli.js --whitelist nob,dan "Alle mennesker er født frie og"` 2> /dev/null
     assert $result "nob"
 
-try "Whitelist: short"
+it "Should accept \`-w\`"
     result=`./cli.js -w nob,dan "Alle mennesker er født frie og"` 2> /dev/null
     assert $result "nob"
 
-try "Blacklist: long"
+it "Should accept \`--blacklist\`"
     result=`./cli.js --blacklist por,glg "O Brasil caiu 26 posições em"` 2> /dev/null
     assert $result "src"
 
-try "Blacklist: short"
+it "Should accept \`-b\`"
     result=`./cli.js -b por,glg "O Brasil caiu 26 posições em"` 2> /dev/null
     assert $result "src"
 
-try "Help: long"
+it "Should accept \`--help\`"
     code=0
     ./cli.js --help > /dev/null 2>&1 || code=$?
     assert $code 0
 
-try "Help: short"
+it "Should accept \`-h\`"
     code=0
     ./cli.js -h > /dev/null 2>&1 || code=$?
     assert $code 0
 
-try "Version: long"
+it "Should accept \`--version\`"
     code=0
     ./cli.js --version > /dev/null 2>&1 || code=$?
     assert $code 0
 
-try "Version: short"
+it "Should accept \`-v\`"
     code=0
     ./cli.js -v > /dev/null 2>&1 || code=$?
     assert $code 0
 
 printf "\033[32m\n(✓) Passed $tests assertions without errors\033[0m\n";
-
-exit 0
