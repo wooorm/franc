@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,7 +10,7 @@ var fixtures,
 franc = require('./');
 fixtures = require('./test/fixtures.json');
 
-/**
+/*
  * Optional dependencies.
  */
 
@@ -53,7 +53,6 @@ if (hasException) {
  * @param {string} fixture
  * @return {string} - Most probable language.
  */
-
 function guessLanguage(fixture) {
     var result;
 
@@ -70,7 +69,6 @@ function guessLanguage(fixture) {
  * @param {string} fixture
  * @return {string} - Most probable language.
  */
-
 function languageDetect(fixture) {
     var result;
 
@@ -85,7 +83,6 @@ function languageDetect(fixture) {
  * @param {string} fixture
  * @return {string} - Most probable language.
  */
-
 function vac(fixture) {
     return Object.keys(Vac.detect(fixture, 1))[0];
 }
@@ -95,14 +92,13 @@ function vac(fixture) {
  *
  * @param {function(string)} callback
  */
-
 function eachFixture(callback) {
     Object.keys(fixtures).forEach(function (language) {
         callback(fixtures[language]);
     });
 }
 
-/**
+/*
  * Get fixture count.
  */
 

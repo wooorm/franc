@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -12,7 +12,7 @@ support = require('../data/support');
 customFixtures = require('../data/custom-fixtures');
 udhr = require('udhr').json();
 
-/**
+/*
  * The minimum number of speakers to be included in
  * `franc`: 1,000,000.
  */
@@ -42,7 +42,7 @@ if (THRESHOLD < 1e5) {
     );
 }
 
-/**
+/*
  * Get fixtures from UDHR preambles and notes.
  */
 
@@ -81,7 +81,7 @@ support.forEach(function (language) {
     data.push(fixture);
 });
 
-/**
+/*
  * Add a fixture for `und`: Undetermined languages.
  */
 
@@ -89,7 +89,7 @@ data.und = '';
 
 data = JSON.stringify(data, 0, 2);
 
-/**
+/*
  * Write.
  */
 

@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -16,7 +16,7 @@ iso6393 = require('iso-639-3');
 support = require('../data/support');
 fixtures = require('./fixtures');
 
-/**
+/*
  * Constants;
  */
 
@@ -27,14 +27,14 @@ MAGIC_NUMBER = 42;
 
 MAGIC_LANGUAGE = 'pol';
 
-/**
+/*
  * The fixture belonging to magic number should not equal
  * magic language.
  */
 
 assert(MAGIC_LANGUAGE !== franc(fixtures[MAGIC_NUMBER]));
 
-/**
+/*
  * Tests.
  */
 
@@ -59,7 +59,7 @@ describe('franc()', function () {
         assert(franc('the the the the the ') === 'sco');
     });
 
-    /**
+    /*
      * Inspired by lifthrasiir on hackernews:
      *
      *   https://news.ycombinator.com/item?id=8405672
@@ -188,6 +188,12 @@ describe('franc.all()', function () {
 });
 
 describe('algorithm', function () {
+    /**
+     * Test that `input` is classified as `language`.
+     *
+     * @param {string} input
+     * @param {Object} language
+     */
     function classifyLanguage(input, language) {
         var example;
 

@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,6 +10,14 @@ var PhantomConstructor,
 assert = require('assert');
 PhantomConstructor = require('phantom');
 
+/**
+ * Open `url` in `phantom`.
+ * Asserts if the document's title contains `"passed"`.
+ *
+ * @param {Object} phantom
+ * @param {string} url
+ * @param {function(Error?)} done
+ */
 function open(phantom, url, done) {
     phantom.createPage(function (page) {
         page.open(url, function (status) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -11,7 +11,7 @@ var franc,
 pack = require('./package.json');
 franc = require('./');
 
-/**
+/*
  * Arguments.
  */
 
@@ -19,7 +19,7 @@ var argv;
 
 argv = process.argv.slice(2);
 
-/**
+/*
  * Command.
  */
 
@@ -28,9 +28,8 @@ var command;
 command = Object.keys(pack.bin)[0];
 
 /**
- * Help.
+ * Log help.
  */
-
 function help() {
     console.log([
         '',
@@ -67,7 +66,7 @@ function help() {
     ].join('\n  ') + '\n');
 }
 
-/**
+/*
  * Program.
  */
 
@@ -75,6 +74,11 @@ var index,
     blacklist,
     whitelist;
 
+/**
+ * Log the language for `value`.
+ *
+ * @param {string} value
+ */
 function detect(value) {
     console.log(franc(value, {
         'whitelist': whitelist,

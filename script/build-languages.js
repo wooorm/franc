@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -18,7 +18,7 @@ declarations = require('udhr').json();
 trigrams = require('trigrams').min();
 scripts = require('unicode-7.0.0').scripts;
 
-/**
+/*
  * Data.
  */
 
@@ -26,7 +26,7 @@ var topLanguages;
 
 topLanguages = [];
 
-/**
+/*
  * The minimum number of speakers to be included in
  * `franc`, defaulting to 1,000,000.
  * Can be passed in through an environment variable,
@@ -53,7 +53,7 @@ console.log(
     'with AT LEAST `' + THRESHOLD + '` speakers.'
 );
 
-/**
+/*
  * Transform scripts into global expressions.
  */
 
@@ -70,9 +70,12 @@ scripts.forEach(function (script) {
 });
 
 /**
- * Get script information.
+ * Get all values at `key` properties in `object`.
+ *
+ * @param {Object} object
+ * @param {string} key
+ * @return {Array.<*>}
  */
-
 function all(object, key) {
     var results = [],
         property,
@@ -91,6 +94,12 @@ function all(object, key) {
     return results;
 }
 
+/**
+ * Get which scripts are used for a given UDHR code.
+ *
+ * @param {string} code
+ * @return {Object.<string, number>} - Script information.
+ */
 function getScriptInformation(code) {
     var declaration,
         content,
@@ -105,7 +114,7 @@ function getScriptInformation(code) {
     Object.keys(expressions).forEach(function (script) {
         var count;
 
-        /**
+        /*
          * Blacklisted, unimportant for our goal, scripts.
          */
 
@@ -130,14 +139,14 @@ function getScriptInformation(code) {
     return scriptInformation;
 }
 
-/**
+/*
  * Get a UDHR key from an ISO code.
  */
 
 var overrides;
 
 overrides = {
-    /**
+    /*
      * It doesnt matter which one we take, simplified
      * or traditional. It all chinese, and all Han-script
      * characters/
@@ -145,7 +154,7 @@ overrides = {
 
     'cmn': ['cmn_hans'],
 
-    /**
+    /*
      * Seems to be most popular in Nigeria:
      *
      * Source:
@@ -154,13 +163,13 @@ overrides = {
 
     'hau': ['hau_NG'],
 
-    /**
+    /*
      * Monotonic Greek is modern greek.
      */
 
     'ell': ['ell_monotonic'],
 
-    /**
+    /*
      * More popular, Farsi/Persian, instead of Dari
      *
      * Source:
@@ -169,7 +178,7 @@ overrides = {
 
     'pes': ['pes_1'],
 
-    /**
+    /*
      * Asante: 2,800,000; Fante: 1,900,000; Akuapem: 555,000.
      *
      * Source:
@@ -178,7 +187,7 @@ overrides = {
 
     'aka': ['aka_fante', 'aka_asante'],
 
-    /**
+    /*
      * Languages with one dated translation, pick the
      * newest:
      */
@@ -186,14 +195,14 @@ overrides = {
     'deu': ['deu_1996'],
     'ron': ['ron_2006'],
 
-    /**
+    /*
      * Pick European Portuguese, maybe not fair, will
      * have to investigate.
      */
 
     'por': ['por_PT'],
 
-    /**
+    /*
      * No real reason.
      *
      * Source:
@@ -202,13 +211,19 @@ overrides = {
 
     'nya': ['nya_chinyanja'],
 
-    /**
+    /*
      * It says ``popular'' in the name?
      */
 
     'hat': ['hat_popular']
 };
 
+/**
+ * Sort a list of languages by most-popular.
+ *
+ * @param {string} iso
+ * @return {Array.<string>} - UDHR keys.
+ */
 function getUDHRKeysfromISO(iso) {
     var udhrs;
 
@@ -232,7 +247,7 @@ function getUDHRKeysfromISO(iso) {
         return udhrs;
     }
 
-    /**
+    /*
      * Pick the main UDHR.
      */
 
@@ -245,8 +260,10 @@ function getUDHRKeysfromISO(iso) {
 
 /**
  * Sort a list of languages by most-popular.
+ *
+ * @param {Array.<string>} array
+ * @return {Array.<string>} - Sorted array.
  */
-
 function sort(array) {
     return array.concat().sort(function (a, b) {
         var diff;
@@ -261,7 +278,7 @@ function sort(array) {
     });
 }
 
-/**
+/*
  * Some languages are blacklisted, no matter what
  * `threshold` is chosen.
  */
@@ -269,7 +286,7 @@ function sort(array) {
 var BLACKLIST;
 
 BLACKLIST = [
-    /**
+    /*
      * `cbs` and `prq` have the same entries:
      *
      * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cbs
@@ -288,7 +305,7 @@ BLACKLIST = [
     'prq'
 ];
 
-/**
+/*
  * Output.
  */
 
@@ -357,7 +374,7 @@ topLanguages.forEach(function (language) {
 
     language.script = getScriptInformation(language.udhr);
 
-    /**
+    /*
      * Languages without (accessible) UDHR declaration.
      */
 
@@ -377,7 +394,7 @@ topLanguages.forEach(function (language) {
         language.script['Ol_Chiki'] = 0.8;
     }
 
-    /**
+    /*
      * No trigram, and no custom script, available for:
      *
      * - awa (Awadhi): Devanagari, Kaithi, Persian;
@@ -404,7 +421,7 @@ topLanguages.forEach(function (language) {
      */
 });
 
-/**
+/*
  * Detect which languages are unique per script.
  */
 
@@ -426,7 +443,7 @@ topLanguages = topLanguages.filter(function (language) {
     return true;
 });
 
-/**
+/*
  * Create a map of which languages should be supported.
  */
 
@@ -436,7 +453,7 @@ topLanguages.forEach(function (language) {
     languages[language.iso6393] = language;
 });
 
-/**
+/*
  * Japanese is different.
  */
 
@@ -448,7 +465,7 @@ topLanguages.forEach(function (language) {
     }
 });
 
-/**
+/*
  * Transform the scripts object into a single key.
  * Throw when more than one scripts are in use.
  */
@@ -466,7 +483,7 @@ topLanguages.forEach(function (language) {
 
 topLanguages = sort(topLanguages);
 
-/**
+/*
  * Detect languages with unique scripts.
  */
 
@@ -486,7 +503,7 @@ topLanguages.forEach(function (language) {
     languagesByScripts[script].push(language);
 });
 
-/**
+/*
  * Supported languages.
  */
 
@@ -494,7 +511,7 @@ var support;
 
 support = [];
 
-/**
+/*
  * Get languages by scripts.
  */
 
@@ -523,7 +540,7 @@ Object.keys(languagesByScripts).forEach(function (script) {
     }
 });
 
-/**
+/*
  * Push Japanese.
  */
 
@@ -533,7 +550,7 @@ regularExpressions.jpn = new RegExp(
     'g'
 );
 
-/**
+/*
  * Write data.
  */
 
@@ -547,7 +564,7 @@ fs.writeFileSync('lib/expressions.js', (function () {
     return 'module.exports = {\n  ' + asString + '\n};\n';
 })());
 
-/**
+/*
  * Write info on which regular scripts belong to
  * which languages.
  */
@@ -583,7 +600,7 @@ fs.writeFileSync('lib/data.json', (function () {
     return JSON.stringify(languagesAsObject, 0, 2);
 })());
 
-/**
+/*
  * Write info on which languages are supported.
  */
 
