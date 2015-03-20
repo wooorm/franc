@@ -1,6 +1,6 @@
 {
   "name": "franc",
-  "main": "index.js",
+  "main": "dist/franc.js",
   "description": "Detect the language of text",
   "license": "MIT",
   "keywords": [
@@ -33,13 +33,14 @@
     "components/",
     "coverage/",
     "data/",
-    "dist/",
+    "lib/",
     "node_modules/",
     "script/",
     "test/",
+    "benchmark.js",
     "build.js",
     "cli.js",
-    "benchmark.js",
+    "index.js",
     "component.json",
     "package.json"
   ]
