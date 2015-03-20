@@ -225,7 +225,7 @@ describe('algorithm', function () {
                             '), got `' + result + '` (' +
                             iso6393.get(result).name +
                             ').'
-                        )
+                        );
                     }
                 }
             );
