@@ -89,7 +89,7 @@
  * Dependencies.
  */
 
-var franc = require('wooorm/franc@0.7.1');
+var franc = require('wooorm/franc@1.0.0');
 var fixtures = require('./fixtures.js');
 var debounce = require('component/debounce');
 
@@ -144,7 +144,7 @@ $input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
 
 oninputchange();
 
-}, {"wooorm/franc@0.7.1":2,"./fixtures.js":3,"component/debounce":4}],
+}, {"wooorm/franc@1.0.0":2,"./fixtures.js":3,"component/debounce":4}],
 2: [function(require, module, exports) {
 'use strict';
 
@@ -154,41 +154,37 @@ module.exports = require('./lib/franc');
 5: [function(require, module, exports) {
 'use strict';
 
-var data,
-    utilities,
-    expressions;
-
 /*
  * Load `trigram-utils`.
  */
 
-utilities = require('trigram-utils');
+var utilities = require('trigram-utils');
 
 /*
  * Load `expressions` (regular expressions matching
  * scripts).
  */
 
-expressions = require('./expressions.js');
+var expressions = require('./expressions.js');
 
 /*
  * Load `data` (trigram information per language,
  * per script).
  */
 
-data = require('./data.json');
+var data = require('./data.json');
 
 /*
  * Construct trigram dictionaries.
  */
 
 (function () {
-    var languages,
-        name,
-        trigrams,
-        model,
-        script,
-        weight;
+    var languages;
+    var name;
+    var trigrams;
+    var model;
+    var script;
+    var weight;
 
     for (script in data) {
         languages = data[script];
@@ -209,28 +205,24 @@ data = require('./data.json');
     }
 })();
 
-var MAX_LENGTH,
-    MIN_LENGTH,
-    MAX_DIFFERENCE;
-
 /*
  * Maximum sample length.
  */
 
-MAX_LENGTH = 2048;
+var MAX_LENGTH = 2048;
 
 /*
  * Minimum sample length.
  */
 
-MIN_LENGTH = 10;
+var MIN_LENGTH = 10;
 
 /*
  * The maximum distance to add when a given trigram does
  * not exist in a trigram dictionary.
  */
 
-MAX_DIFFERENCE = 300;
+var MAX_DIFFERENCE = 300;
 
 /**
  * Deep regular sort on the number at `1` in both objects.
@@ -261,8 +253,8 @@ function sort(a, b) {
  *   languages.
  */
 function filterLanguages(languages, whitelist, blacklist) {
-    var filteredLanguages,
-        language;
+    var filteredLanguages;
+    var language;
 
     if (whitelist.length === 0 && blacklist.length === 0) {
         return languages;
@@ -296,13 +288,10 @@ function filterLanguages(languages, whitelist, blacklist) {
  * @return {number} - The distance between the two.
  */
 function getDistance(trigrams, model) {
-    var distance,
-        index,
-        trigram,
-        difference;
-
-    distance = 0;
-    index = trigrams.length;
+    var distance = 0;
+    var index = trigrams.length;
+    var trigram;
+    var difference;
 
     while (index--) {
         trigram = trigrams[index];
@@ -335,14 +324,11 @@ function getDistance(trigrams, model) {
  *   containing language--distance tuples.
  */
 function getDistances(trigrams, languages, options) {
-    var distances,
-        whitelist,
-        blacklist,
-        language;
+    var distances = [];
+    var whitelist = options.whitelist || [];
+    var blacklist = options.blacklist || [];
+    var language;
 
-    distances = [];
-    whitelist = options.whitelist || [];
-    blacklist = options.blacklist || [];
     languages = filterLanguages(languages, whitelist, blacklist);
 
     for (language in languages) {
@@ -363,9 +349,7 @@ function getDistances(trigrams, languages, options) {
  * @return {number} Float between 0 and 1.
  */
 function getOccurrence(value, expression) {
-    var count;
-
-    count = value.match(expression);
+    var count = value.match(expression);
 
     return (count ? count.length : 0) / value.length || 0;
 }
@@ -380,12 +364,10 @@ function getOccurrence(value, expression) {
  *   occurrence percentage.
  */
 function getTopScript(value, scripts) {
-    var topCount,
-        topScript,
-        script,
-        count;
-
-    topCount = -1;
+    var topCount = -1;
+    var topScript;
+    var script;
+    var count;
 
     for (script in scripts) {
         count = getOccurrence(value, scripts[script]);
@@ -409,17 +391,10 @@ function getTopScript(value, scripts) {
  *   distances.
  */
 function normalize(value, distances) {
-    var max,
-        min,
-        index,
-        length;
-
-    min = distances[0][1];
-
-    max = (value.length * MAX_DIFFERENCE) - min;
-
-    index = -1;
-    length = distances.length;
+    var min = distances[0][1];
+    var max = (value.length * MAX_DIFFERENCE) - min;
+    var index = -1;
+    var length = distances.length;
 
     while (++index < length) {
         distances[index][1] = 1 - ((distances[index][1] - min) / max);
@@ -450,9 +425,15 @@ function singleLanguageTuples(language) {
  *   containing language--distance tuples.
  */
 function detectAll(value, options) {
+    var settings = options || {};
+    var minLength = MIN_LENGTH;
     var script;
 
-    if (!value || value.length < MIN_LENGTH) {
+    if (settings.minLength !== null && settings.minLength !== undefined) {
+        minLength = settings.minLength;
+    }
+
+    if (!value || value.length < minLength) {
         return singleLanguageTuples('und');
     }
 
@@ -479,7 +460,7 @@ function detectAll(value, options) {
      */
 
     return normalize(value, getDistances(
-        utilities.asTuples(value), data[script[0]], options || {}
+        utilities.asTuples(value), data[script[0]], settings
     ));
 }
 
@@ -730,7 +711,6 @@ module.exports = {
  * @throws {Error} When `n` is not a number (incl. NaN), Infinity, or lt 1.
  * @return {Function} A function creating n-grams from a given value.
  */
-
 function nGram(n) {
     if (
         typeof n !== 'number' ||
@@ -743,7 +723,7 @@ function nGram(n) {
         );
     }
 
-    /**
+    /*
      * Create n-grams from a given value.
      *
      * @example
@@ -755,18 +735,21 @@ function nGram(n) {
      */
 
     return function (value) {
-        var nGrams = [],
+        var nGrams,
             index;
+
+        nGrams = [];
 
         if (value === null || value === undefined) {
             return nGrams;
         }
 
         value = String(value);
+
         index = value.length - n + 1;
 
         if (index < 1) {
-            return [];
+            return nGrams;
         }
 
         while (index--) {
@@ -777,13 +760,13 @@ function nGram(n) {
     };
 }
 
-/**
+/*
  * Export `n-gram`.
  */
 
 module.exports = nGram;
 
-/**
+/*
  * Create bigrams from a given value.
  *
  * @example
@@ -796,7 +779,7 @@ module.exports = nGram;
 
 nGram.bigram = nGram(2);
 
-/**
+/*
  * Create trigrams from a given value.
  *
  * @example
