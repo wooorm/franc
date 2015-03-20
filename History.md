@@ -1,3 +1,17 @@
+
+1.0.0 / 2015-03-20
+==================
+
+*   Add `minLength` support ([c90f51e](https://github.com/wooorm/franc/commit/c90f51e), closes #17)
+*   Refactor `History.md` ([edcbe56](https://github.com/wooorm/franc/commit/edcbe56))
+*   Refactor code style ([fecc398](https://github.com/wooorm/franc/commit/fecc398))
+*   Update `.travis.yml` ([903f505](https://github.com/wooorm/franc/commit/903f505))
+*   Add UMD to `bower.json` ([b22a4aa](https://github.com/wooorm/franc/commit/b22a4aa))
+*   Add `build.js` to `.gitignore`, `.npmignore`, `bower.json` ([3815c30](https://github.com/wooorm/franc/commit/3815c30))
+*   Update eslint ([4fc984e](https://github.com/wooorm/franc/commit/4fc984e))
+*   Update markdown-table ([106e3c2](https://github.com/wooorm/franc/commit/106e3c2))
+*   Update browserify ([473c614](https://github.com/wooorm/franc/commit/473c614))
+
 0.7.1 / 2015-01-11
 ==================
 
