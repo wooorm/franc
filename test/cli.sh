@@ -50,6 +50,20 @@ it "Should accept \`-b\`"
     result=`./cli.js -b por,glg "O Brasil caiu 26 posições em"` 2> /dev/null
     assert $result "src"
 
+it "Should accept \`--min-length\`"
+    result=`./cli.js --min-length 3 "the"` 2> /dev/null
+    assert $result "sco"
+
+    result=`./cli.js --min-length 4 "the"` 2> /dev/null
+    assert $result "und"
+
+it "Should accept \`-m\`"
+  result=`./cli.js -m 3 "the"` 2> /dev/null
+  assert $result "sco"
+
+  result=`./cli.js -m 4 "the"` 2> /dev/null
+  assert $result "und"
+
 it "Should accept \`--help\`"
     code=0
     ./cli.js --help > /dev/null 2>&1 || code=$?

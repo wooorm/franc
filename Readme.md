@@ -85,7 +85,10 @@ franc.all('O Brasil caiu 26 posições em');
  */
 
 /* "und" is returned for too-short input: */
-franc.all(''); // [ [ 'und', 1 ] ]
+franc('the'); // 'und'
+
+/* You can change what’s too short (default: 10): */
+franc('the', {'minLength': 3}); // 'sco'
 
 /* Provide a whitelist: */
 franc.all('O Brasil caiu 26 posições em', {
@@ -139,6 +142,7 @@ Options:
 
   -h, --help                    output usage information
   -v, --version                 output version number
+  -m, --min-length <number>     minimum length to accept
   -w, --whitelist <string>      allow languages
   -b, --blacklist <string>      disallow languages
 
@@ -163,7 +167,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 175 “languages”. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 175 “languages”, by default. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
 
 ## Supporting more or less languages
 

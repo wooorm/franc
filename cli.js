@@ -42,6 +42,7 @@ function help() {
         '',
         '  -h, --help                    output usage information',
         '  -v, --version                 output version number',
+        '  -m, --min-length <number>     minimum length to accept',
         '  -w, --whitelist <string>      allow languages',
         '  -b, --blacklist <string>      disallow languages',
         '',
@@ -75,6 +76,7 @@ function help() {
 var index;
 var blacklist;
 var whitelist;
+var minLength;
 
 /**
  * Log the language for `value`.
@@ -84,6 +86,7 @@ var whitelist;
 function detect(value) {
     if (value && value.length) {
         console.log(franc(value, {
+            'minLength': minLength,
             'whitelist': whitelist,
             'blacklist': blacklist
         }));
@@ -108,6 +111,18 @@ if (
 ) {
     console.log(pack.version);
 } else {
+    index = argv.indexOf('--min-length');
+
+    if (index === -1) {
+        index = argv.indexOf('-m');
+    }
+
+    if (index !== -1) {
+        minLength = Number(argv[index + 1] || '');
+
+        argv.splice(index, 2);
+    }
+
     index = argv.indexOf('--blacklist');
 
     if (index === -1) {

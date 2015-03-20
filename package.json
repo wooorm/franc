@@ -43,9 +43,9 @@
     "unicode-7.0.0": "^0.1.0"
   },
   "scripts": {
-    "test-browser": "_mocha --check-leaks -t 10000 test/browser.js",
+    "test-browser": "mocha --check-leaks -t 10000 test/browser.js",
     "test-cli": "bash ./test/cli.sh",
-    "test-lib": "_mocha --check-leaks test/index.js",
+    "test-lib": "mocha --check-leaks test/index.js",
     "test-coveralls": "istanbul cover _mocha --report lcovonly -- --check-leaks test/index.js",
     "test-coverage": "istanbul cover _mocha -- -- test/index.js",
     "test-travis": "npm run test-coveralls && npm run test-browser && npm run test-cli",

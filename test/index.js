@@ -77,7 +77,7 @@ describe('franc()', function () {
         }
     );
 
-    it('should accept blacklist parameter', function () {
+    it('should accept `blacklist`', function () {
         var language = franc(fixtures[MAGIC_NUMBER]);
 
         var result = franc(fixtures[MAGIC_NUMBER], {
@@ -87,14 +87,29 @@ describe('franc()', function () {
         assert(result !== language);
     });
 
-    it('should accept whitelist parameter', function () {
+    it('should accept `whitelist`', function () {
         var result = franc(fixtures[MAGIC_NUMBER], {
             'whitelist': [MAGIC_LANGUAGE]
         });
 
         assert(result === MAGIC_LANGUAGE);
     });
+
+    it('should accept `minLength`', function () {
+        var result = franc('the', {
+            'minLength': 3
+        });
+
+        assert(result === 'sco');
+
+        result = franc('the', {
+            'minLength': 4
+        });
+
+        assert(result === 'und');
+    });
 });
+
 describe('franc.all()', function () {
     it('should be of type `function`', function () {
         assert(typeof franc.all === 'function');
@@ -137,7 +152,7 @@ describe('franc.all()', function () {
         assert(result[1].length === 2);
     });
 
-    it('should accept blacklist parameter', function () {
+    it('should accept `blacklist`', function () {
         var shouldBeLanguage = franc(fixtures[MAGIC_NUMBER]);
         var result = franc.all(fixtures[MAGIC_NUMBER], {
             'blacklist': [shouldBeLanguage]
@@ -148,13 +163,29 @@ describe('franc.all()', function () {
         });
     });
 
-    it('should accept whitelist parameter', function () {
+    it('should accept `whitelist`', function () {
         var result = franc.all(fixtures[MAGIC_NUMBER], {
             'whitelist': [MAGIC_LANGUAGE]
         });
 
         assert(result.length === 1);
         assert(result[0][0] === MAGIC_LANGUAGE);
+    });
+
+    it('should accept `minLength`', function () {
+        var result = franc.all('the', {
+            'minLength': 3
+        });
+
+        assert(result[0][0] === 'sco');
+        assert(result.length !== 1);
+
+        result = franc.all('the', {
+            'minLength': 4
+        });
+
+        assert(result[0][0] === 'und');
+        assert(result.length === 1);
     });
 });
 
