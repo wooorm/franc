@@ -37,6 +37,7 @@
     "node_modules/",
     "script/",
     "test/",
+    "build.js",
     "cli.js",
     "benchmark.js",
     "component.json",
