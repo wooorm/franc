@@ -5,35 +5,26 @@
  * Dependencies.
  */
 
-var franc,
-    pack;
-
-pack = require('./package.json');
-franc = require('./');
+var pack = require('./package.json');
+var franc = require('./');
 
 /*
  * Detect if a value is expected to be piped in.
  */
 
-var expextPipeIn;
-
-expextPipeIn = !process.stdin.isTTY;
+var expextPipeIn = !process.stdin.isTTY;
 
 /*
  * Arguments.
  */
 
-var argv;
-
-argv = process.argv.slice(2);
+var argv = process.argv.slice(2);
 
 /*
  * Command.
  */
 
-var command;
-
-command = Object.keys(pack.bin)[0];
+var command = Object.keys(pack.bin)[0];
 
 /**
  * Help.
@@ -81,9 +72,9 @@ function help() {
     ].join('\n  ') + '\n';
 }
 
-var index,
-    blacklist,
-    whitelist;
+var index;
+var blacklist;
+var whitelist;
 
 /**
  * Log the language for `value`.

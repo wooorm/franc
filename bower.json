@@ -14,9 +14,6 @@
     "cli",
     "bin"
   ],
-  "dependencies": {
-    "trigram-utils": "^0.1.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/franc.git"

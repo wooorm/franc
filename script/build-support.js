@@ -1,12 +1,8 @@
 'use strict';
 
-var fs,
-    table,
-    support;
-
-fs = require('fs');
-table = require('markdown-table');
-support = require('../data/support');
+var fs = require('fs');
+var table = require('markdown-table');
+var support = require('../data/support');
 
 support.unshift({
     'iso6393': 'und',

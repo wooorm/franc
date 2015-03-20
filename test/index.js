@@ -4,28 +4,18 @@
  * Dependencies.
  */
 
-var franc,
-    assert,
-    iso6393,
-    support,
-    fixtures;
-
-franc = require('..');
-assert = require('assert');
-iso6393 = require('iso-639-3');
-support = require('../data/support');
-fixtures = require('./fixtures');
+var franc = require('..');
+var assert = require('assert');
+var iso6393 = require('iso-639-3');
+var support = require('../data/support');
+var fixtures = require('./fixtures');
 
 /*
  * Constants;
  */
 
-var MAGIC_NUMBER,
-    MAGIC_LANGUAGE;
-
-MAGIC_NUMBER = 42;
-
-MAGIC_LANGUAGE = 'pol';
+var MAGIC_NUMBER = 42;
+var MAGIC_LANGUAGE = 'pol';
 
 /*
  * The fixture belonging to magic number should not equal
@@ -88,12 +78,9 @@ describe('franc()', function () {
     );
 
     it('should accept blacklist parameter', function () {
-        var language,
-            result;
+        var language = franc(fixtures[MAGIC_NUMBER]);
 
-        language = franc(fixtures[MAGIC_NUMBER]);
-
-        result = franc(fixtures[MAGIC_NUMBER], {
+        var result = franc(fixtures[MAGIC_NUMBER], {
             'blacklist': [language]
         });
 
@@ -101,9 +88,7 @@ describe('franc()', function () {
     });
 
     it('should accept whitelist parameter', function () {
-        var result;
-
-        result = franc(fixtures[MAGIC_NUMBER], {
+        var result = franc(fixtures[MAGIC_NUMBER], {
             'whitelist': [MAGIC_LANGUAGE]
         });
 
@@ -117,9 +102,7 @@ describe('franc.all()', function () {
 
     it('should return an array containing language--probability tuples',
         function () {
-            var result;
-
-            result = franc.all('XYZ');
+            var result = franc.all('XYZ');
 
             assert(result instanceof Array);
             assert(typeof result[0][0] === 'string');
@@ -128,9 +111,7 @@ describe('franc.all()', function () {
     );
 
     it('should return [["und", 1]] on an undetermined value', function () {
-        var result;
-
-        result = franc.all('XYZ');
+        var result = franc.all('XYZ');
 
         assert(result[0][0] === 'und');
         assert(result[0][1] === 1);
@@ -139,9 +120,7 @@ describe('franc.all()', function () {
     });
 
     it('should return [["und", 1]] on a missing value', function () {
-        var result;
-
-        result = franc.all();
+        var result = franc.all();
 
         assert(result[0][0] === 'und');
         assert(result[0][1] === 1);
@@ -150,9 +129,7 @@ describe('franc.all()', function () {
     });
 
     it('should work on weird values', function () {
-        var result;
-
-        result = franc.all('the the the the the ');
+        var result = franc.all('the the the the the ');
 
         assert(result[0][0] === 'sco');
         assert(result[0].length === 2);
@@ -161,12 +138,8 @@ describe('franc.all()', function () {
     });
 
     it('should accept blacklist parameter', function () {
-        var shouldBeLanguage,
-            result;
-
-        shouldBeLanguage = franc(fixtures[MAGIC_NUMBER]);
-
-        result = franc.all(fixtures[MAGIC_NUMBER], {
+        var shouldBeLanguage = franc(fixtures[MAGIC_NUMBER]);
+        var result = franc.all(fixtures[MAGIC_NUMBER], {
             'blacklist': [shouldBeLanguage]
         });
 
@@ -176,9 +149,7 @@ describe('franc.all()', function () {
     });
 
     it('should accept whitelist parameter', function () {
-        var result;
-
-        result = franc.all(fixtures[MAGIC_NUMBER], {
+        var result = franc.all(fixtures[MAGIC_NUMBER], {
             'whitelist': [MAGIC_LANGUAGE]
         });
 
@@ -195,16 +166,12 @@ describe('algorithm', function () {
      * @param {Object} language
      */
     function classifyLanguage(input, language) {
-        var example;
-
-        example = input.replace(/\n/g, '\\n').slice(0, 20) + '...';
+        var example = input.replace(/\n/g, '\\n').slice(0, 20) + '...';
 
         describe(language.iso6393, function () {
             it('should classify `' + example + '` as ' + language.name,
                 function () {
-                    var result;
-
-                    result = franc.all(input);
+                    var result = franc.all(input);
 
                     result.forEach(function (tuple) {
                         assert(tuple[1] <= 1);

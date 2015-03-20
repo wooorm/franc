@@ -4,27 +4,18 @@
  * Dependencies.
  */
 
-var fs,
-    speakers,
-    information,
-    declarations,
-    trigrams,
-    scripts;
-
-fs = require('fs');
-speakers = require('speakers').all();
-information = require('udhr').information();
-declarations = require('udhr').json();
-trigrams = require('trigrams').min();
-scripts = require('unicode-7.0.0').scripts;
+var fs = require('fs');
+var speakers = require('speakers').all();
+var information = require('udhr').information();
+var declarations = require('udhr').json();
+var trigrams = require('trigrams').min();
+var scripts = require('unicode-7.0.0').scripts;
 
 /*
  * Data.
  */
 
-var topLanguages;
-
-topLanguages = [];
+var topLanguages = [];
 
 /*
  * The minimum number of speakers to be included in
@@ -57,14 +48,10 @@ console.log(
  * Transform scripts into global expressions.
  */
 
-var expressions;
-
-expressions = {};
+var expressions = {};
 
 scripts.forEach(function (script) {
-    var expression;
-
-    expression = require('unicode-7.0.0/scripts/' + script + '/regex.js');
+    var expression = require('unicode-7.0.0/scripts/' + script + '/regex.js');
 
     expressions[script] = new RegExp(expression.source, 'g');
 });
@@ -77,9 +64,9 @@ scripts.forEach(function (script) {
  * @return {Array.<*>}
  */
 function all(object, key) {
-    var results = [],
-        property,
-        value;
+    var results = [];
+    var property;
+    var value;
 
     for (property in object) {
         value = object[property];
@@ -101,15 +88,10 @@ function all(object, key) {
  * @return {Object.<string, number>} - Script information.
  */
 function getScriptInformation(code) {
-    var declaration,
-        content,
-        length,
-        scriptInformation;
-
-    declaration = declarations[code];
-    content = all(declaration, 'para').join('');
-    length = content.length;
-    scriptInformation = {};
+    var declaration = declarations[code];
+    var content = all(declaration, 'para').join('');
+    var length = content.length;
+    var scriptInformation = {};
 
     Object.keys(expressions).forEach(function (script) {
         var count;
@@ -143,9 +125,7 @@ function getScriptInformation(code) {
  * Get a UDHR key from an ISO code.
  */
 
-var overrides;
-
-overrides = {
+var overrides = {
     /*
      * It doesnt matter which one we take, simplified
      * or traditional. It all chinese, and all Han-script
@@ -225,18 +205,14 @@ overrides = {
  * @return {Array.<string>} - UDHR keys.
  */
 function getUDHRKeysfromISO(iso) {
-    var udhrs;
-
-    udhrs = [];
+    var udhrs = [];
 
     if (iso in overrides) {
         return overrides[iso];
     }
 
     Object.keys(information).forEach(function (code) {
-        var info;
-
-        info = information[code];
+        var info = information[code];
 
         if (info.ISO === iso) {
             udhrs.push(code);
@@ -266,9 +242,7 @@ function getUDHRKeysfromISO(iso) {
  */
 function sort(array) {
     return array.concat().sort(function (a, b) {
-        var diff;
-
-        diff = b.speakers - a.speakers;
+        var diff = b.speakers - a.speakers;
 
         if (diff === 0) {
             diff = a.iso6393.charCodeAt(0) - b.iso6393.charCodeAt(0);
@@ -283,9 +257,7 @@ function sort(array) {
  * `threshold` is chosen.
  */
 
-var BLACKLIST;
-
-BLACKLIST = [
+var BLACKLIST = [
     /*
      * `cbs` and `prq` have the same entries:
      *
@@ -310,9 +282,7 @@ BLACKLIST = [
  */
 
 Object.keys(speakers).forEach(function (iso6393) {
-    var language;
-
-    language = speakers[iso6393];
+    var language = speakers[iso6393];
 
     if (BLACKLIST.indexOf(iso6393) !== -1) {
         console.log(
@@ -341,9 +311,7 @@ Object.keys(speakers).forEach(function (iso6393) {
 });
 
 topLanguages.forEach(function (language) {
-    var udhrs;
-
-    udhrs = getUDHRKeysfromISO(language.iso6393);
+    var udhrs = getUDHRKeysfromISO(language.iso6393);
 
     language.udhr = udhrs.pop();
 
@@ -368,9 +336,7 @@ topLanguages.forEach(function (language) {
 topLanguages = sort(topLanguages);
 
 topLanguages.forEach(function (language) {
-    var iso;
-
-    iso = language.iso6393;
+    var iso = language.iso6393;
 
     language.script = getScriptInformation(language.udhr);
 
@@ -426,9 +392,7 @@ topLanguages.forEach(function (language) {
  */
 
 topLanguages = topLanguages.filter(function (language) {
-    var hasScripts;
-
-    hasScripts = Object.keys(language.script).length !== 0;
+    var hasScripts = Object.keys(language.script).length !== 0;
 
     if (!trigrams[language.udhr] && !hasScripts) {
         console.log(
@@ -487,14 +451,10 @@ topLanguages = sort(topLanguages);
  * Detect languages with unique scripts.
  */
 
-var languagesByScripts;
-
-languagesByScripts = {};
+var languagesByScripts = {};
 
 topLanguages.forEach(function (language) {
-    var script;
-
-    script = language.script;
+    var script = language.script;
 
     if (!languagesByScripts[script]) {
         languagesByScripts[script] = [];
@@ -507,24 +467,17 @@ topLanguages.forEach(function (language) {
  * Supported languages.
  */
 
-var support;
-
-support = [];
+var support = [];
 
 /*
  * Get languages by scripts.
  */
 
-var data,
-    regularExpressions;
-
-data = {};
-regularExpressions = {}; /* Ha! */
+var data = {};
+var regularExpressions = {}; /* Ha! */
 
 Object.keys(languagesByScripts).forEach(function (script) {
-    var languagesByScript;
-
-    languagesByScript = languagesByScripts[script];
+    var languagesByScript = languagesByScripts[script];
 
     if (languagesByScript.length > 1) {
         if (!regularExpressions[script]) {
@@ -555,9 +508,7 @@ regularExpressions.jpn = new RegExp(
  */
 
 fs.writeFileSync('lib/expressions.js', (function () {
-    var asString;
-
-    asString = Object.keys(regularExpressions).map(function (script) {
+    var asString = Object.keys(regularExpressions).map(function (script) {
         return script + ': ' + regularExpressions[script];
     }).join(',\n  ');
 
@@ -570,14 +521,10 @@ fs.writeFileSync('lib/expressions.js', (function () {
  */
 
 fs.writeFileSync('lib/data.json', (function () {
-    var languagesAsObject;
-
-    languagesAsObject = {};
+    var languagesAsObject = {};
 
     Object.keys(data).forEach(function (script) {
-        var scriptObject;
-
-        scriptObject = {};
+        var scriptObject = {};
 
         data[script].forEach(function (language) {
             if (trigrams[language.udhr]) {

@@ -4,20 +4,17 @@
  * Dependencies.
  */
 
-var fixtures,
-    franc;
-
-franc = require('./');
-fixtures = require('./test/fixtures.json');
+var franc = require('./');
+var fixtures = require('./test/fixtures.json');
 
 /*
  * Optional dependencies.
  */
 
-var hasException,
-    guesslanguage,
-    languagedetect,
-    Vac;
+var hasException;
+var guesslanguage;
+var languagedetect;
+var Vac;
 
 try {
     guesslanguage = require('guesslanguage').guessLanguage;
@@ -70,9 +67,7 @@ function guessLanguage(fixture) {
  * @return {string} - Most probable language.
  */
 function languageDetect(fixture) {
-    var result;
-
-    result = languagedetect.detect(fixture, 1)[0];
+    var result = languagedetect.detect(fixture, 1)[0];
 
     return result && result[0];
 }
@@ -102,9 +97,7 @@ function eachFixture(callback) {
  * Get fixture count.
  */
 
-var fixtureCount;
-
-fixtureCount = Object.keys(fixtures).length;
+var fixtureCount = Object.keys(fixtures).length;
 
 suite(
     'benchmarks * ' + fixtureCount + ' paragraphs in different languages',

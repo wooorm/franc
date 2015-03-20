@@ -4,11 +4,8 @@
  * Dependencies.
  */
 
-var PhantomConstructor,
-    assert;
-
-assert = require('assert');
-PhantomConstructor = require('phantom');
+var assert = require('assert');
+var PhantomConstructor = require('phantom');
 
 /**
  * Open `url` in `phantom`.

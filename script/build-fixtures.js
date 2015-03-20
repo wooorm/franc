@@ -4,13 +4,9 @@
  * Dependencies.
  */
 
-var support,
-    customFixtures,
-    udhr;
-
-support = require('../data/support');
-customFixtures = require('../data/custom-fixtures');
-udhr = require('udhr').json();
+var support = require('../data/support');
+var customFixtures = require('../data/custom-fixtures');
+var udhr = require('udhr').json();
 
 /*
  * The minimum number of speakers to be included in
@@ -46,15 +42,11 @@ if (THRESHOLD < 1e5) {
  * Get fixtures from UDHR preambles and notes.
  */
 
-var data;
-
-data = [];
+var data = [];
 
 support.forEach(function (language) {
-    var udhrKey,
-        fixture;
-
-    udhrKey = language.udhr;
+    var udhrKey = language.udhr;
+    var fixture;
 
     if (udhrKey in customFixtures) {
         fixture = customFixtures[udhrKey];
