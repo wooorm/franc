@@ -1,3 +1,7 @@
+1.0.1 / 2015-03-25
+==================
+
+*   Fix results for digit-only and white-space-only input ([e0624ae](https://github.com/wooorm/franc/commit/e0624ae))
 
 1.0.0 / 2015-03-20
 ==================
