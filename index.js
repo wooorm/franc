@@ -4,7 +4,7 @@
  * Dependencies.
  */
 
-var franc = require('wooorm/franc@1.0.0');
+var franc = require('wooorm/franc@1.0.1');
 var fixtures = require('./fixtures.js');
 var debounce = require('component/debounce');
 

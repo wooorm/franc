@@ -30,15 +30,18 @@
    */
 
   function call(id, require){
-    var m = cache[id] = { exports: {} };
+    var m = { exports: {} };
     var mod = modules[id];
     var name = mod[2];
     var fn = mod[0];
 
     fn.call(m.exports, function(req){
       var dep = modules[id][1][req];
-      return require(dep ? dep : req);
+      return require(dep || req);
     }, m, m.exports, outer, modules, cache, entries);
+
+    // store to cache after successful resolve
+    cache[id] = m;
 
     // expose as `name`.
     if (name) cache[name] = cache[id];
@@ -89,7 +92,7 @@
  * Dependencies.
  */
 
-var franc = require('wooorm/franc@1.0.0');
+var franc = require('wooorm/franc@1.0.1');
 var fixtures = require('./fixtures.js');
 var debounce = require('component/debounce');
 
@@ -144,7 +147,7 @@ $input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
 
 oninputchange();
 
-}, {"wooorm/franc@1.0.0":2,"./fixtures.js":3,"component/debounce":4}],
+}, {"wooorm/franc@1.0.1":2,"./fixtures.js":3,"component/debounce":4}],
 2: [function(require, module, exports) {
 'use strict';
 
@@ -448,10 +451,15 @@ function detectAll(value, options) {
 
     /*
      * One languages exists for the most-used script.
+     *
+     * If no matches occured, such as a digit only string,
+     * exit with `und`.
      */
 
     if (!(script[0] in data)) {
-        return singleLanguageTuples(script[0]);
+        return singleLanguageTuples(
+            script[1] === 0 ? 'und' : script[0]
+        );
     }
 
     /*
