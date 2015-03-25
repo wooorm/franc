@@ -108,6 +108,10 @@ describe('franc()', function () {
 
         assert(result === 'und');
     });
+
+    it('should return `und` for generic characters', function () {
+        assert(franc('987 654 321') === 'und');
+    });
 });
 
 describe('franc.all()', function () {
@@ -137,6 +141,14 @@ describe('franc.all()', function () {
     it('should return [["und", 1]] on a missing value', function () {
         var result = franc.all();
 
+        assert(result[0][0] === 'und');
+        assert(result[0][1] === 1);
+        assert(result[0].length === 2);
+        assert(result.length === 1);
+    });
+
+    it('should return `[["und", 1]]` for generic characters', function () {
+        var result = franc.all('987 654 321');
         assert(result[0][0] === 'und');
         assert(result[0][1] === 1);
         assert(result[0].length === 2);
