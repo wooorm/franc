@@ -1,3 +1,10 @@
+1.1.0 / 2015-06-16
+==================
+
+*   Update browserify, eslint, jscs-jsdoc, markdown-table ([ee2f575](https://github.com/wooorm/franc/commit/ee2f575))
+*   Refactor cli ([ee2f575](https://github.com/wooorm/franc/commit/d656ebf))
+*   Add support for --all to cli.js ([b3092f8](https://github.com/wooorm/franc/commit/b3092f8))
+
 1.0.1 / 2015-03-25
 ==================
 
@@ -255,4 +262,3 @@
 
 0.0.1 / 2014-07-19
 ==================
-
