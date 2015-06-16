@@ -93,8 +93,9 @@ function detect(value) {
             'blacklist': blacklist
         };
         if (all) {
-            (franc.all(value, param))
-                .filter(function (a) { console.log(a[0] + ' ' + a[1]) } );
+            franc.all(value, param).map(function (language) {
+                console.log(language[0] + ' ' + language[1]);
+            });
         } else {
             console.log(franc(value, param));
         }
