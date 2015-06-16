@@ -64,6 +64,14 @@ it "Should accept \`-m\`"
   result=`./cli.js -m 4 "the"` 2> /dev/null
   assert $result "und"
 
+it "Should accept \`--all\`"
+  result=`./cli.js --all "Alle menslike wesens word vry" | grep afr | cut -f2 -d\ ` 2> /dev/null
+  assert $result 1
+
+it "Should accept \`--a\`"
+  result=`./cli.js -a "Alle menslike wesens word vry" | grep afr | cut -f2 -d\ ` 2> /dev/null
+  assert $result 1
+
 it "Should accept \`--help\`"
     code=0
     ./cli.js --help > /dev/null 2>&1 || code=$?

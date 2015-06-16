@@ -45,6 +45,7 @@ function help() {
         '  -m, --min-length <number>     minimum length to accept',
         '  -w, --whitelist <string>      allow languages',
         '  -b, --blacklist <string>      disallow languages',
+        '  -a, --all                     display all guesses',
         '',
         'Usage:',
         '',
@@ -77,6 +78,7 @@ var index;
 var blacklist;
 var whitelist;
 var minLength;
+var all = false;
 
 /**
  * Log the language for `value`.
@@ -85,11 +87,17 @@ var minLength;
  */
 function detect(value) {
     if (value && value.length) {
-        console.log(franc(value, {
+        var param = {
             'minLength': minLength,
             'whitelist': whitelist,
             'blacklist': blacklist
-        }));
+        };
+        if (all) {
+            (franc.all(value, param))
+                .filter(function (a) { console.log(a[0] + ' ' + a[1]) } );
+        } else {
+            console.log(franc(value, param));
+        }
     } else {
         process.stderr.write(help());
         process.exit(1);
@@ -145,6 +153,18 @@ if (
         whitelist = (argv[index + 1] || '').split(',');
 
         argv.splice(index, 2);
+    }
+
+    index = argv.indexOf('--all');
+
+    if (index === -1) {
+        index = argv.indexOf('-a');
+    }
+
+    if (index !== -1) {
+        all = true;
+
+        argv.splice(index, 1);
     }
 
     if (argv.length) {
