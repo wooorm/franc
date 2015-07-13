@@ -1,3 +1,9 @@
+
+0.1.1 / 2015-07-13
+==================
+
+*   Fix failure when script not in white-list ([bddf79b](https://github.com/wooorm/franc/commit/bddf79b))
+
 1.1.0 / 2015-06-16
 ==================
 
