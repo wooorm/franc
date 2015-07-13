@@ -16,6 +16,7 @@ var fixtures = require('./fixtures');
 
 var MAGIC_NUMBER = 42;
 var MAGIC_LANGUAGE = 'pol';
+var SOME_HEBREW = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית';
 
 /*
  * The fixture belonging to magic number should not equal
@@ -93,6 +94,14 @@ describe('franc()', function () {
         });
 
         assert(result === MAGIC_LANGUAGE);
+    });
+
+    it('should accept `whitelist` for different scripts', function () {
+        var result = franc(SOME_HEBREW, {
+            'whitelist': ['eng']
+        });
+
+        assert(result === 'und');
     });
 
     it('should accept `minLength`', function () {
@@ -182,6 +191,15 @@ describe('franc.all()', function () {
 
         assert(result.length === 1);
         assert(result[0][0] === MAGIC_LANGUAGE);
+    });
+
+    it('should accept `whitelist` for different scripts', function () {
+        var result = franc.all(SOME_HEBREW, {
+            'whitelist': ['eng']
+        });
+
+        assert(result.length === 1);
+        assert(result[0][0] === 'und');
     });
 
     it('should accept `minLength`', function () {
