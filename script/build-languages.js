@@ -335,6 +335,8 @@ topLanguages.forEach(function (language) {
 
 topLanguages = sort(topLanguages);
 
+/* eslint-disable dot-notation */
+
 topLanguages.forEach(function (language) {
     var iso = language.iso6393;
 
@@ -386,6 +388,8 @@ topLanguages.forEach(function (language) {
      * *: future interest?
      */
 });
+
+/* eslint-enable dot-notation */
 
 /*
  * Detect which languages are unique per script.

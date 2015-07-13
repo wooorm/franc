@@ -100,6 +100,7 @@ function detect(value) {
             console.log(franc(value, param));
         }
     } else {
+        /* eslint-disable no-process-exit */
         process.stderr.write(help());
         process.exit(1);
     }
