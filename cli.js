@@ -59,8 +59,8 @@ function help() {
         '',
         '# blacklist certain languages',
         '$ ' + command + ' --blacklist por,glg ' +
-            '"O Brasil caiu 26 posições em"',
-        '# ' + franc('O Brasil caiu 26 posições em', {
+            '"O Brasil caiu 26 posições"',
+        '# ' + franc('O Brasil caiu 26 posições', {
             'blacklist': ['por', 'glg']
         }),
         '',

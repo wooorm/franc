@@ -43,11 +43,11 @@ it "Should accept \`-w\`"
     assert $result "nob"
 
 it "Should accept \`--blacklist\`"
-    result=`./cli.js --blacklist por,glg "O Brasil caiu 26 posições em"` 2> /dev/null
+    result=`./cli.js --blacklist por,glg "O Brasil caiu 26 posições"` 2> /dev/null
     assert $result "src"
 
 it "Should accept \`-b\`"
-    result=`./cli.js -b por,glg "O Brasil caiu 26 posições em"` 2> /dev/null
+    result=`./cli.js -b por,glg "O Brasil caiu 26 posições"` 2> /dev/null
     assert $result "src"
 
 it "Should accept \`--min-length\`"
