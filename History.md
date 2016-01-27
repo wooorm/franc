@@ -1,5 +1,11 @@
 
-0.1.1 / 2015-07-13
+1.1.2 / 2016-01-27
+==================
+
+*   Fix bug where the top-trigram was not counted ([0152d0a](https://github.com/wooorm/franc/commit/0152d0a))
+*   Fix typo in foreign language example ([1e982cf](https://github.com/wooorm/franc/commit/1e982cf))
+
+1.1.1 / 2015-07-13
 ==================
 
 *   Fix failure when script not in white-list ([bddf79b](https://github.com/wooorm/franc/commit/bddf79b))
