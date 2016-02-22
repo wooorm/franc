@@ -138,6 +138,24 @@ describe('franc.all()', function () {
         }
     );
 
+    it('should return `0` without matches', function () {
+        var result = franc.all('פאר טסי');
+
+        assert(result instanceof Array);
+        assert(result[0][0] === 'und');
+        assert(result[0][1] === 1);
+
+        result = franc.all('פאר טסי', {
+          'minLength': 3
+        });
+
+        assert(result instanceof Array);
+        assert(result[0][0] === 'heb');
+        assert(result[0][1] === 0);
+        assert(result[1][0] === 'ydd');
+        assert(result[1][1] === 0);
+    });
+
     it('should return [["und", 1]] on an undetermined value', function () {
         var result = franc.all('XYZ');
 
