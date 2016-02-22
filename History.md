@@ -1,4 +1,9 @@
 
+1.1.3 / 2016-02-22
+==================
+
+*   Fix `NaN` from showing up in empty results ([f915584](https://github.com/wooorm/franc/commit/f915584))
+
 1.1.2 / 2016-01-27
 ==================
 
