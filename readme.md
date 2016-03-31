@@ -150,9 +150,9 @@ The above would create a version of **franc** with support for any language with
 
 I’ve compiled three versions of **franc** for use in the browser. They’re [UMD](http://ryanflorence.com/2013/es6-modules-and-browser-app-delivery/) compliant: they work with [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md), [CommonJS](http://www.commonjs.org), and `<script>`s.
 
-- [dist/franc.js](dist/franc.js) — **franc** with support for languages with 8 million or more speakers (75 languages);
-- [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](supported-Languages.md) version);
-- [dist/franc-all.js](dist/franc-all.js) — **franc** with support for all languages (339 languages, carful, huge!).
+- [`franc.js`](franc.js) — **franc** with support for languages with 8 million or more speakers (75 languages);
+- [`franc-most.js`](franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](supported-Languages.md) version);
+- [`franc-all.js`](franc-all.js) — **franc** with support for all languages (339 languages, carful, huge!).
 
 ## Derivation
 

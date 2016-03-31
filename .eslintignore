@@ -1,2 +1,4 @@
 coverage/
-dist/
+franc-all.js
+franc-most.js
+franc.js

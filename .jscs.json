@@ -1,7 +1,9 @@
 {
   "excludeFiles": [
     "coverage/",
-    "dist/",
+    "franc-all.js",
+    "franc-most.js",
+    "franc.js",
     "node_modules/"
   ],
   "preset": "yandex",

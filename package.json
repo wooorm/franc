@@ -20,7 +20,6 @@
   "files": [
     "index.js",
     "cli.js",
-    "dist/",
     "lib/"
   ],
   "repository": {
@@ -52,13 +51,13 @@
   "scripts": {
     "build-fixtures": "node script/build-fixtures.js",
     "build-support": "node script/build-support.js",
-    "build-bundle-small": "export THRESHOLD=8000000 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile dist/franc.js",
-    "build-bundle-medium": "export THRESHOLD=1000000 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile dist/franc-most.js",
-    "build-bundle-large": "export THRESHOLD=-1 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile dist/franc-all.js",
+    "build-bundle-small": "export THRESHOLD=8000000 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile franc.js",
+    "build-bundle-medium": "export THRESHOLD=1000000 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile franc-most.js",
+    "build-bundle-large": "export THRESHOLD=-1 && node script/build-languages.js && browserify lib/franc.js --standalone franc --outfile franc-all.js",
     "build-bundle": "npm run build-bundle-small && npm run build-bundle-large && npm run build-bundle-medium",
-    "build-mangle-small": "esmangle dist/franc.js -o dist/franc.js",
-    "build-mangle-medium": "esmangle dist/franc-most.js -o dist/franc-most.js",
-    "build-mangle-large": "esmangle dist/franc-all.js -o dist/franc-all.js",
+    "build-mangle-small": "esmangle franc.js -o franc.js",
+    "build-mangle-medium": "esmangle franc-most.js -o franc-most.js",
+    "build-mangle-large": "esmangle franc-all.js -o franc-all.js",
     "build-mangle": "npm run build-mangle-small && npm run build-mangle-medium && npm run build-mangle-large",
     "build": "npm run build-bundle && npm run build-mangle && npm run build-fixtures && npm run build-support",
     "lint-api": "eslint .",
