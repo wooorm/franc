@@ -194,9 +194,9 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 
 [build-status]: https://travis-ci.org/wooorm/franc
 
-[coverage-badge]: https://img.shields.io/coveralls/wooorm/franc.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/franc.svg
 
-[coverage-status]: https://coveralls.io/r/wooorm/franc?branch=master
+[coverage-status]: https://codecov.io/github/wooorm/franc
 
 [climate-badge]: http://img.shields.io/codeclimate/github/wooorm/franc.svg
 
@@ -226,6 +226,6 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 
 [grant-3]: https://github.com/wooorm/franc/issues/6#issuecomment-59936827
 
-[MIT]: LICENSE
+[mit]: LICENSE
 
 [home]: http://wooorm.com

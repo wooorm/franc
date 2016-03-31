@@ -3,7 +3,7 @@ node_js:
 - '0.10'
 - '0.11'
 - '0.12'
-after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+after_script: npm install codecov.io && cat ./coverage/lcov.info | codecov
 sudo: false
 deploy:
   - provider: npm
