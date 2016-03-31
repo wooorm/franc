@@ -16,43 +16,8 @@ Detect the language of text.
 
 [npm](https://docs.npmjs.com/cli/install):
 
-```bash
-$ npm install franc
-```
-
-[Component.js](https://github.com/componentjs/component):
-
-```bash
-$ component install wooorm/franc
-```
-
-[Bower](http://bower.io/#install-packages):
-
-```bash
-$ bower install franc
-```
-
-[Duo](http://duojs.org/#getting-started):
-
-```javascript
-var franc = require('wooorm/franc');
-```
-
-[AMD](http://requirejs.org/docs/whyamd.html#amd) ([info](#browser)):
-
-```javascript
-require(['path/to/dist/franc.js'], function (franc) {
-    franc('Alle menslike wesens word vry'); // "afr"
-});
-```
-
-Browser globals ([info](#browser)):
-
-```html
-<script src="path/to/dist/franc.js" charset="utf-8"></script>
-<script>
-    franc('Alle menslike wesens word vry'); // "afr"
-</script>
+```sh
+npm install franc
 ```
 
 ## Usage
@@ -167,7 +132,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 175 “languages”, by default. For a complete list, check out [supported-Languages.md](supported-Languages.md).
+**franc** supports 176 “languages”, by default. For a complete list, check out [supported-Languages.md](supported-Languages.md).
 
 ## Supporting more or less languages
 
