@@ -17,11 +17,21 @@
   "dependencies": {
     "trigram-utils": "^0.1.0"
   },
+  "files": [
+    "index.js",
+    "cli.js",
+    "dist/",
+    "lib/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/franc.git"
   },
-  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "bugs": "https://github.com/wooorm/franc/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
   "bin": {
     "franc": "cli.js"
   },
