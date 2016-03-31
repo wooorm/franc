@@ -167,7 +167,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 175 “languages”, by default. For a complete list, check out [Supported-Languages.md](Supported-Languages.md).
+**franc** supports 175 “languages”, by default. For a complete list, check out [supported-Languages.md](supported-Languages.md).
 
 ## Supporting more or less languages
 
@@ -186,7 +186,7 @@ The above would create a version of **franc** with support for any language with
 I’ve compiled three versions of **franc** for use in the browser. They’re [UMD](http://ryanflorence.com/2013/es6-modules-and-browser-app-delivery/) compliant: they work with [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md), [CommonJS](http://www.commonjs.org), and `<script>`s.
 
 - [dist/franc.js](dist/franc.js) — **franc** with support for languages with 8 million or more speakers (75 languages);
-- [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](Supported-Languages.md) version);
+- [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](supported-Languages.md) version);
 - [dist/franc-all.js](dist/franc-all.js) — **franc** with support for all languages (339 languages, carful, huge!).
 
 ## Benchmark
