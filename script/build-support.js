@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-env node */
+
 var fs = require('fs');
 var table = require('markdown-table');
 var support = require('../data/support');

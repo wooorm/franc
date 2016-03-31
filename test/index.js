@@ -145,7 +145,7 @@ describe('franc.all()', function () {
         assert(result[0][1] === 1);
 
         result = franc.all('פאר טסי', {
-          'minLength': 3
+            'minLength': 3
         });
 
         assert(result instanceof Array);
@@ -240,8 +240,8 @@ describe('algorithm', function () {
     /**
      * Test that `input` is classified as `language`.
      *
-     * @param {string} input
-     * @param {Object} language
+     * @param {string} input - Input value.
+     * @param {Object} language - Correct language.
      */
     function classifyLanguage(input, language) {
         var example = input.replace(/\n/g, '\\n').slice(0, 20) + '...';

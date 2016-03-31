@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+/* eslint-env node */
+
 /*
  * Dependencies.
  */
@@ -29,7 +31,7 @@ var command = Object.keys(pack.bin)[0];
 /**
  * Help.
  *
- * @return {string}
+ * @return {string} - Help message.
  */
 function help() {
     return [
@@ -83,7 +85,7 @@ var all = false;
 /**
  * Log the language for `value`.
  *
- * @param {string} value
+ * @param {string} value - Value to detect.
  */
 function detect(value) {
     if (value && value.length) {

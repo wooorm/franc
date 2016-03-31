@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-env node */
+
 /*
  * Dependencies.
  */
@@ -59,9 +61,9 @@ scripts.forEach(function (script) {
 /**
  * Get all values at `key` properties in `object`.
  *
- * @param {Object} object
- * @param {string} key
- * @return {Array.<*>}
+ * @param {Object} object - Context.
+ * @param {string} key - Property.
+ * @return {Array.<*>} - Results.
  */
 function all(object, key) {
     var results = [];
@@ -84,7 +86,7 @@ function all(object, key) {
 /**
  * Get which scripts are used for a given UDHR code.
  *
- * @param {string} code
+ * @param {string} code - ISO 639 3
  * @return {Object.<string, number>} - Script information.
  */
 function getScriptInformation(code) {
@@ -201,7 +203,7 @@ var overrides = {
 /**
  * Sort a list of languages by most-popular.
  *
- * @param {string} iso
+ * @param {string} iso - ISO 639 3.
  * @return {Array.<string>} - UDHR keys.
  */
 function getUDHRKeysfromISO(iso) {
@@ -237,7 +239,7 @@ function getUDHRKeysfromISO(iso) {
 /**
  * Sort a list of languages by most-popular.
  *
- * @param {Array.<string>} array
+ * @param {Array.<string>} array - List.
  * @return {Array.<string>} - Sorted array.
  */
 function sort(array) {
@@ -347,19 +349,19 @@ topLanguages.forEach(function (language) {
      */
 
     if (iso === 'tel') {
-        language.script['Telugu'] = 0.8;
+        language.script.Telugu = 0.8;
     }
 
     if (iso === 'ori') {
-        language.script['Oriya'] = 0.8;
+        language.script.Oriya = 0.8;
     }
 
     if (iso === 'sin') {
-        language.script['Sinhala'] = 0.8;
+        language.script.Sinhala = 0.8;
     }
 
     if (iso === 'sat') {
-        language.script['Ol_Chiki'] = 0.8;
+        language.script.Ol_Chiki = 0.8;
     }
 
     /*
@@ -513,10 +515,14 @@ regularExpressions.jpn = new RegExp(
 
 fs.writeFileSync('lib/expressions.js', (function () {
     var asString = Object.keys(regularExpressions).map(function (script) {
-        return script + ': ' + regularExpressions[script];
-    }).join(',\n  ');
+        return '\'' + script + '\': ' + regularExpressions[script];
+    }).join(',\n    ');
 
-    return 'module.exports = {\n  ' + asString + '\n};\n';
+    return '/* eslint-env commonjs */\n' +
+      '\n' +
+      'module.exports = {\n' +
+      '    ' + asString + '\n' +
+      '};\n';
 })());
 
 /*
