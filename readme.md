@@ -20,6 +20,9 @@ Detect the language of text.
 npm install franc
 ```
 
+**franc** is also available pre-built as an AMD, CommonJS, and globals
+module, [supporting 75, 176, and 339 languages][releases].
+
 ## Usage
 
 ```javascript
@@ -161,3 +164,7 @@ Franc is a derivative work from [guess-language](http://code.google.com/p/guess-
 ## License
 
 [MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+
+<!-- Definitions -->
+
+[releases]: https://github.com/wooorm/franc/releases
