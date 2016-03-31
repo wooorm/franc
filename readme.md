@@ -189,20 +189,6 @@ I’ve compiled three versions of **franc** for use in the browser. They’re [U
 - [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](supported-Languages.md) version);
 - [dist/franc-all.js](dist/franc-all.js) — **franc** with support for all languages (339 languages, carful, huge!).
 
-## Benchmark
-
-On a MacBook Air, it runs 175 paragraphs 2 times per second (total: 350 op/s).
-
-```text
-         benchmarks * 175 paragraphs in different languages
-  2 op/s » franc -- this module
-  2 op/s » guesslanguage
-  2 op/s » languagedetect
-  2 op/s » vac
-```
-
-(I’ll work on a better benchmark soon)
-
 ## Derivation
 
 Franc is a derivative work from [guess-language](http://code.google.com/p/guess-language/) (Python, LGPL), [guesslanguage](http://websvn.kde.org/branches/work/sonnet-refactoring/common/nlp/guesslanguage.cpp?view=markup) (C++, LGPL), and [Language::Guess](http://web.archive.org/web/20090228163219/http://languid.cantbedone.org/) (Perl, GPL). Their creators granted me the rights to distribute franc under the MIT license: respectively, [Maciej Ceglowski](https://github.com/wooorm/franc/issues/6#issuecomment-59669191), [Jacob R. Rideout](https://github.com/wooorm/franc/issues/6#issuecomment-60196819), and [Kent S. Johnson](https://github.com/wooorm/franc/issues/6#issuecomment-59936827).

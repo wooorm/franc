@@ -34,7 +34,6 @@
     "node_modules/",
     "script/",
     "test/",
-    "benchmark.js",
     "build.js",
     "cli.js",
     "index.js",

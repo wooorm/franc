@@ -11,7 +11,6 @@ node_modules/
 script/
 test/
 build.js
-benchmark.js
 bower.json
 component.json
 History.md
