@@ -214,7 +214,7 @@ function getUDHRKeysfromISO(iso) {
     Object.keys(information).forEach(function (code) {
         var info = information[code];
 
-        if (info.ISO === iso) {
+        if (info.ISO === iso || info.code === iso) {
             udhrs.push(code);
         }
     });

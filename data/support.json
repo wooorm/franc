@@ -253,13 +253,6 @@
   },
   {
     "speakers": 22000000,
-    "name": "Pulaar",
-    "iso6393": "fuc",
-    "udhr": "fuc",
-    "script": "Latin"
-  },
-  {
-    "speakers": 22000000,
     "name": "Hausa",
     "iso6393": "hau",
     "udhr": "hau_NG",
@@ -388,15 +381,15 @@
     "speakers": 13869000,
     "name": "North Azerbaijani",
     "iso6393": "azj",
-    "udhr": "azj_latn",
-    "script": "Latin"
+    "udhr": "azj_cyrl",
+    "script": "Cyrillic"
   },
   {
     "speakers": 13869000,
     "name": "North Azerbaijani",
     "iso6393": "azj",
-    "udhr": "azj_cyrl",
-    "script": "Cyrillic"
+    "udhr": "azj_latn",
+    "script": "Latin"
   },
   {
     "speakers": 13218000,
@@ -404,6 +397,13 @@
     "iso6393": "sin",
     "udhr": "sin",
     "script": "Sinhala"
+  },
+  {
+    "speakers": 12500000,
+    "name": "Komi-Permyak",
+    "iso6393": "koi",
+    "udhr": "koi",
+    "script": "Cyrillic"
   },
   {
     "speakers": 12258540,
@@ -556,14 +556,14 @@
     "speakers": 7000000,
     "name": "Akan",
     "iso6393": "aka",
-    "udhr": "aka_fante",
+    "udhr": "aka_asante",
     "script": "Latin"
   },
   {
     "speakers": 7000000,
     "name": "Akan",
     "iso6393": "aka",
-    "udhr": "aka_asante",
+    "udhr": "aka_fante",
     "script": "Latin"
   },
   {
@@ -785,17 +785,17 @@
   },
   {
     "speakers": 4000000,
-    "name": "Lithuanian",
-    "iso6393": "lit",
-    "udhr": "lit",
-    "script": "Latin"
-  },
-  {
-    "speakers": 4000000,
     "name": "Lao",
     "iso6393": "lao",
     "udhr": "lao",
     "script": "Lao"
+  },
+  {
+    "speakers": 4000000,
+    "name": "Lithuanian",
+    "iso6393": "lit",
+    "udhr": "lit",
+    "script": "Latin"
   },
   {
     "speakers": 4000000,
@@ -904,6 +904,13 @@
   },
   {
     "speakers": 2700000,
+    "name": "Dyula",
+    "iso6393": "dyu",
+    "udhr": "dyu",
+    "script": "Latin"
+  },
+  {
+    "speakers": 2700000,
     "name": "Wolof",
     "iso6393": "wol",
     "udhr": "wol",
@@ -1002,16 +1009,16 @@
   },
   {
     "speakers": 2000000,
-    "name": "Tiv",
-    "iso6393": "tiv",
-    "udhr": "tiv",
+    "name": "Tok Pisin",
+    "iso6393": "tpi",
+    "udhr": "tpi",
     "script": "Latin"
   },
   {
     "speakers": 2000000,
-    "name": "Tok Pisin",
-    "iso6393": "tpi",
-    "udhr": "tpi",
+    "name": "Tiv",
+    "iso6393": "tiv",
+    "udhr": "tiv",
     "script": "Latin"
   },
   {

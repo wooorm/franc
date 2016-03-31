@@ -42,7 +42,6 @@ Supported Languages:
 | [pan](http://www-01.sil.org/iso639-3/documentation.asp?id=pan) |                  Panjabi                 |           Gurmukhi          |  25700000 |
 | [bho](http://www-01.sil.org/iso639-3/documentation.asp?id=bho) |                 Bhojpuri                 |          Devanagari         |  25000000 |
 | [amh](http://www-01.sil.org/iso639-3/documentation.asp?id=amh) |                  Amharic                 |           Ethiopic          |  23000000 |
-| [fuc](http://www-01.sil.org/iso639-3/documentation.asp?id=fuc) |                  Pulaar                  |            Latin            |  22000000 |
 | [hau](http://www-01.sil.org/iso639-3/documentation.asp?id=hau) |                   Hausa                  |            Latin            |  22000000 |
 | [bos](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) |                  Bosnian                 |            Latin            |  21000000 |
 | [bos](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) |                  Bosnian                 |           Cyrillic          |  21000000 |
@@ -61,9 +60,10 @@ Supported Languages:
 | [skr](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) |                  Seraiki                 |            Arabic           |  15020000 |
 | [tgl](http://www-01.sil.org/iso639-3/documentation.asp?id=tgl) |                  Tagalog                 |            Latin            |  14850000 |
 | [hun](http://www-01.sil.org/iso639-3/documentation.asp?id=hun) |                 Hungarian                |            Latin            |  14500000 |
-| [azj](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) |             North Azerbaijani            |            Latin            |  13869000 |
 | [azj](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) |             North Azerbaijani            |           Cyrillic          |  13869000 |
+| [azj](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) |             North Azerbaijani            |            Latin            |  13869000 |
 | [sin](http://www-01.sil.org/iso639-3/documentation.asp?id=sin) |                  Sinhala                 |           Sinhala           |  13218000 |
+| [koi](http://www-01.sil.org/iso639-3/documentation.asp?id=koi) |               Komi-Permyak               |           Cyrillic          |  12500000 |
 | [ell](http://www-01.sil.org/iso639-3/documentation.asp?id=ell) |           Modern Greek (1453-)           |            Greek            |  12258540 |
 | [ces](http://www-01.sil.org/iso639-3/documentation.asp?id=ces) |                   Czech                  |            Latin            |  12000000 |
 | [mag](http://www-01.sil.org/iso639-3/documentation.asp?id=mag) |                  Magahi                  |          Devanagari         |  10821000 |
@@ -118,8 +118,8 @@ Supported Languages:
 | [kat](http://www-01.sil.org/iso639-3/documentation.asp?id=kat) |                 Georgian                 |           Georgian          |  4103000  |
 | [bcl](http://www-01.sil.org/iso639-3/documentation.asp?id=bcl) |               Central Bikol              |            Latin            |  4000000  |
 | [glg](http://www-01.sil.org/iso639-3/documentation.asp?id=glg) |                 Galician                 |            Latin            |  4000000  |
-| [lit](http://www-01.sil.org/iso639-3/documentation.asp?id=lit) |                Lithuanian                |            Latin            |  4000000  |
 | [lao](http://www-01.sil.org/iso639-3/documentation.asp?id=lao) |                    Lao                   |             Lao             |  4000000  |
+| [lit](http://www-01.sil.org/iso639-3/documentation.asp?id=lit) |                Lithuanian                |            Latin            |  4000000  |
 | [umb](http://www-01.sil.org/iso639-3/documentation.asp?id=umb) |                  Umbundu                 |            Latin            |  4000000  |
 | [tsn](http://www-01.sil.org/iso639-3/documentation.asp?id=tsn) |                  Tswana                  |            Latin            |  3932000  |
 | [nso](http://www-01.sil.org/iso639-3/documentation.asp?id=nso) |                   Pedi                   |            Latin            |  3851000  |
@@ -135,6 +135,7 @@ Supported Languages:
 | [tzm](http://www-01.sil.org/iso639-3/documentation.asp?id=tzm) |          Central Atlas Tamazight         |            Latin            |  3000000  |
 | [war](http://www-01.sil.org/iso639-3/documentation.asp?id=war) |            Waray (Philippines)           |            Latin            |  3000000  |
 | [ydd](http://www-01.sil.org/iso639-3/documentation.asp?id=ydd) |              Eastern Yiddish             |            Hebrew           |  3000000  |
+| [dyu](http://www-01.sil.org/iso639-3/documentation.asp?id=dyu) |                   Dyula                  |            Latin            |  2700000  |
 | [wol](http://www-01.sil.org/iso639-3/documentation.asp?id=wol) |                   Wolof                  |            Latin            |  2700000  |
 | [kir](http://www-01.sil.org/iso639-3/documentation.asp?id=kir) |                  Kirghiz                 |           Cyrillic          |  2631420  |
 | [nds](http://www-01.sil.org/iso639-3/documentation.asp?id=nds) |                Low German                |            Latin            |  2600000  |
@@ -149,8 +150,8 @@ Supported Languages:
 | [bci](http://www-01.sil.org/iso639-3/documentation.asp?id=bci) |                  Baoulé                  |            Latin            |  2130000  |
 | [epo](http://www-01.sil.org/iso639-3/documentation.asp?id=epo) |                 Esperanto                |            Latin            |  2000000  |
 | [pam](http://www-01.sil.org/iso639-3/documentation.asp?id=pam) |                 Pampanga                 |            Latin            |  2000000  |
-| [tiv](http://www-01.sil.org/iso639-3/documentation.asp?id=tiv) |                    Tiv                   |            Latin            |  2000000  |
 | [tpi](http://www-01.sil.org/iso639-3/documentation.asp?id=tpi) |                 Tok Pisin                |            Latin            |  2000000  |
+| [tiv](http://www-01.sil.org/iso639-3/documentation.asp?id=tiv) |                    Tiv                   |            Latin            |  2000000  |
 | [ssw](http://www-01.sil.org/iso639-3/documentation.asp?id=ssw) |                   Swati                  |            Latin            |  1670000  |
 | [nyn](http://www-01.sil.org/iso639-3/documentation.asp?id=nyn) |                 Nyankole                 |            Latin            |  1643193  |
 | [iii](http://www-01.sil.org/iso639-3/documentation.asp?id=iii) |                Sichuan Yi                |              Yi             |  1600000  |

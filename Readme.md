@@ -7,7 +7,7 @@ Detect the language of text.
 # What’s so cool about franc?
 
 1. **franc** supports more languages<sup>(†)</sup> than any other library, or Google;
-2. **franc** is easily [forked](#supporting-more-or-less-languages) to support 335 languages;
+2. **franc** is easily [forked](#supporting-more-or-less-languages) to support 339 languages;
 3. **franc** is just as fast as the competition.
 
 † - If humans write in the language, on the web, and the language has more than one million speakers, **franc** detects it.
@@ -187,7 +187,7 @@ I’ve compiled three versions of **franc** for use in the browser. They’re [U
 
 - [dist/franc.js](dist/franc.js) — **franc** with support for languages with 8 million or more speakers (75 languages);
 - [dist/franc-most.js](dist/franc-most.js) — **franc** with support for languages with 1 million or more speakers (175 languages, the same as the [Node or Component](Supported-Languages.md) version);
-- [dist/franc-all.js](dist/franc-all.js) — **franc** with support for all languages (335 languages, carful, huge!).
+- [dist/franc-all.js](dist/franc-all.js) — **franc** with support for all languages (339 languages, carful, huge!).
 
 ## Benchmark
 

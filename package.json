@@ -26,19 +26,18 @@
     "franc": "cli.js"
   },
   "devDependencies": {
-    "browserify": "^10.0.0",
-    "eslint": "^0.23.0",
+    "browserify": "^13.0.0",
+    "eslint": "^2.0.0",
     "esmangle": "^1.0.0",
-    "iso-639-3": "^0.2.0",
-    "istanbul": "^0.3.0",
-    "jscs": "^1.0.0",
+    "istanbul": "^0.4.0",
+    "jscs": "^2.0.0",
     "jscs-jsdoc": "^1.0.0",
     "markdown-table": "^0.4.0",
-    "matcha": "^0.6.0",
+    "matcha": "^0.7.0",
     "mocha": "^2.0.0",
     "speakers": "^0.1.0",
-    "trigrams": "^0.1.0",
-    "udhr": "^0.1.0",
+    "trigrams": "^1.0.0",
+    "udhr": "^1.0.0",
     "unicode-7.0.0": "^0.1.0"
   },
   "scripts": {

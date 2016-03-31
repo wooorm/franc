@@ -6,7 +6,6 @@
 
 var franc = require('..');
 var assert = require('assert');
-var iso6393 = require('iso-639-3');
 var support = require('../data/support');
 var fixtures = require('./fixtures');
 
@@ -14,7 +13,7 @@ var fixtures = require('./fixtures');
  * Constants;
  */
 
-var MAGIC_NUMBER = 42;
+var MAGIC_NUMBER = 41;
 var MAGIC_LANGUAGE = 'pol';
 var SOME_HEBREW = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית';
 
@@ -255,24 +254,9 @@ describe('algorithm', function () {
                     result.forEach(function (tuple) {
                         assert(tuple[1] <= 1);
                         assert(tuple[1] >= 0);
-
-                        assert(iso6393.has(tuple[0]));
                     });
 
-                    result = result[0][0];
-
-                    /* istanbul ignore if */
-                    if (result !== language.iso6393) {
-                        console.log(franc.all(input).slice(0, 10));
-                        throw new Error(
-                            'Expected `' + language.iso6393 +
-                            '` (' +
-                            iso6393.get(language.iso6393).name +
-                            '), got `' + result + '` (' +
-                            iso6393.get(result).name +
-                            ').'
-                        );
-                    }
+                    assert.equal(result[0][0], language.iso6393);
                 }
             );
         });
