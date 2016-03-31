@@ -11,7 +11,7 @@ support.unshift({
     'name': '† **Special: Case for unknown language**'
 });
 
-fs.writeFileSync('supported-Languages.md',
+fs.writeFileSync('supported-languages.md',
     'Supported Languages:\n' +
     '=================\n' +
     '\n' +
