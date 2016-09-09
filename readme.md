@@ -189,7 +189,7 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 
 [releases]: https://github.com/wooorm/franc/releases
 
-[logo]: https://cdn.rawgit.com/wooorm/franc/master/logo.svg
+[logo]: https://cdn.rawgit.com/wooorm/franc/a162cc0/logo.svg
 
 [build-badge]: https://img.shields.io/travis/wooorm/franc.svg
 
