@@ -1,5 +1,5 @@
-Supported Languages:
-=================
+Supported Languages
+===================
 
 - † — Undetermined languages will result in the "und" language code
 

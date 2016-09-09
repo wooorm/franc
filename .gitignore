@@ -2,6 +2,6 @@
 *.log
 coverage/
 node_modules/
-franc.js
-franc-most.js
-franc-all.js
+/franc.js
+/franc-most.js
+/franc-all.js

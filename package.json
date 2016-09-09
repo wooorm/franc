@@ -36,17 +36,15 @@
   },
   "devDependencies": {
     "browserify": "^13.0.0",
-    "eslint": "^2.0.0",
     "esmangle": "^1.0.0",
     "istanbul": "^0.4.0",
-    "jscs": "^2.0.0",
-    "jscs-jsdoc": "^1.0.0",
     "markdown-table": "^0.4.0",
     "mocha": "^2.0.0",
     "speakers": "^0.1.0",
     "trigrams": "^1.0.0",
     "udhr": "^1.0.0",
-    "unicode-7.0.0": "^0.1.0"
+    "unicode-7.0.0": "^0.1.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
     "build-fixtures": "node script/build-fixtures.js",
@@ -60,12 +58,23 @@
     "build-mangle-large": "esmangle franc-all.js -o franc-all.js",
     "build-mangle": "npm run build-mangle-small && npm run build-mangle-medium && npm run build-mangle-large",
     "build": "npm run build-bundle && npm run build-mangle && npm run build-fixtures && npm run build-support",
-    "lint-api": "eslint .",
-    "lint-style": "jscs . --reporter inline",
-    "lint": "npm run lint-api && npm run lint-style",
+    "lint": "xo",
     "test-cli": "bash ./test/cli.sh",
     "test-api": "mocha --check-leaks test/index.js",
     "test-coverage": "istanbul cover _mocha -- -- test/index.js",
     "test": "npm run build && npm run lint && npm run test-coverage && npm run test-cli"
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "max-lines": "off",
+      "guard-for-in": "off",
+      "no-self-compare": "off"
+    },
+    "ignores": [
+      "franc-all.js",
+      "franc-most.js",
+      "franc.js"
+    ]
   }
 }
