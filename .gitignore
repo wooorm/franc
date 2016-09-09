@@ -1,5 +1,6 @@
 .DS_Store
 *.log
+.nyc_output/
 coverage/
 node_modules/
 /franc.js
