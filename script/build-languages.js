@@ -8,7 +8,7 @@ var speakers = require('speakers').all();
 var information = require('udhr').information();
 var declarations = require('udhr').json();
 var trigrams = require('trigrams').min();
-var scripts = require('unicode-7.0.0').scripts;
+var scripts = require('unicode-7.0.0').Script;
 
 /* Data. */
 var topLanguages = [];
@@ -42,7 +42,7 @@ console.log(
 var expressions = {};
 
 scripts.forEach(function (script) {
-  var expression = require('unicode-7.0.0/scripts/' + script + '/regex.js');
+  var expression = require('unicode-7.0.0/Script/' + script + '/regex.js');
 
   expressions[script] = new RegExp(expression.source, 'g');
 });
