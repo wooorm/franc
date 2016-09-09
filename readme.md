@@ -8,7 +8,8 @@ Detect the language of text.
 
 ## What’s so cool about franc?
 
-1.  **franc** supports more languages<sup>(†)</sup> than any other library, or Google;
+1.  **franc** supports more languages<sup>(†)</sup> than any other
+    library, or Google;
 2.  **franc** is easily [forked][fork] to support 339 languages;
 3.  **franc** is just as fast as the competition.
 
@@ -138,7 +139,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 176 “languages”, by default. For a complete list,
+**franc** supports 176 “languages”, by default.  For a complete list,
 check out [supported-languages.md][support].
 
 ## Supporting more or less languages
@@ -153,7 +154,7 @@ npm run build # Run the `build` script.
 ```
 
 The above would create a version of **franc** with support for any
-language with 100,000 or more speakers. To support all languages, even
+language with 100,000 or more speakers.  To support all languages, even
 dead ones like Latin, specify `-1`.
 
 ## Browser
@@ -176,7 +177,7 @@ They’re [UMD][] compliant: they work with [AMD][], [CommonJS][], and
 
 Franc is a derivative work from [guess-language][] (Python, LGPL),
 [guesslanguage][] (C++, LGPL), and [Language::Guess][language-guess]
-(Perl, GPL). Their creators granted me the rights to distribute franc
+(Perl, GPL).  Their creators granted me the rights to distribute franc
 under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 [Jacob R. Rideout][grant-2], and [Kent S. Johnson][grant-3].
 
