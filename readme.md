@@ -105,7 +105,7 @@ npm install --global franc
 
 Use:
 
-```text
+```bash
 Usage: franc [options] <string>
 
 Detect the language of text
