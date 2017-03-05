@@ -28,7 +28,7 @@ var all = false;
 function detect(value) {
   var options;
 
-  if (value && value.length) {
+  if (value && value.length !== 0) {
     options = {
       minLength: minLength,
       whitelist: whitelist,
@@ -108,7 +108,7 @@ if (
     argv.splice(index, 1);
   }
 
-  if (argv.length) {
+  if (argv.length !== 0) {
     detect(argv.join(' '));
   } else if (expextPipeIn) {
     process.stdin.resume();

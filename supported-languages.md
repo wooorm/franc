@@ -57,7 +57,7 @@ Supported Languages
 | [ibo](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) |                   Igbo                   |            Latin            |  17000000 |
 | [nep](http://www-01.sil.org/iso639-3/documentation.asp?id=nep) |          Nepali (macrolanguage)          |          Devanagari         |  16200000 |
 | [ceb](http://www-01.sil.org/iso639-3/documentation.asp?id=ceb) |                  Cebuano                 |            Latin            |  15230000 |
-| [skr](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) |                  Seraiki                 |            Arabic           |  15020000 |
+| [skr](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) |                  Saraiki                 |            Arabic           |  15020000 |
 | [tgl](http://www-01.sil.org/iso639-3/documentation.asp?id=tgl) |                  Tagalog                 |            Latin            |  14850000 |
 | [hun](http://www-01.sil.org/iso639-3/documentation.asp?id=hun) |                 Hungarian                |            Latin            |  14500000 |
 | [azj](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) |             North Azerbaijani            |           Cyrillic          |  13869000 |

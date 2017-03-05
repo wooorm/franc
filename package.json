@@ -35,16 +35,17 @@
     "franc": "cli.js"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
+    "browserify": "^14.1.0",
     "esmangle": "^1.0.0",
+    "iso-639-3": "^1.0.0",
     "markdown-table": "^1.0.0",
-    "nyc": "^8.1.0",
-    "speakers": "^0.1.0",
+    "nyc": "^10.1.0",
+    "speakers": "^1.0.0",
     "tape": "^4.6.0",
     "trigrams": "^1.0.0",
     "udhr": "^1.0.0",
     "unicode-7.0.0": "^0.7.0",
-    "xo": "^0.16.0"
+    "xo": "^0.17.0"
   },
   "scripts": {
     "build-fixtures": "node script/build-fixtures.js",
@@ -75,7 +76,8 @@
     "rules": {
       "max-lines": "off",
       "guard-for-in": "off",
-      "no-self-compare": "off"
+      "no-self-compare": "off",
+      "import/no-dynamic-require": "off"
     },
     "ignores": [
       "franc-all.js",

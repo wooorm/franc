@@ -4,7 +4,8 @@
 
 /* Dependencies. */
 var fs = require('fs');
-var speakers = require('speakers').all();
+var iso6393 = require('iso-639-3');
+var speakers = require('speakers');
 var information = require('udhr').information();
 var declarations = require('udhr').json();
 var trigrams = require('trigrams').min();
@@ -45,6 +46,12 @@ scripts.forEach(function (script) {
   var expression = require('unicode-7.0.0/Script/' + script + '/regex.js');
 
   expressions[script] = new RegExp(expression.source, 'g');
+});
+
+var nameByCode = {};
+
+iso6393.forEach(function (info) {
+  nameByCode[info.iso6393] = info.name;
 });
 
 /**
@@ -215,31 +222,29 @@ var BLACKLIST = [
 ];
 
 /* Output. */
-Object.keys(speakers).forEach(function (iso6393) {
-  var language = speakers[iso6393];
+Object.keys(speakers).forEach(function (code) {
+  var count = speakers[code];
+  var name = nameByCode[code];
 
-  if (BLACKLIST.indexOf(iso6393) !== -1) {
+  if (BLACKLIST.indexOf(code) !== -1) {
     console.log(
-      'Ignoring unsafe language `' + iso6393 +
-      '` (' + language.name + '), which has ' +
-      language.speakers + ' speakers. ' +
-      'See the code for reasoning.'
+      'Ignoring unsafe language `' + code + '` (' + name + '), which has ' +
+      count + ' speakers. See the code for reasoning.'
     );
 
     return;
   }
 
-  if (language.speakers >= THRESHOLD) {
+  if (count >= THRESHOLD) {
     topLanguages.push({
-      speakers: language.speakers,
-      name: language.name,
-      iso6393: iso6393
+      speakers: count,
+      name: name,
+      iso6393: code
     });
   } else {
     console.log(
-      'Ignoring unpopular language `' + iso6393 + '` (' +
-      language.name + '), which has ' + language.speakers +
-      ' speakers.'
+      'Ignoring unpopular language `' + code + '` (' + name + '), which has ' +
+      count + ' speakers.'
     );
   }
 });
