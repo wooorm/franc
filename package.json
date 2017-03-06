@@ -45,7 +45,7 @@
     "lint": "xo",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test/index.js",
-    "test": "npm run build && npm run lint && npm run test-coverage && npm run test-cli"
+    "test": "npm run build && npm run lint && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,

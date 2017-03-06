@@ -2,9 +2,12 @@
 
 # franc-all
 
-Detect the language of text.
+> Detect the language of text.
 
 Built with support for 375 languages.
+
+View the [monorepo](https://github.com/wooorm/franc) for more packages and
+usage information.
 
 ## Install
 
