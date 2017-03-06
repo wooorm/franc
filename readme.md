@@ -139,8 +139,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 176 “languages”, by default.  For a complete list,
-check out [supported-languages.md][support].
+**franc** supports 176 “languages”, by default.  For a complete list.
 
 ## Supporting more or less languages
 
@@ -206,8 +205,6 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 [fork]: #supporting-more-or-less-languages
 
 [npm]: https://docs.npmjs.com/cli/install
-
-[support]: supported-languages.md
 
 [umd]: http://ryanflorence.com/2013/es6-modules-and-browser-app-delivery/
 

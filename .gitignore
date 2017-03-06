@@ -4,5 +4,7 @@
 coverage/
 node_modules/
 /franc.js
-/franc-most.js
+/franc-min.js
 /franc-all.js
+packages/franc-all/index.js
+packages/franc-min/index.js

@@ -2,16 +2,16 @@
 
 /* Dependencies. */
 var test = require('tape');
-var franc = require('..');
-var support = require('../data/support');
+var franc = require('../packages/franc');
 var fixtures = require('./fixtures');
 
 /* Constants; */
-var MAGIC_NUMBER = 41;
-var MAGIC_LANGUAGE = 'pol';
+var languageA = 'pol';
+var languageB = 'eng';
+var fixtureB = fixtures[languageB].fixture;
 var SOME_HEBREW = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית';
 
-if (MAGIC_LANGUAGE === franc(fixtures[MAGIC_NUMBER])) {
+if (languageA === franc(fixtureB)) {
   throw new Error(
     'The fixture belonging to magic number should not equal' +
     ' magic language'
@@ -53,10 +53,10 @@ test('franc()', function (t) {
     'should work on unique-scripts with many latin characters (2)'
   );
 
-  expected = franc(fixtures[MAGIC_NUMBER]);
+  expected = franc(fixtureB);
 
   t.notEqual(
-    franc(fixtures[MAGIC_NUMBER], {
+    franc(fixtureB, {
       blacklist: [expected]
     }),
     expected,
@@ -64,10 +64,10 @@ test('franc()', function (t) {
   );
 
   t.equal(
-    franc(fixtures[MAGIC_NUMBER], {
-      whitelist: [MAGIC_LANGUAGE]
+    franc(fixtureB, {
+      whitelist: [languageA]
     }),
-    MAGIC_LANGUAGE,
+    languageA,
     'should accept `whitelist`'
   );
 
@@ -132,11 +132,11 @@ test('franc.all()', function (t) {
     'should work on weird values'
   );
 
-  expected = franc(fixtures[MAGIC_NUMBER]);
+  expected = franc(fixtureB);
 
   t.deepEqual(
     franc
-      .all(fixtures[MAGIC_NUMBER], {blacklist: [expected]})
+      .all(fixtureB, {blacklist: [expected]})
       .map(function (tuple) {
         return tuple[0];
       })
@@ -146,8 +146,8 @@ test('franc.all()', function (t) {
   );
 
   t.deepEqual(
-    franc.all(fixtures[MAGIC_NUMBER], {whitelist: [MAGIC_LANGUAGE]}),
-    [[MAGIC_LANGUAGE, 1]],
+    franc.all(fixtureB, {whitelist: [languageA]}),
+    [[languageA, 1]],
     'should accept `whitelist`'
   );
 
@@ -173,26 +173,21 @@ test('franc.all()', function (t) {
 });
 
 test('algorithm', function (t) {
-  support.forEach(function (language, index) {
-    if (fixtures[index] === '') {
-      console.log(
-        'Missing fixture for language `' +
-        language.iso6393 + '` (' + language.name + ').'
-      );
-    } else {
-      classify(fixtures[index], language);
-    }
-  });
+  Object
+    .keys(fixtures)
+    .forEach(function (code) {
+      var info = fixtures[code];
 
-  function classify(input, language) {
-    var example = input.replace(/\n/g, '\\n').slice(0, 20) + '...';
-
-    t.equal(
-      franc.all(input)[0][0],
-      language.iso6393,
-      example + ' (' + language.name + ')'
-    );
-  }
+      if (info.fixture) {
+        t.equal(
+          franc.all(info.fixture)[0][0],
+          info.iso6393,
+          info.fixture.replace(/\n/g, '\\n').slice(0, 20) + '... (' + code + ')'
+        );
+      } else {
+        console.log('Missing fixture for UDHR `' + code + '`');
+      }
+    });
 
   t.end();
 });

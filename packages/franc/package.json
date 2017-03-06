@@ -1,0 +1,34 @@
+{
+  "name": "franc",
+  "threshold": 1000000,
+  "version": "2.0.0",
+  "description": "Detect the language of text",
+  "license": "MIT",
+  "keywords": [
+    "natural",
+    "language",
+    "writing",
+    "system",
+    "detect",
+    "guess"
+  ],
+  "dependencies": {
+    "trigram-utils": "^0.1.0"
+  },
+  "files": [
+    "data.json",
+    "expressions.js",
+    "index.js"
+  ],
+  "repository": "https://github.com/wooorm/franc/tree/master/packages/franc",
+  "bugs": "https://github.com/wooorm/franc/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+    "Kamil Bielawski <k_bielawski@fastmail.fm>",
+    "Andrew Pantyukhin <infofarmer@gmail.com>",
+    "Dmitriy Sobolev <disobolev@icloud.com>",
+    "Jeff Huijsmans <jeffhuys@gmail.com>"
+  ],
+  "xo": false
+}

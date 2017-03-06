@@ -1,17 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-/* Dependencies. */
+var franc = require('franc');
 var pack = require('./package.json');
-var franc = require('./');
 
-/* Detect if a value is expected to be piped in. */
-var expextPipeIn = !process.stdin.isTTY;
-
-/* Arguments. */
 var argv = process.argv.slice(2);
-
-/* Command. */
 var command = Object.keys(pack.bin)[0];
 
 var index;
@@ -108,16 +101,14 @@ if (
     argv.splice(index, 1);
   }
 
-  if (argv.length !== 0) {
-    detect(argv.join(' '));
-  } else if (expextPipeIn) {
+  if (argv.length === 0) {
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', function (data) {
       detect(data.trim());
     });
   } else {
-    detect([]);
+    detect(argv.join(' '));
   }
 }
 
