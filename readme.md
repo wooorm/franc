@@ -2,19 +2,23 @@
 
 [![Build Status][build-badge]][build-status]
 [![Coverage Status][coverage-badge]][coverage-status]
-[![Code Climate][climate-badge]][climate-status]
 
 Detect the language of text.
 
 ## What’s so cool about franc?
 
-1.  **franc** supports more languages<sup>(†)</sup> than any other
-    library, or Google;
-2.  **franc** is easily [forked][fork] to support 339 languages;
-3.  **franc** is just as fast as the competition.
+1.  **franc** can support more languages<sup>(†)</sup> than any other
+    library
+2.  **franc** is packaged with support for [75][s], [175][m], or [375][l]
+    languages
+3.  **franc** has a CLI
 
-† - If humans write in the language, on the web, and the language has
-more than one million speakers, **franc** detects it.
+† - Based on the [UDHR][], the most translated document in the world.
+
+## What’s not so cool about franc?
+
+**franc** supports many languages, so make sure to pass it big documents,
+to get reliable results.
 
 ## Installation
 
@@ -24,75 +28,73 @@ more than one million speakers, **franc** detects it.
 npm install franc
 ```
 
-**franc** is also available pre-built as an AMD, CommonJS, and globals
-module, [supporting 75, 176, and 339 languages][releases].
+This installs the [`franc`][m] package, with support for 175 languages
+(languages which have 1 million or more speakers).  [`franc-min`][s] (75
+languages, 8m or more speakers) and [`franc-all`][l] (all 375 possible
+languages) are also available.  Finally, use `franc-cli` to install the
+[CLI][].
+
+Browser builds for [`franc-min`][s], [`franc`][m], and [`franc-all`][l] are
+available on [GitHub Releases][releases].
 
 ## Usage
 
 ```javascript
 var franc = require('franc');
 
-franc('Alle menslike wesens word vry'); // "afr"
-franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); // "ben"
-franc('Alle mennesker er født frie og'); // "nno"
-franc(''); // "und"
-
-franc.all('O Brasil caiu 26 posições');
-/*
- * [
- *  [ 'por', 1 ],
- *  [ 'src', 0.8948665297741273 ],
- *  [ 'glg', 0.8862422997946612 ],
- *  [ 'snn', 0.8804928131416838 ],
- *  [ 'bos', 0.8394250513347022 ],
- *  [ 'hrv', 0.8336755646817249 ],
- *  [ 'lav', 0.833264887063655 ],
- *  [ 'cat', 0.8303901437371664 ],
- *  [ 'spa', 0.8242299794661191 ],
- *  [ 'bam', 0.8242299794661191 ],
- *  [ 'sco', 0.8069815195071869 ],
- *  [ 'rmy', 0.7839835728952772 ],
- *   ...
- * ]
- */
-
-/* "und" is returned for too-short input: */
-franc('the'); // 'und'
-
+franc('Alle menslike wesens word vry'); //=> 'afr'
+franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); //=> 'ben'
+franc('Alle mennesker er født frie og'); //=> 'nno'
+franc(''); //=> 'und'
+franc('the'); //=> 'und'
 /* You can change what’s too short (default: 10): */
-franc('the', {'minLength': 3}); // 'sco'
+franc('the', {minLength: 3}); // 'sco'
+```
 
-/* Provide a whitelist: */
-franc.all('O Brasil caiu 26 posições', {
-    'whitelist' : ['por', 'src', 'glg', 'spa']
-});
-/*
- * [
- *   [ 'por', 1 ],
- *   [ 'src', 0.8948665297741273 ],
- *   [ 'glg', 0.8862422997946612 ],
- *   [ 'spa', 0.8242299794661191 ]
- * ]
-*/
+###### `.all`
 
-/* Provide a blacklist: */
-franc.all('O Brasil caiu 26 posições', {
-    'blacklist' : ['src', 'glg', 'lav']
-});
-/*
- * [
- *   [ 'por', 1 ],
- *   [ 'snn', 0.8804928131416838 ],
- *   [ 'bos', 0.8394250513347022 ],
- *   [ 'hrv', 0.8336755646817249 ],
- *   [ 'cat', 0.8303901437371664 ],
- *   [ 'spa', 0.8242299794661191 ],
- *   [ 'bam', 0.8242299794661191 ],
- *   [ 'sco', 0.8069815195071869 ],
- *   [ 'rmy', 0.7839835728952772 ],
- *   ...
- * ]
- */
+```js
+franc.all('O Brasil caiu 26 posições');
+```
+
+Yields:
+
+```js
+[ [ 'por', 1 ],
+  [ 'src', 0.8797557538750587 ],
+  [ 'glg', 0.8708313762329732 ],
+  [ 'snn', 0.8633161108501644 ],
+  [ 'bos', 0.8172851103804604 ],
+  ... 116 more items ]
+```
+
+###### `whitelist`
+
+```js
+franc.all('O Brasil caiu 26 posições', {whitelist: ['por', 'spa']});
+```
+
+Yields:
+
+```js
+[ [ 'por', 1 ], [ 'spa', 0.799906059182715 ] ]
+```
+
+###### `blacklist`
+
+```js
+franc.all('O Brasil caiu 26 posições', {blacklist: ['src', 'glg']});
+```
+
+Yields:
+
+```js
+[ [ 'por', 1 ],
+  [ 'snn', 0.8633161108501644 ],
+  [ 'bos', 0.8172851103804604 ],
+  [ 'hrv', 0.8107092531705026 ],
+  [ 'lav', 0.810239549084077 ],
+  ... 114 more items ]
 ```
 
 ## CLI
@@ -100,15 +102,15 @@ franc.all('O Brasil caiu 26 posições', {
 Install:
 
 ```bash
-npm install --global franc
+npm install franc-cli --global
 ```
 
 Use:
 
 ```text
-Usage: franc [options] <string>
+CLI to detect the language of text
 
-Detect the language of text
+Usage: franc [options] <string>
 
 Options:
 
@@ -117,6 +119,7 @@ Options:
   -m, --min-length <number>     minimum length to accept
   -w, --whitelist <string>      allow languages
   -b, --blacklist <string>      disallow languages
+  -a, --all                     display all guesses
 
 Usage:
 
@@ -139,38 +142,11 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 ## Supported languages
 
-**franc** supports 176 “languages”, by default.  For a complete list.
-
-## Supporting more or less languages
-
-Supporting more or less languages is easy: fork the project and run
-the following:
-
-```bash
-npm install # Install development dependencies.
-export THRESHOLD=100000 # Set minimum speakers to a 100,000.
-npm run build # Run the `build` script.
-```
-
-The above would create a version of **franc** with support for any
-language with 100,000 or more speakers.  To support all languages, even
-dead ones like Latin, specify `-1`.
-
-## Browser
-
-I’ve compiled three versions of **franc** for use in the browser.
-They’re [UMD][] compliant: they work with [AMD][], [CommonJS][], and
-`<script>`s.
-
-*   `franc.js` — **franc** with support for languages with 8 million or
-    more speakers (75 languages);
-
-*   `franc-most.js` — **franc** with support for languages with 1
-    million or more speakers (175 languages, the same as the npm
-    version);
-
-*   `franc-all.js` — **franc** with support for all languages (339
-    languages, carful, huge!).
+| Package          | Languages | Speakers   |
+| ---------------- | --------- | ---------- |
+| [`franc-min`][s] | 75        | 8M or more |
+| [`franc`][m]     | 175       | 1M or more |
+| [`franc-all`][l] | 375       | -          |
 
 ## Derivation
 
@@ -198,19 +174,7 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 
 [coverage-status]: https://codecov.io/github/wooorm/franc
 
-[climate-badge]: http://img.shields.io/codeclimate/github/wooorm/franc.svg
-
-[climate-status]: https://codeclimate.com/github/wooorm/franc
-
-[fork]: #supporting-more-or-less-languages
-
 [npm]: https://docs.npmjs.com/cli/install
-
-[umd]: http://ryanflorence.com/2013/es6-modules-and-browser-app-delivery/
-
-[amd]: https://github.com/amdjs/amdjs-api/blob/master/AMD.md
-
-[commonjs]: http://www.commonjs.org
 
 [guess-language]: http://code.google.com/p/guess-language/
 
@@ -227,3 +191,13 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 [mit]: LICENSE
 
 [home]: http://wooorm.com
+
+[cli]: #cli
+
+[udhr]: http://unicode.org/udhr/
+
+[s]: https://github.com/wooorm/franc/tree/master/packages/franc-min
+
+[m]: https://github.com/wooorm/franc/tree/master/packages/franc
+
+[l]: https://github.com/wooorm/franc/tree/master/packages/franc-all
