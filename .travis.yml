@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-- '0.10'
-- '5.0'
-- '6.0'
+- '4.0'
+- '7.0'
 after_script: bash <(curl -s https://codecov.io/bash)
 sudo: false
 deploy:
@@ -12,14 +11,14 @@ deploy:
       secure: kVRUR6vE8yHb3zDblXnup0k6t8p7max0aK++DYBZCSpnIF+rIzqTjg4FdDv8Hv0Hdi/52PiYrBSBw8VdCRGhQlwmVXzNOllAy7+ucZya9zlpmpvken7bjQDifgbKqkxplMyNaUgLggDTEVyfIcPbBAagiV/hrp+M6/viLw++GN0=
     on:
       tags: true
-      node: '5.0'
+      node: '4.0'
   - provider: releases
     api_key:
       secure: A8NpISg//NNDq9kOclBemt5KD1SKPpYm/dZzGx2+smOST1EAgriG7oPDO+mE4Umb6omuoajBJxmSIYir3tzKC/GsTQFZaulBtJl5IMUJJigKHosDm5AT7OvriuTtozpJ4J5FrUbUxp6UJzrNPtm7hmPn5Ln/2rMbjiTpUvPmOZk=
     file:
       - "franc.js"
-      - "franc-most.js"
+      - "franc-min.js"
       - "franc-all.js"
     on:
       tags: true
-      node: '6.0'
+      node: '7.0'
