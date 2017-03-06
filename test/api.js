@@ -1,27 +1,19 @@
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var franc = require('../packages/franc');
 var fixtures = require('./fixtures');
 
-/* Constants; */
 var languageA = 'pol';
 var languageB = 'eng';
 var fixtureB = fixtures[languageB].fixture;
-var SOME_HEBREW = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית';
+var hebrew = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית';
 
 if (languageA === franc(fixtureB)) {
-  throw new Error(
-    'The fixture belonging to magic number should not equal' +
-    ' magic language'
-  );
+  throw new Error('a and b should not be equal...');
 }
 
-/* Tests. */
 test('franc()', function (t) {
-  var expected;
-
   t.equal(typeof franc, 'function', 'should be of type `function`');
   t.equal(typeof franc('XYZ'), 'string', 'should return a string');
   t.equal(franc('XYZ'), 'und', 'should return "und" on an undetermined value');
@@ -41,6 +33,7 @@ test('franc()', function (t) {
     'kor',
     'should work on unique-scripts with many latin characters (1)'
   );
+
   t.equal(
     franc(
       '現行の学校文法では、英語にあるような「目的語」「補語」' +
@@ -53,26 +46,20 @@ test('franc()', function (t) {
     'should work on unique-scripts with many latin characters (2)'
   );
 
-  expected = franc(fixtureB);
-
   t.notEqual(
-    franc(fixtureB, {
-      blacklist: [expected]
-    }),
-    expected,
+    franc(fixtureB, {blacklist: [franc(fixtureB)]}),
+    franc(fixtureB),
     'should accept `blacklist`'
   );
 
   t.equal(
-    franc(fixtureB, {
-      whitelist: [languageA]
-    }),
+    franc(fixtureB, {whitelist: [languageA]}),
     languageA,
     'should accept `whitelist`'
   );
 
   t.equal(
-    franc(SOME_HEBREW, {whitelist: ['eng']}),
+    franc(hebrew, {whitelist: ['eng']}),
     'und',
     'should accept `whitelist` for different scripts'
   );
@@ -86,8 +73,6 @@ test('franc()', function (t) {
 });
 
 test('franc.all()', function (t) {
-  var expected;
-
   t.equal(typeof franc.all, 'function', 'should be of type `function`');
 
   t.deepEqual(
@@ -132,15 +117,13 @@ test('franc.all()', function (t) {
     'should work on weird values'
   );
 
-  expected = franc(fixtureB);
-
   t.deepEqual(
     franc
-      .all(fixtureB, {blacklist: [expected]})
+      .all(fixtureB, {blacklist: [franc(fixtureB)]})
       .map(function (tuple) {
         return tuple[0];
       })
-      .indexOf(expected),
+      .indexOf(franc(fixtureB)),
     -1,
     'should accept `blacklist`'
   );
@@ -152,7 +135,7 @@ test('franc.all()', function (t) {
   );
 
   t.deepEqual(
-    franc.all(SOME_HEBREW, {whitelist: ['eng']}),
+    franc.all(hebrew, {whitelist: ['eng']}),
     [['und', 1]],
     'should accept `whitelist` for different scripts'
   );
