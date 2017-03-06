@@ -9,6 +9,7 @@
     "alpha-sort": "^2.0.0",
     "browserify": "^14.1.0",
     "esmangle": "^1.0.0",
+    "execa": "^0.6.0",
     "format": "^0.2.2",
     "human-format": "^0.8.0",
     "is-hidden": "^1.1.0",
@@ -42,8 +43,7 @@
     "build-bundle": "npm run build-bundle-s && npm run build-bundle-m && npm run build-bundle-l",
     "build": "npm run build-packages && npm run build-md && npm run build-bundle",
     "lint": "xo",
-    "test-cli": "bash ./test/cli.sh",
-    "test-api": "node test/index.js",
+    "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test/index.js",
     "test": "npm run build && npm run lint && npm run test-coverage && npm run test-cli"
   },

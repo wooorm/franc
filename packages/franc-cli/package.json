@@ -13,7 +13,9 @@
     "cli",
     "bin"
   ],
-  "bin": "cli.js",
+  "bin": {
+    "franc": "cli.js"
+  },
   "files": [
     "cli.js"
   ],
