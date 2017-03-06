@@ -20,7 +20,8 @@
     "cli.js"
   ],
   "dependencies": {
-    "franc": "^2.0.0"
+    "franc": "^2.0.0",
+    "meow": "^3.7.0"
   },
   "repository": "https://github.com/wooorm/franc/tree/master/packages/franc-cli",
   "bugs": "https://github.com/wooorm/franc/issues",

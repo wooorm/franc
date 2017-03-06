@@ -1,128 +1,67 @@
 #!/usr/bin/env node
 'use strict';
 
+var meow = require('meow');
 var franc = require('franc');
-var pack = require('./package.json');
+var pack = require('./package');
 
-var argv = process.argv.slice(2);
 var command = Object.keys(pack.bin)[0];
 
-var index;
-var blacklist;
-var whitelist;
-var minLength;
-var all = false;
-
-/**
- * Log the language for `value`.
- *
- * @param {string} value - Value to detect.
- */
-function detect(value) {
-  var options;
-
-  if (value && value.length !== 0) {
-    options = {
-      minLength: minLength,
-      whitelist: whitelist,
-      blacklist: blacklist
-    };
-
-    if (all) {
-      franc.all(value, options).forEach(function (language) {
-        console.log(language[0] + ' ' + language[1]);
-      });
-    } else {
-      console.log(franc(value, options));
-    }
-  } else {
-    process.stderr.write(help());
-    process.exit(1);
+var cli = meow({help: help()}, {
+  boolean: ['all'],
+  string: ['whitelist', 'blacklist', 'min-length'],
+  alias: {
+    v: 'version',
+    h: 'help',
+    m: 'min-length',
+    w: 'whitelist',
+    b: 'blacklist',
+    a: 'all'
   }
+});
+
+var value = cli.input.join(' ').trim();
+var flags = cli.flags;
+
+flags.minLength = Number(flags.minLength) || null;
+
+if (flags.whitelist) {
+  flags.whitelist = String(flags.whitelist).split(',');
 }
 
-/* Program. */
-if (
-  argv.indexOf('--help') !== -1 ||
-  argv.indexOf('-h') !== -1
-) {
-  console.log(help());
-} else if (
-  argv.indexOf('--version') !== -1 ||
-  argv.indexOf('-v') !== -1
-) {
-  console.log(pack.version);
+if (flags.blacklist) {
+  flags.blacklist = String(flags.blacklist).split(',');
+}
+
+if (value) {
+  detect(value);
 } else {
-  index = argv.indexOf('--min-length');
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', function (data) {
+    detect(data.trim());
+  });
+}
 
-  if (index === -1) {
-    index = argv.indexOf('-m');
-  }
+function detect(value) {
+  var options = {
+    minLength: flags.minLength,
+    whitelist: flags.whitelist,
+    blacklist: flags.blacklist
+  };
 
-  if (index !== -1) {
-    minLength = Number(argv[index + 1] || '');
-
-    argv.splice(index, 2);
-  }
-
-  index = argv.indexOf('--blacklist');
-
-  if (index === -1) {
-    index = argv.indexOf('-b');
-  }
-
-  if (index !== -1) {
-    blacklist = (argv[index + 1] || '').split(',');
-
-    argv.splice(index, 2);
-  }
-
-  index = argv.indexOf('--whitelist');
-
-  if (index === -1) {
-    index = argv.indexOf('-w');
-  }
-
-  if (index !== -1) {
-    whitelist = (argv[index + 1] || '').split(',');
-
-    argv.splice(index, 2);
-  }
-
-  index = argv.indexOf('--all');
-
-  if (index === -1) {
-    index = argv.indexOf('-a');
-  }
-
-  if (index !== -1) {
-    all = true;
-
-    argv.splice(index, 1);
-  }
-
-  if (argv.length === 0) {
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', function (data) {
-      detect(data.trim());
+  if (flags.all) {
+    franc.all(value, options).forEach(function (language) {
+      console.log(language[0] + ' ' + language[1]);
     });
   } else {
-    detect(argv.join(' '));
+    console.log(franc(value, options));
   }
 }
 
-/**
- * Help.
- *
- * @return {string} - Help message.
- */
 function help() {
   return [
-    '',
     'Usage: ' + command + ' [options] <string>',
-    '',
-    pack.description,
     '',
     'Options:',
     '',
@@ -155,7 +94,6 @@ function help() {
       ' --whitelist nob,dan',
     '# ' + franc('Alle mennesker er født frie og', {
       whitelist: ['nob', 'dan']
-    }),
-    ''
-  ].join('\n  ') + '\n';
+    })
+  ];
 }

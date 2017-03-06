@@ -24,7 +24,7 @@ test('cli', function (t) {
     execa
       .stdout(cli, [flag])
       .then(function (result) {
-        t.ok(/^\s+Usage: franc \[options] <string>/.test(result), flag);
+        t.ok(/^\s+CLI to detect the language of text/.test(result), flag);
       }, t.ifErr);
   });
 
