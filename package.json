@@ -1,0 +1,16 @@
+{
+  "name": "franc-www",
+  "private": true,
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "franc": "^3.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "esmangle": "^1.0.1",
+    "iso-639-3": "^1.0.0"
+  },
+  "scripts": {
+    "build": "node generate; browserify index.js | esmangle > build.js"
+  }
+}

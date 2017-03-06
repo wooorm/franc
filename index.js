@@ -1,60 +1,39 @@
 'use strict';
 
-/**
- * Dependencies.
- */
-
-var franc = require('wooorm/franc@1.0.1');
-var fixtures = require('./fixtures.js');
-var debounce = require('component/debounce');
-
-/**
- * DOM elements.
- */
+var franc = require('franc');
+var debounce = require('debounce');
+var fixtures = require('./fixtures');
+var names = require('./list');
 
 var $input = document.getElementsByTagName('textarea')[0];
-var $output = document.getElementsByTagName('ol')[0];
+var $output = document.getElementsByTagName('tbody')[0];
 
-/**
- * Event handler.
- */
+var onchange = debounce(oninputchange, 100);
 
-var oninputchange = debounce(function () {
-    /**
-     * Remove previous results.
-     */
-
-    while ($output.firstElementChild) {
-        $output.removeChild($output.firstElementChild);
-    }
-
-    /**
-     * Add new results.
-     */
-
-    franc.all($input.value).forEach(function (result, n) {
-        var $node = document.createElement('li');
-
-        $node.textContent = result[0] + ': ' + result[1];
-
-        $output.appendChild($node);
-    });
-}, 50);
-
-/**
- * Listen.
- */
-
-$input.addEventListener('input', oninputchange);
-
-/**
- * Add initial content.
- */
+$input.addEventListener('input', onchange);
 
 $input.value = fixtures[Math.floor(Math.random() * fixtures.length)];
 
-/**
- * Provide initial answer.
- */
-
 oninputchange();
+
+function oninputchange() {
+  while ($output.firstChild) {
+    $output.removeChild($output.firstChild);
+  }
+  
+  franc.all($input.value).forEach(add);
+
+  function add(result, n) {
+    var $node = document.createElement('tr');
+    var link = document.createElement('a');
+    
+    link.href = 'http://www-01.sil.org/iso639-3/documentation.asp?id=' + result[0];
+    link.textContent = result[0];
+
+    $node.appendChild(document.createElement('td')).appendChild(link);
+    $node.appendChild(document.createElement('td')).textContent = names[result[0]];
+    $node.appendChild(document.createElement('td')).textContent = result[1];
+
+    $output.appendChild($node);
+  }
+}

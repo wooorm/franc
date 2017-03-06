@@ -1,9 +1,12 @@
 .DS_Store
 *.log
-bower_components/
+.nyc_output/
 build/
-components/
 coverage/
-dist/
 node_modules/
+packages/
 test/
+franc.js
+franc-all.js
+franc-min.js
+list.json
