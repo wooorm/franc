@@ -44,7 +44,7 @@ var franc = require('franc');
 
 franc('Alle menslike wesens word vry'); //=> 'afr'
 franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); //=> 'ben'
-franc('Alle mennesker er født frie og'); //=> 'nno'
+franc('Alle menneske er fødde til fridom'); //=> 'nno'
 franc(''); //=> 'und'
 franc('the'); //=> 'und'
 /* You can change what’s too short (default: 10): */
