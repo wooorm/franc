@@ -14,10 +14,10 @@
     "bin"
   ],
   "bin": {
-    "franc": "cli.js"
+    "franc": "index.js"
   },
   "files": [
-    "cli.js"
+    "index.js"
   ],
   "dependencies": {
     "franc": "^3.0.0",
