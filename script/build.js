@@ -26,6 +26,14 @@ var core = path.join(__dirname, '..');
 var root = path.join(core, 'packages');
 var mono = require(path.join(__dirname, '..', 'package.json'));
 
+/* Persian (fas, macrolanguage) contains Western Persian (pes)
+ * and Dari (prs).  They’re so similar in UDHR that using both
+ * will result in incorrect results, so add the macrolanguage
+ * instead. (note: prs and pes are blacklisted) */
+speakers = xtend(speakers, {
+  fas: speakers.prs + speakers.pes
+});
+
 var expressions = createExpressions();
 var topLanguages = createTopLanguages();
 var doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8');
@@ -63,7 +71,18 @@ function generate(basename) {
   byScript = createTopLanguagesByScript(list);
 
   Object.keys(byScript).forEach(function (script) {
-    var languages = byScript[script];
+    var languages = byScript[script].filter(function (info) {
+      return [
+        /* Ignore `npi` (Nepali (individual language)): `npe`
+         * (Nepali (macrolanguage)) is also included. */
+        'npi',
+        /* Ignore `yue`, it uses the Han script, just like `cmn`,
+         * but if both are turned on, both will be ignored as Trigrams
+         * don’t work on Han characters (cmn has 830m speakers, so
+         * that’s the preferred choice). */
+        'yue'
+      ].indexOf(info.iso6393) === -1;
+    });
 
     if (languages.length > 1) {
       if (!regularExpressions[script]) {
@@ -80,7 +99,9 @@ function generate(basename) {
   Object
     .keys(perScript)
     .forEach(function (script) {
-      var scriptObject = data[script] = {};
+      var scriptObject = {};
+
+      data[script] = scriptObject;
 
       perScript[script].forEach(function (info) {
         if (trigrams[info.udhr]) {
@@ -115,7 +136,6 @@ function generate(basename) {
   console.log('✓ ' + pack.name + ' w/ ' + list.length + ' languages');
 
   if (pack.name !== mono.name) {
-    console.log('exit', pack.name, mono.name);
     return;
   }
 
@@ -399,6 +419,7 @@ function createTopLanguages() {
   top = top.filter(function (info) {
     var scripts = info.script;
     var ignore = !trigrams[info.udhr] && scripts.length === 0;
+
     info.script = scripts[0];
 
     if (scripts.length > 1) {
@@ -408,10 +429,13 @@ function createTopLanguages() {
       );
     }
 
-    if (ignore) {
+    if (ignore && info.speakers && info.speakers > 1e6) {
       console.log(
         'Ignoring language with neither trigrams nor ' +
-        'scripts: ' + info.iso6393 + ' (' + info.name + ')'
+        'scripts: %s (%s, %s)',
+        info.iso6393,
+        info.name,
+        info.speakers
       );
     }
 

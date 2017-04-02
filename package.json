@@ -17,20 +17,21 @@
     "lerna": "^2.0.0-beta.38",
     "negate": "^1.0.0",
     "nyc": "^10.1.0",
-    "parse-author": "^1.0.0",
+    "parse-author": "^2.0.0",
     "remark-cli": "^3.0.0",
     "remark-lint-no-heading-punctuation": "^1.0.0",
     "remark-lint-no-html": "^1.0.0",
+    "remark-lint-table-pipe-alignment": "^1.0.0",
     "remark-preset-wooorm": "^2.0.0",
     "remark-stringify": "^3.0.0",
     "speakers": "^1.0.0",
     "tape": "^4.6.0",
-    "trigrams": "^1.0.0",
-    "udhr": "^1.0.0",
+    "trigrams": "^2.0.0",
+    "udhr": "^2.0.0",
     "unicode-7.0.0": "^0.7.0",
     "unified": "^6.1.1",
     "unist-builder": "^1.0.2",
-    "xo": "^0.17.0",
+    "xo": "^0.18.1",
     "xtend": "^4.0.1"
   },
   "scripts": {
@@ -55,12 +56,12 @@
   },
   "xo": {
     "space": true,
+    "esnext": false,
     "rules": {
       "camelcase": "off",
       "max-lines": "off",
       "guard-for-in": "off",
-      "no-self-compare": "off",
-      "import/no-dynamic-require": "off"
+      "no-self-compare": "off"
     },
     "ignores": [
       "franc-all.js",
@@ -69,8 +70,15 @@
     ]
   },
   "remarkConfig": {
+    "settings": {
+      "paddedTable": false
+    },
     "plugins": [
       "preset-wooorm",
+      [
+        "remark-lint-table-pipe-alignment",
+        false
+      ],
       [
         "remark-lint-no-html",
         false

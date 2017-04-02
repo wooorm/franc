@@ -1,6 +1,10 @@
 /* Some languages are blacklisted, no matter what
  * `threshold` is chosen. */
 module.exports = [
+  /* Using both results in incorrect results.
+   * `build.js` adds support for `fas`. */
+  'prs', /* Western Persian */
+  'pes', /* Dari */
   /* `cbs` and `prq` have the same entries:
    *
    * - http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=cbs

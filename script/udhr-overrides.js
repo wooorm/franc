@@ -11,9 +11,11 @@ exports.hau = ['hau_NG'];
 /* Monotonic Greek is modern greek. */
 exports.ell = ['ell_monotonic'];
 
-/* More popular, Farsi/Persian, instead of Dari
- * http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=prs1 */
-exports.pes = ['pes_1'];
+/* UDHR combines `pes` (Western Persian, as spoken in Iran) with
+ * `prs` (Dari, as spoken in Afghanistan).
+ * Use Western Persian (`pes_1`) instead of Dari (`pes_2`)
+ * for “Persian”, the macrolanguage. */
+exports.fas = ['pes_1'];
 
 /* Asante: 2,800,000; Fante: 1,900,000; Akuapem: 555,000.
  * http://www.ethnologue.com/language/aka */

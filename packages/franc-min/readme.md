@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 75 languages (8M or more speakers).
+Built with support for 81 languages (8M or more speakers).
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -21,83 +21,89 @@ npm install franc-min
 
 This build supports the following languages:
 
-| Code                                                             | Name                          | Speakers |
-| ---------------------------------------------------------------- | ----------------------------- | -------- |
-| [`cmn`](http://www-01.sil.org/iso639-3/documentation.asp?id=cmn) | Mandarin Chinese              | 885M     |
-| [`spa`](http://www-01.sil.org/iso639-3/documentation.asp?id=spa) | Spanish                       | 332M     |
-| [`eng`](http://www-01.sil.org/iso639-3/documentation.asp?id=eng) | English                       | 322M     |
-| [`rus`](http://www-01.sil.org/iso639-3/documentation.asp?id=rus) | Russian                       | 288M     |
-| [`arb`](http://www-01.sil.org/iso639-3/documentation.asp?id=arb) | Standard Arabic               | 280M     |
-| [`ben`](http://www-01.sil.org/iso639-3/documentation.asp?id=ben) | Bengali                       | 196M     |
-| [`hin`](http://www-01.sil.org/iso639-3/documentation.asp?id=hin) | Hindi                         | 182M     |
-| [`por`](http://www-01.sil.org/iso639-3/documentation.asp?id=por) | Portuguese                    | 182M     |
-| [`ind`](http://www-01.sil.org/iso639-3/documentation.asp?id=ind) | Indonesian                    | 140M     |
-| [`jpn`](http://www-01.sil.org/iso639-3/documentation.asp?id=jpn) | Japanese                      | 125M     |
-| [`fra`](http://www-01.sil.org/iso639-3/documentation.asp?id=fra) | French                        | 124M     |
-| [`deu`](http://www-01.sil.org/iso639-3/documentation.asp?id=deu) | German                        | 121M     |
-| [`jav`](http://www-01.sil.org/iso639-3/documentation.asp?id=jav) | Javanese                      | 76M      |
-| [`kor`](http://www-01.sil.org/iso639-3/documentation.asp?id=kor) | Korean                        | 75M      |
-| [`tel`](http://www-01.sil.org/iso639-3/documentation.asp?id=tel) | Telugu                        | 73M      |
-| [`vie`](http://www-01.sil.org/iso639-3/documentation.asp?id=vie) | Vietnamese                    | 67M      |
-| [`mar`](http://www-01.sil.org/iso639-3/documentation.asp?id=mar) | Marathi                       | 65M      |
-| [`ita`](http://www-01.sil.org/iso639-3/documentation.asp?id=ita) | Italian                       | 63M      |
-| [`tam`](http://www-01.sil.org/iso639-3/documentation.asp?id=tam) | Tamil                         | 62M      |
-| [`tur`](http://www-01.sil.org/iso639-3/documentation.asp?id=tur) | Turkish                       | 59M      |
-| [`urd`](http://www-01.sil.org/iso639-3/documentation.asp?id=urd) | Urdu                          | 54M      |
-| [`guj`](http://www-01.sil.org/iso639-3/documentation.asp?id=guj) | Gujarati                      | 44M      |
-| [`pol`](http://www-01.sil.org/iso639-3/documentation.asp?id=pol) | Polish                        | 44M      |
-| [`ukr`](http://www-01.sil.org/iso639-3/documentation.asp?id=ukr) | Ukrainian                     | 41M      |
-| [`mai`](http://www-01.sil.org/iso639-3/documentation.asp?id=mai) | Maithili                      | 35M      |
-| [`mal`](http://www-01.sil.org/iso639-3/documentation.asp?id=mal) | Malayalam                     | 34M      |
-| [`kan`](http://www-01.sil.org/iso639-3/documentation.asp?id=kan) | Kannada                       | 34M      |
-| [`mya`](http://www-01.sil.org/iso639-3/documentation.asp?id=mya) | Burmese                       | 31M      |
-| [`ori`](http://www-01.sil.org/iso639-3/documentation.asp?id=ori) | Oriya (macrolanguage)         | 31M      |
-| [`gax`](http://www-01.sil.org/iso639-3/documentation.asp?id=gax) | Borana-Arsi-Guji Oromo        | 30M      |
-| [`swh`](http://www-01.sil.org/iso639-3/documentation.asp?id=swh) | Swahili (individual language) | 30M      |
-| [`sun`](http://www-01.sil.org/iso639-3/documentation.asp?id=sun) | Sundanese                     | 27M      |
-| [`ron`](http://www-01.sil.org/iso639-3/documentation.asp?id=ron) | Romanian                      | 26M      |
-| [`pan`](http://www-01.sil.org/iso639-3/documentation.asp?id=pan) | Panjabi                       | 26M      |
-| [`bho`](http://www-01.sil.org/iso639-3/documentation.asp?id=bho) | Bhojpuri                      | 25M      |
-| [`amh`](http://www-01.sil.org/iso639-3/documentation.asp?id=amh) | Amharic                       | 23M      |
-| [`hau`](http://www-01.sil.org/iso639-3/documentation.asp?id=hau) | Hausa                         | 22M      |
-| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin)               | 21M      |
-| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Cyrillic)            | 21M      |
-| [`hrv`](http://www-01.sil.org/iso639-3/documentation.asp?id=hrv) | Croatian                      | 21M      |
-| [`nld`](http://www-01.sil.org/iso639-3/documentation.asp?id=nld) | Dutch                         | 21M      |
-| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin)               | 21M      |
-| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic)            | 21M      |
-| [`tha`](http://www-01.sil.org/iso639-3/documentation.asp?id=tha) | Thai                          | 21M      |
-| [`ckb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ckb) | Central Kurdish               | 20M      |
-| [`yor`](http://www-01.sil.org/iso639-3/documentation.asp?id=yor) | Yoruba                        | 20M      |
-| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic)     | 18M      |
-| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin)        | 18M      |
-| [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo                          | 17M      |
-| [`nep`](http://www-01.sil.org/iso639-3/documentation.asp?id=nep) | Nepali (macrolanguage)        | 16M      |
-| [`ceb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ceb) | Cebuano                       | 15M      |
-| [`skr`](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) | Saraiki                       | 15M      |
-| [`tgl`](http://www-01.sil.org/iso639-3/documentation.asp?id=tgl) | Tagalog                       | 15M      |
-| [`hun`](http://www-01.sil.org/iso639-3/documentation.asp?id=hun) | Hungarian                     | 15M      |
-| [`azj`](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) | North Azerbaijani (Latin)     | 14M      |
-| [`azj`](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) | North Azerbaijani (Cyrillic)  | 14M      |
-| [`sin`](http://www-01.sil.org/iso639-3/documentation.asp?id=sin) | Sinhala                       | 13M      |
-| [`koi`](http://www-01.sil.org/iso639-3/documentation.asp?id=koi) | Komi-Permyak                  | 13M      |
-| [`ell`](http://www-01.sil.org/iso639-3/documentation.asp?id=ell) | Modern Greek (1453-)          | 12M      |
-| [`ces`](http://www-01.sil.org/iso639-3/documentation.asp?id=ces) | Czech                         | 12M      |
-| [`mag`](http://www-01.sil.org/iso639-3/documentation.asp?id=mag) | Magahi                        | 11M      |
-| [`bel`](http://www-01.sil.org/iso639-3/documentation.asp?id=bel) | Belarusian                    | 10M      |
-| [`plt`](http://www-01.sil.org/iso639-3/documentation.asp?id=plt) | Plateau Malagasy              | 10M      |
-| [`qug`](http://www-01.sil.org/iso639-3/documentation.asp?id=qug) | Chimborazo Highland Quichua   | 10M      |
-| [`mad`](http://www-01.sil.org/iso639-3/documentation.asp?id=mad) | Madurese                      | 10M      |
-| [`nya`](http://www-01.sil.org/iso639-3/documentation.asp?id=nya) | Nyanja                        | 10M      |
-| [`kin`](http://www-01.sil.org/iso639-3/documentation.asp?id=kin) | Kinyarwanda                   | 9M       |
-| [`zul`](http://www-01.sil.org/iso639-3/documentation.asp?id=zul) | Zulu                          | 9M       |
-| [`bul`](http://www-01.sil.org/iso639-3/documentation.asp?id=bul) | Bulgarian                     | 9M       |
-| [`swe`](http://www-01.sil.org/iso639-3/documentation.asp?id=swe) | Swedish                       | 9M       |
-| [`lin`](http://www-01.sil.org/iso639-3/documentation.asp?id=lin) | Lingala                       | 8M       |
-| [`som`](http://www-01.sil.org/iso639-3/documentation.asp?id=som) | Somali                        | 8M       |
-| [`hms`](http://www-01.sil.org/iso639-3/documentation.asp?id=hms) | Southern Qiandong Miao        | 8M       |
-| [`ilo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ilo) | Iloko                         | 8M       |
-| [`kaz`](http://www-01.sil.org/iso639-3/documentation.asp?id=kaz) | Kazakh                        | 8M       |
+| Code | Name | Speakers |
+| ---- | ---- | -------- |
+| [`cmn`](http://www-01.sil.org/iso639-3/documentation.asp?id=cmn) | Mandarin Chinese | 885M |
+| [`spa`](http://www-01.sil.org/iso639-3/documentation.asp?id=spa) | Spanish | 332M |
+| [`eng`](http://www-01.sil.org/iso639-3/documentation.asp?id=eng) | English | 322M |
+| [`rus`](http://www-01.sil.org/iso639-3/documentation.asp?id=rus) | Russian | 288M |
+| [`arb`](http://www-01.sil.org/iso639-3/documentation.asp?id=arb) | Standard Arabic | 280M |
+| [`ben`](http://www-01.sil.org/iso639-3/documentation.asp?id=ben) | Bengali | 196M |
+| [`hin`](http://www-01.sil.org/iso639-3/documentation.asp?id=hin) | Hindi | 182M |
+| [`por`](http://www-01.sil.org/iso639-3/documentation.asp?id=por) | Portuguese | 182M |
+| [`ind`](http://www-01.sil.org/iso639-3/documentation.asp?id=ind) | Indonesian | 140M |
+| [`jpn`](http://www-01.sil.org/iso639-3/documentation.asp?id=jpn) | Japanese | 125M |
+| [`fra`](http://www-01.sil.org/iso639-3/documentation.asp?id=fra) | French | 124M |
+| [`deu`](http://www-01.sil.org/iso639-3/documentation.asp?id=deu) | German | 121M |
+| [`jav`](http://www-01.sil.org/iso639-3/documentation.asp?id=jav) | Javanese | 76M |
+| [`kor`](http://www-01.sil.org/iso639-3/documentation.asp?id=kor) | Korean | 75M |
+| [`tel`](http://www-01.sil.org/iso639-3/documentation.asp?id=tel) | Telugu | 73M |
+| [`vie`](http://www-01.sil.org/iso639-3/documentation.asp?id=vie) | Vietnamese | 67M |
+| [`mar`](http://www-01.sil.org/iso639-3/documentation.asp?id=mar) | Marathi | 65M |
+| [`ita`](http://www-01.sil.org/iso639-3/documentation.asp?id=ita) | Italian | 63M |
+| [`tam`](http://www-01.sil.org/iso639-3/documentation.asp?id=tam) | Tamil | 62M |
+| [`tur`](http://www-01.sil.org/iso639-3/documentation.asp?id=tur) | Turkish | 59M |
+| [`urd`](http://www-01.sil.org/iso639-3/documentation.asp?id=urd) | Urdu | 54M |
+| [`guj`](http://www-01.sil.org/iso639-3/documentation.asp?id=guj) | Gujarati | 44M |
+| [`pol`](http://www-01.sil.org/iso639-3/documentation.asp?id=pol) | Polish | 44M |
+| [`ukr`](http://www-01.sil.org/iso639-3/documentation.asp?id=ukr) | Ukrainian | 41M |
+| [`fas`](http://www-01.sil.org/iso639-3/documentation.asp?id=fas) | Persian | 40M |
+| [`kan`](http://www-01.sil.org/iso639-3/documentation.asp?id=kan) | Kannada | 38M |
+| [`mai`](http://www-01.sil.org/iso639-3/documentation.asp?id=mai) | Maithili | 35M |
+| [`mal`](http://www-01.sil.org/iso639-3/documentation.asp?id=mal) | Malayalam | 34M |
+| [`mya`](http://www-01.sil.org/iso639-3/documentation.asp?id=mya) | Burmese | 31M |
+| [`ori`](http://www-01.sil.org/iso639-3/documentation.asp?id=ori) | Oriya (macrolanguage) | 31M |
+| [`gax`](http://www-01.sil.org/iso639-3/documentation.asp?id=gax) | Borana-Arsi-Guji Oromo | 30M |
+| [`swh`](http://www-01.sil.org/iso639-3/documentation.asp?id=swh) | Swahili (individual language) | 30M |
+| [`sun`](http://www-01.sil.org/iso639-3/documentation.asp?id=sun) | Sundanese | 27M |
+| [`ron`](http://www-01.sil.org/iso639-3/documentation.asp?id=ron) | Romanian | 26M |
+| [`pan`](http://www-01.sil.org/iso639-3/documentation.asp?id=pan) | Panjabi | 26M |
+| [`bho`](http://www-01.sil.org/iso639-3/documentation.asp?id=bho) | Bhojpuri | 25M |
+| [`amh`](http://www-01.sil.org/iso639-3/documentation.asp?id=amh) | Amharic | 23M |
+| [`hau`](http://www-01.sil.org/iso639-3/documentation.asp?id=hau) | Hausa | 22M |
+| [`fuv`](http://www-01.sil.org/iso639-3/documentation.asp?id=fuv) | Nigerian Fulfulde | 22M |
+| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin) | 21M |
+| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Cyrillic) | 21M |
+| [`hrv`](http://www-01.sil.org/iso639-3/documentation.asp?id=hrv) | Croatian | 21M |
+| [`nld`](http://www-01.sil.org/iso639-3/documentation.asp?id=nld) | Dutch | 21M |
+| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
+| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic) | 21M |
+| [`tha`](http://www-01.sil.org/iso639-3/documentation.asp?id=tha) | Thai | 21M |
+| [`ckb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ckb) | Central Kurdish | 20M |
+| [`yor`](http://www-01.sil.org/iso639-3/documentation.asp?id=yor) | Yoruba | 20M |
+| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
+| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic) | 18M |
+| [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
+| [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Arabic) | 18M |
+| [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo | 17M |
+| [`nep`](http://www-01.sil.org/iso639-3/documentation.asp?id=nep) | Nepali (macrolanguage) | 16M |
+| [`ceb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ceb) | Cebuano | 15M |
+| [`skr`](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) | Saraiki | 15M |
+| [`tgl`](http://www-01.sil.org/iso639-3/documentation.asp?id=tgl) | Tagalog | 15M |
+| [`hun`](http://www-01.sil.org/iso639-3/documentation.asp?id=hun) | Hungarian | 15M |
+| [`azj`](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) | North Azerbaijani (Cyrillic) | 14M |
+| [`azj`](http://www-01.sil.org/iso639-3/documentation.asp?id=azj) | North Azerbaijani (Latin) | 14M |
+| [`sin`](http://www-01.sil.org/iso639-3/documentation.asp?id=sin) | Sinhala | 13M |
+| [`koi`](http://www-01.sil.org/iso639-3/documentation.asp?id=koi) | Komi-Permyak | 13M |
+| [`ell`](http://www-01.sil.org/iso639-3/documentation.asp?id=ell) | Modern Greek (1453-) | 12M |
+| [`ces`](http://www-01.sil.org/iso639-3/documentation.asp?id=ces) | Czech | 12M |
+| [`run`](http://www-01.sil.org/iso639-3/documentation.asp?id=run) | Rundi | 11M |
+| [`bel`](http://www-01.sil.org/iso639-3/documentation.asp?id=bel) | Belarusian | 10M |
+| [`plt`](http://www-01.sil.org/iso639-3/documentation.asp?id=plt) | Plateau Malagasy | 10M |
+| [`qug`](http://www-01.sil.org/iso639-3/documentation.asp?id=qug) | Chimborazo Highland Quichua | 10M |
+| [`mad`](http://www-01.sil.org/iso639-3/documentation.asp?id=mad) | Madurese | 10M |
+| [`nya`](http://www-01.sil.org/iso639-3/documentation.asp?id=nya) | Nyanja | 10M |
+| [`zyb`](http://www-01.sil.org/iso639-3/documentation.asp?id=zyb) | Yongbei Zhuang | 10M |
+| [`kin`](http://www-01.sil.org/iso639-3/documentation.asp?id=kin) | Kinyarwanda | 9M |
+| [`zul`](http://www-01.sil.org/iso639-3/documentation.asp?id=zul) | Zulu | 9M |
+| [`bul`](http://www-01.sil.org/iso639-3/documentation.asp?id=bul) | Bulgarian | 9M |
+| [`swe`](http://www-01.sil.org/iso639-3/documentation.asp?id=swe) | Swedish | 9M |
+| [`lin`](http://www-01.sil.org/iso639-3/documentation.asp?id=lin) | Lingala | 8M |
+| [`som`](http://www-01.sil.org/iso639-3/documentation.asp?id=som) | Somali | 8M |
+| [`hms`](http://www-01.sil.org/iso639-3/documentation.asp?id=hms) | Southern Qiandong Miao | 8M |
+| [`hnj`](http://www-01.sil.org/iso639-3/documentation.asp?id=hnj) | Hmong Njua | 8M |
+| [`ilo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ilo) | Iloko | 8M |
+| [`kaz`](http://www-01.sil.org/iso639-3/documentation.asp?id=kaz) | Kazakh | 8M |
 
 ## License
 
