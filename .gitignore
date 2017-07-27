@@ -1,12 +1,6 @@
 .DS_Store
 *.log
-.nyc_output/
-build/
-coverage/
 node_modules/
-packages/
-test/
-franc.js
-franc-all.js
-franc-min.js
-list.json
+src/list.json
+src/fixtures.json
+dest/

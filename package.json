@@ -6,11 +6,34 @@
     "franc": "^3.0.0"
   },
   "devDependencies": {
+    "bail": "^1.0.2",
     "browserify": "^14.1.0",
+    "concat-stream": "^1.6.0",
     "esmangle": "^1.0.1",
-    "iso-639-3": "^1.0.0"
+    "iso-639-3": "^1.0.0",
+    "rehype-cli": "^4.0.0",
+    "rehype-preset-minify": "^2.0.0",
+    "rehype-prevent-favicon-request": "^1.0.0",
+    "stylelint": "^8.0.0",
+    "stylelint-config-standard": "^17.0.0",
+    "xo": "^0.18.2",
+    "xtend": "^4.0.1"
   },
   "scripts": {
-    "build": "node generate; browserify index.js | esmangle > build.js"
+    "build-generate": "node build",
+    "build:js": "browserify src/index.js | esmangle > dest/index.js",
+    "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
+    "lint:js": "xo",
+    "lint:css": "stylelint src/index.css",
+    "build": "npm run build-generate && npm run build:js && npm run build:html",
+    "lint": "npm run lint:js && npm run lint:css",
+    "test": "npm run build && npm run lint"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
+  },
+  "xo": {
+    "space": true,
+    "esnext": false
   }
 }

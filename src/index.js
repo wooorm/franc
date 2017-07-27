@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-env browser */
+
 var franc = require('franc');
 var debounce = require('debounce');
 var fixtures = require('./fixtures');
@@ -20,13 +22,13 @@ function oninputchange() {
   while ($output.firstChild) {
     $output.removeChild($output.firstChild);
   }
-  
+
   franc.all($input.value).forEach(add);
 
-  function add(result, n) {
+  function add(result) {
     var $node = document.createElement('tr');
     var link = document.createElement('a');
-    
+
     link.href = 'http://www-01.sil.org/iso639-3/documentation.asp?id=' + result[0];
     link.textContent = result[0];
 
