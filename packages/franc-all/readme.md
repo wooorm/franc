@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 384 languages.
+Built with support for 389 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -66,13 +66,13 @@ This build supports the following languages:
 | [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin) | 21M |
 | [`hrv`](http://www-01.sil.org/iso639-3/documentation.asp?id=hrv) | Croatian | 21M |
 | [`nld`](http://www-01.sil.org/iso639-3/documentation.asp?id=nld) | Dutch | 21M |
-| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic) | 21M |
 | [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
+| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic) | 21M |
 | [`tha`](http://www-01.sil.org/iso639-3/documentation.asp?id=tha) | Thai | 21M |
 | [`ckb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ckb) | Central Kurdish | 20M |
 | [`yor`](http://www-01.sil.org/iso639-3/documentation.asp?id=yor) | Yoruba | 20M |
-| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic) | 18M |
 | [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
+| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Arabic) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
 | [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo | 17M |
@@ -389,12 +389,15 @@ This build supports the following languages:
 | [`ajg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ajg) | Aja (Benin) | 200 |
 | [`arl`](http://www-01.sil.org/iso639-3/documentation.asp?id=arl) | Arabela | 150 |
 | [`ppl`](http://www-01.sil.org/iso639-3/documentation.asp?id=ppl) | Pipil | 20 |
-| [`mxi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mxi) | Mozarabic | 0 |
 | [`nku`](http://www-01.sil.org/iso639-3/documentation.asp?id=nku) | Bouna Kulango | unknown |
 | [`cbi`](http://www-01.sil.org/iso639-3/documentation.asp?id=cbi) | Chachi | unknown |
-| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
+| [`mxi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mxi) | Mozarabic | 0 |
+| [`ccp`](http://www-01.sil.org/iso639-3/documentation.asp?id=ccp) | Chakma | unknown |
 | [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (undefined) | unknown |
+| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
+| [`duu`](http://www-01.sil.org/iso639-3/documentation.asp?id=duu) | Drung | unknown |
 | [`cfm`](http://www-01.sil.org/iso639-3/documentation.asp?id=cfm) | Falam Chin | unknown |
+| [`fat`](http://www-01.sil.org/iso639-3/documentation.asp?id=fat) | Fanti | unknown |
 | [`ido`](http://www-01.sil.org/iso639-3/documentation.asp?id=ido) | Ido | unknown |
 | [`ina`](http://www-01.sil.org/iso639-3/documentation.asp?id=ina) | Interlingua (International Auxiliary Language Association) | unknown |
 | [`kkh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kkh) | Khün | unknown |
@@ -404,6 +407,8 @@ This build supports the following languages:
 | [`sey`](http://www-01.sil.org/iso639-3/documentation.asp?id=sey) | Secoya | unknown |
 | [`blt`](http://www-01.sil.org/iso639-3/documentation.asp?id=blt) | Tai Dam | unknown |
 | [`tdt`](http://www-01.sil.org/iso639-3/documentation.asp?id=tdt) | Tetun Dili | unknown |
+| [`twi`](http://www-01.sil.org/iso639-3/documentation.asp?id=twi) | Twi (Latin) | unknown |
+| [`twi`](http://www-01.sil.org/iso639-3/documentation.asp?id=twi) | Twi (Latin) | unknown |
 | [`auc`](http://www-01.sil.org/iso639-3/documentation.asp?id=auc) | Waorani | unknown |
 | [`pnb`](http://www-01.sil.org/iso639-3/documentation.asp?id=pnb) | Western Panjabi | unknown |
 | [`zro`](http://www-01.sil.org/iso639-3/documentation.asp?id=zro) | Záparo | unknown |

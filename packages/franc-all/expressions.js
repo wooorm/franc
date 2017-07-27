@@ -33,7 +33,8 @@ module.exports = {
   div: /[\u0780-\u07B1]/g,
   vai: /[\uA500-\uA62B]/g,
   Canadian_Aboriginal: /[\u1400-\u167F\u18B0-\u18F5]/g,
-  chr: undefined,
+  ccp: /\uD804[\uDD00-\uDD34\uDD36-\uDD43]/g,
+  chr: /[\u13A0-\u13F4]/g,
   kkh: /[\u1A20-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AA0-\u1AAD]/g,
   blt: /[\uAA80-\uAAC2\uAADB-\uAADF]/g
 };

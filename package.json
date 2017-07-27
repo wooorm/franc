@@ -27,7 +27,7 @@
     "speakers": "^1.0.0",
     "tape": "^4.6.0",
     "trigrams": "^2.0.0",
-    "udhr": "^2.0.0",
+    "udhr": "^3.0.0",
     "unicode-7.0.0": "^0.7.0",
     "unified": "^6.1.1",
     "unist-builder": "^1.0.2",

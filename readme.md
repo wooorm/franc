@@ -9,7 +9,7 @@ Detect the language of text.
 
 1.  **franc** can support more languages<sup>(†)</sup> than any other
     library
-2.  **franc** is packaged with support for [81][s], [186][m], or [384][l]
+2.  **franc** is packaged with support for [81][s], [186][m], or [389][l]
     languages
 3.  **franc** has a CLI
 
@@ -30,7 +30,7 @@ npm install franc
 
 This installs the [`franc`][m] package, with support for 186 languages
 (languages which have 1 million or more speakers).  [`franc-min`][s] (81
-languages, 8m or more speakers) and [`franc-all`][l] (all 384 possible
+languages, 8m or more speakers) and [`franc-all`][l] (all 389 possible
 languages) are also available.  Finally, use `franc-cli` to install the
 [CLI][].
 
@@ -146,7 +146,7 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 | ------- | --------- | -------- |
 | [`franc-min`][s] | 81 | 8M or more |
 | [`franc`][m] | 186 | 1M or more |
-| [`franc-all`][l] | 384 | - |
+| [`franc-all`][l] | 389 | - |
 
 ## Derivation
 
