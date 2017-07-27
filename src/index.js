@@ -25,6 +25,8 @@ function oninputchange() {
 
   franc.all($input.value).forEach(add);
 
+  $input.style.height = $input.scrollHeight + 'px';
+
   function add(result) {
     var $node = document.createElement('tr');
     var link = document.createElement('a');

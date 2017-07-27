@@ -1,0 +1,123 @@
+html {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+  background-color: hsl(0, 0%, 95%);
+  word-break: break-word;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  background-color: hsl(0, 0%, 97.5%);
+  position: relative;
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 0 calc(2em + 2ex);
+}
+
+@media (min-width: 40em) and (min-height: 20em) {
+  main {
+    /* Go all Tschichold when supported */
+    margin: 11.1vh 22.2vw 22.2vh 11.1vw;
+    border: 1px solid hsl(214, 13%, 90%);
+    border-radius: 3px;
+  }
+}
+
+section {
+  margin: calc(2em + 2ex) calc(-2em - 2ex);
+  padding: calc(2em + 2ex);
+  border: 0 solid #e1e4e8;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+section + section {
+  margin-top: calc(-2em - 2ex - 1px);
+}
+
+section > :first-child {
+  margin-top: 0;
+}
+
+section > :last-child {
+  margin-bottom: 0;
+}
+
+section:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  border-top-width: 0;
+  margin-top: 0;
+}
+
+section:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  border-bottom-width: 0;
+  margin-bottom: 0;
+}
+
+.hl { color: #4c1; }
+
+.highlight { background-color: hsl(0, 0%, 100%); }
+
+* {
+  line-height: calc(1em + 1ex);
+  box-sizing: border-box;
+}
+
+p,
+h1,
+h2 {
+  margin-top: calc(1em + 1ex);
+  margin-bottom: calc(1em + 1ex);
+}
+
+h1,
+h2 {
+  font-weight: 100;
+  text-align: center;
+}
+
+h1 { font-size: 3em; }
+
+h2 { font-size: 2em; }
+
+a {
+  text-decoration: none;
+  color: #0367d8;
+  transition: 200ms;
+  transition-property: color;
+}
+
+a:hover,
+a:focus,
+a:target {
+  color: inherit;
+}
+
+.credits { text-align: center; }
+
+table { font-family: monospace; }
+
+td { min-width: 10ch; }
+
+textarea {
+  color: inherit;
+  font-family: monospace;
+  font-size: 16px;
+  letter-spacing: normal;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: transparent;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  resize: none;
+}

@@ -9,8 +9,10 @@
     "bail": "^1.0.2",
     "browserify": "^14.1.0",
     "concat-stream": "^1.6.0",
+    "cssnano": "^3.10.0",
     "esmangle": "^1.0.1",
     "iso-639-3": "^1.0.0",
+    "postcss-cli": "^4.1.0",
     "rehype-cli": "^4.0.0",
     "rehype-preset-minify": "^2.0.0",
     "rehype-prevent-favicon-request": "^1.0.0",
@@ -22,10 +24,11 @@
   "scripts": {
     "build-generate": "node build",
     "build:js": "browserify src/index.js | esmangle > dest/index.js",
+    "build:css": "postcss src/index.css > dest/index.css",
     "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
     "lint:js": "xo",
     "lint:css": "stylelint src/index.css",
-    "build": "npm run build-generate && npm run build:js && npm run build:html",
+    "build": "npm run build-generate && npm run build:js && npm run build:css && npm run build:html",
     "lint": "npm run lint:js && npm run lint:css",
     "test": "npm run build && npm run lint"
   },
@@ -35,5 +38,12 @@
   "xo": {
     "space": true,
     "esnext": false
+  },
+  "postcss": {
+    "plugins": {
+      "cssnano": {
+        "preset": "default"
+      }
+    }
   }
 }
