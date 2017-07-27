@@ -148,6 +148,17 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 | [`franc`][m] | 186 | 1M or more |
 | [`franc-all`][l] | 389 | - |
 
+## Ports
+
+Franc has been ported to several other programming languages.
+
+*   [R](https://github.com/MangoTheCat/franc)
+*   [Erlang](https://github.com/G-Corp/efranc)
+*   [Rust](https://github.com/greyblake/whatlang-rs)
+
+The works franc is derived from have themselves also been ported to other
+languages.
+
 ## Derivation
 
 Franc is a derivative work from [guess-language][] (Python, LGPL),
