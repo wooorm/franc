@@ -166,8 +166,8 @@ languages.
 Franc is a derivative work from [guess-language][] (Python, LGPL),
 [guesslanguage][] (C++, LGPL), and [Language::Guess][language-guess]
 (Perl, GPL).  Their creators granted me the rights to distribute franc
-under the MIT license: respectively, [Maciej Ceglowski][grant-1],
-[Jacob R. Rideout][grant-2], and [Kent S. Johnson][grant-3].
+under the MIT license: respectively, [Kent S. Johnson][grant-3],
+[Jacob R. Rideout][grant-2], and [Maciej Ceglowski][grant-1].
 
 ## License
 
@@ -189,7 +189,7 @@ under the MIT license: respectively, [Maciej Ceglowski][grant-1],
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[guess-language]: http://code.google.com/p/guess-language/
+[guess-language]: https://github.com/kent37/guess-language
 
 [guesslanguage]: http://websvn.kde.org/branches/work/sonnet-refactoring/common/nlp/guesslanguage.cpp?view=markup
 
