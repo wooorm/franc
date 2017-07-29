@@ -152,11 +152,12 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 
 Franc has been ported to several other programming languages.
 
-*   [Elixir](https://github.com/minibikini/paasaa)
-*   [Erlang](https://github.com/G-Corp/efranc)
-*   [Go](https://github.com/kapsteur/franco)
-*   [R](https://github.com/MangoTheCat/franc)
-*   [Rust](https://github.com/greyblake/whatlang-rs)
+*   Elixir — [`paasaa`](https://github.com/minibikini/paasaa)
+*   Erlang — [`efranc`](https://github.com/G-Corp/efranc)
+*   Go — [`franco`](https://github.com/kapsteur/franco),
+    [`whatlanggo`](https://github.com/abadojack/whatlanggo)
+*   R — [`franc`](https://github.com/MangoTheCat/franc)
+*   Rust — [`whatlang-rs`](https://github.com/greyblake/whatlang-rs)
 
 The works franc is derived from have themselves also been ported to other
 languages.
