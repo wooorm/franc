@@ -7,16 +7,32 @@ var pack = require('./package');
 
 var command = Object.keys(pack.bin)[0];
 
-var cli = meow({help: help()}, {
-  boolean: ['all'],
-  string: ['whitelist', 'blacklist', 'min-length'],
-  alias: {
-    v: 'version',
-    h: 'help',
-    m: 'min-length',
-    w: 'whitelist',
-    b: 'blacklist',
-    a: 'all'
+var cli = meow(help(), {
+  flags: {
+    all: {
+      type: 'boolean',
+      alias: 'a'
+    },
+    whitelist: {
+      type: 'string',
+      alias: 'w'
+    },
+    blacklist: {
+      type: 'string',
+      alias: 'b'
+    },
+    minLength: {
+      type: 'string',
+      alias: 'm'
+    },
+    version: {
+      type: 'boolean',
+      alias: 'v'
+    },
+    help: {
+      type: 'boolean',
+      alias: 'h'
+    }
   }
 });
 
@@ -95,5 +111,5 @@ function help() {
     '# ' + franc('Alle mennesker er født frie og', {
       whitelist: ['nob', 'dan']
     })
-  ];
+  ].join('\n');
 }
