@@ -148,6 +148,10 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 | [`franc`][m] | 186 | 1M or more |
 | [`franc-all`][l] | 389 | - |
 
+### Language code
+
+Note that the three-letter codes used by Franc are [ISO 639-3](http://www-01.sil.org/iso639-3/codes.asp) codes. See also issues about conversion to other codes: [BCP-47](https://github.com/wooorm/franc/issues/30) [ISO 659-1](https://github.com/wooorm/franc/issues/10)
+
 ## Ports
 
 Franc has been ported to several other programming languages.
