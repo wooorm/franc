@@ -4,8 +4,8 @@
 
 var franc = require('franc');
 var debounce = require('debounce');
-var fixtures = require('./fixtures');
-var names = require('./list');
+var fixtures = require('./fixtures.json');
+var names = require('./list.json');
 
 var $input = document.getElementsByTagName('textarea')[0];
 var $output = document.getElementsByTagName('tbody')[0];
