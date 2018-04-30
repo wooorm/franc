@@ -40,21 +40,22 @@ available on [GitHub Releases][releases].
 ## Usage
 
 ```javascript
-var franc = require('franc');
+var franc = require('franc')
 
-franc('Alle menslike wesens word vry'); //=> 'afr'
-franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'); //=> 'ben'
-franc('Alle menneske er fødde til fridom'); //=> 'nno'
-franc(''); //=> 'und'
-franc('the'); //=> 'und'
+franc('Alle menslike wesens word vry') // => 'afr'
+franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট') // => 'ben'
+franc('Alle menneske er fødde til fridom') // => 'nno'
+franc('') // => 'und'
+franc('the') // => 'und'
+
 /* You can change what’s too short (default: 10): */
-franc('the', {minLength: 3}); // 'sco'
+franc('the', {minLength: 3}) // => 'sco'
 ```
 
 ###### `.all`
 
 ```js
-franc.all('O Brasil caiu 26 posições');
+console.log(franc.all('O Brasil caiu 26 posições'))
 ```
 
 Yields:
@@ -71,7 +72,7 @@ Yields:
 ###### `whitelist`
 
 ```js
-franc.all('O Brasil caiu 26 posições', {whitelist: ['por', 'spa']});
+console.log(franc.all('O Brasil caiu 26 posições', {whitelist: ['por', 'spa']}))
 ```
 
 Yields:
@@ -83,7 +84,7 @@ Yields:
 ###### `blacklist`
 
 ```js
-franc.all('O Brasil caiu 26 posições', {blacklist: ['src', 'glg']});
+console.log(franc.all('O Brasil caiu 26 posições', {blacklist: ['src', 'glg']}))
 ```
 
 Yields:

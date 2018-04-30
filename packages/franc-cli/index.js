@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'
 
-var meow = require('meow');
-var franc = require('franc');
-var pack = require('./package');
+var meow = require('meow')
+var franc = require('franc')
+var pack = require('./package')
 
-var command = Object.keys(pack.bin)[0];
+var command = Object.keys(pack.bin)[0]
 
 var cli = meow(help(), {
   flags: {
@@ -34,29 +34,29 @@ var cli = meow(help(), {
       alias: 'h'
     }
   }
-});
+})
 
-var value = cli.input.join(' ').trim();
-var flags = cli.flags;
+var value = cli.input.join(' ').trim()
+var flags = cli.flags
 
-flags.minLength = Number(flags.minLength) || null;
+flags.minLength = Number(flags.minLength) || null
 
 if (flags.whitelist) {
-  flags.whitelist = String(flags.whitelist).split(',');
+  flags.whitelist = String(flags.whitelist).split(',')
 }
 
 if (flags.blacklist) {
-  flags.blacklist = String(flags.blacklist).split(',');
+  flags.blacklist = String(flags.blacklist).split(',')
 }
 
 if (value) {
-  detect(value);
+  detect(value)
 } else {
-  process.stdin.resume();
-  process.stdin.setEncoding('utf8');
-  process.stdin.on('data', function (data) {
-    detect(data.trim());
-  });
+  process.stdin.resume()
+  process.stdin.setEncoding('utf8')
+  process.stdin.on('data', function(data) {
+    detect(data.trim())
+  })
 }
 
 function detect(value) {
@@ -64,14 +64,14 @@ function detect(value) {
     minLength: flags.minLength,
     whitelist: flags.whitelist,
     blacklist: flags.blacklist
-  };
+  }
 
   if (flags.all) {
-    franc.all(value, options).forEach(function (language) {
-      console.log(language[0] + ' ' + language[1]);
-    });
+    franc.all(value, options).forEach(function(language) {
+      console.log(language[0] + ' ' + language[1])
+    })
   } else {
-    console.log(franc(value, options));
+    console.log(franc(value, options))
   }
 }
 
@@ -99,17 +99,19 @@ function help() {
     '# ' + franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'),
     '',
     '# blacklist certain languages',
-    '$ ' + command + ' --blacklist por,glg ' +
-      '"O Brasil caiu 26 posições"',
-    '# ' + franc('O Brasil caiu 26 posições', {
-      blacklist: ['por', 'glg']
-    }),
+    '$ ' + command + ' --blacklist por,glg "O Brasil caiu 26 posições"',
+    '# ' +
+      franc('O Brasil caiu 26 posições', {
+        blacklist: ['por', 'glg']
+      }),
     '',
     '# output language from stdin with whitelist',
-    '$ echo "Alle mennesker er født frie og" | ' + command +
+    '$ echo "Alle mennesker er født frie og" | ' +
+      command +
       ' --whitelist nob,dan',
-    '# ' + franc('Alle mennesker er født frie og', {
-      whitelist: ['nob', 'dan']
-    })
-  ].join('\n');
+    '# ' +
+      franc('Alle mennesker er født frie og', {
+        whitelist: ['nob', 'dan']
+      })
+  ].join('\n')
 }

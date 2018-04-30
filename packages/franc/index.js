@@ -1,59 +1,59 @@
-'use strict';
+'use strict'
 
 /* Load `trigram-utils`. */
-var utilities = require('trigram-utils');
+var utilities = require('trigram-utils')
 
 /* Load `expressions` (regular expressions matching
  * scripts). */
-var expressions = require('./expressions.js');
+var expressions = require('./expressions.js')
 
 /* Load `data` (trigram information per language,
  * per script). */
-var data = require('./data.json');
+var data = require('./data.json')
 
 /* Expose `detectAll` on `detect`. */
-detect.all = detectAll;
+detect.all = detectAll
 
 /* Expose `detect`. */
-module.exports = detect;
+module.exports = detect
 
 /* Maximum sample length. */
-var MAX_LENGTH = 2048;
+var MAX_LENGTH = 2048
 
 /* Minimum sample length. */
-var MIN_LENGTH = 10;
+var MIN_LENGTH = 10
 
 /* The maximum distance to add when a given trigram does
  * not exist in a trigram dictionary. */
-var MAX_DIFFERENCE = 300;
+var MAX_DIFFERENCE = 300
 
 /* Construct trigram dictionaries. */
-(function () {
-  var languages;
-  var name;
-  var trigrams;
-  var model;
-  var script;
-  var weight;
+;(function() {
+  var languages
+  var name
+  var trigrams
+  var model
+  var script
+  var weight
 
   for (script in data) {
-    languages = data[script];
+    languages = data[script]
 
     for (name in languages) {
-      model = languages[name].split('|');
+      model = languages[name].split('|')
 
-      weight = model.length;
+      weight = model.length
 
-      trigrams = {};
+      trigrams = {}
 
       while (weight--) {
-        trigrams[model[weight]] = weight;
+        trigrams[model[weight]] = weight
       }
 
-      languages[name] = trigrams;
+      languages[name] = trigrams
     }
   }
-})();
+})()
 
 /**
  * Get the most probable language for the given value.
@@ -63,7 +63,7 @@ var MAX_DIFFERENCE = 300;
  * @return {string} The most probable language.
  */
 function detect(value, options) {
-  return detectAll(value, options)[0][0];
+  return detectAll(value, options)[0][0]
 }
 
 /**
@@ -76,37 +76,38 @@ function detect(value, options) {
  *   containing language--distance tuples.
  */
 function detectAll(value, options) {
-  var settings = options || {};
-  var minLength = MIN_LENGTH;
-  var script;
+  var settings = options || {}
+  var minLength = MIN_LENGTH
+  var script
 
   if (settings.minLength !== null && settings.minLength !== undefined) {
-    minLength = settings.minLength;
+    minLength = settings.minLength
   }
 
   if (!value || value.length < minLength) {
-    return und();
+    return und()
   }
 
-  value = value.substr(0, MAX_LENGTH);
+  value = value.substr(0, MAX_LENGTH)
 
   /* Get the script which characters occur the most
    * in `value`. */
-  script = getTopScript(value, expressions);
+  script = getTopScript(value, expressions)
 
   /* One languages exists for the most-used script.
    *
    * If no matches occured, such as a digit only string,
    * exit with `und`. */
   if (!(script[0] in data)) {
-    return script[1] === 0 ? und() : singleLanguageTuples(script[0]);
+    return script[1] === 0 ? und() : singleLanguageTuples(script[0])
   }
 
   /* Get all distances for a given script, and
    * normalize the distance values. */
-  return normalize(value, getDistances(
-    utilities.asTuples(value), data[script[0]], settings
-  ));
+  return normalize(
+    value,
+    getDistances(utilities.asTuples(value), data[script[0]], settings)
+  )
 }
 
 /**
@@ -120,16 +121,16 @@ function detectAll(value, options) {
  *   distances.
  */
 function normalize(value, distances) {
-  var min = distances[0][1];
-  var max = (value.length * MAX_DIFFERENCE) - min;
-  var index = -1;
-  var length = distances.length;
+  var min = distances[0][1]
+  var max = value.length * MAX_DIFFERENCE - min
+  var index = -1
+  var length = distances.length
 
   while (++index < length) {
-    distances[index][1] = 1 - ((distances[index][1] - min) / max) || 0;
+    distances[index][1] = 1 - (distances[index][1] - min) / max || 0
   }
 
-  return distances;
+  return distances
 }
 
 /**
@@ -142,21 +143,21 @@ function normalize(value, distances) {
  *   occurrence percentage.
  */
 function getTopScript(value, scripts) {
-  var topCount = -1;
-  var topScript;
-  var script;
-  var count;
+  var topCount = -1
+  var topScript
+  var script
+  var count
 
   for (script in scripts) {
-    count = getOccurrence(value, scripts[script]);
+    count = getOccurrence(value, scripts[script])
 
     if (count > topCount) {
-      topCount = count;
-      topScript = script;
+      topCount = count
+      topScript = script
     }
   }
 
-  return [topScript, topCount];
+  return [topScript, topCount]
 }
 
 /**
@@ -167,9 +168,9 @@ function getTopScript(value, scripts) {
  * @return {number} Float between 0 and 1.
  */
 function getOccurrence(value, expression) {
-  var count = value.match(expression);
+  var count = value.match(expression)
 
-  return (count ? count.length : 0) / value.length || 0;
+  return (count ? count.length : 0) / value.length || 0
 }
 
 /**
@@ -185,21 +186,18 @@ function getOccurrence(value, expression) {
  *   containing language--distance tuples.
  */
 function getDistances(trigrams, languages, options) {
-  var distances = [];
-  var whitelist = options.whitelist || [];
-  var blacklist = options.blacklist || [];
-  var language;
+  var distances = []
+  var whitelist = options.whitelist || []
+  var blacklist = options.blacklist || []
+  var language
 
-  languages = filterLanguages(languages, whitelist, blacklist);
+  languages = filterLanguages(languages, whitelist, blacklist)
 
   for (language in languages) {
-    distances.push([
-      language,
-      getDistance(trigrams, languages[language])
-    ]);
+    distances.push([language, getDistance(trigrams, languages[language])])
   }
 
-  return distances.length ? distances.sort(sort) : und();
+  return distances.length ? distances.sort(sort) : und()
 }
 
 /**
@@ -213,29 +211,29 @@ function getDistances(trigrams, languages, options) {
  * @return {number} - The distance between the two.
  */
 function getDistance(trigrams, model) {
-  var distance = 0;
-  var index = -1;
-  var length = trigrams.length;
-  var trigram;
-  var difference;
+  var distance = 0
+  var index = -1
+  var length = trigrams.length
+  var trigram
+  var difference
 
   while (++index < length) {
-    trigram = trigrams[index];
+    trigram = trigrams[index]
 
     if (trigram[0] in model) {
-      difference = trigram[1] - model[trigram[0]] - 1;
+      difference = trigram[1] - model[trigram[0]] - 1
 
       if (difference < 0) {
-        difference = -difference;
+        difference = -difference
       }
     } else {
-      difference = MAX_DIFFERENCE;
+      difference = MAX_DIFFERENCE
     }
 
-    distance += difference;
+    distance += difference
   }
 
-  return distance;
+  return distance
 }
 
 /**
@@ -253,42 +251,39 @@ function getDistance(trigrams, model) {
  *   languages.
  */
 function filterLanguages(languages, whitelist, blacklist) {
-  var filteredLanguages;
-  var language;
+  var filteredLanguages
+  var language
 
   if (whitelist.length === 0 && blacklist.length === 0) {
-    return languages;
+    return languages
   }
 
-  filteredLanguages = {};
+  filteredLanguages = {}
 
   for (language in languages) {
     if (
-      (
-        whitelist.length === 0 ||
-        whitelist.indexOf(language) !== -1
-      ) &&
+      (whitelist.length === 0 || whitelist.indexOf(language) !== -1) &&
       blacklist.indexOf(language) === -1
     ) {
-      filteredLanguages[language] = languages[language];
+      filteredLanguages[language] = languages[language]
     }
   }
 
-  return filteredLanguages;
+  return filteredLanguages
 }
 
 /* Create a single `und` tuple. */
 function und() {
-  return singleLanguageTuples('und');
+  return singleLanguageTuples('und')
 }
 
 /* Create a single tuple as a list of tuples from a given
  * language code. */
 function singleLanguageTuples(language) {
-  return [[language, 1]];
+  return [[language, 1]]
 }
 
 /* Deep regular sort on the number at `1` in both objects. */
 function sort(a, b) {
-  return a[1] - b[1];
+  return a[1] - b[1]
 }

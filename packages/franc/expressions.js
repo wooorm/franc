@@ -30,4 +30,4 @@ module.exports = {
   zgh: /[\u2D30-\u2D67\u2D6F\u2D70\u2D7F]/g,
   iii: /[\uA000-\uA48C\uA490-\uA4C6]/g,
   aii: /[\u0700-\u070D\u070F-\u074A\u074D-\u074F]/g
-};
+}

@@ -18,6 +18,7 @@
     "negate": "^1.0.0",
     "nyc": "^11.0.0",
     "parse-author": "^2.0.0",
+    "prettier": "^1.12.1",
     "remark-cli": "^5.0.0",
     "remark-lint-no-heading-punctuation": "^1.0.0",
     "remark-lint-no-html": "^1.0.0",
@@ -36,17 +37,16 @@
   },
   "scripts": {
     "prepublish": "lerna bootstrap",
-    "build-md": "remark . -qfo",
-    "build-packages": "node script/build",
+    "generate": "node script/build",
+    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
     "build-bundle-s": "browserify packages/franc-min -s franc | esmangle > franc-min.js",
     "build-bundle-m": "browserify packages/franc -s franc | esmangle > franc.js",
     "build-bundle-l": "browserify packages/franc-all -s franc | esmangle > franc-all.js",
     "build-bundle": "npm run build-bundle-s && npm run build-bundle-m && npm run build-bundle-l",
-    "build": "npm run build-packages && npm run build-md && npm run build-bundle",
-    "lint": "xo",
+    "build": "npm run build-bundle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test/index.js",
-    "test": "npm run build && npm run lint && npm run test-coverage"
+    "test": "npm run generate && npm run format && npm run build && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,
@@ -54,8 +54,16 @@
     "functions": 100,
     "branches": 100
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
   "xo": {
-    "space": true,
+    "prettier": true,
     "esnext": false,
     "rules": {
       "camelcase": "off",

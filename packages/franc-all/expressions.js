@@ -37,4 +37,4 @@ module.exports = {
   chr: /[\u13A0-\u13F4]/g,
   kkh: /[\u1A20-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AA0-\u1AAD]/g,
   blt: /[\uAA80-\uAAC2\uAADB-\uAADF]/g
-};
+}
