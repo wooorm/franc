@@ -30,14 +30,13 @@ function oninputchange() {
   function add(result) {
     var $node = document.createElement('tr')
     var link = document.createElement('a')
+    var name = names[result[0]]
 
-    link.href =
-      'http://www-01.sil.org/iso639-3/documentation.asp?id=' + result[0]
+    link.href = 'https://iso639-3.sil.org/code/' + result[0]
     link.textContent = result[0]
 
     $node.appendChild(document.createElement('td')).appendChild(link)
-    $node.appendChild(document.createElement('td')).textContent =
-      names[result[0]]
+    $node.appendChild(document.createElement('td')).textContent = name
     $node.appendChild(document.createElement('td')).textContent = result[1]
 
     $output.appendChild($node)
