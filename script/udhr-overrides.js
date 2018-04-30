@@ -39,3 +39,6 @@ exports.hat = ['hat_popular']
 
 /* There’s many translated OCIs, let’s use the first though. */
 exports.oci = ['oci']
+
+/* Tso in mozambique has a UDHR preview: http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=tso */
+exports.tso = ['tso_MZ']

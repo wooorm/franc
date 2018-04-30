@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 186 languages (1M or more speakers).
+Built with support for 188 languages (1M or more speakers).
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -62,19 +62,19 @@ This build supports the following languages:
 | [`amh`](http://www-01.sil.org/iso639-3/documentation.asp?id=amh) | Amharic | 23M |
 | [`hau`](http://www-01.sil.org/iso639-3/documentation.asp?id=hau) | Hausa | 22M |
 | [`fuv`](http://www-01.sil.org/iso639-3/documentation.asp?id=fuv) | Nigerian Fulfulde | 22M |
-| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin) | 21M |
 | [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Cyrillic) | 21M |
+| [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin) | 21M |
 | [`hrv`](http://www-01.sil.org/iso639-3/documentation.asp?id=hrv) | Croatian | 21M |
 | [`nld`](http://www-01.sil.org/iso639-3/documentation.asp?id=nld) | Dutch | 21M |
-| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
 | [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic) | 21M |
+| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
 | [`tha`](http://www-01.sil.org/iso639-3/documentation.asp?id=tha) | Thai | 21M |
 | [`ckb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ckb) | Central Kurdish | 20M |
 | [`yor`](http://www-01.sil.org/iso639-3/documentation.asp?id=yor) | Yoruba | 20M |
-| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
 | [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic) | 18M |
-| [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
+| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Arabic) | 18M |
+| [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
 | [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo | 17M |
 | [`nep`](http://www-01.sil.org/iso639-3/documentation.asp?id=nep) | Nepali (macrolanguage) | 16M |
 | [`ceb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ceb) | Cebuano | 15M |
@@ -94,6 +94,7 @@ This build supports the following languages:
 | [`mad`](http://www-01.sil.org/iso639-3/documentation.asp?id=mad) | Madurese | 10M |
 | [`nya`](http://www-01.sil.org/iso639-3/documentation.asp?id=nya) | Nyanja | 10M |
 | [`zyb`](http://www-01.sil.org/iso639-3/documentation.asp?id=zyb) | Yongbei Zhuang | 10M |
+| [`pbu`](http://www-01.sil.org/iso639-3/documentation.asp?id=pbu) | Northern Pashto | 10M |
 | [`kin`](http://www-01.sil.org/iso639-3/documentation.asp?id=kin) | Kinyarwanda | 9M |
 | [`zul`](http://www-01.sil.org/iso639-3/documentation.asp?id=zul) | Zulu | 9M |
 | [`bul`](http://www-01.sil.org/iso639-3/documentation.asp?id=bul) | Bulgarian | 9M |
@@ -162,6 +163,7 @@ This build supports the following languages:
 | [`wol`](http://www-01.sil.org/iso639-3/documentation.asp?id=wol) | Wolof | 3M |
 | [`kir`](http://www-01.sil.org/iso639-3/documentation.asp?id=kir) | Kirghiz | 3M |
 | [`nds`](http://www-01.sil.org/iso639-3/documentation.asp?id=nds) | Low German | 3M |
+| [`fuf`](http://www-01.sil.org/iso639-3/documentation.asp?id=fuf) | Pular | 3M |
 | [`mkd`](http://www-01.sil.org/iso639-3/documentation.asp?id=mkd) | Macedonian | 3M |
 | [`vmw`](http://www-01.sil.org/iso639-3/documentation.asp?id=vmw) | Makhuwa | 3M |
 | [`zgh`](http://www-01.sil.org/iso639-3/documentation.asp?id=zgh) | Standard Moroccan Tamazight | 2M |

@@ -19,5 +19,8 @@ module.exports = [
    * I've sent an e-mail out to OHCHR and am waiting
    * for an answer. */
   'cbs',
-  'prq'
+  'prq',
+
+  /* Same UDHR as ckb (Central Kurdish), but with less speakers. */
+  'kmr' /* Northern Kurdish */
 ]

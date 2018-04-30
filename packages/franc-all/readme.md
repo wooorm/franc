@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 389 languages.
+Built with support for 402 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -66,13 +66,13 @@ This build supports the following languages:
 | [`bos`](http://www-01.sil.org/iso639-3/documentation.asp?id=bos) | Bosnian (Latin) | 21M |
 | [`hrv`](http://www-01.sil.org/iso639-3/documentation.asp?id=hrv) | Croatian | 21M |
 | [`nld`](http://www-01.sil.org/iso639-3/documentation.asp?id=nld) | Dutch | 21M |
-| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
 | [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Cyrillic) | 21M |
+| [`srp`](http://www-01.sil.org/iso639-3/documentation.asp?id=srp) | Serbian (Latin) | 21M |
 | [`tha`](http://www-01.sil.org/iso639-3/documentation.asp?id=tha) | Thai | 21M |
 | [`ckb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ckb) | Central Kurdish | 20M |
 | [`yor`](http://www-01.sil.org/iso639-3/documentation.asp?id=yor) | Yoruba | 20M |
-| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
 | [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Cyrillic) | 18M |
+| [`uzn`](http://www-01.sil.org/iso639-3/documentation.asp?id=uzn) | Northern Uzbek (Latin) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Arabic) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
 | [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo | 17M |
@@ -94,6 +94,7 @@ This build supports the following languages:
 | [`mad`](http://www-01.sil.org/iso639-3/documentation.asp?id=mad) | Madurese | 10M |
 | [`nya`](http://www-01.sil.org/iso639-3/documentation.asp?id=nya) | Nyanja | 10M |
 | [`zyb`](http://www-01.sil.org/iso639-3/documentation.asp?id=zyb) | Yongbei Zhuang | 10M |
+| [`pbu`](http://www-01.sil.org/iso639-3/documentation.asp?id=pbu) | Northern Pashto | 10M |
 | [`kin`](http://www-01.sil.org/iso639-3/documentation.asp?id=kin) | Kinyarwanda | 9M |
 | [`zul`](http://www-01.sil.org/iso639-3/documentation.asp?id=zul) | Zulu | 9M |
 | [`bul`](http://www-01.sil.org/iso639-3/documentation.asp?id=bul) | Bulgarian | 9M |
@@ -122,8 +123,8 @@ This build supports the following languages:
 | [`tir`](http://www-01.sil.org/iso639-3/documentation.asp?id=tir) | Tigrinya | 6M |
 | [`fin`](http://www-01.sil.org/iso639-3/documentation.asp?id=fin) | Finnish | 6M |
 | [`slk`](http://www-01.sil.org/iso639-3/documentation.asp?id=slk) | Slovak | 6M |
-| [`tuk`](http://www-01.sil.org/iso639-3/documentation.asp?id=tuk) | Turkmen (Latin) | 5M |
 | [`tuk`](http://www-01.sil.org/iso639-3/documentation.asp?id=tuk) | Turkmen (Cyrillic) | 5M |
+| [`tuk`](http://www-01.sil.org/iso639-3/documentation.asp?id=tuk) | Turkmen (Latin) | 5M |
 | [`dan`](http://www-01.sil.org/iso639-3/documentation.asp?id=dan) | Danish | 5M |
 | [`nob`](http://www-01.sil.org/iso639-3/documentation.asp?id=nob) | Norwegian Bokmål | 5M |
 | [`suk`](http://www-01.sil.org/iso639-3/documentation.asp?id=suk) | Sukuma | 5M |
@@ -162,6 +163,7 @@ This build supports the following languages:
 | [`wol`](http://www-01.sil.org/iso639-3/documentation.asp?id=wol) | Wolof | 3M |
 | [`kir`](http://www-01.sil.org/iso639-3/documentation.asp?id=kir) | Kirghiz | 3M |
 | [`nds`](http://www-01.sil.org/iso639-3/documentation.asp?id=nds) | Low German | 3M |
+| [`fuf`](http://www-01.sil.org/iso639-3/documentation.asp?id=fuf) | Pular | 3M |
 | [`mkd`](http://www-01.sil.org/iso639-3/documentation.asp?id=mkd) | Macedonian | 3M |
 | [`vmw`](http://www-01.sil.org/iso639-3/documentation.asp?id=vmw) | Makhuwa | 3M |
 | [`zgh`](http://www-01.sil.org/iso639-3/documentation.asp?id=zgh) | Standard Moroccan Tamazight | 2M |
@@ -283,6 +285,7 @@ This build supports the following languages:
 | [`mam`](http://www-01.sil.org/iso639-3/documentation.asp?id=mam) | Mam | 157k |
 | [`tah`](http://www-01.sil.org/iso639-3/documentation.asp?id=tah) | Tahitian | 150k |
 | [`nav`](http://www-01.sil.org/iso639-3/documentation.asp?id=nav) | Navajo | 149k |
+| [`ami`](http://www-01.sil.org/iso639-3/documentation.asp?id=ami) | Amis | 138k |
 | [`lot`](http://www-01.sil.org/iso639-3/documentation.asp?id=lot) | Otuho | 135k |
 | [`cak`](http://www-01.sil.org/iso639-3/documentation.asp?id=cak) | Kaqchikel | 132k |
 | [`tzh`](http://www-01.sil.org/iso639-3/documentation.asp?id=tzh) | Tzeltal | 130k |
@@ -352,6 +355,7 @@ This build supports the following languages:
 | [`qxu`](http://www-01.sil.org/iso639-3/documentation.asp?id=qxu) | Arequipa-La Unión Quechua | 16k |
 | [`pau`](http://www-01.sil.org/iso639-3/documentation.asp?id=pau) | Palauan | 15k |
 | [`shp`](http://www-01.sil.org/iso639-3/documentation.asp?id=shp) | Shipibo-Conibo | 15k |
+| [`gld`](http://www-01.sil.org/iso639-3/documentation.asp?id=gld) | Nanai | 12k |
 | [`gug`](http://www-01.sil.org/iso639-3/documentation.asp?id=gug) | Paraguayan Guaraní | 12k |
 | [`mzi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mzi) | Ixcatlán Mazatec | 11k |
 | [`cjs`](http://www-01.sil.org/iso639-3/documentation.asp?id=cjs) | Shor | 10k |
@@ -378,6 +382,7 @@ This build supports the following languages:
 | [`cbr`](http://www-01.sil.org/iso639-3/documentation.asp?id=cbr) | Cashibo-Cacataibo | 2k |
 | [`mcf`](http://www-01.sil.org/iso639-3/documentation.asp?id=mcf) | Matsés | 1k |
 | [`bis`](http://www-01.sil.org/iso639-3/documentation.asp?id=bis) | Bislama | 1k |
+| [`orh`](http://www-01.sil.org/iso639-3/documentation.asp?id=orh) | Oroqen | 1k |
 | [`ykg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ykg) | Northern Yukaghir | 1k |
 | [`nio`](http://www-01.sil.org/iso639-3/documentation.asp?id=nio) | Nganasan | 1k |
 | [`cic`](http://www-01.sil.org/iso639-3/documentation.asp?id=cic) | Chickasaw | 1k |
@@ -386,15 +391,16 @@ This build supports the following languages:
 | [`amc`](http://www-01.sil.org/iso639-3/documentation.asp?id=amc) | Amahuaca | 720 |
 | [`amr`](http://www-01.sil.org/iso639-3/documentation.asp?id=amr) | Amarakaeri | 500 |
 | [`cot`](http://www-01.sil.org/iso639-3/documentation.asp?id=cot) | Caquinte | 300 |
+| [`oaa`](http://www-01.sil.org/iso639-3/documentation.asp?id=oaa) | Orok | 295 |
 | [`ajg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ajg) | Aja (Benin) | 200 |
 | [`arl`](http://www-01.sil.org/iso639-3/documentation.asp?id=arl) | Arabela | 150 |
 | [`ppl`](http://www-01.sil.org/iso639-3/documentation.asp?id=ppl) | Pipil | 20 |
+| [`bax`](http://www-01.sil.org/iso639-3/documentation.asp?id=bax) | Bamun | unknown |
 | [`nku`](http://www-01.sil.org/iso639-3/documentation.asp?id=nku) | Bouna Kulango | unknown |
 | [`cbi`](http://www-01.sil.org/iso639-3/documentation.asp?id=cbi) | Chachi | unknown |
-| [`mxi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mxi) | Mozarabic | 0 |
 | [`ccp`](http://www-01.sil.org/iso639-3/documentation.asp?id=ccp) | Chakma | unknown |
-| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (undefined) | unknown |
 | [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
+| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (undefined) | unknown |
 | [`duu`](http://www-01.sil.org/iso639-3/documentation.asp?id=duu) | Drung | unknown |
 | [`cfm`](http://www-01.sil.org/iso639-3/documentation.asp?id=cfm) | Falam Chin | unknown |
 | [`fat`](http://www-01.sil.org/iso639-3/documentation.asp?id=fat) | Fanti | unknown |
@@ -403,13 +409,20 @@ This build supports the following languages:
 | [`kkh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kkh) | Khün | unknown |
 | [`ktu`](http://www-01.sil.org/iso639-3/documentation.asp?id=ktu) | Kituba (Democratic Republic of Congo) | unknown |
 | [`lat`](http://www-01.sil.org/iso639-3/documentation.asp?id=lat) | Latin | unknown |
+| [`glv`](http://www-01.sil.org/iso639-3/documentation.asp?id=glv) | Manx | unknown |
+| [`mnw`](http://www-01.sil.org/iso639-3/documentation.asp?id=mnw) | Mon | unknown |
+| [`mxi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mxi) | Mozarabic | 0 |
 | [`pcm`](http://www-01.sil.org/iso639-3/documentation.asp?id=pcm) | Nigerian Pidgin | unknown |
 | [`sey`](http://www-01.sil.org/iso639-3/documentation.asp?id=sey) | Secoya | unknown |
+| [`ekk`](http://www-01.sil.org/iso639-3/documentation.asp?id=ekk) | Standard Estonian | unknown |
+| [`lvs`](http://www-01.sil.org/iso639-3/documentation.asp?id=lvs) | Standard Latvian | unknown |
 | [`blt`](http://www-01.sil.org/iso639-3/documentation.asp?id=blt) | Tai Dam | unknown |
+| [`kdh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kdh) | Tem | unknown |
 | [`tdt`](http://www-01.sil.org/iso639-3/documentation.asp?id=tdt) | Tetun Dili | unknown |
 | [`twi`](http://www-01.sil.org/iso639-3/documentation.asp?id=twi) | Twi (Latin) | unknown |
 | [`twi`](http://www-01.sil.org/iso639-3/documentation.asp?id=twi) | Twi (Latin) | unknown |
 | [`auc`](http://www-01.sil.org/iso639-3/documentation.asp?id=auc) | Waorani | unknown |
+| [`gaz`](http://www-01.sil.org/iso639-3/documentation.asp?id=gaz) | West Central Oromo | unknown |
 | [`pnb`](http://www-01.sil.org/iso639-3/documentation.asp?id=pnb) | Western Panjabi | unknown |
 | [`zro`](http://www-01.sil.org/iso639-3/documentation.asp?id=zro) | Záparo | unknown |
 

@@ -75,13 +75,17 @@ function generate(basename) {
       return (
         [
           /* Ignore `npi` (Nepali (individual language)): `npe`
-         * (Nepali (macrolanguage)) is also included. */
+           * (Nepali (macrolanguage)) is also included. */
           'npi',
-          /* Ignore `yue`, it uses the Han script, just like `cmn`,
-         * but if both are turned on, both will be ignored as Trigrams
-         * don’t work on Han characters (cmn has 830m speakers, so
-         * that’s the preferred choice). */
-          'yue'
+          /* Ignore non-Mandarin Chinese, if all are turned on, they’ll get
+           * ignored, as trigrams don’t work on Han characters (cmn has 830m
+           * speakers, so that’s the preferred choice). */
+          'yue',
+          'cjy',
+          'gan',
+          'nan',
+          'wuu',
+          'hak'
         ].indexOf(info.iso6393) === -1
       )
     })
@@ -112,9 +116,10 @@ function generate(basename) {
           .join('|')
       } else {
         console.log(
-          '  Ignoring language without trigrams: %s (%s)',
+          '  Ignoring language without trigrams: %s (%s, %s)',
           info.iso6393,
-          info.name
+          info.name,
+          script
         )
       }
     })
@@ -356,17 +361,11 @@ function scriptInformation(code) {
 
 /* Sort a list of languages by most-popular. */
 function sort(a, b) {
-  var diff = b.speakers - a.speakers
-
-  if (diff > 0 || diff < 0) {
-    return diff
-  }
-
-  if (b.speakers === a.speakers) {
-    return alpha.asc(a.name, b.name)
-  }
-
-  return b.speakers ? 1 : -1
+  return (
+    (b.speakers || 0) - (a.speakers || 0) ||
+    alpha.asc(a.name, b.name) ||
+    alpha.asc(a.script, b.script)
+  )
 }
 
 function createExpressions() {
