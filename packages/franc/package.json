@@ -1,7 +1,7 @@
 {
   "name": "franc",
   "threshold": 1000000,
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "Detect the language of text",
   "license": "MIT",
   "keywords": [
