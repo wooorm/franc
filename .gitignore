@@ -4,3 +4,4 @@ node_modules/
 src/list.json
 src/fixtures.json
 dest/
+yarn.lock
