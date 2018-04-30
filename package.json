@@ -7,9 +7,9 @@
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "devDependencies": {
     "alpha-sort": "^2.0.0",
-    "browserify": "^15.0.0",
+    "browserify": "^16.0.0",
     "esmangle": "^1.0.0",
-    "execa": "^0.9.0",
+    "execa": "^0.10.0",
     "format": "^0.2.2",
     "human-format": "^0.10.0",
     "is-hidden": "^1.1.0",
@@ -31,7 +31,7 @@
     "unicode-7.0.0": "^0.7.0",
     "unified": "^6.1.1",
     "unist-builder": "^1.0.2",
-    "xo": "^0.18.1",
+    "xo": "^0.20.0",
     "xtend": "^4.0.1"
   },
   "scripts": {
@@ -61,6 +61,10 @@
       "camelcase": "off",
       "max-lines": "off",
       "guard-for-in": "off",
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
+      "object-shorthand": "off",
+      "unicorn/no-hex-escape": "off",
       "no-self-compare": "off"
     },
     "ignores": [

@@ -107,7 +107,7 @@ This build supports the following languages:
 | [`uig`](http://www-01.sil.org/iso639-3/documentation.asp?id=uig) | Uighur (Arabic) | 7M |
 | [`uig`](http://www-01.sil.org/iso639-3/documentation.asp?id=uig) | Uighur (Latin) | 7M |
 | [`hat`](http://www-01.sil.org/iso639-3/documentation.asp?id=hat) | Haitian | 7M |
-| [`khm`](http://www-01.sil.org/iso639-3/documentation.asp?id=khm) | Central Khmer | 7M |
+| [`khm`](http://www-01.sil.org/iso639-3/documentation.asp?id=khm) | Khmer | 7M |
 | [`aka`](http://www-01.sil.org/iso639-3/documentation.asp?id=aka) | Akan | 7M |
 | [`hil`](http://www-01.sil.org/iso639-3/documentation.asp?id=hil) | Hiligaynon | 7M |
 | [`sna`](http://www-01.sil.org/iso639-3/documentation.asp?id=sna) | Shona | 7M |
