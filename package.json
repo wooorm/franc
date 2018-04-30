@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "debounce": "^1.0.0",
-    "franc": "^3.0.0"
+    "franc": "^4.0.0"
   },
   "devDependencies": {
     "bail": "^1.0.2",
