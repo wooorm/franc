@@ -154,6 +154,8 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 Note that franc returns [ISO 639-3][iso6393] codes (three letter codes).
 **Not** ISO 639-1 or ISO 639-2.  See also [GH-10][] and [GH-30][].
 
+If you need to convert between different flavors of ISO codes, take a look at the [langs](https://github.com/adlawson/nodejs-langs) package.
+
 ## Ports
 
 Franc has been ported to several other programming languages.
