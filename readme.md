@@ -184,7 +184,7 @@ under the MIT license: respectively, [Kent S. Johnson][grant-3],
 
 [releases]: https://github.com/wooorm/franc/releases
 
-[logo]: https://cdn.rawgit.com/wooorm/franc/a162cc0/logo.svg
+[logo]: https://raw.githubusercontent.com/wooorm/franc/a162cc0/logo.svg?sanitize=true
 
 [build-badge]: https://img.shields.io/travis/wooorm/franc.svg
 
