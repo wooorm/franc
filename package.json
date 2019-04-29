@@ -39,7 +39,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
     "generate": "node script/build",
-    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
     "build-bundle-s": "browserify packages/franc-min -s franc | esmangle > franc-min.js",
     "build-bundle-m": "browserify packages/franc -s franc | esmangle > franc.js",
     "build-bundle-l": "browserify packages/franc-all -s franc | esmangle > franc-all.js",
