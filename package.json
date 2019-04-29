@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "franc",
   "description": "Monorepo for franc packages",
   "license": "MIT",
