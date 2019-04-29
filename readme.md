@@ -208,7 +208,7 @@ under the MIT license: respectively, [Kent S. Johnson][grant-3],
 
 [grant-3]: https://github.com/wooorm/franc/issues/6#issuecomment-59936827
 
-[mit]: LICENSE
+[mit]: license
 
 [home]: http://wooorm.com
 
