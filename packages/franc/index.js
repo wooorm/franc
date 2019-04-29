@@ -197,7 +197,7 @@ function getDistances(trigrams, languages, options) {
     distances.push([language, getDistance(trigrams, languages[language])])
   }
 
-  return distances.length ? distances.sort(sort) : und()
+  return distances.length === 0 ? und() : distances.sort(sort)
 }
 
 /**

@@ -4,3 +4,5 @@
 
 require('./api')
 require('./cli')
+
+/* eslint-enable import/no-unassigned-import */

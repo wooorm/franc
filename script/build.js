@@ -38,8 +38,7 @@ var expressions = createExpressions()
 var topLanguages = createTopLanguages()
 var doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8')
 
-fs
-  .readdirSync(root)
+fs.readdirSync(root)
   .filter(negate(hidden))
   .forEach(generate)
 
@@ -363,8 +362,8 @@ function scriptInformation(code) {
 function sort(a, b) {
   return (
     (b.speakers || 0) - (a.speakers || 0) ||
-    alpha.asc(a.name, b.name) ||
-    alpha.asc(a.script, b.script)
+    alpha.ascending(a.name, b.name) ||
+    alpha.ascending(a.script, b.script)
   )
 }
 
