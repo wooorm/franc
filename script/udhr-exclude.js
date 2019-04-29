@@ -22,5 +22,9 @@ module.exports = [
   'prq',
 
   /* Same UDHR as ckb (Central Kurdish), but with less speakers. */
-  'kmr' /* Northern Kurdish */
+  'kmr' /* Northern Kurdish */,
+
+  // Macedo-Romanian (rup) and Vlax Romani (rmy) have the same UDHR, and same
+  // number of speakers (1.5m), so ignore one.
+  'rup'
 ]

@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 188 languages (1M or more speakers).
+Built with support for 187 languages (1M or more speakers).
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -188,7 +188,6 @@ This build supports the following languages:
 | [`lav`](http://www-01.sil.org/iso639-3/documentation.asp?id=lav) | Latvian | 2M |
 | [`quz`](http://www-01.sil.org/iso639-3/documentation.asp?id=quz) | Cusco Quechua | 2M |
 | [`src`](http://www-01.sil.org/iso639-3/documentation.asp?id=src) | Logudorese Sardinian | 2M |
-| [`rup`](http://www-01.sil.org/iso639-3/documentation.asp?id=rup) | Macedo-Romanian | 2M |
 | [`sco`](http://www-01.sil.org/iso639-3/documentation.asp?id=sco) | Scots | 2M |
 | [`tso`](http://www-01.sil.org/iso639-3/documentation.asp?id=tso) | Tsonga | 2M |
 | [`rmy`](http://www-01.sil.org/iso639-3/documentation.asp?id=rmy) | Vlax Romani | 2M |
