@@ -68,14 +68,9 @@
     "esnext": false,
     "rules": {
       "camelcase": "off",
-      "max-lines": "off",
       "guard-for-in": "off",
-      "no-var": "off",
-      "prefer-arrow-callback": "off",
-      "object-shorthand": "off",
       "no-misleading-character-class": "off",
-      "unicorn/no-hex-escape": "off",
-      "no-self-compare": "off"
+      "unicorn/no-hex-escape": "off"
     },
     "ignores": [
       "franc-all.js",
