@@ -154,6 +154,11 @@ $ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
 Note that franc returns [ISO 639-3][iso6393] codes (three letter codes).
 **Not** ISO 639-1 or ISO 639-2.  See also [GH-10][] and [GH-30][].
 
+To get more info about the languages represented by ISO 639-3, you can use
+[langs][] or [iso-639-3][].
+To map ISO 639-3 to ISO 639-1 codes, use [iso-639-3-to-1][],
+but note that not all 639-3 codes can be represented in 639-1.
+
 ## Ports
 
 Franc has been ported to several other programming languages.
@@ -227,3 +232,9 @@ under the MIT license: respectively, [Kent S. Johnson][grant-3],
 [gh-10]: https://github.com/wooorm/franc/issues/10
 
 [gh-30]: https://github.com/wooorm/franc/issues/30
+
+[langs]: https://github.com/adlawson/nodejs-langs
+
+[iso-639-3]: https://github.com/wooorm/iso-639-3
+
+[iso-639-3-to-1]: https://github.com/amitbend/iso-639-3-to-1
