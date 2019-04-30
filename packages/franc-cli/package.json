@@ -1,6 +1,6 @@
 {
   "name": "franc-cli",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "CLI to detect the language of text",
   "license": "MIT",
   "keywords": [
