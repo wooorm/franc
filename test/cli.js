@@ -10,13 +10,22 @@ var pkg = require(path.resolve(root, 'package.json'))
 var cli = path.resolve(root, 'index.js')
 
 test('cli', function(t) {
-  t.plan(17)
-  ;['-v', '--version'].forEach(function(flag) {
+  var help = ['-h', '--help']
+  var version = ['-v', '--version']
+  var disallow = ['-i', '--ignore', '-b', '--blacklist']
+  var allow = ['-o', '--only', '-w', '--whitelist']
+  var minLength = ['-m', '--min-length']
+  var all = ['-a', '--all']
+
+  t.plan(21)
+
+  version.forEach(function(flag) {
     execa.stdout(cli, [flag]).then(function(result) {
       t.equal(result, pkg.version, flag)
     }, t.ifErr)
   })
-  ;['-h', '--help'].forEach(function(flag) {
+
+  help.forEach(function(flag) {
     execa.stdout(cli, [flag]).then(function(result) {
       t.ok(/^\s+CLI to detect the language of text/.test(result), flag)
     }, t.ifErr)
@@ -57,21 +66,24 @@ test('cli', function(t) {
       st.equal(result, 'afr', 'stdin')
     }, st.ifErr)
   })
-  ;['-w', '--whitelist'].forEach(function(flag) {
+
+  allow.forEach(function(flag) {
     execa
       .stdout(cli, [flag, 'nob,dan', 'Alle mennesker er født frie og'])
       .then(function(result) {
         t.equal(result, 'nob', flag)
       }, t.ifErr)
   })
-  ;['-b', '--blacklist'].forEach(function(flag) {
+
+  disallow.forEach(function(flag) {
     execa
       .stdout(cli, [flag, 'por,glg', 'O Brasil caiu 26 posições'])
       .then(function(result) {
         t.equal(result, 'src', flag)
       }, t.ifErr)
   })
-  ;['-m', '--min-length'].forEach(function(flag) {
+
+  minLength.forEach(function(flag) {
     execa.stdout(cli, [flag, '3', 'the']).then(function(result) {
       t.equal(result, 'sco', flag + ' (satisfied)')
     }, t.ifErr)
@@ -80,7 +92,8 @@ test('cli', function(t) {
       t.equal(result, 'und', flag + ' (unsatisfied)')
     }, t.ifErr)
   })
-  ;['-a', '--all'].forEach(function(flag) {
+
+  all.forEach(function(flag) {
     execa
       .stdout(cli, [flag, 'Alle menslike wesens word vry'])
       .then(function(result) {

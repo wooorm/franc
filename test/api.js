@@ -49,27 +49,27 @@ test('franc()', function(t) {
   )
 
   t.notEqual(
-    franc(fixtureB, {blacklist: [franc(fixtureB)]}),
+    franc(fixtureB, {ignore: [franc(fixtureB)]}),
     franc(fixtureB),
-    'should accept `blacklist`'
+    'should accept `ignore`'
   )
 
   t.deepEqual(
-    franc(fixtures.aii.fixture, {blacklist: ['aii']}),
+    franc(fixtures.aii.fixture, {ignore: ['aii']}),
     'und',
-    'should support `blacklist` if the script can only be in that language'
+    'should support `ignore` if the script can only be in that language'
   )
 
   t.equal(
-    franc(fixtureB, {whitelist: [languageA]}),
+    franc(fixtureB, {only: [languageA]}),
     languageA,
-    'should accept `whitelist`'
+    'should accept `only`'
   )
 
   t.equal(
-    franc(hebrew, {whitelist: ['eng']}),
+    franc(hebrew, {only: ['eng']}),
     'und',
-    'should accept `whitelist` for different scripts'
+    'should accept `only` for different scripts'
   )
 
   t.equal(franc('the', {minLength: 3}), 'sco', 'should accept `minLength` (1)')
@@ -131,25 +131,25 @@ test('franc.all()', function(t) {
 
   t.deepEqual(
     franc
-      .all(fixtureB, {blacklist: [franc(fixtureB)]})
+      .all(fixtureB, {ignore: [franc(fixtureB)]})
       .map(function(tuple) {
         return tuple[0]
       })
       .indexOf(franc(fixtureB)),
     -1,
-    'should accept `blacklist`'
+    'should accept `ignore`'
   )
 
   t.deepEqual(
-    franc.all(fixtureB, {whitelist: [languageA]}),
+    franc.all(fixtureB, {only: [languageA]}),
     [[languageA, 1]],
-    'should accept `whitelist`'
+    'should accept `only`'
   )
 
   t.deepEqual(
-    franc.all(hebrew, {whitelist: ['eng']}),
+    franc.all(hebrew, {only: ['eng']}),
     [['und', 1]],
-    'should accept `whitelist` for different scripts'
+    'should accept `only` for different scripts'
   )
 
   t.deepEqual(
