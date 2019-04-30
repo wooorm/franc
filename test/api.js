@@ -54,6 +54,12 @@ test('franc()', function(t) {
     'should accept `blacklist`'
   )
 
+  t.deepEqual(
+    franc(fixtures.aii.fixture, {blacklist: ['aii']}),
+    'und',
+    'should support `blacklist` if the script can only be in that language'
+  )
+
   t.equal(
     franc(fixtureB, {whitelist: [languageA]}),
     languageA,
