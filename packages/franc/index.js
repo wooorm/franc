@@ -78,6 +78,7 @@ function detect(value, options) {
 function detectAll(value, options) {
   var settings = options || {}
   var minLength = MIN_LENGTH
+  var whitelist = settings.whitelist || []
   var blacklist = settings.blacklist || []
   var script
 
@@ -99,7 +100,7 @@ function detectAll(value, options) {
   if (!(script[0] in data)) {
     /* If no matches occured, such as a digit only string,
      * or because the language is ignored, exit with `und`. */
-    if (script[1] === 0 || blacklist.indexOf(script[0]) !== -1) {
+    if (script[1] === 0 || !allow(script[0], whitelist, blacklist)) {
       return und()
     }
 
@@ -110,7 +111,12 @@ function detectAll(value, options) {
    * normalize the distance values. */
   return normalize(
     value,
-    getDistances(utilities.asTuples(value), data[script[0]], settings)
+    getDistances(
+      utilities.asTuples(value),
+      data[script[0]],
+      whitelist,
+      blacklist
+    )
   )
 }
 
@@ -185,14 +191,16 @@ function getOccurrence(value, expression) {
  *   array containing trigram--count tuples.
  * @param {Object.<Object>} languages - multiple
  *   trigrams to test against.
- * @param {Object} options - Configuration.
+ * @param {Array.<string>} whitelist - Whitelisted
+ *   languages; if non-empty, only included languages
+ *   are kept.
+ * @param {Array.<string>} blacklist - Blacklisted
+ *   languages; included languages are ignored.
  * @return {Array.<Array.<string, number>>} An array
  *   containing language--distance tuples.
  */
-function getDistances(trigrams, languages, options) {
+function getDistances(trigrams, languages, whitelist, blacklist) {
   var distances = []
-  var whitelist = options.whitelist || []
-  var blacklist = options.blacklist || []
   var language
 
   languages = filterLanguages(languages, whitelist, blacklist)
@@ -265,15 +273,35 @@ function filterLanguages(languages, whitelist, blacklist) {
   filteredLanguages = {}
 
   for (language in languages) {
-    if (
-      (whitelist.length === 0 || whitelist.indexOf(language) !== -1) &&
-      blacklist.indexOf(language) === -1
-    ) {
+    if (allow(language, whitelist, blacklist)) {
       filteredLanguages[language] = languages[language]
     }
   }
 
   return filteredLanguages
+}
+
+/**
+ * Check if `language` can match according to settings.
+ *
+ * @param {string} language - Languages
+ *   to filter
+ * @param {Array.<string>} whitelist - Whitelisted
+ *   languages; if non-empty, only included languages
+ *   are kept.
+ * @param {Array.<string>} blacklist - Blacklisted
+ *   languages; included languages are ignored.
+ * @return {boolean} - Whether `language` can match
+ */
+function allow(language, whitelist, blacklist) {
+  if (whitelist.length === 0 && blacklist.length === 0) {
+    return true
+  }
+
+  return (
+    (whitelist.length === 0 || whitelist.indexOf(language) !== -1) &&
+    blacklist.indexOf(language) === -1
+  )
 }
 
 /* Create a single `und` tuple. */
