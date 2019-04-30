@@ -1,20 +1,22 @@
 'use strict'
 
 var fs = require('fs')
-var url = require('url')
+var URL = require('url').URL
 var path = require('path')
 var https = require('https')
 var bail = require('bail')
-var xtend = require('xtend')
 var concat = require('concat-stream')
 var iso = require('iso-639-3')
 
-var fixtures = url.parse(
+var options = new URL(
   'https://raw.githubusercontent.com/wooorm/franc/master/test/fixtures.json'
 )
 
+options.headers = {'User-Agent': 'request'}
+
 https
-  .request(xtend(fixtures, {headers: {'User-Agent': 'request'}}), onrequest)
+  .request(options, onrequest)
+  .on('error', bail)
   .end()
 
 function onrequest(response) {

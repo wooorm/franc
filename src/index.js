@@ -7,8 +7,8 @@ var debounce = require('debounce')
 var fixtures = require('./fixtures.json')
 var names = require('./list.json')
 
-var $input = document.getElementsByTagName('textarea')[0]
-var $output = document.getElementsByTagName('tbody')[0]
+var $input = document.querySelectorAll('textarea')[0]
+var $output = document.querySelectorAll('tbody')[0]
 
 var onchange = debounce(oninputchange, 100)
 

@@ -28,8 +28,7 @@
     "remark-preset-wooorm": "^4.0.0",
     "stylelint": "^10.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "xo": "^0.24.0",
-    "xtend": "^4.0.1"
+    "xo": "^0.24.0"
   },
   "scripts": {
     "generate": "node build",
@@ -56,7 +55,8 @@
     "esnext": false,
     "rules": {
       "no-var": "off",
-      "prefer-arrow-callback": "off"
+      "prefer-arrow-callback": "off",
+      "unicorn/prefer-node-append": "off"
     }
   },
   "postcss": {
