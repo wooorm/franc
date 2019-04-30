@@ -78,6 +78,7 @@ function detect(value, options) {
 function detectAll(value, options) {
   var settings = options || {}
   var minLength = MIN_LENGTH
+  var blacklist = settings.blacklist || []
   var script
 
   if (settings.minLength !== null && settings.minLength !== undefined) {
@@ -94,12 +95,15 @@ function detectAll(value, options) {
    * in `value`. */
   script = getTopScript(value, expressions)
 
-  /* One languages exists for the most-used script.
-   *
-   * If no matches occured, such as a digit only string,
-   * exit with `und`. */
+  /* One languages exists for the most-used script. */
   if (!(script[0] in data)) {
-    return script[1] === 0 ? und() : singleLanguageTuples(script[0])
+    /* If no matches occured, such as a digit only string,
+     * or because the language is ignored, exit with `und`. */
+    if (script[1] === 0 || blacklist.indexOf(script[0]) !== -1) {
+      return und()
+    }
+
+    return singleLanguageTuples(script[0])
   }
 
   /* Get all distances for a given script, and
