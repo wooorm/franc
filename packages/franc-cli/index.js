@@ -17,9 +17,17 @@ var cli = meow(help(), {
       type: 'string',
       alias: 'w'
     },
+    only: {
+      type: 'string',
+      alias: 'o'
+    },
     blacklist: {
       type: 'string',
       alias: 'b'
+    },
+    ignore: {
+      type: 'string',
+      alias: 'i'
     },
     minLength: {
       type: 'string',
@@ -41,13 +49,10 @@ var flags = cli.flags
 
 flags.minLength = Number(flags.minLength) || null
 
-if (flags.whitelist) {
-  flags.whitelist = String(flags.whitelist).split(',')
-}
-
-if (flags.blacklist) {
-  flags.blacklist = String(flags.blacklist).split(',')
-}
+flags.whitelist = list(flags.whitelist)
+flags.blacklist = list(flags.blacklist)
+flags.only = flags.whitelist.concat(list(flags.only))
+flags.ignore = flags.blacklist.concat(list(flags.ignore))
 
 if (value) {
   detect(value)
@@ -62,8 +67,8 @@ if (value) {
 function detect(value) {
   var options = {
     minLength: flags.minLength,
-    whitelist: flags.whitelist,
-    blacklist: flags.blacklist
+    only: flags.only,
+    ignore: flags.ignore
   }
 
   if (flags.all) {
@@ -84,8 +89,8 @@ function help() {
     '  -h, --help                    output usage information',
     '  -v, --version                 output version number',
     '  -m, --min-length <number>     minimum length to accept',
-    '  -w, --whitelist <string>      allow languages',
-    '  -b, --blacklist <string>      disallow languages',
+    '  -o, --only <string>           allow languages',
+    '  -i, --ignore <string>         disallow languages',
     '  -a, --all                     display all guesses',
     '',
     'Usage:',
@@ -98,20 +103,16 @@ function help() {
     '$ echo "এটি একটি ভাষা একক IBM স্ক্রিপ্ট" | ' + command,
     '# ' + franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট'),
     '',
-    '# blacklist certain languages',
-    '$ ' + command + ' --blacklist por,glg "O Brasil caiu 26 posições"',
-    '# ' +
-      franc('O Brasil caiu 26 posições', {
-        blacklist: ['por', 'glg']
-      }),
+    '# ignore certain languages',
+    '$ ' + command + ' --ignore por,glg "O Brasil caiu 26 posições"',
+    '# ' + franc('O Brasil caiu 26 posições', {ignore: ['por', 'glg']}),
     '',
-    '# output language from stdin with whitelist',
-    '$ echo "Alle mennesker er født frie og" | ' +
-      command +
-      ' --whitelist nob,dan',
-    '# ' +
-      franc('Alle mennesker er født frie og', {
-        whitelist: ['nob', 'dan']
-      })
+    '# output language from stdin with only',
+    '$ echo "Alle mennesker er født frie og" | ' + command + ' --only nob,dan',
+    '# ' + franc('Alle mennesker er født frie og', {only: ['nob', 'dan']})
   ].join('\n')
+}
+
+function list(value) {
+  return value ? String(value).split(',') : []
 }

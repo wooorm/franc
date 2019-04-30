@@ -78,8 +78,8 @@ function detect(value, options) {
 function detectAll(value, options) {
   var settings = options || {}
   var minLength = MIN_LENGTH
-  var whitelist = settings.whitelist || []
-  var blacklist = settings.blacklist || []
+  var only = [].concat(settings.whitelist || [], settings.only || [])
+  var ignore = [].concat(settings.blacklist || [], settings.ignore || [])
   var script
 
   if (settings.minLength !== null && settings.minLength !== undefined) {
@@ -100,7 +100,7 @@ function detectAll(value, options) {
   if (!(script[0] in data)) {
     /* If no matches occured, such as a digit only string,
      * or because the language is ignored, exit with `und`. */
-    if (script[1] === 0 || !allow(script[0], whitelist, blacklist)) {
+    if (script[1] === 0 || !allow(script[0], only, ignore)) {
       return und()
     }
 
@@ -111,12 +111,7 @@ function detectAll(value, options) {
    * normalize the distance values. */
   return normalize(
     value,
-    getDistances(
-      utilities.asTuples(value),
-      data[script[0]],
-      whitelist,
-      blacklist
-    )
+    getDistances(utilities.asTuples(value), data[script[0]], only, ignore)
   )
 }
 
@@ -191,19 +186,18 @@ function getOccurrence(value, expression) {
  *   array containing trigram--count tuples.
  * @param {Object.<Object>} languages - multiple
  *   trigrams to test against.
- * @param {Array.<string>} whitelist - Whitelisted
- *   languages; if non-empty, only included languages
- *   are kept.
- * @param {Array.<string>} blacklist - Blacklisted
- *   languages; included languages are ignored.
+ * @param {Array.<string>} only - Allowed languages; if
+ *   non-empty, only included languages are kept.
+ * @param {Array.<string>} ignore - Disallowed languages;
+ *   included languages are ignored.
  * @return {Array.<Array.<string, number>>} An array
  *   containing language--distance tuples.
  */
-function getDistances(trigrams, languages, whitelist, blacklist) {
+function getDistances(trigrams, languages, only, ignore) {
   var distances = []
   var language
 
-  languages = filterLanguages(languages, whitelist, blacklist)
+  languages = filterLanguages(languages, only, ignore)
 
   for (language in languages) {
     distances.push([language, getDistance(trigrams, languages[language])])
@@ -250,30 +244,29 @@ function getDistance(trigrams, model) {
 
 /**
  * Filter `languages` by removing languages in
- * `blacklist`, or including languages in `whitelist`.
+ * `ignore`, or including languages in `only`.
  *
  * @param {Object.<Object>} languages - Languages
  *   to filter
- * @param {Array.<string>} whitelist - Whitelisted
- *   languages; if non-empty, only included languages
- *   are kept.
- * @param {Array.<string>} blacklist - Blacklisted
- *   languages; included languages are ignored.
+ * @param {Array.<string>} only - Allowed languages; if
+ *   non-empty, only included languages are kept.
+ * @param {Array.<string>} ignore - Disallowed languages;
+ *   included languages are ignored.
  * @return {Object.<Object>} - Filtered array of
  *   languages.
  */
-function filterLanguages(languages, whitelist, blacklist) {
+function filterLanguages(languages, only, ignore) {
   var filteredLanguages
   var language
 
-  if (whitelist.length === 0 && blacklist.length === 0) {
+  if (only.length === 0 && ignore.length === 0) {
     return languages
   }
 
   filteredLanguages = {}
 
   for (language in languages) {
-    if (allow(language, whitelist, blacklist)) {
+    if (allow(language, only, ignore)) {
       filteredLanguages[language] = languages[language]
     }
   }
@@ -286,21 +279,20 @@ function filterLanguages(languages, whitelist, blacklist) {
  *
  * @param {string} language - Languages
  *   to filter
- * @param {Array.<string>} whitelist - Whitelisted
- *   languages; if non-empty, only included languages
- *   are kept.
- * @param {Array.<string>} blacklist - Blacklisted
- *   languages; included languages are ignored.
+ * @param {Array.<string>} only - Allowed languages; if
+ *   non-empty, only included languages are kept.
+ * @param {Array.<string>} ignore - Disallowed languages;
+ *   included languages are ignored.
  * @return {boolean} - Whether `language` can match
  */
-function allow(language, whitelist, blacklist) {
-  if (whitelist.length === 0 && blacklist.length === 0) {
+function allow(language, only, ignore) {
+  if (only.length === 0 && ignore.length === 0) {
     return true
   }
 
   return (
-    (whitelist.length === 0 || whitelist.indexOf(language) !== -1) &&
-    blacklist.indexOf(language) === -1
+    (only.length === 0 || only.indexOf(language) !== -1) &&
+    ignore.indexOf(language) === -1
   )
 }
 

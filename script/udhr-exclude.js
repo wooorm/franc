@@ -1,4 +1,4 @@
-/* Some languages are blacklisted, no matter what
+/* Some languages are ignored, no matter what
  * `threshold` is chosen. */
 module.exports = [
   /* Using both results in incorrect results.

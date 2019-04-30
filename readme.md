@@ -69,10 +69,10 @@ Yields:
   ... 116 more items ]
 ```
 
-###### `whitelist`
+###### `only`
 
 ```js
-console.log(franc.all('O Brasil caiu 26 posições', {whitelist: ['por', 'spa']}))
+console.log(franc.all('O Brasil caiu 26 posições', {only: ['por', 'spa']}))
 ```
 
 Yields:
@@ -81,10 +81,10 @@ Yields:
 [ [ 'por', 1 ], [ 'spa', 0.799906059182715 ] ]
 ```
 
-###### `blacklist`
+###### `ignore`
 
 ```js
-console.log(franc.all('O Brasil caiu 26 posições', {blacklist: ['src', 'glg']}))
+console.log(franc.all('O Brasil caiu 26 posições', {ignore: ['src', 'glg']}))
 ```
 
 Yields:
@@ -118,8 +118,8 @@ Options:
   -h, --help                    output usage information
   -v, --version                 output version number
   -m, --min-length <number>     minimum length to accept
-  -w, --whitelist <string>      allow languages
-  -b, --blacklist <string>      disallow languages
+  -o, --only <string>           allow languages
+  -i, --ignore <string>         disallow languages
   -a, --all                     display all guesses
 
 Usage:
@@ -132,12 +132,12 @@ $ franc "Alle menslike wesens word vry"
 $ echo "এটি একটি ভাষা একক IBM স্ক্রিপ্ট" | franc
 # ben
 
-# blacklist certain languages
-$ franc --blacklist por,glg "O Brasil caiu 26 posições"
+# ignore certain languages
+$ franc --ignore por,glg "O Brasil caiu 26 posições"
 # src
 
-# output language from stdin with whitelist
-$ echo "Alle mennesker er født frie og" | franc --whitelist nob,dan
+# output language from stdin with only
+$ echo "Alle mennesker er født frie og" | franc --only nob,dan
 # nob
 ```
 

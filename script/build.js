@@ -29,7 +29,7 @@ var mono = require(path.join(__dirname, '..', 'package.json'))
 /* Persian (fas, macrolanguage) contains Western Persian (pes)
  * and Dari (prs).  They’re so similar in UDHR that using both
  * will result in incorrect results, so add the macrolanguage
- * instead. (note: prs and pes are blacklisted) */
+ * instead. (note: prs and pes are ignored) */
 speakers = xtend(speakers, {
   fas: speakers.prs + speakers.pes
 })
