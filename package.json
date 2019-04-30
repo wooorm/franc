@@ -17,7 +17,6 @@
     "browserify": "^16.0.0",
     "concat-stream": "^2.0.0",
     "cssnano": "^4.0.0",
-    "esmangle": "^1.0.1",
     "iso-639-3": "^1.0.0",
     "postcss-cli": "^6.0.0",
     "prettier": "^1.12.1",
@@ -28,12 +27,13 @@
     "remark-preset-wooorm": "^4.0.0",
     "stylelint": "^10.0.0",
     "stylelint-config-standard": "^18.0.0",
+    "tinyify": "^2.5.0",
     "xo": "^0.24.0"
   },
   "scripts": {
     "generate": "node build",
     "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix && stylelint src/index.css --fix",
-    "build:js": "browserify src/index.js | esmangle > dest/index.js",
+    "build:js": "browserify src/index.js -p tinyify > dest/index.js",
     "build:css": "postcss src/index.css > dest/index.css",
     "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
     "build": "npm run build:js && npm run build:css && npm run build:html",
