@@ -20,26 +20,27 @@ test('cli', function(t) {
   t.plan(21)
 
   version.forEach(function(flag) {
-    execa.stdout(cli, [flag]).then(function(result) {
-      t.equal(result, pkg.version, flag)
+    execa(cli, [flag]).then(function(result) {
+      t.equal(result.stdout, pkg.version, flag)
     }, t.ifErr)
   })
 
   help.forEach(function(flag) {
-    execa.stdout(cli, [flag]).then(function(result) {
-      t.ok(/^\s+CLI to detect the language of text/.test(result), flag)
+    execa(cli, [flag]).then(function(result) {
+      t.ok(/^\s+CLI to detect the language of text/.test(result.stdout), flag)
     }, t.ifErr)
   })
 
-  execa.stdout(cli, ['Alle menslike wesens word vry']).then(function(result) {
-    t.equal(result, 'afr', 'argument')
+  execa(cli, ['Alle menslike wesens word vry']).then(function(result) {
+    t.equal(result.stdout, 'afr', 'argument')
   }, t.ifErr)
 
-  execa
-    .stdout(cli, ['Alle', 'menslike', 'wesens', 'word', 'vry'])
-    .then(function(result) {
-      t.equal(result, 'afr', 'multiple arguments')
-    }, t.ifErr)
+  execa(cli, ['Alle', 'menslike', 'wesens', 'word', 'vry']).then(function(
+    result
+  ) {
+    t.equal(result.stdout, 'afr', 'multiple arguments')
+  },
+  t.ifErr)
 
   t.test('stdin', function(st) {
     var stream = new PassThrough()
@@ -62,46 +63,46 @@ test('cli', function(t) {
 
     send()
 
-    execa.stdout(cli, {input: stream}).then(function(result) {
-      st.equal(result, 'afr', 'stdin')
+    execa(cli, {input: stream}).then(function(result) {
+      st.equal(result.stdout, 'afr', 'stdin')
     }, st.ifErr)
   })
 
   allow.forEach(function(flag) {
-    execa
-      .stdout(cli, [flag, 'nob,dan', 'Alle mennesker er født frie og'])
-      .then(function(result) {
-        t.equal(result, 'nob', flag)
-      }, t.ifErr)
+    execa(cli, [flag, 'nob,dan', 'Alle mennesker er født frie og']).then(
+      function(result) {
+        t.equal(result.stdout, 'nob', flag)
+      },
+      t.ifErr
+    )
   })
 
   disallow.forEach(function(flag) {
-    execa
-      .stdout(cli, [flag, 'por,glg', 'O Brasil caiu 26 posições'])
-      .then(function(result) {
-        t.equal(result, 'src', flag)
-      }, t.ifErr)
+    execa(cli, [flag, 'por,glg', 'O Brasil caiu 26 posições']).then(function(
+      result
+    ) {
+      t.equal(result.stdout, 'src', flag)
+    },
+    t.ifErr)
   })
 
   minLength.forEach(function(flag) {
-    execa.stdout(cli, [flag, '3', 'the']).then(function(result) {
-      t.equal(result, 'sco', flag + ' (satisfied)')
+    execa(cli, [flag, '3', 'the']).then(function(result) {
+      t.equal(result.stdout, 'sco', flag + ' (satisfied)')
     }, t.ifErr)
 
-    execa.stdout(cli, [flag, '4', 'the']).then(function(result) {
-      t.equal(result, 'und', flag + ' (unsatisfied)')
+    execa(cli, [flag, '4', 'the']).then(function(result) {
+      t.equal(result.stdout, 'und', flag + ' (unsatisfied)')
     }, t.ifErr)
   })
 
   all.forEach(function(flag) {
-    execa
-      .stdout(cli, [flag, 'Alle menslike wesens word vry'])
-      .then(function(result) {
-        t.deepEqual(
-          result.split('\n').slice(0, 3),
-          ['afr 1', 'nld 0.7532813781788351', 'nob 0.5412223133716161'],
-          flag
-        )
-      }, t.ifErr)
+    execa(cli, [flag, 'Alle menslike wesens word vry']).then(function(result) {
+      t.deepEqual(
+        result.stdout.split('\n').slice(0, 3),
+        ['afr 1', 'nld 0.7532813781788351', 'nob 0.5412223133716161'],
+        flag
+      )
+    }, t.ifErr)
   })
 })

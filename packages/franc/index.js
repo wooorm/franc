@@ -90,7 +90,7 @@ function detectAll(value, options) {
     return und()
   }
 
-  value = value.substr(0, MAX_LENGTH)
+  value = value.slice(0, MAX_LENGTH)
 
   /* Get the script which characters occur the most
    * in `value`. */

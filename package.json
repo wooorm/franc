@@ -9,7 +9,7 @@
   "devDependencies": {
     "alpha-sort": "^3.0.0",
     "browserify": "^16.0.0",
-    "execa": "^1.0.0",
+    "execa": "^3.0.0",
     "format": "^0.2.2",
     "human-format": "^0.10.0",
     "is-hidden": "^1.1.0",
@@ -19,21 +19,21 @@
     "nyc": "^14.0.0",
     "parse-author": "^2.0.0",
     "prettier": "^1.12.1",
-    "remark-cli": "^6.0.0",
+    "remark-cli": "^7.0.0",
     "remark-lint-no-heading-punctuation": "^1.0.0",
     "remark-lint-no-html": "^1.0.0",
     "remark-lint-table-pipe-alignment": "^1.0.0",
-    "remark-preset-wooorm": "^4.0.0",
-    "remark-stringify": "^6.0.0",
+    "remark-preset-wooorm": "^6.0.0",
+    "remark-stringify": "^7.0.0",
     "speakers": "^1.0.0",
     "tape": "^4.6.0",
     "tinyify": "^2.5.0",
     "trigrams": "^4.0.0",
     "udhr": "^4.0.0",
     "unicode-7.0.0": "^0.7.0",
-    "unified": "^7.0.0",
+    "unified": "^8.0.0",
     "unist-builder": "^1.0.2",
-    "xo": "^0.24.0",
+    "xo": "^0.25.0",
     "xtend": "^4.0.1"
   },
   "scripts": {
@@ -70,7 +70,8 @@
       "camelcase": "off",
       "guard-for-in": "off",
       "no-misleading-character-class": "off",
-      "unicorn/no-hex-escape": "off"
+      "unicorn/no-hex-escape": "off",
+      "unicorn/prefer-includes": "off"
     },
     "ignores": [
       "franc-all.js",
