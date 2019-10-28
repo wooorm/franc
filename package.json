@@ -20,15 +20,15 @@
     "iso-639-3": "^1.0.0",
     "postcss-cli": "^6.0.0",
     "prettier": "^1.12.1",
-    "rehype-cli": "^7.0.0",
-    "rehype-preset-minify": "^3.0.0",
-    "rehype-prevent-favicon-request": "^1.0.0",
-    "remark-cli": "^6.0.0",
-    "remark-preset-wooorm": "^4.0.0",
-    "stylelint": "^10.0.0",
-    "stylelint-config-standard": "^18.0.0",
+    "rehype-cli": "^8.0.0",
+    "rehype-preset-minify": "^4.0.0",
+    "rehype-prevent-favicon-request": "^2.0.0",
+    "remark-cli": "^7.0.0",
+    "remark-preset-wooorm": "^6.0.0",
+    "stylelint": "^11.0.0",
+    "stylelint-config-standard": "^19.0.0",
     "tinyify": "^2.5.0",
-    "xo": "^0.24.0"
+    "xo": "^0.25.0"
   },
   "scripts": {
     "generate": "node build",
