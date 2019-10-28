@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- lts/boron
-- node
+  - lts/dubnium
+  - node
 after_script: bash <(curl -s https://codecov.io/bash)
 sudo: false
 deploy:
@@ -10,8 +10,8 @@ deploy:
   api_key:
     secure: A8NpISg//NNDq9kOclBemt5KD1SKPpYm/dZzGx2+smOST1EAgriG7oPDO+mE4Umb6omuoajBJxmSIYir3tzKC/GsTQFZaulBtJl5IMUJJigKHosDm5AT7OvriuTtozpJ4J5FrUbUxp6UJzrNPtm7hmPn5Ln/2rMbjiTpUvPmOZk=
   file:
-    - "franc.js"
-    - "franc-min.js"
-    - "franc-all.js"
+    - 'franc.js'
+    - 'franc-min.js'
+    - 'franc-all.js'
   on:
     tags: true
