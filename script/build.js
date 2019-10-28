@@ -128,7 +128,11 @@ function generate(basename) {
    * Unicode Kanji Table from http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml */
   var kanjiRegexSource = '[\u3400-\u4DB5\u4E00-\u9FAF]'
   regularExpressions.jpn = new RegExp(
-    expressions.Hiragana.source + '|' + expressions.Katakana.source + '|' + kanjiRegexSource,
+    expressions.Hiragana.source +
+      '|' +
+      expressions.Katakana.source +
+      '|' +
+      kanjiRegexSource,
     'g'
   )
 
