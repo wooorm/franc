@@ -1,7 +1,7 @@
 {
   "name": "franc-min",
   "threshold": 8000000,
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Detect the language of text",
   "license": "MIT",
   "keywords": [
