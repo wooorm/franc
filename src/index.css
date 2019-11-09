@@ -1,5 +1,6 @@
-html {
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+:root {
+  color-scheme: light dark;
+  font-family: system-ui;
   background-color: hsl(0, 0%, 95%);
   word-break: break-word;
 }
@@ -59,9 +60,13 @@ section:last-child {
   margin-bottom: 0;
 }
 
-.hl { color: #4c1; }
+.hl {
+  color: #4c1;
+}
 
-.highlight { background-color: hsl(0, 0%, 100%); }
+.highlight {
+  background-color: hsl(0, 0%, 100%);
+}
 
 * {
   line-height: calc(1em + 1ex);
@@ -77,13 +82,17 @@ h2 {
 
 h1,
 h2 {
-  font-weight: 100;
+  font-weight: normal;
   text-align: center;
 }
 
-h1 { font-size: 3em; }
+h1 {
+  font-size: 3em;
+}
 
-h2 { font-size: 2em; }
+h2 {
+  font-size: 2em;
+}
 
 a {
   text-decoration: none;
@@ -98,18 +107,30 @@ a:target {
   color: inherit;
 }
 
-.credits { text-align: center; }
+.credits {
+  text-align: center;
+}
 
-table { font-family: monospace; }
+table,
+textarea {
+  font-family:
+    SFMono-Regular,
+    Consolas,
+    Liberation Mono,
+    Menlo,
+    Courier,
+    monospace;
+}
 
-td { min-width: 10ch; }
+td {
+  min-width: 6ch;
+}
 
 textarea {
   color: inherit;
-  font-family: monospace;
   font-size: 16px;
   letter-spacing: normal;
-  line-height: 1.5;
+  line-height: calc(1em + 1ex);
   white-space: pre-wrap;
   word-wrap: break-word;
   background: transparent;
@@ -120,4 +141,29 @@ textarea {
   padding: 0;
   width: 100%;
   resize: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: hsl(214, 13%, 7.5%);
+    color: hsl(214, 13%, 95%);
+  }
+
+  main {
+    background-color: hsl(214, 13%, 5%);
+  }
+
+  @media (min-width: 40em) and (min-height: 20em) {
+    main {
+      border-color: hsl(214, 13%, 12.5%);
+    }
+  }
+
+  .highlight {
+    background-color: hsl(214, 13%, 2.5%);
+  }
+
+  section {
+    border-color: hsl(214, 13%, 12.5%);
+  }
 }
