@@ -81,7 +81,7 @@ test('cli', function(t) {
     execa(cli, [flag, 'por,glg', 'O Brasil caiu 26 posições']).then(function(
       result
     ) {
-      t.equal(result.stdout, 'src', flag)
+      t.equal(result.stdout, 'vec', flag)
     },
     t.ifErr)
   })
@@ -100,7 +100,7 @@ test('cli', function(t) {
     execa(cli, [flag, 'Alle menslike wesens word vry']).then(function(result) {
       t.deepEqual(
         result.stdout.split('\n').slice(0, 3),
-        ['afr 1', 'nld 0.7532813781788351', 'nob 0.5412223133716161'],
+        ['afr 1', 'nld 0.7569230769230769', 'nob 0.544'],
         flag
       )
     }, t.ifErr)

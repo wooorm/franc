@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 401 languages.
+Built with support for 406 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -383,6 +383,7 @@ This build supports the following languages:
 | [`bis`](http://www-01.sil.org/iso639-3/documentation.asp?id=bis) | Bislama | 1k |
 | [`orh`](http://www-01.sil.org/iso639-3/documentation.asp?id=orh) | Oroqen | 1k |
 | [`ykg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ykg) | Northern Yukaghir | 1k |
+| [`ese`](http://www-01.sil.org/iso639-3/documentation.asp?id=ese) | Ese Ejja | 1k |
 | [`nio`](http://www-01.sil.org/iso639-3/documentation.asp?id=nio) | Nganasan | 1k |
 | [`cic`](http://www-01.sil.org/iso639-3/documentation.asp?id=cic) | Chickasaw | 1k |
 | [`csa`](http://www-01.sil.org/iso639-3/documentation.asp?id=csa) | Chiltepec Chinantec | 1k |
@@ -407,11 +408,15 @@ This build supports the following languages:
 | [`ina`](http://www-01.sil.org/iso639-3/documentation.asp?id=ina) | Interlingua (International Auxiliary Language Association) | unknown |
 | [`kkh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kkh) | Khün | unknown |
 | [`ktu`](http://www-01.sil.org/iso639-3/documentation.asp?id=ktu) | Kituba (Democratic Republic of Congo) | unknown |
+| [`fkv`](http://www-01.sil.org/iso639-3/documentation.asp?id=fkv) | Kven Finnish | unknown |
 | [`lat`](http://www-01.sil.org/iso639-3/documentation.asp?id=lat) | Latin | unknown |
 | [`glv`](http://www-01.sil.org/iso639-3/documentation.asp?id=glv) | Manx | unknown |
+| [`mfq`](http://www-01.sil.org/iso639-3/documentation.asp?id=mfq) | Moba | unknown |
 | [`mnw`](http://www-01.sil.org/iso639-3/documentation.asp?id=mnw) | Mon | unknown |
 | [`mxi`](http://www-01.sil.org/iso639-3/documentation.asp?id=mxi) | Mozarabic | 0 |
 | [`pcm`](http://www-01.sil.org/iso639-3/documentation.asp?id=pcm) | Nigerian Pidgin | unknown |
+| [`niu`](http://www-01.sil.org/iso639-3/documentation.asp?id=niu) | Niuean | unknown |
+| [`kqs`](http://www-01.sil.org/iso639-3/documentation.asp?id=kqs) | Northern Kissi | unknown |
 | [`sey`](http://www-01.sil.org/iso639-3/documentation.asp?id=sey) | Secoya | unknown |
 | [`ekk`](http://www-01.sil.org/iso639-3/documentation.asp?id=ekk) | Standard Estonian | unknown |
 | [`lvs`](http://www-01.sil.org/iso639-3/documentation.asp?id=lvs) | Standard Latvian | unknown |

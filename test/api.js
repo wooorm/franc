@@ -131,7 +131,10 @@ test('franc.all()', function(t) {
 
   t.deepEqual(
     franc.all('פאר טסי', {minLength: 3}),
-    [['heb', 0], ['ydd', 0]],
+    [
+      ['heb', 0],
+      ['ydd', 0]
+    ],
     'should return `[["und", 1]]` without matches (2)'
   )
 
@@ -155,7 +158,10 @@ test('franc.all()', function(t) {
 
   t.deepEqual(
     franc.all('the the the the the ').slice(0, 2),
-    [['sco', 1], ['eng', 0.9858799798285426]],
+    [
+      ['sco', 1],
+      ['eng', 0.9865523617414692]
+    ],
     'should work on weird values'
   )
 
@@ -184,7 +190,10 @@ test('franc.all()', function(t) {
 
   t.deepEqual(
     franc.all('the', {minLength: 3}).slice(0, 2),
-    [['sco', 1], ['eng', 0.9988851727982163]],
+    [
+      ['sco', 1],
+      ['eng', 0.9988851727982163]
+    ],
     'should accept `minLength` (1)'
   )
 

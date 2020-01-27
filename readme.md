@@ -9,7 +9,7 @@ Detect the language of text.
 
 1.  **franc** can support more languages<sup>(†)</sup> than any other
     library
-2.  **franc** is packaged with support for [82][s], [187][m], or [401][l]
+2.  **franc** is packaged with support for [82][s], [187][m], or [406][l]
     languages
 3.  **franc** has a CLI
 
