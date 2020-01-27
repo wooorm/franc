@@ -400,7 +400,7 @@ This build supports the following languages:
 | [`cbi`](http://www-01.sil.org/iso639-3/documentation.asp?id=cbi) | Chachi | unknown |
 | [`ccp`](http://www-01.sil.org/iso639-3/documentation.asp?id=ccp) | Chakma | unknown |
 | [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
-| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (undefined) | unknown |
+| [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
 | [`duu`](http://www-01.sil.org/iso639-3/documentation.asp?id=duu) | Drung | unknown |
 | [`cfm`](http://www-01.sil.org/iso639-3/documentation.asp?id=cfm) | Falam Chin | unknown |
 | [`fat`](http://www-01.sil.org/iso639-3/documentation.asp?id=fat) | Fanti | unknown |
