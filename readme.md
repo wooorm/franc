@@ -17,10 +17,11 @@ Detect the language of text.
 
 ## What’s not so cool about franc?
 
-**franc** supports many languages, so make sure to pass it big documents,
-to get reliable results.
+**franc** supports many languages, which means it’s easily confused on small
+samples.
+Make sure to pass it big documents to get reliable results.
 
-## Installation
+## Install
 
 [npm][]:
 
@@ -29,17 +30,17 @@ npm install franc
 ```
 
 This installs the [`franc`][m] package, with support for 187 languages
-(languages which have 1 million or more speakers).  [`franc-min`][s] (82
-languages, 8m or more speakers) and [`franc-all`][l] (all 401 possible
-languages) are also available.  Finally, use `franc-cli` to install the
-[CLI][].
+(languages which have 1 million or more speakers).
+[`franc-min`][s] (82 languages, 8m or more speakers) and [`franc-all`][l] (all
+406 possible languages) are also available.
+Finally, use `franc-cli` to install the [CLI][].
 
 Browser builds for [`franc-min`][s], [`franc`][m], and [`franc-all`][l] are
 available on [GitHub Releases][releases].
 
-## Usage
+## Use
 
-```javascript
+```js
 var franc = require('franc')
 
 franc('Alle menslike wesens word vry') // => 'afr'
@@ -102,7 +103,7 @@ Yields:
 
 Install:
 
-```bash
+```sh
 npm install franc-cli --global
 ```
 
@@ -147,17 +148,19 @@ $ echo "Alle mennesker er født frie og" | franc --only nob,dan
 | ------- | --------- | -------- |
 | [`franc-min`][s] | 82 | 8M or more |
 | [`franc`][m] | 187 | 1M or more |
-| [`franc-all`][l] | 401 | - |
+| [`franc-all`][l] | 406 | - |
 
 ### Language code
 
 Note that franc returns [ISO 639-3][iso6393] codes (three letter codes).
-**Not** ISO 639-1 or ISO 639-2.  See also [GH-10][] and [GH-30][].
+**Not** ISO 639-1 or ISO 639-2.
+See also [GH-10][] and [GH-30][].
 
-To get more info about the languages represented by ISO 639-3, you can use
-[langs][] or [iso-639-3][].
-To map ISO 639-3 to ISO 639-1 codes, use [iso-639-3-to-1][],
-but note that not all 639-3 codes can be represented in 639-1.
+To get more info about the languages represented by ISO 639-3, use
+[`iso-639-3`][iso-639-3].
+There is also an index available to map ISO 639-3 to ISO 639-1 codes,
+[`iso-639-3/to-1.json`][iso-639-3-to-1], but note that not all 639-3 codes can
+be represented in 639-1.
 
 ## Ports
 
@@ -177,9 +180,10 @@ languages.
 
 Franc is a derivative work from [guess-language][] (Python, LGPL),
 [guesslanguage][] (C++, LGPL), and [Language::Guess][language-guess]
-(Perl, GPL).  Their creators granted me the rights to distribute franc
-under the MIT license: respectively, [Kent S. Johnson][grant-3],
-[Jacob R. Rideout][grant-2], and [Maciej Ceglowski][grant-1].
+(Perl, GPL).
+Their creators granted me the rights to distribute franc under the MIT license:
+respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
+[Maciej Ceglowski][grant-1].
 
 ## License
 
@@ -233,8 +237,6 @@ under the MIT license: respectively, [Kent S. Johnson][grant-3],
 
 [gh-30]: https://github.com/wooorm/franc/issues/30
 
-[langs]: https://github.com/adlawson/nodejs-langs
-
 [iso-639-3]: https://github.com/wooorm/iso-639-3
 
-[iso-639-3-to-1]: https://github.com/amitbend/iso-639-3-to-1
+[iso-639-3-to-1]: https://github.com/wooorm/iso-639-3/blob/master/to-1.json
