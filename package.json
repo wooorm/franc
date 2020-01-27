@@ -8,26 +8,24 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "dependencies": {
-    "debounce": "^1.0.0",
-    "franc": "^4.0.0"
-  },
   "devDependencies": {
-    "bail": "^1.0.2",
+    "bail": "^1.0.0",
     "browserify": "^16.0.0",
     "concat-stream": "^2.0.0",
     "cssnano": "^4.0.0",
-    "iso-639-3": "^1.0.0",
-    "postcss-cli": "^6.0.0",
-    "prettier": "^1.12.1",
+    "debounce": "^1.0.0",
+    "franc": "^5.0.0",
+    "iso-639-3": "^2.0.0",
+    "postcss-cli": "^7.0.0",
+    "prettier": "^1.0.0",
     "rehype-cli": "^8.0.0",
     "rehype-preset-minify": "^4.0.0",
     "rehype-prevent-favicon-request": "^2.0.0",
     "remark-cli": "^7.0.0",
     "remark-preset-wooorm": "^6.0.0",
-    "stylelint": "^11.0.0",
+    "stylelint": "^13.0.0",
     "stylelint-config-standard": "^19.0.0",
-    "tinyify": "^2.5.0",
+    "tinyify": "^2.0.0",
     "xo": "^0.25.0"
   },
   "scripts": {
