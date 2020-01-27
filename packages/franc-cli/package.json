@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "franc": "^4.0.0",
-    "meow": "^5.0.0"
+    "meow": "^6.0.0"
   },
   "repository": "https://github.com/wooorm/franc/tree/master/packages/franc-cli",
   "bugs": "https://github.com/wooorm/franc/issues",
