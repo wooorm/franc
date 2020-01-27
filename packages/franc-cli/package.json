@@ -25,6 +25,10 @@
   },
   "repository": "https://github.com/wooorm/franc/tree/master/packages/franc-cli",
   "bugs": "https://github.com/wooorm/franc/issues",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/wooorm"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
