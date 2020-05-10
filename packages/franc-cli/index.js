@@ -54,14 +54,14 @@ flags.blacklist = list(flags.blacklist)
 flags.only = flags.whitelist.concat(list(flags.only))
 flags.ignore = flags.blacklist.concat(list(flags.ignore))
 
-if (value) {
-  detect(value)
-} else {
+if (cli.input.length === 0) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
   process.stdin.on('data', function(data) {
     detect(data.trim())
   })
+} else {
+  detect(value)
 }
 
 function detect(value) {
