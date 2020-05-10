@@ -22,7 +22,7 @@ npm install franc-all
 This build supports the following languages:
 
 | Code | Name | Speakers |
-| ---- | ---- | -------- |
+| - | - | - |
 | [`cmn`](http://www-01.sil.org/iso639-3/documentation.asp?id=cmn) | Mandarin Chinese | 885M |
 | [`spa`](http://www-01.sil.org/iso639-3/documentation.asp?id=spa) | Spanish | 332M |
 | [`eng`](http://www-01.sil.org/iso639-3/documentation.asp?id=eng) | English | 322M |

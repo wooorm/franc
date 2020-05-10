@@ -13,7 +13,7 @@ if (languageA === franc(fixtureB)) {
   throw new Error('a and b should not be equal...')
 }
 
-test('franc()', function(t) {
+test('franc()', function (t) {
   t.equal(typeof franc, 'function', 'should be of type `function`')
   t.equal(typeof franc('XYZ'), 'string', 'should return a string')
   t.equal(franc('XYZ'), 'und', 'should return "und" on an undetermined value')
@@ -114,7 +114,7 @@ test('franc()', function(t) {
   t.end()
 })
 
-test('franc.all()', function(t) {
+test('franc.all()', function (t) {
   t.equal(typeof franc.all, 'function', 'should be of type `function`')
 
   t.deepEqual(
@@ -168,7 +168,7 @@ test('franc.all()', function(t) {
   t.deepEqual(
     franc
       .all(fixtureB, {ignore: [franc(fixtureB)]})
-      .map(function(tuple) {
+      .map(function (tuple) {
         return tuple[0]
       })
       .indexOf(franc(fixtureB)),
@@ -206,8 +206,8 @@ test('franc.all()', function(t) {
   t.end()
 })
 
-test('algorithm', function(t) {
-  Object.keys(fixtures).forEach(function(code) {
+test('algorithm', function (t) {
+  Object.keys(fixtures).forEach(function (code) {
     var info = fixtures[code]
 
     if (info.fixture) {

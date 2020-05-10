@@ -28,7 +28,7 @@ var MIN_LENGTH = 10
 var MAX_DIFFERENCE = 300
 
 /* Construct trigram dictionaries. */
-;(function() {
+;(function () {
   var languages
   var name
   var trigrams

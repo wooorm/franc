@@ -38,9 +38,7 @@ var expressions = createExpressions()
 var topLanguages = createTopLanguages()
 var doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8')
 
-fs.readdirSync(root)
-  .filter(negate(hidden))
-  .forEach(generate)
+fs.readdirSync(root).filter(negate(hidden)).forEach(generate)
 
 function generate(basename) {
   var base = path.join(root, basename)
@@ -62,15 +60,15 @@ function generate(basename) {
   console.log('%s, threshold: %s', pack.name, threshold)
 
   if (threshold !== -1) {
-    list = list.filter(function(info) {
+    list = list.filter(function (info) {
       return info.speakers >= threshold
     })
   }
 
   byScript = createTopLanguagesByScript(list)
 
-  Object.keys(byScript).forEach(function(script) {
-    var languages = byScript[script].filter(function(info) {
+  Object.keys(byScript).forEach(function (script) {
+    var languages = byScript[script].filter(function (info) {
       return (
         [
           /* Ignore `npi` (Nepali (individual language)): `npe`
@@ -101,12 +99,12 @@ function generate(basename) {
     }
   })
 
-  Object.keys(perScript).forEach(function(script) {
+  Object.keys(perScript).forEach(function (script) {
     var scriptObject = {}
 
     data[script] = scriptObject
 
-    perScript[script].forEach(function(info) {
+    perScript[script].forEach(function (info) {
       if (trigrams[info.udhr]) {
         support.push(info)
         scriptObject[info.iso6393] = trigrams[info.udhr]
@@ -168,7 +166,7 @@ function generate(basename) {
 
   fixtures = {}
 
-  support.forEach(function(language) {
+  support.forEach(function (language) {
     var udhrKey = language.udhr
     var fixture
 
@@ -215,7 +213,7 @@ function generateExpressions(expressions) {
     'module.exports = {',
     '  ' +
       Object.keys(expressions)
-        .map(function(script) {
+        .map(function (script) {
           return script + ': ' + expressions[script]
         })
         .join(',\n  '),
@@ -265,9 +263,7 @@ function generateReadme(pack, list) {
     ])
   ])
 
-  return unified()
-    .use(stringify)
-    .stringify(tree)
+  return unified().use(stringify).stringify(tree)
 
   function row(info) {
     return u('tableRow', [
@@ -312,7 +308,7 @@ function generateReadme(pack, list) {
 
 function count(list) {
   var map = {}
-  list.forEach(function(info) {
+  list.forEach(function (info) {
     map[info.iso6393] = (map[info.iso6393] || 0) + 1
   })
   return map
@@ -344,7 +340,7 @@ function scriptInformation(code) {
   var length = content.length
   var scriptInformation = {}
 
-  Object.keys(expressions).forEach(function(script) {
+  Object.keys(expressions).forEach(function (script) {
     var count
 
     /* Ignore: unimportant for our goal, scripts. */
@@ -374,20 +370,20 @@ function sort(a, b) {
 }
 
 function createExpressions() {
-  var res = {}
-  scripts.forEach(function(script) {
+  var result = {}
+  scripts.forEach(function (script) {
     var expression = require('unicode-12.1.0/Script/' + script + '/regex.js')
-    res[script] = new RegExp(expression.source, 'g')
+    result[script] = new RegExp(expression.source, 'g')
   })
-  return res
+  return result
 }
 
 function createTopLanguages() {
   var top = iso6393
-    .map(function(info) {
+    .map(function (info) {
       return xtend(info, {speakers: speakers[info.iso6393]})
     })
-    .filter(function(info) {
+    .filter(function (info) {
       var code = info.iso6393
       var name = info.name
 
@@ -404,20 +400,20 @@ function createTopLanguages() {
       return true
     })
 
-  top.forEach(function(info) {
+  top.forEach(function (info) {
     var code = info.iso6393
     var udhrs = getUDHRKeysfromISO(code)
 
     info.udhr = udhrs.pop()
 
     if (udhrs.length !== 0) {
-      udhrs.forEach(function(udhr) {
+      udhrs.forEach(function (udhr) {
         top.push(xtend(info, {udhr: udhr}))
       })
     }
   })
 
-  top.forEach(function(info) {
+  top.forEach(function (info) {
     var code = info.iso6393
     var scripts = scriptInformation(info.udhr)
 
@@ -461,7 +457,7 @@ function createTopLanguages() {
     info.script = Object.keys(scripts)
   })
 
-  top = top.filter(function(info) {
+  top = top.filter(function (info) {
     var scripts = info.script
     var ignore = !trigrams[info.udhr] && scripts.length === 0
 
@@ -491,7 +487,7 @@ function createTopLanguages() {
 function createTopLanguagesByScript(top) {
   var scripts = {}
 
-  top.forEach(function(info) {
+  top.forEach(function (info) {
     var script = info.script
 
     if (!scripts[script]) {
@@ -512,7 +508,7 @@ function getUDHRKeysfromISO(iso) {
     return overrides[iso]
   }
 
-  Object.keys(information).forEach(function(code) {
+  Object.keys(information).forEach(function (code) {
     var info = information[code]
 
     if (info.ISO === iso || info.code === iso) {

@@ -57,7 +57,7 @@ flags.ignore = flags.blacklist.concat(list(flags.ignore))
 if (cli.input.length === 0) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
-  process.stdin.on('data', function(data) {
+  process.stdin.on('data', function (data) {
     detect(data.trim())
   })
 } else {
@@ -72,7 +72,7 @@ function detect(value) {
   }
 
   if (flags.all) {
-    franc.all(value, options).forEach(function(language) {
+    franc.all(value, options).forEach(function (language) {
       console.log(language[0] + ' ' + language[1])
     })
   } else {

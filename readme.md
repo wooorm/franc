@@ -145,7 +145,7 @@ $ echo "Alle mennesker er født frie og" | franc --only nob,dan
 ## Supported languages
 
 | Package | Languages | Speakers |
-| ------- | --------- | -------- |
+| - | - | - |
 | [`franc-min`][s] | 82 | 8M or more |
 | [`franc`][m] | 187 | 1M or more |
 | [`franc-all`][l] | 406 | - |
