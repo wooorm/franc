@@ -15,4 +15,4 @@ npm install franc-cli --global
 
 ## License
 
-[MIT](https://github.com/wooorm/franc/blob/master/license) © [Titus Wormer](http://wooorm.com)
+[MIT](https://github.com/wooorm/franc/blob/franc/license) © [Titus Wormer](http://wooorm.com)

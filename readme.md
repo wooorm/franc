@@ -226,11 +226,11 @@ respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 
 [udhr]: http://unicode.org/udhr/
 
-[s]: https://github.com/wooorm/franc/tree/master/packages/franc-min
+[s]: https://github.com/wooorm/franc/tree/franc/packages/franc-min
 
-[m]: https://github.com/wooorm/franc/tree/master/packages/franc
+[m]: https://github.com/wooorm/franc/tree/franc/packages/franc
 
-[l]: https://github.com/wooorm/franc/tree/master/packages/franc-all
+[l]: https://github.com/wooorm/franc/tree/franc/packages/franc-all
 
 [iso6393]: https://iso639-3.sil.org/code_tables/639/data
 
@@ -240,4 +240,4 @@ respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 
 [iso-639-3]: https://github.com/wooorm/iso-639-3
 
-[iso-639-3-to-1]: https://github.com/wooorm/iso-639-3/blob/master/to-1.json
+[iso-639-3-to-1]: https://github.com/wooorm/iso-639-3/blob/HEAD/to-1.json

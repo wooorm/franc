@@ -255,7 +255,7 @@ function generateReadme(pack, list) {
     u('table', {align: []}, [header()].concat(list.map(row))),
     u('heading', {depth: 2}, [u('text', 'License')]),
     u('paragraph', [
-      u('link', {url: mono.repository + '/blob/master/license'}, [
+      u('link', {url: mono.repository + '/blob/main/license'}, [
         u('text', mono.license)
       ]),
       u('text', ' © '),
