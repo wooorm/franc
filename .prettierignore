@@ -1,1 +1,4 @@
 dest/
+*.html
+*.json
+*.md

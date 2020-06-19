@@ -9,15 +9,12 @@ var concat = require('concat-stream')
 var iso = require('iso-639-3')
 
 var options = new URL(
-  'https://raw.githubusercontent.com/wooorm/franc/master/test/fixtures.json'
+  'https://raw.githubusercontent.com/wooorm/franc/main/test/fixtures.json'
 )
 
 options.headers = {'User-Agent': 'request'}
 
-https
-  .request(options, onrequest)
-  .on('error', bail)
-  .end()
+https.request(options, onrequest).on('error', bail).end()
 
 function onrequest(response) {
   response.pipe(concat(onconcat))

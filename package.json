@@ -17,20 +17,21 @@
     "franc": "^5.0.0",
     "iso-639-3": "^2.0.0",
     "postcss-cli": "^7.0.0",
-    "prettier": "^1.0.0",
-    "rehype-cli": "^8.0.0",
-    "rehype-preset-minify": "^4.0.0",
+    "prettier": "^2.0.0",
+    "rehype-cli": "^9.0.0",
+    "rehype-preset-minify": "^5.0.0",
     "rehype-prevent-favicon-request": "^2.0.0",
-    "remark-cli": "^7.0.0",
-    "remark-preset-wooorm": "^6.0.0",
+    "remark-cli": "^8.0.0",
+    "remark-preset-wooorm": "^7.0.0",
     "stylelint": "^13.0.0",
-    "stylelint-config-standard": "^19.0.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
     "tinyify": "^2.0.0",
-    "xo": "^0.25.0"
+    "xo": "^0.32.0"
   },
   "scripts": {
     "generate": "node build",
-    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix && stylelint src/index.css --fix",
+    "format": "remark . -qfo && prettier . --write && xo --fix && stylelint src/index.css --fix",
     "build:js": "browserify src/index.js -p tinyify > dest/index.js",
     "build:css": "postcss src/index.css > dest/index.css",
     "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
@@ -38,7 +39,10 @@
     "test": "npm run generate && npm run format && npm run build"
   },
   "stylelint": {
-    "extends": "stylelint-config-standard"
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ]
   },
   "prettier": {
     "tabWidth": 2,
@@ -52,9 +56,11 @@
     "prettier": true,
     "esnext": false,
     "rules": {
+      "unicorn/no-fn-reference-in-iterator": "off",
+      "unicorn/prefer-node-append": "off",
+      "unicorn/prefer-node-remove": "off",
       "no-var": "off",
-      "prefer-arrow-callback": "off",
-      "unicorn/prefer-node-append": "off"
+      "prefer-arrow-callback": "off"
     }
   },
   "postcss": {

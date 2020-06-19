@@ -113,12 +113,7 @@ a:target {
 
 table,
 textarea {
-  font-family:
-    SFMono-Regular,
-    Consolas,
-    Liberation Mono,
-    Menlo,
-    Courier,
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
     monospace;
 }
 
