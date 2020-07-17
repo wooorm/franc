@@ -20,7 +20,7 @@
   "dependencies": {
     "trigram-utils": "^1.0.0"
   },
-  "repository": "https://github.com/wooorm/franc/tree/franc/packages/franc-all",
+  "repository": "https://github.com/wooorm/franc/tree/main/packages/franc-all",
   "bugs": "https://github.com/wooorm/franc/issues",
   "funding": {
     "type": "github",

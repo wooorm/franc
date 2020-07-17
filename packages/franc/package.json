@@ -20,7 +20,7 @@
     "expressions.js",
     "index.js"
   ],
-  "repository": "https://github.com/wooorm/franc/tree/franc/packages/franc",
+  "repository": "https://github.com/wooorm/franc/tree/main/packages/franc",
   "bugs": "https://github.com/wooorm/franc/issues",
   "funding": {
     "type": "github",
