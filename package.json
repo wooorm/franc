@@ -8,9 +8,9 @@
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "devDependencies": {
     "alpha-sort": "^3.0.0",
-    "browserify": "^16.0.0",
+    "browserify": "^17.0.0",
     "format": "^0.2.0",
-    "human-format": "^0.10.0",
+    "human-format": "^0.11.0",
     "is-hidden": "^1.0.0",
     "iso-639-3": "^2.0.0",
     "lerna": "^3.0.0",
@@ -18,27 +18,27 @@
     "nyc": "^15.0.0",
     "parse-author": "^2.0.0",
     "prettier": "^2.0.0",
-    "remark-cli": "^8.0.0",
+    "remark-cli": "^9.0.0-alpha.1",
     "remark-lint-no-heading-punctuation": "^2.0.0",
     "remark-lint-no-html": "^2.0.0",
     "remark-lint-table-pipe-alignment": "^2.0.0",
-    "remark-preset-wooorm": "^7.0.0",
+    "remark-preset-wooorm": "^8.0.0",
     "remark-stringify": "^8.0.0",
     "speakers": "^1.0.0",
     "tape": "^5.0.0",
-    "tinyify": "^2.0.0",
+    "tinyify": "^3.0.0",
     "trigrams": "^4.0.0",
     "udhr": "^4.0.0",
     "unicode-12.1.0": "^0.8.0",
     "unified": "^9.0.0",
     "unist-builder": "^2.0.0",
-    "xo": "^0.32.0",
+    "xo": "^0.33.0",
     "xtend": "^4.0.0"
   },
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
     "generate": "node script/build",
-    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "build-bundle-s": "browserify packages/franc-min -s franc -p tinyify > franc-min.js",
     "build-bundle-m": "browserify packages/franc -s franc -p tinyify > franc.js",
     "build-bundle-l": "browserify packages/franc-all -s franc -p tinyify > franc-all.js",
@@ -81,11 +81,12 @@
     ]
   },
   "remarkConfig": {
-    "settings": {
-      "tablePipeAlign": false
-    },
     "plugins": [
       "preset-wooorm",
+      [
+        "gfm",
+        {"tablePipeAlign": false}
+      ],
       [
         "remark-lint-table-pipe-alignment",
         false
