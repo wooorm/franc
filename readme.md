@@ -173,6 +173,7 @@ Franc has been ported to several other programming languages.
     [`whatlanggo`](https://github.com/abadojack/whatlanggo)
 *   R — [`franc`](https://github.com/MangoTheCat/franc)
 *   Rust — [`whatlang-rs`](https://github.com/greyblake/whatlang-rs)
+*   Dart — [`francd`](https://github.com/svonidze/francd)
 
 The works franc is derived from have themselves also been ported to other
 languages.
