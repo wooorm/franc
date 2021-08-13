@@ -5,17 +5,11 @@ import {asTuples} from 'trigram-utils'
 
 /* Load `expressions` (regular expressions matching
  * scripts). */
-import expressions from './expressions.js'
+import {expressions} from './expressions.js'
 
 /* Load `data` (trigram information per language,
  * per script). */
-import data from './data.js'
-
-/* Expose `detectAll` on `detect`. */
-detect.all = detectAll
-
-/* Expose `detect`. */
-export default detect
+import {data} from './data.js'
 
 /* Maximum sample length. */
 var MAX_LENGTH = 2048
@@ -62,8 +56,8 @@ var MAX_DIFFERENCE = 300
  * @param {Object} options - Configuration.
  * @return {string} The most probable language.
  */
-function detect(value, options) {
-  return detectAll(value, options)[0][0]
+export function franc(value, options) {
+  return francAll(value, options)[0][0]
 }
 
 /**
@@ -75,7 +69,7 @@ function detect(value, options) {
  * @return {Array.<Array.<string, number>>} An array
  *   containing language--distance tuples.
  */
-function detectAll(value, options) {
+export function francAll(value, options) {
   var settings = options || {}
   var minLength = MIN_LENGTH
   var only = [].concat(settings.whitelist || [], settings.only || [])

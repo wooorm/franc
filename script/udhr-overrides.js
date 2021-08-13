@@ -1,4 +1,4 @@
-const udhrOverrides = {
+export const udhrOverrides = {
   /* Get a UDHR key from an ISO code. */
   /* It doesnt matter which one we take, simplified
    * or traditional. It all chinese, and all Han-script
@@ -44,5 +44,3 @@ const udhrOverrides = {
   /* Tso in mozambique has a UDHR preview: http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=tso */
   tso: ['tso_MZ']
 }
-
-export default udhrOverrides

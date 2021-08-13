@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {createRequire} from 'node:module'
 import meow from 'meow'
-import franc from 'franc'
+import {franc, francAll} from 'franc'
 
 const require = createRequire(import.meta.url)
 const pack = require('./package.json')
@@ -74,7 +74,7 @@ function detect(value) {
   }
 
   if (flags.all) {
-    franc.all(value, options).forEach(function (language) {
+    francAll(value, options).forEach(function (language) {
       console.log(language[0] + ' ' + language[1])
     })
   } else {

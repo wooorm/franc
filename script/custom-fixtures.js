@@ -1,4 +1,4 @@
-const customFixtures = {
+export const customFixtures = {
   ori:
     'ସବୁ ମନୁଷ୍ୟ ଜନ୍ମୁକାଳରୁ ସ୍ଵଧୀନ, ଷେମାନଙ୍କର ମର୍ସ୍ୟାଡା ଓ ' +
     'ଅଧିକାର ସମାନ, ସେମାନଙଠାରେ ପ୍ରବଁ ଓ ବିବେକ ନିହ ଟଛି, ' +
@@ -70,5 +70,3 @@ const customFixtures = {
     'елэкчим муттук һерукэли; һии Царствас энис эскэнси эрэгэр ' +
     'бидэн. Аминб.'
 }
-
-export default customFixtures

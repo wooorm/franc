@@ -1,6 +1,6 @@
 import test from 'tape'
-import franc from '../packages/franc/index.js'
-import fixtures from './fixtures.js'
+import {franc, francAll} from '../packages/franc/index.js'
+import {fixtures} from './fixtures.js'
 
 var languageA = 'pol'
 var languageB = 'eng'
@@ -112,23 +112,23 @@ test('franc()', function (t) {
   t.end()
 })
 
-test('franc.all()', function (t) {
-  t.equal(typeof franc.all, 'function', 'should be of type `function`')
+test('francAll()', function (t) {
+  t.equal(typeof francAll, 'function', 'should be of type `function`')
 
   t.deepEqual(
-    franc.all('XYZ'),
+    francAll('XYZ'),
     [['und', 1]],
     'should return an array containing language--probability tuples'
   )
 
   t.deepEqual(
-    franc.all('פאר טסי'),
+    francAll('פאר טסי'),
     [['und', 1]],
     'should return `[["und", 1]]` without matches (1)'
   )
 
   t.deepEqual(
-    franc.all('פאר טסי', {minLength: 3}),
+    francAll('פאר טסי', {minLength: 3}),
     [
       ['heb', 0],
       ['ydd', 0]
@@ -137,25 +137,25 @@ test('franc.all()', function (t) {
   )
 
   t.deepEqual(
-    franc.all('xyz'),
+    francAll('xyz'),
     [['und', 1]],
     'should return `[["und", 1]]` without matches (3)'
   )
 
   t.deepEqual(
-    franc.all(),
+    francAll(),
     [['und', 1]],
     'should return `[["und", 1]]` for a missing value'
   )
 
   t.deepEqual(
-    franc.all('987 654 321'),
+    francAll('987 654 321'),
     [['und', 1]],
     'should return `[["und", 1]]` for generic characters'
   )
 
   t.deepEqual(
-    franc.all('the the the the the ').slice(0, 2),
+    francAll('the the the the the ').slice(0, 2),
     [
       ['sco', 1],
       ['eng', 0.9889001009081736]
@@ -164,8 +164,7 @@ test('franc.all()', function (t) {
   )
 
   t.deepEqual(
-    franc
-      .all(fixtureB, {ignore: [franc(fixtureB)]})
+    francAll(fixtureB, {ignore: [franc(fixtureB)]})
       .map(function (tuple) {
         return tuple[0]
       })
@@ -175,19 +174,19 @@ test('franc.all()', function (t) {
   )
 
   t.deepEqual(
-    franc.all(fixtureB, {only: [languageA]}),
+    francAll(fixtureB, {only: [languageA]}),
     [[languageA, 1]],
     'should accept `only`'
   )
 
   t.deepEqual(
-    franc.all(hebrew, {only: ['eng']}),
+    francAll(hebrew, {only: ['eng']}),
     [['und', 1]],
     'should accept `only` for different scripts'
   )
 
   t.deepEqual(
-    franc.all('the', {minLength: 3}).slice(0, 2),
+    francAll('the', {minLength: 3}).slice(0, 2),
     [
       ['sco', 1],
       ['eng', 0.9988851727982163]
@@ -196,7 +195,7 @@ test('franc.all()', function (t) {
   )
 
   t.deepEqual(
-    franc.all('the', {minLength: 4}),
+    francAll('the', {minLength: 4}),
     [['und', 1]],
     'should accept `minLength` (2)'
   )
@@ -213,7 +212,7 @@ test('algorithm', function (t) {
 
     if (info.fixture) {
       t.equal(
-        franc.all(info.fixture)[0][0],
+        francAll(info.fixture)[0][0],
         info.iso6393,
         info.fixture.replace(/\n/g, '\\n').slice(0, 20) + '... (' + code + ')'
       )
