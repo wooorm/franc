@@ -103,7 +103,11 @@ test('cli', function (t) {
     exec(args, function (err, stdout, stderr) {
       t.deepEqual(
         [err, stderr, stdout.split('\n').slice(0, 3)],
-        [null, '', ['afr 1', 'nld 0.7569230769230769', 'nob 0.544']],
+        [
+          null,
+          '',
+          ['afr 1', 'nld 0.7419425564569173', 'nob 0.5446174084630564']
+        ],
         flag
       )
     })

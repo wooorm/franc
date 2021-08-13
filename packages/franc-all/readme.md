@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 406 languages.
+Built with support for 409 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -395,12 +395,14 @@ This build supports the following languages:
 | [`ajg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ajg) | Aja (Benin) | 200 |
 | [`arl`](http://www-01.sil.org/iso639-3/documentation.asp?id=arl) | Arabela | 150 |
 | [`ppl`](http://www-01.sil.org/iso639-3/documentation.asp?id=ppl) | Pipil | 20 |
+| [`aar`](http://www-01.sil.org/iso639-3/documentation.asp?id=aar) | Afar | unknown |
 | [`bax`](http://www-01.sil.org/iso639-3/documentation.asp?id=bax) | Bamun | unknown |
 | [`nku`](http://www-01.sil.org/iso639-3/documentation.asp?id=nku) | Bouna Kulango | unknown |
 | [`cbi`](http://www-01.sil.org/iso639-3/documentation.asp?id=cbi) | Chachi | unknown |
 | [`ccp`](http://www-01.sil.org/iso639-3/documentation.asp?id=ccp) | Chakma | unknown |
 | [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
 | [`chr`](http://www-01.sil.org/iso639-3/documentation.asp?id=chr) | Cherokee (Cherokee) | unknown |
+| [`crh`](http://www-01.sil.org/iso639-3/documentation.asp?id=crh) | Crimean Tatar | unknown |
 | [`duu`](http://www-01.sil.org/iso639-3/documentation.asp?id=duu) | Drung | unknown |
 | [`cfm`](http://www-01.sil.org/iso639-3/documentation.asp?id=cfm) | Falam Chin | unknown |
 | [`fat`](http://www-01.sil.org/iso639-3/documentation.asp?id=fat) | Fanti | unknown |
@@ -420,6 +422,7 @@ This build supports the following languages:
 | [`sey`](http://www-01.sil.org/iso639-3/documentation.asp?id=sey) | Secoya | unknown |
 | [`ekk`](http://www-01.sil.org/iso639-3/documentation.asp?id=ekk) | Standard Estonian | unknown |
 | [`lvs`](http://www-01.sil.org/iso639-3/documentation.asp?id=lvs) | Standard Latvian | unknown |
+| [`gsw`](http://www-01.sil.org/iso639-3/documentation.asp?id=gsw) | Swiss German | unknown |
 | [`blt`](http://www-01.sil.org/iso639-3/documentation.asp?id=blt) | Tai Dam | unknown |
 | [`kdh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kdh) | Tem | unknown |
 | [`tdt`](http://www-01.sil.org/iso639-3/documentation.asp?id=tdt) | Tetun Dili | unknown |

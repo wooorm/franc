@@ -1,7 +1,7 @@
 'use strict'
 
 /* Load `trigram-utils`. */
-import utilities from 'trigram-utils'
+import {asTuples} from 'trigram-utils'
 
 /* Load `expressions` (regular expressions matching
  * scripts). */
@@ -111,7 +111,7 @@ function detectAll(value, options) {
    * normalize the distance values. */
   return normalize(
     value,
-    getDistances(utilities.asTuples(value), data[script[0]], only, ignore)
+    getDistances(asTuples(value), data[script[0]], only, ignore)
   )
 }
 
