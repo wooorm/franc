@@ -66,6 +66,7 @@
     "prettier": true,
     "esnext": false,
     "rules": {
+      "import/extensions": "off",
       "unicorn/no-fn-reference-in-iterator": "off",
       "unicorn/no-hex-escape": "off",
       "unicorn/prefer-includes": "off",
