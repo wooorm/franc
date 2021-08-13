@@ -7,14 +7,17 @@ import {isHidden} from 'is-hidden'
 import {iso6393} from 'iso-639-3'
 import {speakers} from 'speakers'
 import {unified} from 'unified'
+import rehypeParse from 'rehype-parse'
 import gfm from 'remark-gfm'
 import stringify from 'remark-stringify'
 import {u} from 'unist-builder'
+import {selectAll} from 'hast-util-select'
+import {toText} from 'hast-util-to-text'
 import format from 'format'
 import author from 'parse-author'
 import human from 'human-format'
 import alphaSort from 'alpha-sort'
-import udhr from 'udhr'
+import {udhr} from 'udhr'
 import allTrigrams from 'trigrams'
 import unicode from 'unicode-12.1.0'
 import customFixtures from './custom-fixtures.js'
@@ -24,8 +27,6 @@ import exclude from './udhr-exclude.js'
 const ascending = alphaSort()
 
 const trigrams = allTrigrams.min()
-const information = udhr.information()
-const declarations = udhr.json()
 const scripts = unicode.Script
 
 const require = createRequire(import.meta.url)
@@ -175,19 +176,32 @@ function generate(basename) {
   fixtures = {}
 
   support.forEach(function (language) {
-    var udhrKey = language.udhr
+    var udhrKey = language.udhr || language.iso6393
     var fixture
 
     if (udhrKey in customFixtures) {
       fixture = customFixtures[udhrKey]
-    } else if (udhrKey in declarations) {
-      if (
-        declarations[udhrKey].preamble &&
-        declarations[udhrKey].preamble.para
-      ) {
-        fixture = declarations[udhrKey].preamble.para
-      } else if (declarations[udhrKey].note && declarations[udhrKey].note[0]) {
-        fixture = declarations[udhrKey].note[0].para
+    } else if (udhrKey) {
+      const info = udhr.find((d) => d.code === udhrKey)
+
+      if (info) {
+        const declaration = String(
+          fs.readFileSync(
+            path.join('node_modules', 'udhr', 'declaration', udhrKey + '.html')
+          )
+        )
+        const tree = unified().use(rehypeParse).parse(declaration)
+
+        fixture =
+          selectAll('header p', tree)
+            .map((d) => toText(d))
+            .join('\n') ||
+          selectAll(
+            'body > :matches(h1, h2, h3, h4, h5, h6), header :matches(h1, h2, h3, h4, h5, h6)',
+            tree
+          )
+            .map((d) => toText(d))
+            .join('\n')
       }
     }
 
@@ -326,30 +340,22 @@ function count(list) {
   return map
 }
 
-/* Get all values at `key` properties in `object`. */
-function all(object, key) {
-  var results = []
-  var property
-  var value
-
-  for (property in object) {
-    value = object[property]
-
-    if (property === key) {
-      results.push(value)
-    } else if (typeof value === 'object') {
-      results = results.concat(all(value, key))
-    }
-  }
-
-  return results
-}
-
 /* Get which scripts are used for a given UDHR code. */
 function scriptInformation(code) {
-  var declaration = declarations[code]
-  var content = all(declaration, 'para').join('')
-  var length = content.length
+  const info = code ? udhr.find((d) => d.code === code) : undefined
+  let paragraphs = ''
+
+  if (info) {
+    const declaration = fs.readFileSync(
+      path.join('node_modules', 'udhr', 'declaration', code + '.html')
+    )
+    const tree = unified().use(rehypeParse).parse(declaration)
+    paragraphs = selectAll('article p', tree)
+      .map((d) => toText(d))
+      .join('\n')
+  }
+
+  var length = paragraphs.length
   var scriptInformation = {}
 
   Object.keys(expressions).forEach(function (script) {
@@ -360,7 +366,7 @@ function scriptInformation(code) {
       return
     }
 
-    count = content.match(expressions[script])
+    count = paragraphs.match(expressions[script])
     count = (count ? count.length : 0) / length
     count = Math.round(count * 100) / 100
 
@@ -520,11 +526,9 @@ function getUDHRKeysfromISO(iso) {
     return overrides[iso]
   }
 
-  Object.keys(information).forEach(function (code) {
-    var info = information[code]
-
-    if (info.ISO === iso || info.code === iso) {
-      udhrs.push(code)
+  udhr.forEach(function (info) {
+    if (info.iso6393 === iso || info.code === iso) {
+      udhrs.push(info.code)
     }
   })
 
