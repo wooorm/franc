@@ -87,6 +87,7 @@ This build supports the following languages:
 | [`koi`](http://www-01.sil.org/iso639-3/documentation.asp?id=koi) | Komi-Permyak | 13M |
 | [`ell`](http://www-01.sil.org/iso639-3/documentation.asp?id=ell) | Modern Greek (1453-) | 12M |
 | [`ces`](http://www-01.sil.org/iso639-3/documentation.asp?id=ces) | Czech | 12M |
+| [`mag`](http://www-01.sil.org/iso639-3/documentation.asp?id=mag) | Magahi | 11M |
 | [`run`](http://www-01.sil.org/iso639-3/documentation.asp?id=run) | Rundi | 11M |
 | [`bel`](http://www-01.sil.org/iso639-3/documentation.asp?id=bel) | Belarusian | 10M |
 | [`plt`](http://www-01.sil.org/iso639-3/documentation.asp?id=plt) | Plateau Malagasy | 10M |
@@ -271,7 +272,6 @@ This build supports the following languages:
 | [`gjn`](http://www-01.sil.org/iso639-3/documentation.asp?id=gjn) | Gonja | 250k |
 | [`njo`](http://www-01.sil.org/iso639-3/documentation.asp?id=njo) | Ao Naga | 232k |
 | [`hus`](http://www-01.sil.org/iso639-3/documentation.asp?id=hus) | Huastec | 220k |
-| [`mag`](http://www-01.sil.org/iso639-3/documentation.asp?id=mag) | Magahi | 220k |
 | [`xsm`](http://www-01.sil.org/iso639-3/documentation.asp?id=xsm) | Kasem | 200k |
 | [`ote`](http://www-01.sil.org/iso639-3/documentation.asp?id=ote) | Mezquital Otomi | 200k |
 | [`qxn`](http://www-01.sil.org/iso639-3/documentation.asp?id=qxn) | Northern Conchucos Ancash Quechua | 200k |

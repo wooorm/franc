@@ -318,6 +318,11 @@ const fixtures = {
     fixture:
       'U vědomí toho,\nže uznání přirozené důstojnosti a rovných a nezcizitelných práv členů lidské rodiny je základem svobody, spravedlnosti a míru ve světě,\nže zneuznání lidských práv a pohrdání jimi vedlo k barbarským činům, urážejícím svědomí lidstva, a že vybudování světa, ve kterém lidé, zbavení strachu a nouze, se budou těšiti svobodě projevu a přesvědčení, bylo prohlášeno za nejvyšší cíl lidu,\nže je nutné, aby lidská práva byla chráněna zákonem, nemá-li být člověk donucen uchylovat se, když vše ostatní selhalo, k odboji proti tyranii a útlaku,\nže je nutné podporovat rozvoj přátelských vztahu mezi národy,\nže lid Spojených národů zdůraznil v Chartě znovu svou víru v základní lidská práva, v důstojnost a hodnotu lidské osobnosti, v rovná práva mužů i žen a že se rozhodl podporovat sociální pokrok a vytvořit lepší životní podmínky ve větší svobodě,\nže členské státy převzaly závazek zajistit ve spolupráci s Organizací spojených národů všeobecné uznávání a zachovávání lidských práv a základn'
   },
+  mag: {
+    iso6393: 'mag',
+    fixture:
+      'सभे के ओकर उचित सम्मान तथा मानव परिवार के सब सदस्य के बराबरी के हक ही विश्व समुदाय के स्वतंत्रता, न्याय और शांति के बुनियाद हई।\nमानवाधिकार के उल्लंघन हरदम से अमानवीय काम के बजह से ही होव हई। जेकरा से मानवता के अंतकरण दु:खी होव हई। एक आम आदमी के सबसे बड़ा इच्छा इहे होव हई कि ए दुनिया में ओकरा भाषण और विचार के आजादी मीले साथ ही भय और इच्छा से भी मुक्ति मीले।\nयदि कोइयो तानाशाही या दमन के खिलाफ बगावत करे लेले मजबूर हई त ओकरा कानून से ओकर मानवाधिकार के सुरक्षा के इंतजाम होए के चाहीं। इहो आवश्यक हई कि राष्ट्र सब के बीच दोस्ती बढ़ाएल जाए।\nसंयुक्त राष्ट्र के लोग सब अपन चार्टर में मौलिक मानवाधिकार, मानव के सम्मान और उपयोगिता तथा आदमी और औरत के बराबर अधिकार के प्रति अपन विश्वास जतेलकई हन। साथ ही उ आर स्वतंत्रता के माहौल में सामाजिक प्रगति तथा जीवन के स्तर के बढ़ावे लेल भी दृढ़ निश्चय कएलकई हन।\nसाथ में सदस्य राष्ट्र सब संयुक्त राष्ट्र के मदद से मानवाधिकार और मौलिक स्वतंत्रता के प्रति लोग सब में इज्जत बढ़ावे लेल भी संकल्प लेलकए हन।\nएहि से इ संकल्प के प्राप्ति के लेल इ सब अधिकार और स्वतंत्रता के सम'
+  },
   run: {
     iso6393: 'run',
     fixture:
