@@ -1,6 +1,2 @@
 coverage/
-/franc.js
-/franc-min.js
-/franc-all.js
-*.json
 *.md
