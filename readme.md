@@ -1,7 +1,7 @@
 # ![franc][logo]
 
-[![Build Status][build-badge]][build-status]
-[![Coverage Status][coverage-badge]][coverage-status]
+[![Build Status][build-badge]][build]
+[![Coverage Status][coverage-badge]][coverage]
 
 Detect the language of text.
 
@@ -197,13 +197,13 @@ respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 
 [logo]: https://raw.githubusercontent.com/wooorm/franc/a162cc0/logo.svg?sanitize=true
 
-[build-badge]: https://img.shields.io/travis/wooorm/franc.svg
+[build-badge]: https://github.com/wooorm/franc/workflows/main/badge.svg
 
-[build-status]: https://travis-ci.org/wooorm/franc
+[build]: https://github.com/wooorm/franc/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/franc.svg
 
-[coverage-status]: https://codecov.io/github/wooorm/franc
+[coverage]: https://codecov.io/github/wooorm/franc
 
 [npm]: https://docs.npmjs.com/cli/install
 
