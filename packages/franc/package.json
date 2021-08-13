@@ -12,14 +12,17 @@
     "detect",
     "guess"
   ],
-  "dependencies": {
-    "trigram-utils": "^1.0.0"
-  },
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "data.js",
     "expressions.js",
     "index.js"
   ],
+  "dependencies": {
+    "trigram-utils": "^1.0.0"
+  },
   "repository": "https://github.com/wooorm/franc/tree/main/packages/franc",
   "bugs": "https://github.com/wooorm/franc/issues",
   "funding": {

@@ -1,21 +1,21 @@
 'use strict'
 
 /* Load `trigram-utils`. */
-var utilities = require('trigram-utils')
+import utilities from 'trigram-utils'
 
 /* Load `expressions` (regular expressions matching
  * scripts). */
-var expressions = require('./expressions.js')
+import expressions from './expressions.js'
 
 /* Load `data` (trigram information per language,
  * per script). */
-var data = require('./data.js')
+import data from './data.js'
 
 /* Expose `detectAll` on `detect`. */
 detect.all = detectAll
 
 /* Expose `detect`. */
-module.exports = detect
+export default detect
 
 /* Maximum sample length. */
 var MAX_LENGTH = 2048

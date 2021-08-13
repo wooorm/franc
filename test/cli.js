@@ -1,12 +1,15 @@
-'use strict'
-
-var path = require('path')
-var exec = require('child_process').exec
-var PassThrough = require('stream').PassThrough
-var test = require('tape')
+import path from 'path'
+import fs from 'fs'
+import {exec} from 'child_process'
+import {PassThrough} from 'stream'
+import test from 'tape'
 
 var root = path.resolve(process.cwd(), 'packages', 'franc-cli')
-var pkg = require(path.resolve(root, 'package.json'))
+var pkg = JSON.parse(
+  fs.readFileSync(
+    path.resolve(process.cwd(), 'packages', 'franc-cli', 'package.json')
+  )
+)
 var cli = path.resolve(root, 'index.js')
 
 test('cli', function (t) {

@@ -12,6 +12,9 @@
     "detect",
     "guess"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "data.js",
     "expressions.js",

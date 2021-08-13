@@ -1,8 +1,6 @@
-'use strict'
-
-var test = require('tape')
-var franc = require('../packages/franc')
-var fixtures = require('./fixtures')
+import test from 'tape'
+import franc from '../packages/franc/index.js'
+import fixtures from './fixtures.js'
 
 var languageA = 'pol'
 var languageB = 'eng'

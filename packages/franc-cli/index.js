@@ -1,13 +1,15 @@
 #!/usr/bin/env node
-'use strict'
+import {createRequire} from 'node:module'
+import meow from 'meow'
+import franc from 'franc'
 
-var meow = require('meow')
-var franc = require('franc')
-var pack = require('./package')
+const require = createRequire(import.meta.url)
+const pack = require('./package.json')
 
 var command = Object.keys(pack.bin)[0]
 
 var cli = meow(help(), {
+  importMeta: import.meta,
   flags: {
     all: {
       type: 'boolean',

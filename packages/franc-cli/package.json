@@ -13,6 +13,8 @@
     "cli",
     "bin"
   ],
+  "type": "module",
+  "main": "index.js",
   "bin": {
     "franc": "index.js"
   },
@@ -21,7 +23,7 @@
   ],
   "dependencies": {
     "franc": "^5.0.0",
-    "meow": "^7.0.0"
+    "meow": "^10.0.0"
   },
   "repository": "https://github.com/wooorm/franc/tree/main/packages/franc-cli",
   "bugs": "https://github.com/wooorm/franc/issues",

@@ -1,6 +1,6 @@
 /* Some languages are ignored, no matter what
  * `threshold` is chosen. */
-module.exports = [
+const udhrExclude = [
   /* Using both results in incorrect results.
    * `build.js` adds support for `fas`. */
   'prs' /* Western Persian */,
@@ -28,3 +28,5 @@ module.exports = [
   // number of speakers (1.5m), so ignore one.
   'rup'
 ]
+
+export default udhrExclude
