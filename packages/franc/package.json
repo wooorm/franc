@@ -16,7 +16,7 @@
     "trigram-utils": "^1.0.0"
   },
   "files": [
-    "data.json",
+    "data.js",
     "expressions.js",
     "index.js"
   ],

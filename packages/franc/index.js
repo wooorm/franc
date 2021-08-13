@@ -9,7 +9,7 @@ var expressions = require('./expressions.js')
 
 /* Load `data` (trigram information per language,
  * per script). */
-var data = require('./data.json')
+var data = require('./data.js')
 
 /* Expose `detectAll` on `detect`. */
 detect.all = detectAll

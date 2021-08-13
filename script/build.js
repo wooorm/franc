@@ -142,8 +142,8 @@ function generate(basename) {
   )
 
   fs.writeFileSync(
-    path.join(base, 'data.json'),
-    JSON.stringify(data, null, 2) + '\n'
+    path.join(base, 'data.js'),
+    'module.exports = ' + JSON.stringify(data, null, 2) + '\n'
   )
 
   fs.writeFileSync(path.join(base, 'readme.md'), generateReadme(pack, support))
