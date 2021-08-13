@@ -3,22 +3,25 @@ import fs from 'fs'
 import path from 'path'
 import xtend from 'xtend'
 import negate from 'negate'
-import hidden from 'is-hidden'
+import {isHidden} from 'is-hidden'
 import {iso6393} from 'iso-639-3'
 import {speakers} from 'speakers'
-import unified from 'unified'
+import {unified} from 'unified'
+import gfm from 'remark-gfm'
 import stringify from 'remark-stringify'
-import u from 'unist-builder'
+import {u} from 'unist-builder'
 import format from 'format'
 import author from 'parse-author'
 import human from 'human-format'
-import alpha from 'alpha-sort'
+import alphaSort from 'alpha-sort'
 import udhr from 'udhr'
 import allTrigrams from 'trigrams'
 import unicode from 'unicode-12.1.0'
 import customFixtures from './custom-fixtures.js'
 import overrides from './udhr-overrides.js'
 import exclude from './udhr-exclude.js'
+
+const ascending = alphaSort()
 
 const trigrams = allTrigrams.min()
 const information = udhr.information()
@@ -41,7 +44,7 @@ var expressions = createExpressions()
 var topLanguages = createTopLanguages()
 var doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8')
 
-fs.readdirSync(root).filter(negate(hidden)).forEach(generate)
+fs.readdirSync(root).filter(negate(isHidden)).forEach(generate)
 
 function generate(basename) {
   var base = path.join(root, basename)
@@ -272,7 +275,7 @@ function generateReadme(pack, list) {
     ])
   ])
 
-  return unified().use(stringify).stringify(tree)
+  return unified().use(stringify).use(gfm).stringify(tree)
 
   function row(info) {
     return u('tableRow', [
@@ -373,8 +376,8 @@ function scriptInformation(code) {
 function sort(a, b) {
   return (
     (b.speakers || 0) - (a.speakers || 0) ||
-    alpha.ascending(a.name, b.name) ||
-    alpha.ascending(a.script, b.script)
+    ascending(a.name, b.name) ||
+    ascending(a.script, b.script)
   )
 }
 
