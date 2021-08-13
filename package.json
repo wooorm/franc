@@ -29,7 +29,7 @@
     "tape": "^5.0.0",
     "trigrams": "^5.0.0",
     "udhr": "^5.0.0",
-    "unicode-12.1.0": "^0.8.0",
+    "@unicode/unicode-14.0.0": "^1.0.0",
     "unified": "^10.0.0",
     "unist-builder": "^3.0.0",
     "xo": "^0.33.0",

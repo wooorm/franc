@@ -16,7 +16,7 @@ import parseAuthor from 'parse-author'
 import alphaSort from 'alpha-sort'
 import {udhr} from 'udhr'
 import {min} from 'trigrams'
-import unicode from 'unicode-12.1.0'
+import unicode from '@unicode/unicode-14.0.0'
 import {customFixtures} from './custom-fixtures.js'
 import {udhrOverrides} from './udhr-overrides.js'
 import {udhrExclude} from './udhr-exclude.js'
@@ -397,7 +397,9 @@ min().then((trigrams) => {
   function createExpressions() {
     var result = {}
     scripts.forEach(function (script) {
-      var expression = require('unicode-12.1.0/Script/' + script + '/regex.js')
+      var expression = require('@unicode/unicode-14.0.0/Script/' +
+        script +
+        '/regex.js')
       result[script] = new RegExp(expression.source, 'g')
     })
     return result
