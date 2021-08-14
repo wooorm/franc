@@ -378,6 +378,25 @@ async function main() {
           depth: 2,
           children: [{type: 'text', value: 'Install'}]
         },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'This package is '},
+            {
+              type: 'link',
+              url: 'https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c',
+              children: [{type: 'text', value: 'ESM only'}]
+            },
+            {
+              type: 'text',
+              value: ':\nNode 12+ is needed to use it and it must be\n'
+            },
+            {type: 'inlineCode', value: 'import'},
+            {type: 'text', value: 'ed instead of '},
+            {type: 'inlineCode', value: 'require'},
+            {type: 'text', value: 'd.'}
+          ]
+        },
         {type: 'paragraph', children: [{type: 'text', value: 'npm:'}]},
         {type: 'code', lang: 'sh', value: 'npm install ' + pack.name},
         {
@@ -409,7 +428,52 @@ async function main() {
                 }
               ]
             },
-            ...list.map((d) => row(d))
+            ...list.map((info) => ({
+              type: 'tableRow',
+              children: [
+                {
+                  type: 'tableCell',
+                  children: [
+                    {
+                      type: 'link',
+                      url:
+                        'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
+                        info.code,
+                      title: null,
+                      children: [{type: 'inlineCode', value: info.code}]
+                    }
+                  ]
+                },
+                {
+                  type: 'tableCell',
+                  children: [
+                    {
+                      type: 'text',
+                      value:
+                        info.name +
+                        (counts[info.code] === 1
+                          ? ''
+                          : ' (' + info.script + ')')
+                    }
+                  ]
+                },
+                {
+                  type: 'tableCell',
+                  children: [
+                    {
+                      type: 'text',
+                      value:
+                        typeof info.speakers === 'number'
+                          ? info.speakers.toLocaleString('en', {
+                              notation: 'compact',
+                              maximumFractionDigits: 0
+                            })
+                          : 'unknown'
+                    }
+                  ]
+                }
+              ]
+            }))
           ]
         },
         {
@@ -437,53 +501,6 @@ async function main() {
     }
 
     return unified().use(stringify).use(gfm).stringify(tree)
-
-    function row(info) {
-      return {
-        type: 'tableRow',
-        children: [
-          {
-            type: 'tableCell',
-            children: [
-              {
-                type: 'link',
-                url:
-                  'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
-                  info.code,
-                title: null,
-                children: [{type: 'inlineCode', value: info.code}]
-              }
-            ]
-          },
-          {
-            type: 'tableCell',
-            children: [
-              {
-                type: 'text',
-                value:
-                  info.name +
-                  (counts[info.code] === 1 ? '' : ' (' + info.script + ')')
-              }
-            ]
-          },
-          {
-            type: 'tableCell',
-            children: [
-              {
-                type: 'text',
-                value:
-                  typeof info.speakers === 'number'
-                    ? info.speakers.toLocaleString('en', {
-                        notation: 'compact',
-                        maximumFractionDigits: 0
-                      })
-                    : 'unknown'
-              }
-            ]
-          }
-        ]
-      }
-    }
   }
 
   function count(list) {

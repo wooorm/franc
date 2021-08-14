@@ -23,6 +23,9 @@ Make sure to pass it big documents to get reliable results.
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -40,8 +43,11 @@ available on [GitHub Releases][releases].
 
 ## Use
 
+This package exports the following identifiers: `franc`, `francAll`.
+There is no default export.
+
 ```js
-var franc = require('franc')
+import {franc, francAll} from 'franc'
 
 franc('Alle menslike wesens word vry') // => 'afr'
 franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট') // => 'ben'
@@ -57,47 +63,56 @@ franc('the', {minLength: 3}) // => 'sco'
 ###### `.all`
 
 ```js
-console.log(franc.all('O Brasil caiu 26 posições'))
+console.log(francAll('Considerando ser essencial que os direitos humanos'))
 ```
 
 Yields:
 
 ```js
-[ [ 'por', 1 ],
-  [ 'src', 0.8797557538750587 ],
-  [ 'glg', 0.8708313762329732 ],
-  [ 'snn', 0.8633161108501644 ],
-  [ 'bos', 0.8172851103804604 ],
-  ... 116 more items ]
+[
+  [ 'por', 1 ],
+  [ 'glg', 0.771284519307895 ],
+  [ 'spa', 0.6034146900423971 ],
+  [ 'cat', 0.5367251059928957 ],
+  [ 'src', 0.47461899851037015 ],
+  ... 122 more items ]
 ```
 
 ###### `only`
 
 ```js
-console.log(franc.all('O Brasil caiu 26 posições', {only: ['por', 'spa']}))
+console.log(
+  francAll('Considerando ser essencial que os direitos humanos', {
+    only: ['por', 'spa']
+  })
+)
 ```
 
 Yields:
 
 ```js
-[ [ 'por', 1 ], [ 'spa', 0.799906059182715 ] ]
+[ [ 'por', 1 ], [ 'spa', 0.6034146900423971 ] ]
 ```
 
 ###### `ignore`
 
 ```js
-console.log(franc.all('O Brasil caiu 26 posições', {ignore: ['src', 'glg']}))
+console.log(
+  francAll('Considerando ser essencial que os direitos humanos', {
+    ignore: ['src', 'glg']
+  })
+)
 ```
 
 Yields:
 
 ```js
 [ [ 'por', 1 ],
-  [ 'snn', 0.8633161108501644 ],
-  [ 'bos', 0.8172851103804604 ],
-  [ 'hrv', 0.8107092531705026 ],
-  [ 'lav', 0.810239549084077 ],
-  ... 114 more items ]
+  [ 'spa', 0.6034146900423971 ],
+  [ 'cat', 0.5367251059928957 ],
+  [ 'ita', 0.4740460639394981 ],
+  [ 'fra', 0.44757648676521145 ],
+  ... 120 more items ]
 ```
 
 ## CLI
