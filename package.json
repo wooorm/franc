@@ -31,7 +31,6 @@
     "udhr": "^5.0.0",
     "@unicode/unicode-14.0.0": "^1.0.0",
     "unified": "^10.0.0",
-    "unist-builder": "^3.0.0",
     "xo": "^0.39.0"
   },
   "scripts": {

@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 188 languages (1M or more speakers).
+Built with support for 187 languages (1M or more speakers).
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -35,7 +35,8 @@ This build supports the following languages:
 | [`jpn`](http://www-01.sil.org/iso639-3/documentation.asp?id=jpn) | Japanese | 125M |
 | [`fra`](http://www-01.sil.org/iso639-3/documentation.asp?id=fra) | French | 124M |
 | [`deu`](http://www-01.sil.org/iso639-3/documentation.asp?id=deu) | German | 121M |
-| [`jav`](http://www-01.sil.org/iso639-3/documentation.asp?id=jav) | Javanese | 76M |
+| [`jav`](http://www-01.sil.org/iso639-3/documentation.asp?id=jav) | Javanese (Javanese) | 76M |
+| [`jav`](http://www-01.sil.org/iso639-3/documentation.asp?id=jav) | Javanese (Latin) | 76M |
 | [`kor`](http://www-01.sil.org/iso639-3/documentation.asp?id=kor) | Korean | 75M |
 | [`tel`](http://www-01.sil.org/iso639-3/documentation.asp?id=tel) | Telugu | 73M |
 | [`vie`](http://www-01.sil.org/iso639-3/documentation.asp?id=vie) | Vietnamese | 67M |
@@ -47,13 +48,11 @@ This build supports the following languages:
 | [`guj`](http://www-01.sil.org/iso639-3/documentation.asp?id=guj) | Gujarati | 44M |
 | [`pol`](http://www-01.sil.org/iso639-3/documentation.asp?id=pol) | Polish | 44M |
 | [`ukr`](http://www-01.sil.org/iso639-3/documentation.asp?id=ukr) | Ukrainian | 41M |
-| [`fas`](http://www-01.sil.org/iso639-3/documentation.asp?id=fas) | Persian | 40M |
 | [`kan`](http://www-01.sil.org/iso639-3/documentation.asp?id=kan) | Kannada | 38M |
 | [`mai`](http://www-01.sil.org/iso639-3/documentation.asp?id=mai) | Maithili | 35M |
 | [`mal`](http://www-01.sil.org/iso639-3/documentation.asp?id=mal) | Malayalam | 34M |
+| [`pes`](http://www-01.sil.org/iso639-3/documentation.asp?id=pes) | Iranian Persian | 33M |
 | [`mya`](http://www-01.sil.org/iso639-3/documentation.asp?id=mya) | Burmese | 31M |
-| [`ori`](http://www-01.sil.org/iso639-3/documentation.asp?id=ori) | Oriya (macrolanguage) | 31M |
-| [`gax`](http://www-01.sil.org/iso639-3/documentation.asp?id=gax) | Borana-Arsi-Guji Oromo | 30M |
 | [`swh`](http://www-01.sil.org/iso639-3/documentation.asp?id=swh) | Swahili (individual language) | 30M |
 | [`sun`](http://www-01.sil.org/iso639-3/documentation.asp?id=sun) | Sundanese | 27M |
 | [`ron`](http://www-01.sil.org/iso639-3/documentation.asp?id=ron) | Romanian | 26M |
@@ -76,7 +75,7 @@ This build supports the following languages:
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Arabic) | 18M |
 | [`zlm`](http://www-01.sil.org/iso639-3/documentation.asp?id=zlm) | Malay (individual language) (Latin) | 18M |
 | [`ibo`](http://www-01.sil.org/iso639-3/documentation.asp?id=ibo) | Igbo | 17M |
-| [`nep`](http://www-01.sil.org/iso639-3/documentation.asp?id=nep) | Nepali (macrolanguage) | 16M |
+| [`npi`](http://www-01.sil.org/iso639-3/documentation.asp?id=npi) | Nepali (individual language) | 16M |
 | [`ceb`](http://www-01.sil.org/iso639-3/documentation.asp?id=ceb) | Cebuano | 15M |
 | [`skr`](http://www-01.sil.org/iso639-3/documentation.asp?id=skr) | Saraiki | 15M |
 | [`tgl`](http://www-01.sil.org/iso639-3/documentation.asp?id=tgl) | Tagalog | 15M |
@@ -110,7 +109,7 @@ This build supports the following languages:
 | [`uig`](http://www-01.sil.org/iso639-3/documentation.asp?id=uig) | Uighur (Latin) | 7M |
 | [`hat`](http://www-01.sil.org/iso639-3/documentation.asp?id=hat) | Haitian | 7M |
 | [`khm`](http://www-01.sil.org/iso639-3/documentation.asp?id=khm) | Khmer | 7M |
-| [`aka`](http://www-01.sil.org/iso639-3/documentation.asp?id=aka) | Akan | 7M |
+| [`prs`](http://www-01.sil.org/iso639-3/documentation.asp?id=prs) | Dari | 7M |
 | [`hil`](http://www-01.sil.org/iso639-3/documentation.asp?id=hil) | Hiligaynon | 7M |
 | [`sna`](http://www-01.sil.org/iso639-3/documentation.asp?id=sna) | Shona | 7M |
 | [`tat`](http://www-01.sil.org/iso639-3/documentation.asp?id=tat) | Tatar | 7M |
@@ -186,12 +185,12 @@ This build supports the following languages:
 | [`kbd`](http://www-01.sil.org/iso639-3/documentation.asp?id=kbd) | Kabardian | 2M |
 | [`iii`](http://www-01.sil.org/iso639-3/documentation.asp?id=iii) | Sichuan Yi | 2M |
 | [`yao`](http://www-01.sil.org/iso639-3/documentation.asp?id=yao) | Yao | 2M |
-| [`lav`](http://www-01.sil.org/iso639-3/documentation.asp?id=lav) | Latvian | 2M |
+| [`lvs`](http://www-01.sil.org/iso639-3/documentation.asp?id=lvs) | Standard Latvian | 2M |
 | [`quz`](http://www-01.sil.org/iso639-3/documentation.asp?id=quz) | Cusco Quechua | 2M |
 | [`src`](http://www-01.sil.org/iso639-3/documentation.asp?id=src) | Logudorese Sardinian | 2M |
+| [`rup`](http://www-01.sil.org/iso639-3/documentation.asp?id=rup) | Macedo-Romanian | 2M |
 | [`sco`](http://www-01.sil.org/iso639-3/documentation.asp?id=sco) | Scots | 2M |
 | [`tso`](http://www-01.sil.org/iso639-3/documentation.asp?id=tso) | Tsonga | 2M |
-| [`rmy`](http://www-01.sil.org/iso639-3/documentation.asp?id=rmy) | Vlax Romani | 2M |
 | [`men`](http://www-01.sil.org/iso639-3/documentation.asp?id=men) | Mende (Sierra Leone) | 1M |
 | [`fon`](http://www-01.sil.org/iso639-3/documentation.asp?id=fon) | Fon | 1M |
 | [`nhn`](http://www-01.sil.org/iso639-3/documentation.asp?id=nhn) | Central Nahuatl | 1M |
@@ -201,7 +200,7 @@ This build supports the following languages:
 | [`kbp`](http://www-01.sil.org/iso639-3/documentation.asp?id=kbp) | Kabiyè | 1M |
 | [`tem`](http://www-01.sil.org/iso639-3/documentation.asp?id=tem) | Timne | 1M |
 | [`toi`](http://www-01.sil.org/iso639-3/documentation.asp?id=toi) | Tonga (Zambia) | 1M |
-| [`est`](http://www-01.sil.org/iso639-3/documentation.asp?id=est) | Estonian | 1M |
+| [`ekk`](http://www-01.sil.org/iso639-3/documentation.asp?id=ekk) | Standard Estonian | 1M |
 | [`snk`](http://www-01.sil.org/iso639-3/documentation.asp?id=snk) | Soninke | 1M |
 | [`cjk`](http://www-01.sil.org/iso639-3/documentation.asp?id=cjk) | Chokwe | 1M |
 | [`ada`](http://www-01.sil.org/iso639-3/documentation.asp?id=ada) | Adangme | 1M |

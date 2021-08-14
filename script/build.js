@@ -7,17 +7,13 @@ import {unified} from 'unified'
 import rehypeParse from 'rehype-parse'
 import gfm from 'remark-gfm'
 import stringify from 'remark-stringify'
-import {u} from 'unist-builder'
-import {selectAll} from 'hast-util-select'
+import {select, selectAll} from 'hast-util-select'
 import {toString} from 'hast-util-to-string'
 import parseAuthor from 'parse-author'
 import alphaSort from 'alpha-sort'
-import {udhr} from 'udhr'
 import {min} from 'trigrams'
 import unicode from '@unicode/unicode-14.0.0'
 import {customFixtures} from './custom-fixtures.js'
-import {udhrOverrides} from './udhr-overrides.js'
-import {udhrExclude} from './udhr-exclude.js'
 
 const own = {}.hasOwnProperty
 
@@ -28,11 +24,86 @@ const core = process.cwd()
 const root = path.join(core, 'packages')
 const mono = JSON.parse(fs.readFileSync('package.json'))
 
-/* Persian (fas, macrolanguage) contains Western Persian (pes)
- * and Dari (prs).  They’re so similar in UDHR that using both
- * will result in incorrect results, so add the macrolanguage
- * instead. (note: prs and pes are ignored) */
-speakers.fas = speakers.prs + speakers.pes
+// ISO 639-3 types to ignore.
+const iso6393TypeExclude = new Set(['special'])
+
+// Some languages are ignored, no matter what `threshold` is chosen.
+const iso6393Exclude = new Set([
+  // Same UDHR as ckb (Central Kurdish), but with less speakers.
+  'kmr' // Northern Kurdish
+])
+
+const udhrKeyPrefer = new Set([
+  /* Asante: 2,800,000; Fante: 1,900,000; Akuapem: 555,000.
+   * http://www.ethnologue.com/language/aka */
+  'aka_asante',
+
+  // Occitan:
+  // Provençal (before 2007: `prv`): ±350k 30 years ago;
+  // Auvergnat (before 2007: `auv`) ±80k;
+  // Languedocien (before 2007: `lnc`) ±300k;
+  //
+  // I’m not sure why `oci_1`, `oci_2`, `oci_3`, `oci_4` are classified
+  // as `oci`, because they’re explained as Francoprovençal, Fribourg;
+  // Francoprovençal, Savoie; Francoprovençal, Vaud;
+  // and Francoprovençal, Valais;
+  // which seems to be the language Franco-Provençal with a different
+  // ISO code?
+  'lnc',
+
+  // In 2015 Unicode added lowercase Cherokee support (which people use
+  // in handwriting), so prefer that one.
+  'chr_cased',
+
+  // Languages with dated translations, pick the newest.
+  'deu_1996',
+  'ron_2006',
+
+  // Monotonic Greek is modern greek.
+  'ell_monotonic',
+
+  // It says “popular” in the name?
+  'hat_popular',
+
+  // Seems to be most popular in Nigeria:
+  // <http://www.ethnologue.com/language/hau>
+  'hau_NG',
+
+  // Huastec
+  // About 250k speakers.
+  // `hva` (San Luís Potosí) — 48k
+  // `hus` (Veracruz) — 22k
+  // `hsf` (Sierra de Otontepec) — 12k
+  'hva',
+
+  // No real reason. <http://www.ethnologue.com/language/nya>
+  'nya_chinyanja',
+
+  // Many more speakers than European.
+  'por_BR',
+
+  // Tso in mozambique has a UDHR preview: http://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=tso
+  'tso_MZ'
+])
+
+const iso15924Exclude = new Set([
+  // Note these are ISO 15924 PvA’s, used for Unicode Scripts.
+  'Common',
+  'Inherited'
+])
+
+// Update some counts (`speakers` uses macrolanguage)
+// Standard Estonian from inclusive code.
+speakers.ekk = speakers.ekk || speakers.est
+// Standard Lavian from inclusive code.
+speakers.lvs = speakers.lvs || speakers.lav
+
+// Map of languages where trigrams don’t work, but with a unique script.
+const scriptsForSingleLanguages = {
+  sat: {script: 'Ol_Chiki', udhr: undefined},
+  iii: {script: 'Yi', udhr: 'iii'},
+  cmn: {script: 'Han', udhr: 'cmn_hans'}
+}
 
 main()
 
@@ -60,16 +131,15 @@ async function main() {
     let list = topLanguages
 
     if (!threshold) {
-      return
+      console.log('\nNo `threshold` field in `%s`', pack.name)
+      continue
     }
 
     console.log()
     console.log('%s, threshold: %s', pack.name, threshold)
 
     if (threshold !== -1) {
-      list = list.filter((info) => {
-        return info.speakers >= threshold
-      })
+      list = list.filter((info) => info.speakers >= threshold)
     }
 
     const byScript = {}
@@ -90,22 +160,7 @@ async function main() {
 
     for (script in byScript) {
       if (own.call(byScript, script)) {
-        const languages = byScript[script].filter((info) => {
-          return ![
-            /* Ignore `npi` (Nepali (individual language)): `npe`
-             * (Nepali (macrolanguage)) is also included. */
-            'npi',
-            /* Ignore non-Mandarin Chinese, if all are turned on, they’ll get
-             * ignored, as trigrams don’t work on Han characters (cmn has 830m
-             * speakers, so that’s the preferred choice). */
-            'yue',
-            'cjy',
-            'gan',
-            'nan',
-            'wuu',
-            'hak'
-          ].includes(info.iso6393)
-        })
+        const languages = byScript[script]
 
         if (languages.length > 1) {
           if (!regularExpressions[script]) {
@@ -115,7 +170,7 @@ async function main() {
           perScript[script] = languages
         } else {
           support.push(languages[0])
-          regularExpressions[languages[0].iso6393] = expressions[script]
+          regularExpressions[languages[0].code] = expressions[script]
         }
       }
     }
@@ -131,16 +186,16 @@ async function main() {
         while (++index < scripts.length) {
           const info = scripts[index]
 
-          if (trigrams[info.udhr]) {
+          if (info.udhr in trigrams) {
             support.push(info)
-            scriptObject[info.iso6393] = trigrams[info.udhr]
+            scriptObject[info.code] = trigrams[info.udhr]
               .concat()
               .reverse()
               .join('|')
           } else {
             console.log(
               '  Ignoring language without trigrams: %s (%s, %s)',
-              info.iso6393,
+              info.code,
               info.name,
               script
             )
@@ -149,8 +204,9 @@ async function main() {
       }
     }
 
-    /* Push Japanese.
-     * Unicode Kanji Table from http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml */
+    // Push Japanese.
+    // Unicode Kanji Table from:
+    // <http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml>
     const kanjiRegexSource = '[\u3400-\u4DB5\u4E00-\u9FAF]'
     regularExpressions.jpn = new RegExp(
       expressions.Hiragana.source +
@@ -188,7 +244,7 @@ async function main() {
     console.log('✓ %s w/ %s languages', pack.name, list.length)
 
     if (pack.name !== mono.name) {
-      return
+      continue
     }
 
     console.log()
@@ -199,52 +255,47 @@ async function main() {
 
     while (++offset < support.length) {
       const language = support[offset]
-      const udhrKey = language.udhr || language.iso6393
-      let fixture
+      const key = language.udhr || language.code
+      let fixture = ''
 
-      if (udhrKey in customFixtures) {
-        fixture = customFixtures[udhrKey]
-      } else if (udhrKey) {
-        const info = udhr.find((d) => d.code === udhrKey)
-
-        if (info) {
-          const declaration = String(
+      if (key in customFixtures) {
+        fixture = customFixtures[key]
+      } else if (language.udhr) {
+        const tree = unified()
+          .use(rehypeParse)
+          .parse(
             fs.readFileSync(
               path.join(
                 'node_modules',
                 'udhr',
                 'declaration',
-                udhrKey + '.html'
+                language.udhr + '.html'
               )
             )
           )
-          const tree = unified().use(rehypeParse).parse(declaration)
 
-          fixture =
-            selectAll('header p', tree)
-              .map((d) => toString(d))
-              .join(' ') ||
-            selectAll(
-              'body > :matches(h1, h2, h3, h4, h5, h6), header :matches(h1, h2, h3, h4, h5, h6)',
-              tree
-            )
-              .map((d) => toString(d))
-              .join(' ')
+        let nodes = selectAll('header p', tree)
+
+        if (nodes.length === 0) {
+          nodes = selectAll(
+            'body > :matches(h1, h2, h3, h4, h5, h6), header :matches(h1, h2, h3, h4, h5, h6)',
+            tree
+          )
         }
+
+        fixture = nodes.map((d) => toString(d)).join(' ')
       }
 
       if (!fixture) {
         console.log(
           '  Could not access preamble or note for `%s` (%s). No fixture is generated.',
-          language.iso6393,
-          udhrKey
+          language.code,
+          language.udhr
         )
-
-        fixture = ''
       }
 
-      fixtures[udhrKey] = {
-        iso6393: language.iso6393,
+      fixtures[key] = {
+        iso6393: language.code,
         fixture: fixture.slice(0, 1000)
       }
     }
@@ -263,9 +314,7 @@ async function main() {
       'export const expressions = {',
       '  ' +
         Object.keys(expressions)
-          .map((script) => {
-            return script + ': ' + expressions[script]
-          })
+          .map((script) => script + ': ' + expressions[script])
           .join(',\n  '),
       '}',
       ''
@@ -273,93 +322,167 @@ async function main() {
   }
 
   function generateReadme(pack, list) {
-    const counts = count(list)
     const threshold = pack.threshold
+    const counts = count(list)
     const licensee = parseAuthor(pack.author)
-    const tree = u('root', [
-      u('html', '<!--This file is generated by `build.js`-->'),
-      u('heading', {depth: 1}, [u('text', pack.name)]),
-      u('blockquote', [u('paragraph', [u('text', pack.description + '.')])]),
-      u('paragraph', [
-        u(
-          'text',
-          'Built with support for ' +
-            list.length +
-            ' languages' +
-            (threshold === -1
-              ? ''
-              : ' (' +
-                threshold.toLocaleString('en', {notation: 'compact'}) +
-                ' or more speakers)') +
-            '.'
-        )
-      ]),
-      u('paragraph', [
-        u('text', 'View the '),
-        u('link', {url: mono.repository}, [u('text', 'monorepo')]),
-        u('text', ' for more packages and\nusage information.')
-      ]),
-      u('heading', {depth: 2}, [u('text', 'Install')]),
-      u('paragraph', [u('text', 'npm:')]),
-      u('code', {lang: 'sh'}, 'npm install ' + pack.name),
-      u('heading', {depth: 2}, [u('text', 'Support')]),
-      u('paragraph', [
-        u('text', 'This build supports the following languages:')
-      ]),
-      u('table', {align: []}, [header()].concat(list.map((d) => row(d)))),
-      u('heading', {depth: 2}, [u('text', 'License')]),
-      u('paragraph', [
-        u('link', {url: mono.repository + '/blob/main/license'}, [
-          u('text', mono.license)
-        ]),
-        u('text', ' © '),
-        u('link', {url: licensee.url}, [u('text', licensee.name)])
-      ])
-    ])
+    const tree = {
+      type: 'root',
+      children: [
+        {type: 'html', value: '<!--This file is generated by `build.js`-->'},
+        {
+          type: 'heading',
+          depth: 1,
+          children: [{type: 'text', value: pack.name}]
+        },
+        {
+          type: 'blockquote',
+          children: [
+            {
+              type: 'paragraph',
+              children: [{type: 'text', value: pack.description + '.'}]
+            }
+          ]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'text',
+              value:
+                'Built with support for ' +
+                list.length +
+                ' languages' +
+                (threshold === -1
+                  ? ''
+                  : ' (' +
+                    threshold.toLocaleString('en', {notation: 'compact'}) +
+                    ' or more speakers)') +
+                '.'
+            }
+          ]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'View the '},
+            {
+              type: 'link',
+              url: mono.repository,
+              children: [{type: 'text', value: 'monorepo'}]
+            },
+            {type: 'text', value: ' for more packages and\nusage information.'}
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Install'}]
+        },
+        {type: 'paragraph', children: [{type: 'text', value: 'npm:'}]},
+        {type: 'code', lang: 'sh', value: 'npm install ' + pack.name},
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Support'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'text',
+              value: 'This build supports the following languages:'
+            }
+          ]
+        },
+        {
+          type: 'table',
+          align: [],
+          children: [
+            {
+              type: 'tableRow',
+              children: [
+                {type: 'tableCell', children: [{type: 'text', value: 'Code'}]},
+                {type: 'tableCell', children: [{type: 'text', value: 'Name'}]},
+                {
+                  type: 'tableCell',
+                  children: [{type: 'text', value: 'Speakers'}]
+                }
+              ]
+            },
+            ...list.map((d) => row(d))
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'License'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'link',
+              url: mono.repository + '/blob/main/license',
+              children: [{type: 'text', value: mono.license}]
+            },
+            {type: 'text', value: ' © '},
+            {
+              type: 'link',
+              url: licensee.url,
+              children: [{type: 'text', value: licensee.name}]
+            }
+          ]
+        }
+      ]
+    }
 
     return unified().use(stringify).use(gfm).stringify(tree)
 
     function row(info) {
-      return u('tableRow', [
-        u('tableCell', [
-          u(
-            'link',
-            {
-              url:
-                'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
-                info.iso6393,
-              title: null
-            },
-            [u('inlineCode', info.iso6393)]
-          )
-        ]),
-        u('tableCell', [
-          u(
-            'text',
-            info.name +
-              (counts[info.iso6393] === 1 ? '' : ' (' + info.script + ')')
-          )
-        ]),
-        u('tableCell', [
-          u(
-            'text',
-            typeof info.speakers === 'number'
-              ? info.speakers.toLocaleString('en', {
-                  notation: 'compact',
-                  maximumFractionDigits: 0
-                })
-              : 'unknown'
-          )
-        ])
-      ])
-    }
-
-    function header() {
-      return u('tableRow', [
-        u('tableCell', [u('text', 'Code')]),
-        u('tableCell', [u('text', 'Name')]),
-        u('tableCell', [u('text', 'Speakers')])
-      ])
+      return {
+        type: 'tableRow',
+        children: [
+          {
+            type: 'tableCell',
+            children: [
+              {
+                type: 'link',
+                url:
+                  'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
+                  info.code,
+                title: null,
+                children: [{type: 'inlineCode', value: info.code}]
+              }
+            ]
+          },
+          {
+            type: 'tableCell',
+            children: [
+              {
+                type: 'text',
+                value:
+                  info.name +
+                  (counts[info.code] === 1 ? '' : ' (' + info.script + ')')
+              }
+            ]
+          },
+          {
+            type: 'tableCell',
+            children: [
+              {
+                type: 'text',
+                value:
+                  typeof info.speakers === 'number'
+                    ? info.speakers.toLocaleString('en', {
+                        notation: 'compact',
+                        maximumFractionDigits: 0
+                      })
+                    : 'unknown'
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 
@@ -369,50 +492,10 @@ async function main() {
 
     while (++index < list.length) {
       const info = list[index]
-      map[info.iso6393] = (map[info.iso6393] || 0) + 1
+      map[info.code] = (map[info.code] || 0) + 1
     }
 
     return map
-  }
-
-  /* Get which scripts are used for a given UDHR code. */
-  function scriptInformation(code) {
-    const info = code ? udhr.find((d) => d.code === code) : undefined
-    let paragraphs = ''
-
-    if (info) {
-      const declaration = fs.readFileSync(
-        path.join('node_modules', 'udhr', 'declaration', code + '.html')
-      )
-      const tree = unified().use(rehypeParse).parse(declaration)
-      paragraphs = selectAll('article p', tree)
-        .map((d) => toString(d))
-        .join(' ')
-    }
-
-    const length = paragraphs.length
-    const result = {}
-    let script
-
-    for (script in expressions) {
-      if (
-        own.call(expressions, script) &&
-        // Ignore scripts unimportant for our goal.
-        script !== 'Common' &&
-        script !== 'Inherited'
-      ) {
-        const countMatch = paragraphs.match(expressions[script])
-        const count =
-          Math.round(((countMatch ? countMatch.length : 0) / length) * 100) /
-          100
-
-        if (count && count > 0.05) {
-          result[script] = count
-        }
-      }
-    }
-
-    return result
   }
 
   /* Sort a list of languages by most-popular. */
@@ -424,159 +507,159 @@ async function main() {
     )
   }
 
+  // eslint-disable-next-line complexity
   function createTopLanguages() {
-    const topWithUdhr = []
-    let index = -1
+    const top = []
+    let udhrKey
 
-    while (++index < iso6393.length) {
-      const info = Object.assign({}, iso6393[index], {
-        speakers: speakers[iso6393[index].iso6393]
-      })
-
-      const code = info.iso6393
-      const name = info.name
-
-      if (udhrExclude.includes(code)) {
-        console.log('Ignoring unsafe language `%s` (%s)', code, name)
-        continue
-      }
-
-      if (info.type === 'special') {
-        console.log('Ignoring special code `%s` (%s)', code, name)
-        continue
-      }
-
-      const udhrs = getUdhrKeysfromIso(code)
-
-      topWithUdhr.push(info)
-      // Could be undefined: keep at least one for later.
-      info.udhr = udhrs.pop()
-
-      if (udhrs.length > 0) {
-        let index = -1
-        while (++index < udhrs.length) {
-          topWithUdhr.push(Object.assign({}, info, {udhr: udhrs[index]}))
-        }
-      }
-    }
-
-    const topWithScript = []
-    index = -1
-
-    while (++index < topWithUdhr.length) {
-      const info = topWithUdhr[index]
-      const code = info.iso6393
-      let scripts = Object.keys(scriptInformation(info.udhr))
-
-      /* Languages without (accessible) UDHR declaration.
-       * No trigram, and no custom script, available for:
-       * - awa (Awadhi): Devanagari, Kaithi, Persian;
-       * - snd (Sindhi): Arabic, Devanagari, Khudabadi, and more;
-       * - hne (Chhattisgarhi): Devanagari;
-       * - asm (Assamese): Assamese (Bengali + two other characters*);
-       * - koi (Komi-Permyak): Cyrillic;
-       * - raj (Rajasthani): Devanagari;
-       * - mve (Marwari): Devanagari, and Mahajani (which is in unicode*);
-       * - bjj (Kanauji): Devanagari;
-       * - kmr (Northern Kurdish): Latin (main); Perso-Arabic;
-       * - kas (Kashmiri): Perso-Arabic, Devanagari, Sharada.
-       * - shn (Shan): A Shan script exists, but nearly no one can read it*.
-       * - gbm (Garhwali): Devanagari
-       * - dyu (Dyula): N'Ko, Latin, Arabic
-       * - ksw (S'gaw Karen): Burmese
-       * - gno (Northern Gondi): Devanagari, Telugu
-       * - bgp (Eastern Balochi): Urdu Arabic, Arabic
-       * - unr (Mundari): ?
-       * - hoc (Ho): Ol Chiki, Devanagari, Varang Kshiti
-       * - pwo (Pwo Western Karen): Burmese
-       *
-       * *: future interest?
-       */
-      switch (code) {
-        case 'tel': {
-          scripts = ['Telugu']
-          break
-        }
-
-        case 'ori': {
-          scripts = ['Oriya']
-          break
-        }
-
-        case 'sin': {
-          scripts = ['Sinhala']
-          break
-        }
-
-        case 'sat': {
-          scripts = ['Ol_Chiki']
-          break
-        }
-
-        case 'jpn': {
-          /* Japanese is different. */
-          scripts = ['Hiragana, Katakana, and Han']
-          break
-        }
-
-        // No default
-      }
-
-      if (scripts.length > 1) {
-        throw new Error(
-          'Woops, I found a language which uses more than one script. Franc is not build for that. Exiting.'
+    for (udhrKey in trigrams) {
+      if (own.call(trigrams, udhrKey)) {
+        const declaration = String(
+          fs.readFileSync(
+            path.join('node_modules', 'udhr', 'declaration', udhrKey + '.html')
+          )
         )
-      }
+        const tree = unified().use(rehypeParse).parse(declaration)
+        const root = select('html', tree)
+        const code =
+          (root && root.properties && root.properties.dataIso6393) || undefined
 
-      if (scripts.length === 0 && !(info.udhr in trigrams)) {
-        if (info.speakers && info.speakers > 1e6) {
-          console.log(
-            'Ignoring language with neither trigrams nor scripts: %s (%s, %s)',
-            code,
-            info.name,
-            info.speakers.toLocaleString('en', {notation: 'compact'})
+        if (typeof code !== 'string') {
+          throw new TypeError(
+            'Missing `html[data-iso6393]` in `' + udhrKey + '`'
           )
         }
 
-        continue
+        const info = iso6393.find((d) => d.iso6393 === code)
+
+        if (!info) {
+          throw new Error(
+            'Could not find valid `iso-639-3` entry for `' + code + '`'
+          )
+        }
+
+        if (iso6393TypeExclude.has(info.type)) {
+          console.log('Ignoring special code `%s`', udhrKey)
+          continue
+        }
+
+        if (iso6393Exclude.has(code)) {
+          console.log('Ignoring unsafe language `%s`', udhrKey)
+          continue
+        }
+
+        let content = ''
+
+        if (info) {
+          content = selectAll('article p', root)
+            .map((d) => toString(d))
+            .join(' ')
+        }
+
+        const scriptCounts = {}
+        let script
+
+        for (script in expressions) {
+          if (own.call(expressions, script) && !iso15924Exclude.has(script)) {
+            const countMatch = content.match(expressions[script])
+            const count =
+              Math.round(
+                ((countMatch ? countMatch.length : 0) / content.length) * 100
+              ) / 100
+
+            if (count > 0.05) {
+              scriptCounts[script] = count
+            }
+          }
+        }
+
+        // Japanese is different.
+        const scripts =
+          code === 'jpn'
+            ? ['Hiragana, Katakana, and Han']
+            : Object.keys(scriptCounts)
+
+        if (scripts.length > 1) {
+          throw new Error(
+            'Woops, I found a declaration (`' +
+              udhrKey +
+              '`) which uses more than one script. Franc is not build for that. Exiting.'
+          )
+        }
+
+        const lettersOnly = udhrKey.replace(/[^a-z]+/g, '')
+
+        let score = 1
+
+        if (udhrKeyPrefer.has(udhrKey)) {
+          score *= 2
+        } else {
+          // Loose points for number of underscores and digits.
+          score /= udhrKey.length - lettersOnly.length + 1
+        }
+
+        top.push({
+          score,
+          // Can `name` and `type` be removed?
+          name: info.name,
+          code,
+          udhr: udhrKey,
+          script: scripts[0],
+          speakers: speakers[code]
+        })
       }
-
-      topWithScript.push({...info, script: scripts})
     }
 
-    return topWithScript.sort(sort)
-  }
-}
+    let index = -1
+    while (++index < iso6393.length) {
+      const {name, iso6393: code} = iso6393[index]
 
-/* Get UDHR codes for an ISO6393 code. */
-function getUdhrKeysfromIso(iso) {
-  const udhrs = []
-
-  if (iso in udhrOverrides) {
-    return udhrOverrides[iso]
-  }
-
-  let index = -1
-
-  while (++index < udhr.length) {
-    const info = udhr[index]
-
-    // To do: use a better detection algorithm (UDHR declarations have a `data-iso6393` field)
-    if (info.iso6393 === iso || info.code === iso) {
-      udhrs.push(info.code)
+      // Manual scripts for languages without trigrams.
+      if (own.call(scriptsForSingleLanguages, code)) {
+        const info = scriptsForSingleLanguages[code]
+        top.push({
+          score: 1,
+          // Can `name` be removed?
+          name,
+          code,
+          udhr: info.udhr,
+          script: info.script,
+          speakers: speakers[code]
+        })
+      }
     }
-  }
 
-  if (udhrs.length === 1) {
-    return udhrs
-  }
+    const byIsoAndScript = {}
 
-  /* Pick the main UDHR. */
-  if (udhrs.includes(iso)) {
-    return [iso]
-  }
+    for (const d of top) {
+      const key = d.code + ':' + d.script
+      const list = byIsoAndScript[key] || (byIsoAndScript[key] = [])
+      list.push(d)
+    }
 
-  return udhrs
+    const bestScores = []
+    let key
+
+    for (key in byIsoAndScript) {
+      if (own.call(byIsoAndScript, key)) {
+        const list = byIsoAndScript[key]
+
+        // High score first.
+        list.sort((a, b) => b.score - a.score)
+
+        if (list[1] && list[0].score === list[1].score) {
+          console.log(
+            'Not sure which one to pick, please prefer one specific UDHR key',
+            list
+          )
+        }
+
+        bestScores.push(list[0])
+      }
+    }
+
+    return bestScores.sort(sort)
+  }
 }
 
 async function createExpressions() {
