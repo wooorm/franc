@@ -32,8 +32,7 @@
     "@unicode/unicode-14.0.0": "^1.0.0",
     "unified": "^10.0.0",
     "unist-builder": "^3.0.0",
-    "xo": "^0.33.0",
-    "xtend": "^4.0.0"
+    "xo": "^0.39.0"
   },
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
@@ -53,24 +52,11 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false,
     "rules": {
-      "import/extensions": "off",
-      "import/no-useless-path-segments": "off",
-      "unicorn/import-index": "off",
-      "unicorn/no-fn-reference-in-iterator": "off",
-      "unicorn/no-hex-escape": "off",
-      "unicorn/prefer-includes": "off",
-      "unicorn/prefer-number-properties": "off",
       "camelcase": "off",
-      "guard-for-in": "off",
+      "max-depth": "off",
       "no-misleading-character-class": "off"
-    },
-    "ignores": [
-      "franc-all.js",
-      "franc-min.js",
-      "franc.js"
-    ]
+    }
   },
   "remarkConfig": {
     "plugins": [

@@ -6,9 +6,9 @@ import {franc, francAll} from 'franc'
 const require = createRequire(import.meta.url)
 const pack = require('./package.json')
 
-var command = Object.keys(pack.bin)[0]
+const command = Object.keys(pack.bin)[0]
 
-var cli = meow(help(), {
+const cli = meow(help(), {
   importMeta: import.meta,
   flags: {
     all: {
@@ -46,8 +46,8 @@ var cli = meow(help(), {
   }
 })
 
-var value = cli.input.join(' ').trim()
-var flags = cli.flags
+const value = cli.input.join(' ').trim()
+const flags = cli.flags
 
 flags.minLength = Number(flags.minLength) || null
 
@@ -59,7 +59,7 @@ flags.ignore = flags.blacklist.concat(list(flags.ignore))
 if (cli.input.length === 0) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
-  process.stdin.on('data', function (data) {
+  process.stdin.on('data', (data) => {
     detect(data.trim())
   })
 } else {
@@ -67,16 +67,18 @@ if (cli.input.length === 0) {
 }
 
 function detect(value) {
-  var options = {
+  const options = {
     minLength: flags.minLength,
     only: flags.only,
     ignore: flags.ignore
   }
 
   if (flags.all) {
-    francAll(value, options).forEach(function (language) {
-      console.log(language[0] + ' ' + language[1])
-    })
+    const results = francAll(value, options)
+    let index = -1
+    while (++index < results.length) {
+      console.log(results[index][0] + ' ' + results[index][1])
+    }
   } else {
     console.log(franc(value, options))
   }

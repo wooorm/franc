@@ -1,7 +1,5 @@
-import {createRequire} from 'node:module'
 import fs from 'fs'
 import path from 'path'
-import xtend from 'xtend'
 import {isHidden} from 'is-hidden'
 import {iso6393} from 'iso-639-3'
 import {speakers} from 'speakers'
@@ -21,14 +19,14 @@ import {customFixtures} from './custom-fixtures.js'
 import {udhrOverrides} from './udhr-overrides.js'
 import {udhrExclude} from './udhr-exclude.js'
 
+const own = {}.hasOwnProperty
+
 const ascending = alphaSort()
 const scripts = unicode.Script
 
-const require = createRequire(import.meta.url)
-
-var core = process.cwd()
-var root = path.join(core, 'packages')
-var mono = JSON.parse(fs.readFileSync('package.json'))
+const core = process.cwd()
+const root = path.join(core, 'packages')
+const mono = JSON.parse(fs.readFileSync('package.json'))
 
 /* Persian (fas, macrolanguage) contains Western Persian (pes)
  * and Dari (prs).  They’re so similar in UDHR that using both
@@ -36,26 +34,30 @@ var mono = JSON.parse(fs.readFileSync('package.json'))
  * instead. (note: prs and pes are ignored) */
 speakers.fas = speakers.prs + speakers.pes
 
-min().then((trigrams) => {
-  var expressions = createExpressions()
-  var topLanguages = createTopLanguages()
-  var doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8')
+main()
 
-  fs.readdirSync(root)
-    .filter((d) => !isHidden(d))
-    .forEach(generate)
+// eslint-disable-next-line complexity
+async function main() {
+  const trigrams = await min()
+  const expressions = await createExpressions()
+  const topLanguages = createTopLanguages()
+  const doc = fs.readFileSync(path.join(root, 'franc', 'index.js'), 'utf8')
+  const files = fs.readdirSync(root)
+  let index = -1
 
-  function generate(basename) {
-    var base = path.join(root, basename)
-    var pack = JSON.parse(fs.readFileSync(path.join(base, 'package.json')))
-    var threshold = pack.threshold
-    var support = []
-    var regularExpressions = {} /* Ha! */
-    var perScript = {}
-    var data = {}
-    var list = topLanguages
-    var fixtures
-    var byScript
+  while (++index < files.length) {
+    const basename = files[index]
+
+    if (isHidden(basename)) continue
+
+    const base = path.join(root, basename)
+    const pack = JSON.parse(fs.readFileSync(path.join(base, 'package.json')))
+    const threshold = pack.threshold
+    const support = []
+    const regularExpressions = {} /* Ha! */
+    const perScript = {}
+    const data = {}
+    let list = topLanguages
 
     if (!threshold) {
       return
@@ -65,17 +67,31 @@ min().then((trigrams) => {
     console.log('%s, threshold: %s', pack.name, threshold)
 
     if (threshold !== -1) {
-      list = list.filter(function (info) {
+      list = list.filter((info) => {
         return info.speakers >= threshold
       })
     }
 
-    byScript = createTopLanguagesByScript(list)
+    const byScript = {}
+    let offset = -1
 
-    Object.keys(byScript).forEach(function (script) {
-      var languages = byScript[script].filter(function (info) {
-        return (
-          [
+    while (++offset < list.length) {
+      const info = list[offset]
+      const script = info.script
+
+      if (!byScript[script]) {
+        byScript[script] = []
+      }
+
+      byScript[script].push(info)
+    }
+
+    let script
+
+    for (script in byScript) {
+      if (own.call(byScript, script)) {
+        const languages = byScript[script].filter((info) => {
+          return ![
             /* Ignore `npi` (Nepali (individual language)): `npe`
              * (Nepali (macrolanguage)) is also included. */
             'npi',
@@ -88,48 +104,54 @@ min().then((trigrams) => {
             'nan',
             'wuu',
             'hak'
-          ].indexOf(info.iso6393) === -1
-        )
-      })
+          ].includes(info.iso6393)
+        })
 
-      if (languages.length > 1) {
-        if (!regularExpressions[script]) {
-          regularExpressions[script] = expressions[script]
-        }
+        if (languages.length > 1) {
+          if (!regularExpressions[script]) {
+            regularExpressions[script] = expressions[script]
+          }
 
-        perScript[script] = languages
-      } else {
-        support.push(languages[0])
-        regularExpressions[languages[0].iso6393] = expressions[script]
-      }
-    })
-
-    Object.keys(perScript).forEach(function (script) {
-      var scriptObject = {}
-
-      data[script] = scriptObject
-
-      perScript[script].forEach(function (info) {
-        if (trigrams[info.udhr]) {
-          support.push(info)
-          scriptObject[info.iso6393] = trigrams[info.udhr]
-            .concat()
-            .reverse()
-            .join('|')
+          perScript[script] = languages
         } else {
-          console.log(
-            '  Ignoring language without trigrams: %s (%s, %s)',
-            info.iso6393,
-            info.name,
-            script
-          )
+          support.push(languages[0])
+          regularExpressions[languages[0].iso6393] = expressions[script]
         }
-      })
-    })
+      }
+    }
+
+    for (script in perScript) {
+      if (own.call(perScript, script)) {
+        const scripts = perScript[script]
+        const scriptObject = {}
+        let index = -1
+
+        data[script] = scriptObject
+
+        while (++index < scripts.length) {
+          const info = scripts[index]
+
+          if (trigrams[info.udhr]) {
+            support.push(info)
+            scriptObject[info.iso6393] = trigrams[info.udhr]
+              .concat()
+              .reverse()
+              .join('|')
+          } else {
+            console.log(
+              '  Ignoring language without trigrams: %s (%s, %s)',
+              info.iso6393,
+              info.name,
+              script
+            )
+          }
+        }
+      }
+    }
 
     /* Push Japanese.
      * Unicode Kanji Table from http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml */
-    var kanjiRegexSource = '[\u3400-\u4DB5\u4E00-\u9FAF]'
+    const kanjiRegexSource = '[\u3400-\u4DB5\u4E00-\u9FAF]'
     regularExpressions.jpn = new RegExp(
       expressions.Hiragana.source +
         '|' +
@@ -172,11 +194,13 @@ min().then((trigrams) => {
     console.log()
     console.log('Creating fixtures')
 
-    fixtures = {}
+    const fixtures = {}
+    offset = -1
 
-    support.forEach(function (language) {
-      var udhrKey = language.udhr || language.iso6393
-      var fixture
+    while (++offset < support.length) {
+      const language = support[offset]
+      const udhrKey = language.udhr || language.iso6393
+      let fixture
 
       if (udhrKey in customFixtures) {
         fixture = customFixtures[udhrKey]
@@ -223,7 +247,7 @@ min().then((trigrams) => {
         iso6393: language.iso6393,
         fixture: fixture.slice(0, 1000)
       }
-    })
+    }
 
     fs.writeFileSync(
       path.join(core, 'test', 'fixtures.js'),
@@ -239,7 +263,7 @@ min().then((trigrams) => {
       'export const expressions = {',
       '  ' +
         Object.keys(expressions)
-          .map(function (script) {
+          .map((script) => {
             return script + ': ' + expressions[script]
           })
           .join(',\n  '),
@@ -249,10 +273,10 @@ min().then((trigrams) => {
   }
 
   function generateReadme(pack, list) {
-    var counts = count(list)
-    var threshold = pack.threshold
-    var licensee = parseAuthor(pack.author)
-    var tree = u('root', [
+    const counts = count(list)
+    const threshold = pack.threshold
+    const licensee = parseAuthor(pack.author)
+    const tree = u('root', [
       u('html', '<!--This file is generated by `build.js`-->'),
       u('heading', {depth: 1}, [u('text', pack.name)]),
       u('blockquote', [u('paragraph', [u('text', pack.description + '.')])]),
@@ -282,7 +306,7 @@ min().then((trigrams) => {
       u('paragraph', [
         u('text', 'This build supports the following languages:')
       ]),
-      u('table', {align: []}, [header()].concat(list.map(row))),
+      u('table', {align: []}, [header()].concat(list.map((d) => row(d)))),
       u('heading', {depth: 2}, [u('text', 'License')]),
       u('paragraph', [
         u('link', {url: mono.repository + '/blob/main/license'}, [
@@ -319,12 +343,12 @@ min().then((trigrams) => {
         u('tableCell', [
           u(
             'text',
-            isNaN(info.speakers)
-              ? 'unknown'
-              : info.speakers.toLocaleString('en', {
+            typeof info.speakers === 'number'
+              ? info.speakers.toLocaleString('en', {
                   notation: 'compact',
                   maximumFractionDigits: 0
                 })
+              : 'unknown'
           )
         ])
       ])
@@ -340,10 +364,14 @@ min().then((trigrams) => {
   }
 
   function count(list) {
-    var map = {}
-    list.forEach(function (info) {
+    const map = {}
+    let index = -1
+
+    while (++index < list.length) {
+      const info = list[index]
       map[info.iso6393] = (map[info.iso6393] || 0) + 1
-    })
+    }
+
     return map
   }
 
@@ -362,27 +390,29 @@ min().then((trigrams) => {
         .join(' ')
     }
 
-    var length = paragraphs.length
-    var scriptInformation = {}
+    const length = paragraphs.length
+    const result = {}
+    let script
 
-    Object.keys(expressions).forEach(function (script) {
-      var count
+    for (script in expressions) {
+      if (
+        own.call(expressions, script) &&
+        // Ignore scripts unimportant for our goal.
+        script !== 'Common' &&
+        script !== 'Inherited'
+      ) {
+        const countMatch = paragraphs.match(expressions[script])
+        const count =
+          Math.round(((countMatch ? countMatch.length : 0) / length) * 100) /
+          100
 
-      /* Ignore: unimportant for our goal, scripts. */
-      if (script === 'Common' || script === 'Inherited') {
-        return
+        if (count && count > 0.05) {
+          result[script] = count
+        }
       }
+    }
 
-      count = paragraphs.match(expressions[script])
-      count = (count ? count.length : 0) / length
-      count = Math.round(count * 100) / 100
-
-      if (count && count > 0.05) {
-        scriptInformation[script] = count
-      }
-    })
-
-    return scriptInformation
+    return result
   }
 
   /* Sort a list of languages by most-popular. */
@@ -394,55 +424,49 @@ min().then((trigrams) => {
     )
   }
 
-  function createExpressions() {
-    var result = {}
-    scripts.forEach(function (script) {
-      var expression = require('@unicode/unicode-14.0.0/Script/' +
-        script +
-        '/regex.js')
-      result[script] = new RegExp(expression.source, 'g')
-    })
-    return result
-  }
-
   function createTopLanguages() {
-    var top = iso6393
-      .map(function (info) {
-        return xtend(info, {speakers: speakers[info.iso6393]})
-      })
-      .filter(function (info) {
-        var code = info.iso6393
-        var name = info.name
+    const topWithUdhr = []
+    let index = -1
 
-        if (udhrExclude.indexOf(code) !== -1) {
-          console.log('Ignoring unsafe language `%s` (%s)', code, name)
-          return false
-        }
-
-        if (info.type === 'special') {
-          console.log('Ignoring special code `%s` (%s)', code, name)
-          return false
-        }
-
-        return true
+    while (++index < iso6393.length) {
+      const info = Object.assign({}, iso6393[index], {
+        speakers: speakers[iso6393[index].iso6393]
       })
 
-    top.forEach(function (info) {
-      var code = info.iso6393
-      var udhrs = getUDHRKeysfromISO(code)
+      const code = info.iso6393
+      const name = info.name
 
+      if (udhrExclude.includes(code)) {
+        console.log('Ignoring unsafe language `%s` (%s)', code, name)
+        continue
+      }
+
+      if (info.type === 'special') {
+        console.log('Ignoring special code `%s` (%s)', code, name)
+        continue
+      }
+
+      const udhrs = getUdhrKeysfromIso(code)
+
+      topWithUdhr.push(info)
+      // Could be undefined: keep at least one for later.
       info.udhr = udhrs.pop()
 
-      if (udhrs.length !== 0) {
-        udhrs.forEach(function (udhr) {
-          top.push(xtend(info, {udhr: udhr}))
-        })
+      if (udhrs.length > 0) {
+        let index = -1
+        while (++index < udhrs.length) {
+          topWithUdhr.push(Object.assign({}, info, {udhr: udhrs[index]}))
+        }
       }
-    })
+    }
 
-    top.forEach(function (info) {
-      var code = info.iso6393
-      var scripts = scriptInformation(info.udhr)
+    const topWithScript = []
+    index = -1
+
+    while (++index < topWithUdhr.length) {
+      const info = topWithUdhr[index]
+      const code = info.iso6393
+      let scripts = Object.keys(scriptInformation(info.udhr))
 
       /* Languages without (accessible) UDHR declaration.
        * No trigram, and no custom script, available for:
@@ -468,27 +492,35 @@ min().then((trigrams) => {
        *
        * *: future interest?
        */
-      if (code === 'tel') {
-        scripts.Telugu = 0.8
-      } else if (code === 'ori') {
-        scripts.Oriya = 0.8
-      } else if (code === 'sin') {
-        scripts.Sinhala = 0.8
-      } else if (code === 'sat') {
-        scripts.Ol_Chiki = 0.8
-      } else if (code === 'jpn') {
-        /* Japanese is different. */
-        scripts = {'Hiragana, Katakana, and Han': 0.8}
+      switch (code) {
+        case 'tel': {
+          scripts = ['Telugu']
+          break
+        }
+
+        case 'ori': {
+          scripts = ['Oriya']
+          break
+        }
+
+        case 'sin': {
+          scripts = ['Sinhala']
+          break
+        }
+
+        case 'sat': {
+          scripts = ['Ol_Chiki']
+          break
+        }
+
+        case 'jpn': {
+          /* Japanese is different. */
+          scripts = ['Hiragana, Katakana, and Han']
+          break
+        }
+
+        // No default
       }
-
-      info.script = Object.keys(scripts)
-    })
-
-    top = top.filter(function (info) {
-      var scripts = info.script
-      var ignore = !trigrams[info.udhr] && scripts.length === 0
-
-      info.script = scripts[0]
 
       if (scripts.length > 1) {
         throw new Error(
@@ -496,60 +528,69 @@ min().then((trigrams) => {
         )
       }
 
-      if (ignore && info.speakers && info.speakers > 1e6) {
-        console.log(
-          'Ignoring language with neither trigrams nor scripts: %s (%s, %s)',
-          info.iso6393,
-          info.name,
-          info.speakers
-        )
+      if (scripts.length === 0 && !(info.udhr in trigrams)) {
+        if (info.speakers && info.speakers > 1e6) {
+          console.log(
+            'Ignoring language with neither trigrams nor scripts: %s (%s, %s)',
+            code,
+            info.name,
+            info.speakers.toLocaleString('en', {notation: 'compact'})
+          )
+        }
+
+        continue
       }
 
-      return !ignore
-    })
+      topWithScript.push({...info, script: scripts})
+    }
 
-    return top.sort(sort)
+    return topWithScript.sort(sort)
+  }
+}
+
+/* Get UDHR codes for an ISO6393 code. */
+function getUdhrKeysfromIso(iso) {
+  const udhrs = []
+
+  if (iso in udhrOverrides) {
+    return udhrOverrides[iso]
   }
 
-  function createTopLanguagesByScript(top) {
-    var scripts = {}
+  let index = -1
 
-    top.forEach(function (info) {
-      var script = info.script
+  while (++index < udhr.length) {
+    const info = udhr[index]
 
-      if (!scripts[script]) {
-        scripts[script] = []
-      }
-
-      scripts[script].push(info)
-    })
-
-    return scripts
+    // To do: use a better detection algorithm (UDHR declarations have a `data-iso6393` field)
+    if (info.iso6393 === iso || info.code === iso) {
+      udhrs.push(info.code)
+    }
   }
 
-  /* Get UDHR codes for an ISO6393 code. */
-  function getUDHRKeysfromISO(iso) {
-    var udhrs = []
-
-    if (iso in udhrOverrides) {
-      return udhrOverrides[iso]
-    }
-
-    udhr.forEach(function (info) {
-      if (info.iso6393 === iso || info.code === iso) {
-        udhrs.push(info.code)
-      }
-    })
-
-    if (udhrs.length === 1) {
-      return udhrs
-    }
-
-    /* Pick the main UDHR. */
-    if (udhrs.indexOf(iso) !== -1) {
-      return [iso]
-    }
-
+  if (udhrs.length === 1) {
     return udhrs
   }
-})
+
+  /* Pick the main UDHR. */
+  if (udhrs.includes(iso)) {
+    return [iso]
+  }
+
+  return udhrs
+}
+
+async function createExpressions() {
+  const result = {}
+
+  await Promise.all(
+    scripts.map((script) =>
+      import('@unicode/unicode-14.0.0/Script/' + script + '/regex.js').then(
+        (mod) => {
+          result[script] = new RegExp(mod.default.source, 'g')
+        }
+      )
+    )
+  )
+
+  return result
+}

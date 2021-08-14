@@ -1,5 +1,3 @@
-'use strict'
-
 /* Load `trigram-utils`. */
 import {asTuples} from 'trigram-utils'
 
@@ -12,42 +10,40 @@ import {expressions} from './expressions.js'
 import {data} from './data.js'
 
 /* Maximum sample length. */
-var MAX_LENGTH = 2048
+const MAX_LENGTH = 2048
 
 /* Minimum sample length. */
-var MIN_LENGTH = 10
+const MIN_LENGTH = 10
 
 /* The maximum distance to add when a given trigram does
  * not exist in a trigram dictionary. */
-var MAX_DIFFERENCE = 300
+const MAX_DIFFERENCE = 300
+
+const own = {}.hasOwnProperty
 
 /* Construct trigram dictionaries. */
-;(function () {
-  var languages
-  var name
-  var trigrams
-  var model
-  var script
-  var weight
+let script
 
-  for (script in data) {
-    languages = data[script]
+for (script in data) {
+  if (own.call(data, script)) {
+    const languages = data[script]
+    let name
 
     for (name in languages) {
-      model = languages[name].split('|')
+      if (own.call(languages, name)) {
+        const model = languages[name].split('|')
+        const trigrams = {}
+        let weight = model.length
 
-      weight = model.length
+        while (weight--) {
+          trigrams[model[weight]] = weight
+        }
 
-      trigrams = {}
-
-      while (weight--) {
-        trigrams[model[weight]] = weight
+        languages[name] = trigrams
       }
-
-      languages[name] = trigrams
     }
   }
-})()
+}
 
 /**
  * Get the most probable language for the given value.
@@ -69,16 +65,13 @@ export function franc(value, options) {
  * @return {Array.<Array.<string, number>>} An array
  *   containing language--distance tuples.
  */
-export function francAll(value, options) {
-  var settings = options || {}
-  var minLength = MIN_LENGTH
-  var only = [].concat(settings.whitelist || [], settings.only || [])
-  var ignore = [].concat(settings.blacklist || [], settings.ignore || [])
-  var script
-
-  if (settings.minLength !== null && settings.minLength !== undefined) {
-    minLength = settings.minLength
-  }
+export function francAll(value, options = {}) {
+  const only = [...(options.whitelist || []), ...(options.only || [])]
+  const ignore = [...(options.blacklist || []), ...(options.ignore || [])]
+  const minLength =
+    options.minLength !== null && options.minLength !== undefined
+      ? options.minLength
+      : MIN_LENGTH
 
   if (!value || value.length < minLength) {
     return und()
@@ -88,7 +81,7 @@ export function francAll(value, options) {
 
   /* Get the script which characters occur the most
    * in `value`. */
-  script = getTopScript(value, expressions)
+  const script = getTopScript(value, expressions)
 
   /* One languages exists for the most-used script. */
   if (!(script[0] in data)) {
@@ -120,12 +113,11 @@ export function francAll(value, options) {
  *   distances.
  */
 function normalize(value, distances) {
-  var min = distances[0][1]
-  var max = value.length * MAX_DIFFERENCE - min
-  var index = -1
-  var length = distances.length
+  const min = distances[0][1]
+  const max = value.length * MAX_DIFFERENCE - min
+  let index = -1
 
-  while (++index < length) {
+  while (++index < distances.length) {
     distances[index][1] = 1 - (distances[index][1] - min) / max || 0
   }
 
@@ -142,17 +134,18 @@ function normalize(value, distances) {
  *   occurrence percentage.
  */
 function getTopScript(value, scripts) {
-  var topCount = -1
-  var topScript
-  var script
-  var count
+  let topCount = -1
+  let topScript
+  let script
 
   for (script in scripts) {
-    count = getOccurrence(value, scripts[script])
+    if (own.call(scripts, script)) {
+      const count = getOccurrence(value, scripts[script])
 
-    if (count > topCount) {
-      topCount = count
-      topScript = script
+      if (count > topCount) {
+        topCount = count
+        topScript = script
+      }
     }
   }
 
@@ -167,7 +160,7 @@ function getTopScript(value, scripts) {
  * @return {number} Float between 0 and 1.
  */
 function getOccurrence(value, expression) {
-  var count = value.match(expression)
+  const count = value.match(expression)
 
   return (count ? count.length : 0) / value.length || 0
 }
@@ -188,13 +181,15 @@ function getOccurrence(value, expression) {
  *   containing language--distance tuples.
  */
 function getDistances(trigrams, languages, only, ignore) {
-  var distances = []
-  var language
-
   languages = filterLanguages(languages, only, ignore)
 
+  const distances = []
+  let language
+
   for (language in languages) {
-    distances.push([language, getDistance(trigrams, languages[language])])
+    if (own.call(languages, language)) {
+      distances.push([language, getDistance(trigrams, languages[language])])
+    }
   }
 
   return distances.length === 0 ? und() : distances.sort(sort)
@@ -211,14 +206,12 @@ function getDistances(trigrams, languages, only, ignore) {
  * @return {number} - The distance between the two.
  */
 function getDistance(trigrams, model) {
-  var distance = 0
-  var index = -1
-  var length = trigrams.length
-  var trigram
-  var difference
+  let distance = 0
+  let index = -1
 
-  while (++index < length) {
-    trigram = trigrams[index]
+  while (++index < trigrams.length) {
+    const trigram = trigrams[index]
+    let difference = MAX_DIFFERENCE
 
     if (trigram[0] in model) {
       difference = trigram[1] - model[trigram[0]] - 1
@@ -226,8 +219,6 @@ function getDistance(trigrams, model) {
       if (difference < 0) {
         difference = -difference
       }
-    } else {
-      difference = MAX_DIFFERENCE
     }
 
     distance += difference
@@ -250,14 +241,12 @@ function getDistance(trigrams, model) {
  *   languages.
  */
 function filterLanguages(languages, only, ignore) {
-  var filteredLanguages
-  var language
-
   if (only.length === 0 && ignore.length === 0) {
     return languages
   }
 
-  filteredLanguages = {}
+  const filteredLanguages = {}
+  let language
 
   for (language in languages) {
     if (allow(language, only, ignore)) {
@@ -285,8 +274,7 @@ function allow(language, only, ignore) {
   }
 
   return (
-    (only.length === 0 || only.indexOf(language) !== -1) &&
-    ignore.indexOf(language) === -1
+    (only.length === 0 || only.includes(language)) && !ignore.includes(language)
   )
 }
 

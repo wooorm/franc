@@ -2,16 +2,16 @@ import test from 'tape'
 import {franc, francAll} from '../packages/franc/index.js'
 import {fixtures} from './fixtures.js'
 
-var languageA = 'pol'
-var languageB = 'eng'
-var fixtureB = fixtures[languageB].fixture
-var hebrew = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית'
+const languageA = 'pol'
+const languageB = 'eng'
+const fixtureB = fixtures[languageB].fixture
+const hebrew = 'הפיתוח הראשוני בשנות ה־80 התמקד בגנו ובמערכת הגרפית'
 
 if (languageA === franc(fixtureB)) {
   throw new Error('a and b should not be equal...')
 }
 
-test('franc()', function (t) {
+test('franc()', (t) => {
   t.equal(typeof franc, 'function', 'should be of type `function`')
   t.equal(typeof franc('XYZ'), 'string', 'should return a string')
   t.equal(franc('XYZ'), 'und', 'should return "und" on an undetermined value')
@@ -112,7 +112,7 @@ test('franc()', function (t) {
   t.end()
 })
 
-test('francAll()', function (t) {
+test('francAll()', (t) => {
   t.equal(typeof francAll, 'function', 'should be of type `function`')
 
   t.deepEqual(
@@ -165,7 +165,7 @@ test('francAll()', function (t) {
 
   t.deepEqual(
     francAll(fixtureB, {ignore: [franc(fixtureB)]})
-      .map(function (tuple) {
+      .map((tuple) => {
         return tuple[0]
       })
       .indexOf(franc(fixtureB)),
@@ -203,23 +203,28 @@ test('francAll()', function (t) {
   t.end()
 })
 
-test('algorithm', function (t) {
-  Object.keys(fixtures).forEach(function (code) {
-    var info = fixtures[code]
+test('algorithm', (t) => {
+  const keys = Object.keys(fixtures)
+
+  for (const code of keys) {
+    const info = fixtures[code]
 
     // Failing for some reason. Trigrams generated incorrectly?
-    if (code.slice(0, 3) === 'bos') return
+    if (info.iso6393 === 'bos') continue
 
     if (info.fixture) {
       t.equal(
         francAll(info.fixture)[0][0],
         info.iso6393,
-        info.fixture.replace(/\n/g, '\\n').slice(0, 20) + '... (' + code + ')'
+        info.fixture.replace(/\n/g, '\\n').slice(0, 20) +
+          '... (' +
+          info.iso6393 +
+          ')'
       )
     } else {
       console.log('Missing fixture for UDHR `' + code + '`')
     }
-  })
+  }
 
   t.end()
 })
