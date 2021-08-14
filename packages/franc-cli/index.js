@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+/**
+ * @typedef {import('franc').Options} Options
+ */
+
 import {createRequire} from 'node:module'
 import meow from 'meow'
 import {franc, francAll} from 'franc'
@@ -49,30 +53,30 @@ const cli = meow(help(), {
 const value = cli.input.join(' ').trim()
 const flags = cli.flags
 
-flags.minLength = Number(flags.minLength) || null
-
-flags.whitelist = list(flags.whitelist)
-flags.blacklist = list(flags.blacklist)
-flags.only = flags.whitelist.concat(list(flags.only))
-flags.ignore = flags.blacklist.concat(list(flags.ignore))
+/** @type {Options} */
+const options = {
+  minLength: Number(flags.minLength) || undefined,
+  // @ts-expect-error: legacy.
+  whitelist: list(flags.whitelist),
+  blacklist: list(flags.blacklist),
+  only: list(flags.only),
+  ignore: list(flags.ignore)
+}
 
 if (cli.input.length === 0) {
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
   process.stdin.on('data', (data) => {
-    detect(data.trim())
+    detect(String(data).trim())
   })
 } else {
   detect(value)
 }
 
+/**
+ * @param {string} value
+ */
 function detect(value) {
-  const options = {
-    minLength: flags.minLength,
-    only: flags.only,
-    ignore: flags.ignore
-  }
-
   if (flags.all) {
     const results = francAll(value, options)
     let index = -1
@@ -117,6 +121,10 @@ function help() {
   ].join('\n')
 }
 
+/**
+ * @param {string|undefined} value
+ * @returns {string[]}
+ */
 function list(value) {
   return value ? String(value).split(',') : []
 }

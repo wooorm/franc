@@ -1,3 +1,4 @@
+/** @type {Record<string, {iso6393: string, fixture: string}>} */
 export const fixtures = {
   cmn_hans: {
     iso6393: 'cmn',

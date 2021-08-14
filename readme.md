@@ -60,7 +60,7 @@ franc('the') // => 'und'
 franc('the', {minLength: 3}) // => 'sco'
 ```
 
-###### `.all`
+###### `francAll`
 
 ```js
 console.log(francAll('Considerando ser essencial que os direitos humanos'))

@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('type-fest').PackageJson} PackageJson
+ */
+
 import path from 'path'
 import fs from 'fs'
 import {exec} from 'child_process'
@@ -5,9 +9,13 @@ import {PassThrough} from 'stream'
 import test from 'tape'
 
 const root = path.resolve(process.cwd(), 'packages', 'franc-cli')
+
+/** @type {PackageJson} */
 const pkg = JSON.parse(
-  fs.readFileSync(
-    path.resolve(process.cwd(), 'packages', 'franc-cli', 'package.json')
+  String(
+    fs.readFileSync(
+      path.resolve(process.cwd(), 'packages', 'franc-cli', 'package.json')
+    )
   )
 )
 const cli = path.resolve(root, 'index.js')
@@ -59,7 +67,10 @@ test('cli', (t) => {
 
   const input = new PassThrough()
 
-  input.pipe(subprocess.stdin)
+  if (subprocess.stdin) {
+    input.pipe(subprocess.stdin)
+  }
+
   input.write(af.slice(0, af.length / 2))
 
   setImmediate(() => {

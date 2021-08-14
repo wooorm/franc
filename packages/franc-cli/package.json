@@ -13,18 +13,6 @@
     "cli",
     "bin"
   ],
-  "type": "module",
-  "main": "index.js",
-  "bin": {
-    "franc": "index.js"
-  },
-  "files": [
-    "index.js"
-  ],
-  "dependencies": {
-    "franc": "^5.0.0",
-    "meow": "^10.0.0"
-  },
   "repository": "https://github.com/wooorm/franc/tree/main/packages/franc-cli",
   "bugs": "https://github.com/wooorm/franc/issues",
   "funding": {
@@ -39,5 +27,26 @@
     "Dmitriy Sobolev <disobolev@icloud.com>",
     "Jeff Huijsmans <jeffhuys@gmail.com>"
   ],
-  "xo": false
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "franc": "index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "franc": "^5.0.0",
+    "meow": "^10.0.0"
+  },
+  "scripts": {
+    "build": "rimraf \"*.d.ts\" && tsc && type-coverage"
+  },
+  "xo": false,
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  }
 }

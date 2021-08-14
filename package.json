@@ -8,6 +8,10 @@
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "type": "module",
   "devDependencies": {
+    "@types/mdast": "^3.0.7",
+    "@types/parse-author": "^2.0.1",
+    "@types/tape": "^4.13.2",
+    "@unicode/unicode-14.0.0": "^1.0.0",
     "alpha-sort": "^5.0.0",
     "c8": "^7.0.0",
     "hast-util-select": "^5.0.0",
@@ -25,21 +29,27 @@
     "remark-lint-table-pipe-alignment": "^3.0.0",
     "remark-preset-wooorm": "^9.0.0",
     "remark-stringify": "^10.0.0",
+    "rimraf": "^3.0.2",
     "speakers": "^2.0.0",
     "tape": "^5.0.0",
     "trigrams": "^5.0.0",
+    "type-coverage": "^2.18.0",
+    "type-fest": "^2.0.0",
+    "typescript": "^4.3.5",
     "udhr": "^5.0.0",
-    "@unicode/unicode-14.0.0": "^1.0.0",
     "unified": "^10.0.0",
     "xo": "^0.39.0"
   },
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
-    "generate": "node script/build",
+    "build-packages": "node script/build.js",
+    "build-workspace": "lerna run build",
+    "build-monorepo": "rimraf \"script/**/*.d.ts\" \"test/**/*.d.ts\" && tsc && type-coverage",
+    "build": "npm run build-packages && npm run build-workspace && npm run build-monorepo",
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "test-api": "node --conditions development test/index.js",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
-    "test": "npm run generate && npm run format && npm run test-coverage"
+    "test": "npm run build && npm run format && npm run test-coverage"
   },
   "prettier": {
     "tabWidth": 2,
@@ -79,5 +89,11 @@
         false
       ]
     ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
   }
 }

@@ -1,8 +1,22 @@
+/**
+ * @typedef {import('type-fest').PackageJson} PackageJson
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('mdast').TableRow} TableRow
+ *
+ * @typedef Info
+ * @property {number} score
+ * @property {string} name
+ * @property {string} code
+ * @property {string|undefined} udhr
+ * @property {string} script
+ * @property {number|undefined} speakers
+ */
+
 import fs from 'fs'
 import path from 'path'
 import {isHidden} from 'is-hidden'
 import {iso6393} from 'iso-639-3'
-import {speakers} from 'speakers'
+import {speakers as defaultSpeakers} from 'speakers'
 import {unified} from 'unified'
 import rehypeParse from 'rehype-parse'
 import gfm from 'remark-gfm'
@@ -12,6 +26,7 @@ import {toString} from 'hast-util-to-string'
 import parseAuthor from 'parse-author'
 import alphaSort from 'alpha-sort'
 import {min} from 'trigrams'
+// @ts-expect-error: untyped.
 import unicode from '@unicode/unicode-14.0.0'
 import {customFixtures} from './custom-fixtures.js'
 
@@ -22,7 +37,8 @@ const scripts = unicode.Script
 
 const core = process.cwd()
 const root = path.join(core, 'packages')
-const mono = JSON.parse(fs.readFileSync('package.json'))
+/** @type {PackageJson} */
+const mono = JSON.parse(String(fs.readFileSync('package.json')))
 
 // ISO 639-3 types to ignore.
 const iso6393TypeExclude = new Set(['special'])
@@ -92,13 +108,23 @@ const iso15924Exclude = new Set([
   'Inherited'
 ])
 
-// Update some counts (`speakers` uses macrolanguage)
-// Standard Estonian from inclusive code.
-speakers.ekk = speakers.ekk || speakers.est
-// Standard Lavian from inclusive code.
-speakers.lvs = speakers.lvs || speakers.lav
+/** @type {Record<string, number>} */
+const speakers = {
+  ...defaultSpeakers,
+  // Update some counts (`speakers` uses macrolanguage)
+  // Standard Estonian from inclusive code.
+  // @ts-expect-error: allow for `ekk` to be added in the future.
+  ekk: defaultSpeakers.ekk || defaultSpeakers.est,
+  // Standard Lavian from inclusive code.
+  // @ts-expect-error: allow for `ekk` to be added in the future.
+  lvs: defaultSpeakers.lvs || defaultSpeakers.lav
+}
 
-// Map of languages where trigrams don’t work, but with a unique script.
+/**
+ * Map of languages where trigrams don’t work, but with a unique script.
+ *
+ * @type {Record<string, {script: string, udhr: string|undefined}>}
+ */
 const scriptsForSingleLanguages = {
   sat: {script: 'Ol_Chiki', udhr: undefined},
   iii: {script: 'Yi', udhr: 'iii'},
@@ -122,11 +148,20 @@ async function main() {
     if (isHidden(basename)) continue
 
     const base = path.join(root, basename)
-    const pack = JSON.parse(fs.readFileSync(path.join(base, 'package.json')))
+    /** @type {PackageJson} */
+    const pack = JSON.parse(
+      String(fs.readFileSync(path.join(base, 'package.json')))
+    )
+    /** @type {number|undefined} */
+    // @ts-expect-error: custom field.
     const threshold = pack.threshold
+    /** @type {Info[]} */
     const support = []
+    /** @type {Record<string, RegExp>} */
     const regularExpressions = {} /* Ha! */
+    /** @type {Record<string, Info[]>} */
     const perScript = {}
+    /** @type {Record<string, Record<string, string>>} */
     const data = {}
     let list = topLanguages
 
@@ -139,9 +174,13 @@ async function main() {
     console.log('%s, threshold: %s', pack.name, threshold)
 
     if (threshold !== -1) {
-      list = list.filter((info) => info.speakers >= threshold)
+      list = list.filter(
+        (info) =>
+          typeof info.speakers === 'number' && info.speakers >= threshold
+      )
     }
 
+    /** @type {Record<string, Info[]>} */
     const byScript = {}
     let offset = -1
 
@@ -156,6 +195,7 @@ async function main() {
       byScript[script].push(info)
     }
 
+    /** @type {string} */
     let script
 
     for (script in byScript) {
@@ -178,6 +218,7 @@ async function main() {
     for (script in perScript) {
       if (own.call(perScript, script)) {
         const scripts = perScript[script]
+        /** @type {Record<string, string>} */
         const scriptObject = {}
         let index = -1
 
@@ -186,7 +227,7 @@ async function main() {
         while (++index < scripts.length) {
           const info = scripts[index]
 
-          if (info.udhr in trigrams) {
+          if (info.udhr && info.udhr in trigrams) {
             support.push(info)
             scriptObject[info.code] = trigrams[info.udhr]
               .concat()
@@ -226,7 +267,11 @@ async function main() {
 
     fs.writeFileSync(
       path.join(base, 'data.js'),
-      'export const data = ' + JSON.stringify(data, null, 2) + '\n'
+      [
+        '/** @type {Record<string, Record<string, string>>} */',
+        'export const data = ' + JSON.stringify(data, null, 2),
+        ''
+      ].join('\n')
     )
 
     fs.writeFileSync(
@@ -250,6 +295,7 @@ async function main() {
     console.log()
     console.log('Creating fixtures')
 
+    /** @type {Record<string, {iso6393: string, fixture: string}>} */
     const fixtures = {}
     offset = -1
 
@@ -302,15 +348,22 @@ async function main() {
 
     fs.writeFileSync(
       path.join(core, 'test', 'fixtures.js'),
-      'export const fixtures = ' + JSON.stringify(fixtures, null, 2) + '\n'
+      [
+        '/** @type {Record<string, {iso6393: string, fixture: string}>} */',
+        'export const fixtures = ' + JSON.stringify(fixtures, null, 2)
+      ].join('\n')
     )
 
     console.log('✓ fixtures')
   }
 
+  /**
+   * @param {Record<string, RegExp>} expressions
+   */
   function generateExpressions(expressions) {
     return [
       '// This file is generated by `build.js`.',
+      '/** @type {Record<string, RegExp>} */',
       'export const expressions = {',
       '  ' +
         Object.keys(expressions)
@@ -321,10 +374,18 @@ async function main() {
     ].join('\n')
   }
 
+  /**
+   * @param {PackageJson} pack
+   * @param {Info[]} list
+   */
   function generateReadme(pack, list) {
+    /** @type {number} */
+    // @ts-expect-error: custom field.
     const threshold = pack.threshold
     const counts = count(list)
-    const licensee = parseAuthor(pack.author)
+    const licensee =
+      typeof pack.author === 'string' ? parseAuthor(pack.author) : pack.author
+    /** @type {Root} */
     const tree = {
       type: 'root',
       children: [
@@ -332,7 +393,7 @@ async function main() {
         {
           type: 'heading',
           depth: 1,
-          children: [{type: 'text', value: pack.name}]
+          children: [{type: 'text', value: String(pack.name)}]
         },
         {
           type: 'blockquote',
@@ -367,7 +428,7 @@ async function main() {
             {type: 'text', value: 'View the '},
             {
               type: 'link',
-              url: mono.repository,
+              url: String(mono.repository),
               children: [{type: 'text', value: 'monorepo'}]
             },
             {type: 'text', value: ' for more packages and\nusage information.'}
@@ -428,52 +489,57 @@ async function main() {
                 }
               ]
             },
-            ...list.map((info) => ({
-              type: 'tableRow',
-              children: [
-                {
-                  type: 'tableCell',
-                  children: [
-                    {
-                      type: 'link',
-                      url:
-                        'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
-                        info.code,
-                      title: null,
-                      children: [{type: 'inlineCode', value: info.code}]
-                    }
-                  ]
-                },
-                {
-                  type: 'tableCell',
-                  children: [
-                    {
-                      type: 'text',
-                      value:
-                        info.name +
-                        (counts[info.code] === 1
-                          ? ''
-                          : ' (' + info.script + ')')
-                    }
-                  ]
-                },
-                {
-                  type: 'tableCell',
-                  children: [
-                    {
-                      type: 'text',
-                      value:
-                        typeof info.speakers === 'number'
-                          ? info.speakers.toLocaleString('en', {
-                              notation: 'compact',
-                              maximumFractionDigits: 0
-                            })
-                          : 'unknown'
-                    }
-                  ]
-                }
-              ]
-            }))
+            ...list.map((info) => {
+              /** @type {TableRow} */
+              const row = {
+                type: 'tableRow',
+                children: [
+                  {
+                    type: 'tableCell',
+                    children: [
+                      {
+                        type: 'link',
+                        url:
+                          'http://www-01.sil.org/iso639-3/documentation.asp?id=' +
+                          info.code,
+                        title: null,
+                        children: [{type: 'inlineCode', value: info.code}]
+                      }
+                    ]
+                  },
+                  {
+                    type: 'tableCell',
+                    children: [
+                      {
+                        type: 'text',
+                        value:
+                          info.name +
+                          (counts[info.code] === 1
+                            ? ''
+                            : ' (' + info.script + ')')
+                      }
+                    ]
+                  },
+                  {
+                    type: 'tableCell',
+                    children: [
+                      {
+                        type: 'text',
+                        value:
+                          typeof info.speakers === 'number'
+                            ? info.speakers.toLocaleString('en', {
+                                notation: 'compact',
+                                maximumFractionDigits: 0
+                              })
+                            : 'unknown'
+                      }
+                    ]
+                  }
+                ]
+              }
+
+              return row
+            })
           ]
         },
         {
@@ -487,13 +553,13 @@ async function main() {
             {
               type: 'link',
               url: mono.repository + '/blob/main/license',
-              children: [{type: 'text', value: mono.license}]
+              children: [{type: 'text', value: String(mono.license)}]
             },
             {type: 'text', value: ' © '},
             {
               type: 'link',
-              url: licensee.url,
-              children: [{type: 'text', value: licensee.name}]
+              url: String((licensee || {}).url),
+              children: [{type: 'text', value: String((licensee || {}).name)}]
             }
           ]
         }
@@ -503,7 +569,11 @@ async function main() {
     return unified().use(stringify).use(gfm).stringify(tree)
   }
 
+  /**
+   * @param {Info[]} list
+   */
   function count(list) {
+    /** @type {Record<string, number>} */
     const map = {}
     let index = -1
 
@@ -515,7 +585,13 @@ async function main() {
     return map
   }
 
-  /* Sort a list of languages by most-popular. */
+  /**
+   * Sort a list of languages by most-popular.
+   *
+   * @param {Info} a
+   * @param {Info} b
+   * @returns {number}
+   */
   function sort(a, b) {
     return (
       (b.speakers || 0) - (a.speakers || 0) ||
@@ -526,7 +602,9 @@ async function main() {
 
   // eslint-disable-next-line complexity
   function createTopLanguages() {
-    const top = []
+    /** @type {Info[]} */
+    const list = []
+    /** @type {string} */
     let udhrKey
 
     for (udhrKey in trigrams) {
@@ -538,14 +616,18 @@ async function main() {
         )
         const tree = unified().use(rehypeParse).parse(declaration)
         const root = select('html', tree)
-        const code =
-          (root && root.properties && root.properties.dataIso6393) || undefined
 
-        if (typeof code !== 'string') {
+        if (
+          !root ||
+          !root.properties ||
+          typeof root.properties.dataIso6393 !== 'string'
+        ) {
           throw new TypeError(
             'Missing `html[data-iso6393]` in `' + udhrKey + '`'
           )
         }
+
+        const code = root.properties.dataIso6393
 
         const info = iso6393.find((d) => d.iso6393 === code)
 
@@ -573,7 +655,9 @@ async function main() {
             .join(' ')
         }
 
+        /** @type {Record<string, number>} */
         const scriptCounts = {}
+        /** @type {string} */
         let script
 
         for (script in expressions) {
@@ -615,14 +699,13 @@ async function main() {
           score /= udhrKey.length - lettersOnly.length + 1
         }
 
-        top.push({
+        list.push({
           score,
-          // Can `name` and `type` be removed?
           name: info.name,
           code,
           udhr: udhrKey,
           script: scripts[0],
-          speakers: speakers[code]
+          speakers: code in speakers ? speakers[code] : undefined
         })
       }
     }
@@ -634,9 +717,8 @@ async function main() {
       // Manual scripts for languages without trigrams.
       if (own.call(scriptsForSingleLanguages, code)) {
         const info = scriptsForSingleLanguages[code]
-        top.push({
+        list.push({
           score: 1,
-          // Can `name` be removed?
           name,
           code,
           udhr: info.udhr,
@@ -646,15 +728,20 @@ async function main() {
       }
     }
 
+    /** @type {Record<string, Info[]>} */
     const byIsoAndScript = {}
+    index = -1
 
-    for (const d of top) {
-      const key = d.code + ':' + d.script
-      const list = byIsoAndScript[key] || (byIsoAndScript[key] = [])
-      list.push(d)
+    while (++index < list.length) {
+      const info = list[index]
+      const key = info.code + ':' + info.script
+      const similar = byIsoAndScript[key] || (byIsoAndScript[key] = [])
+      similar.push(info)
     }
 
+    /** @type {Info[]} */
     const bestScores = []
+    /** @type {string} */
     let key
 
     for (key in byIsoAndScript) {
@@ -680,15 +767,23 @@ async function main() {
 }
 
 async function createExpressions() {
+  /** @type {Record<string, RegExp>} */
   const result = {}
 
   await Promise.all(
-    scripts.map((script) =>
-      import('@unicode/unicode-14.0.0/Script/' + script + '/regex.js').then(
-        (mod) => {
-          result[script] = new RegExp(mod.default.source, 'g')
-        }
-      )
+    scripts.map(
+      /**
+       * @param {string} script
+       */
+      (script) =>
+        import('@unicode/unicode-14.0.0/Script/' + script + '/regex.js').then(
+          /**
+           * @param {{default: RegExp}} mod
+           */
+          (mod) => {
+            result[script] = new RegExp(mod.default.source, 'g')
+          }
+        )
     )
   )
 
