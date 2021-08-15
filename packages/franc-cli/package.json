@@ -36,7 +36,7 @@
     "index.js"
   ],
   "dependencies": {
-    "franc": "^5.0.0",
+    "franc": "^6.0.0",
     "meow": "^10.0.0"
   },
   "scripts": {
