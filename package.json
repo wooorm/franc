@@ -26,11 +26,11 @@
     "stylelint": "^13.0.0",
     "stylelint-config-prettier": "^8.0.0",
     "stylelint-config-standard": "^22.0.0",
-    "xo": "^0.32.0"
+    "xo": "^0.44.0"
   },
   "scripts": {
     "generate": "node build",
-    "format": "remark . -qfo && prettier . --write && xo --fix && stylelint src/index.css --fix",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix && stylelint src/index.css --fix",
     "build:js": "esbuild src/index.js --bundle --minify --target=es6 --outfile=dest/index.nomodule.js && esbuild src/index.js --bundle --minify --target=es2020 --format=esm --outfile=dest/index.module.js",
     "build:css": "postcss src/index.css > dest/index.css",
     "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
@@ -53,15 +53,6 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false,
-    "rules": {
-      "import/extensions": "off",
-      "unicorn/no-fn-reference-in-iterator": "off",
-      "unicorn/prefer-node-append": "off",
-      "unicorn/prefer-node-remove": "off",
-      "no-var": "off",
-      "prefer-arrow-callback": "off"
-    },
     "ignore": [
       "src/fixtures.js",
       "src/to-name.js"

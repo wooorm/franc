@@ -4,10 +4,10 @@ import {francAll} from 'franc'
 import {toName} from './to-name.js'
 import {fixtures} from './fixtures.js'
 
-var $input = document.querySelectorAll('textarea')[0]
-var $output = document.querySelectorAll('tbody')[0]
+const $input = document.querySelectorAll('textarea')[0]
+const $output = document.querySelectorAll('tbody')[0]
 
-var onchange = debounce(oninputchange, 100)
+const onchange = debounce(oninputchange, 100)
 
 $input.addEventListener('input', onchange)
 
@@ -20,25 +20,32 @@ oninputchange()
 
 function oninputchange() {
   while ($output.firstChild) {
-    $output.removeChild($output.firstChild)
+    $output.firstChild.remove()
   }
 
-  francAll($input.value).forEach(add)
+  const result = francAll($input.value)
+  let index = -1
+  while (++index < result.length) {
+    const [code, score] = result[index]
+    const $node = document.createElement('tr')
+    const link = document.createElement('a')
+
+    link.href = 'https://iso639-3.sil.org/code/' + code
+    link.textContent = code
+
+    const c0 = document.createElement('td')
+    const c1 = document.createElement('td')
+    const c2 = document.createElement('td')
+    c0.append(link)
+    c1.textContent = toName[code]
+    c2.textContent = score
+
+    $node.append(c0)
+    $node.append(c1)
+    $node.append(c2)
+
+    $output.append($node)
+  }
 
   $input.style.height = $input.scrollHeight + 'px'
-
-  function add(result) {
-    var $node = document.createElement('tr')
-    var link = document.createElement('a')
-
-    link.href = 'https://iso639-3.sil.org/code/' + result[0]
-    link.textContent = result[0]
-
-    $node.appendChild(document.createElement('td')).appendChild(link)
-    $node.appendChild(document.createElement('td')).textContent =
-      toName[result[0]]
-    $node.appendChild(document.createElement('td')).textContent = result[1]
-
-    $output.appendChild($node)
-  }
 }
