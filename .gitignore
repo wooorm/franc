@@ -1,7 +1,7 @@
 .DS_Store
 *.log
 node_modules/
-src/list.json
-src/fixtures.json
+src/fixtures.js
+src/to-name.js
 dest/
 yarn.lock

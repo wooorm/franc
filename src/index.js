@@ -1,11 +1,10 @@
-'use strict'
-
 /* eslint-env browser */
+import franc from 'franc'
+import debounce from 'debounce'
+import {toName} from './to-name.js'
+import {fixtures} from './fixtures.js'
 
-var franc = require('franc')
-var debounce = require('debounce')
-var fixtures = require('./fixtures.json')
-var names = require('./list.json')
+console.log(fixtures)
 
 var $input = document.querySelectorAll('textarea')[0]
 var $output = document.querySelectorAll('tbody')[0]
@@ -14,7 +13,10 @@ var onchange = debounce(oninputchange, 100)
 
 $input.addEventListener('input', onchange)
 
-$input.value = fixtures[Math.floor(Math.random() * fixtures.length)]
+const keys = Object.keys(fixtures)
+const key = keys[Math.floor(Math.random() * keys.length)]
+
+$input.value = fixtures[key].fixture
 
 oninputchange()
 
@@ -30,13 +32,13 @@ function oninputchange() {
   function add(result) {
     var $node = document.createElement('tr')
     var link = document.createElement('a')
-    var name = names[result[0]]
 
     link.href = 'https://iso639-3.sil.org/code/' + result[0]
     link.textContent = result[0]
 
     $node.appendChild(document.createElement('td')).appendChild(link)
-    $node.appendChild(document.createElement('td')).textContent = name
+    $node.appendChild(document.createElement('td')).textContent =
+      toName[result[0]]
     $node.appendChild(document.createElement('td')).textContent = result[1]
 
     $output.appendChild($node)

@@ -1,53 +1,33 @@
-'use strict'
-
-var fs = require('fs')
-var URL = require('url').URL
-var path = require('path')
-var https = require('https')
-var bail = require('bail')
-var concat = require('concat-stream')
-var iso = require('iso-639-3')
+import fs from 'fs'
+import {URL} from 'url'
+import path from 'path'
+import https from 'https'
+import bail from 'bail'
+import {iso6393} from 'iso-639-3'
 
 var options = new URL(
-  'https://raw.githubusercontent.com/wooorm/franc/main/test/fixtures.json'
+  'https://raw.githubusercontent.com/wooorm/franc/main/test/fixtures.js'
 )
+
+const iso6393ToName = {}
+
+let index = -1
+
+while (++index < iso6393.length) {
+  const info = iso6393[index]
+  iso6393ToName[info.iso6393] = info.name
+}
 
 options.headers = {'User-Agent': 'request'}
 
 https.request(options, onrequest).on('error', bail).end()
 
 function onrequest(response) {
-  response.pipe(concat(onconcat))
+  response.pipe(fs.createWriteStream(path.join('src', 'fixtures.js')))
 }
 
-function onconcat(buf) {
-  var data = JSON.parse(buf)
-  var list = {}
-  var byCode = {}
-  var fixtures = []
-
-  iso.forEach(patch)
-  Object.keys(data).forEach(add)
-
-  fs.writeFile(
-    path.join('src', 'list.json'),
-    JSON.stringify(list, null, 2) + '\n',
-    bail
-  )
-
-  fs.writeFile(
-    path.join('src', 'fixtures.json'),
-    JSON.stringify(fixtures, null, 2) + '\n',
-    bail
-  )
-
-  function patch(info) {
-    byCode[info.iso6393] = info.name
-  }
-
-  function add(key) {
-    var code = data[key].iso6393
-    list[code] = byCode[code]
-    fixtures.push(data[key].fixture)
-  }
-}
+fs.writeFile(
+  path.join('src', 'to-name.js'),
+  'export const toName = ' + JSON.stringify(iso6393ToName, null, 2) + '\n',
+  bail
+)
