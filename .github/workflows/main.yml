@@ -2,7 +2,7 @@ name: main
 on:
   push:
     branches:
-      - main
+      - website
   schedule:
     - cron: '45 7 2 * *'
 jobs:
