@@ -1,10 +1,8 @@
 /* eslint-env browser */
-import franc from 'franc'
 import debounce from 'debounce'
+import {francAll} from 'franc'
 import {toName} from './to-name.js'
 import {fixtures} from './fixtures.js'
-
-console.log(fixtures)
 
 var $input = document.querySelectorAll('textarea')[0]
 var $output = document.querySelectorAll('tbody')[0]
@@ -25,7 +23,7 @@ function oninputchange() {
     $output.removeChild($output.firstChild)
   }
 
-  franc.all($input.value).forEach(add)
+  francAll($input.value).forEach(add)
 
   $input.style.height = $input.scrollHeight + 'px'
 

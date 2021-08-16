@@ -1,8 +1,8 @@
-import fs from 'fs'
-import {URL} from 'url'
-import path from 'path'
 import https from 'https'
-import bail from 'bail'
+import fs from 'fs'
+import path from 'path'
+import {URL} from 'url'
+import {bail} from 'bail'
 import {iso6393} from 'iso-639-3'
 
 var options = new URL(
