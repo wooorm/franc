@@ -158,7 +158,7 @@ test('francAll()', (t) => {
     francAll('the the the the the ').slice(0, 2),
     [
       ['sco', 1],
-      ['eng', 0.9889001009081736]
+      ['eng', 0.988_900_100_908_173_6]
     ],
     'should work on weird values'
   )
@@ -189,7 +189,7 @@ test('francAll()', (t) => {
     francAll('the', {minLength: 3}).slice(0, 2),
     [
       ['sco', 1],
-      ['eng', 0.9988851727982163]
+      ['eng', 0.998_885_172_798_216_3]
     ],
     'should accept `minLength` (1)'
   )

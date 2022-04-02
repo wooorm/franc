@@ -12,8 +12,9 @@
  * @property {number|undefined} speakers
  */
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import process from 'node:process'
+import path from 'node:path'
 import {isHidden} from 'is-hidden'
 import {iso6393} from 'iso-639-3'
 import {speakers as defaultSpeakers} from 'speakers'
@@ -113,10 +114,8 @@ const speakers = {
   ...defaultSpeakers,
   // Update some counts (`speakers` uses macrolanguage)
   // Standard Estonian from inclusive code.
-  // @ts-expect-error: allow for `ekk` to be added in the future.
   ekk: defaultSpeakers.ekk || defaultSpeakers.est,
   // Standard Lavian from inclusive code.
-  // @ts-expect-error: allow for `ekk` to be added in the future.
   lvs: defaultSpeakers.lvs || defaultSpeakers.lav
 }
 
@@ -155,11 +154,11 @@ async function main() {
     /** @type {number|undefined} */
     // @ts-expect-error: custom field.
     const threshold = pack.threshold
-    /** @type {Info[]} */
+    /** @type {Array<Info>} */
     const support = []
     /** @type {Record<string, RegExp>} */
     const regularExpressions = {} /* Ha! */
-    /** @type {Record<string, Info[]>} */
+    /** @type {Record<string, Array<Info>>} */
     const perScript = {}
     /** @type {Record<string, Record<string, string>>} */
     const data = {}
@@ -180,7 +179,7 @@ async function main() {
       )
     }
 
-    /** @type {Record<string, Info[]>} */
+    /** @type {Record<string, Array<Info>>} */
     const byScript = {}
     let offset = -1
 
@@ -376,7 +375,7 @@ async function main() {
 
   /**
    * @param {PackageJson} pack
-   * @param {Info[]} list
+   * @param {Array<Info>} list
    */
   function generateReadme(pack, list) {
     /** @type {number} */
@@ -570,7 +569,7 @@ async function main() {
   }
 
   /**
-   * @param {Info[]} list
+   * @param {Array<Info>} list
    */
   function count(list) {
     /** @type {Record<string, number>} */
@@ -602,7 +601,7 @@ async function main() {
 
   // eslint-disable-next-line complexity
   function createTopLanguages() {
-    /** @type {Info[]} */
+    /** @type {Array<Info>} */
     const list = []
     /** @type {string} */
     let udhrKey
@@ -728,7 +727,7 @@ async function main() {
       }
     }
 
-    /** @type {Record<string, Info[]>} */
+    /** @type {Record<string, Array<Info>>} */
     const byIsoAndScript = {}
     index = -1
 
@@ -739,7 +738,7 @@ async function main() {
       similar.push(info)
     }
 
-    /** @type {Info[]} */
+    /** @type {Array<Info>} */
     const bestScores = []
     /** @type {string} */
     let key

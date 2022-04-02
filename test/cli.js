@@ -2,10 +2,11 @@
  * @typedef {import('type-fest').PackageJson} PackageJson
  */
 
-import path from 'path'
-import fs from 'fs'
-import {exec} from 'child_process'
-import {PassThrough} from 'stream'
+import process from 'node:process'
+import path from 'node:path'
+import fs from 'node:fs'
+import {exec} from 'node:child_process'
+import {PassThrough} from 'node:stream'
 import test from 'tape'
 
 const root = path.resolve(process.cwd(), 'packages', 'franc-cli')

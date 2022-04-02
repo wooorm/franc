@@ -3,6 +3,7 @@
  * @typedef {import('franc').Options} Options
  */
 
+import process from 'node:process'
 import {createRequire} from 'node:module'
 import meow from 'meow'
 import {franc, francAll} from 'franc'
@@ -123,7 +124,7 @@ function help() {
 
 /**
  * @param {string|undefined} value
- * @returns {string[]}
+ * @returns {Array<string>}
  */
 function list(value) {
   return value ? String(value).split(',') : []

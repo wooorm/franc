@@ -2,9 +2,9 @@
  * @typedef {import('trigram-utils').TrigramTuple} TrigramTuple
  *
  * @typedef Options
- * @property {string[]} [only]
+ * @property {Array<string>} [only]
  *   allow languages
- * @property {string[]} [ignore]
+ * @property {Array<string>} [ignore]
  *   disallow languages
  * @property {number} [minLength=10]
  *   minimum length to accept
@@ -71,7 +71,7 @@ for (script in data) {
  *
  * @param {string} [value]
  *   The value to test.
- * @param {Object} [options]
+ * @param {Options} [options]
  *   Configuration.
  * @return {string}
  *  The most probable language.
@@ -88,14 +88,14 @@ export function franc(value, options) {
  *   The value to test.
  * @param {Options} [options]
  *   Configuration.
- * @return {TrigramTuple[]}
+ * @return {Array<TrigramTuple>}
  *   An array containing language—distance tuples.
  */
 export function francAll(value, options = {}) {
-  /** @type {string[]} */
+  /** @type {Array<string>} */
   // @ts-expect-error: `whitelist` is from long ago.
   const only = [...(options.whitelist || []), ...(options.only || [])]
-  /** @type {string[]} */
+  /** @type {Array<string>} */
   // @ts-expect-error: `blacklist` is from long ago.
   const ignore = [...(options.blacklist || []), ...(options.ignore || [])]
   const minLength =
@@ -138,9 +138,9 @@ export function francAll(value, options = {}) {
  *
  * @param {string} value
  *   Value to normalize.
- * @param {TrigramTuple[]} distances
+ * @param {Array<TrigramTuple>} distances
  *   List of distances.
- * @return {TrigramTuple[]}
+ * @return {Array<TrigramTuple>}
  *   Normalized distances.
  */
 function normalize(value, distances) {
@@ -207,21 +207,21 @@ function getOccurrence(value, expression) {
  * Get the distance between an array of trigram—count
  * tuples, and multiple trigram dictionaries.
  *
- * @param {TrigramTuple[]} trigrams
+ * @param {Array<TrigramTuple>} trigrams
  *   An array containing trigram—count tuples.
  * @param {Record<string, Record<string, number>>} languages
  *   Multiple trigrams to test against.
- * @param {string[]} only
+ * @param {Array<string>} only
  *   Allowed languages; if non-empty, only included languages are kept.
- * @param {string[]} ignore
+ * @param {Array<string>} ignore
  *   Disallowed languages; included languages are ignored.
- * @return {TrigramTuple[]} An array
+ * @return {Array<TrigramTuple>} An array
  *   containing language—distance tuples.
  */
 function getDistances(trigrams, languages, only, ignore) {
   languages = filterLanguages(languages, only, ignore)
 
-  /** @type {TrigramTuple[]} */
+  /** @type {Array<TrigramTuple>} */
   const distances = []
   /** @type {string} */
   let language
@@ -241,7 +241,7 @@ function getDistances(trigrams, languages, only, ignore) {
  * Get the distance between an array of trigram—count
  * tuples, and a language dictionary.
  *
- * @param {TrigramTuple[]} trigrams
+ * @param {Array<TrigramTuple>} trigrams
  *   An array containing trigram—count tuples.
  * @param {Record<string, number>} model
  *   Object containing weighted trigrams.
@@ -276,9 +276,9 @@ function getDistance(trigrams, model) {
  *
  * @param {Record<string, Record<string, number>>} languages
  *   Languages to filter
- * @param {string[]} only
+ * @param {Array<string>} only
  *   Allowed languages; if non-empty, only included languages are kept.
- * @param {string[]} ignore
+ * @param {Array<string>} ignore
  *   Disallowed languages; included languages are ignored.
  * @return {Record<string, Record<string, number>>}
  *   Filtered array of languages.
@@ -307,9 +307,9 @@ function filterLanguages(languages, only, ignore) {
  *
  * @param {string} language
  *   Languages to filter
- * @param {string[]} only
+ * @param {Array<string>} only
  *   Allowed languages; if non-empty, only included languages are kept.
- * @param {string[]} ignore
+ * @param {Array<string>} ignore
  *   Disallowed languages; included languages are ignored.
  * @return {boolean}
  *   Whether `language` can match
@@ -335,7 +335,7 @@ function und() {
  * Create a single tuple as a list of tuples from a given language code.
  *
  * @param {string} language
- * @returns {TrigramTuple[]}
+ * @returns {Array<TrigramTuple>}
  */
 function singleLanguageTuples(language) {
   return [[language, 1]]
