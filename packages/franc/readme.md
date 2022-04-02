@@ -4,7 +4,7 @@
 
 > Detect the language of text.
 
-Built with support for 187 languages (1M or more speakers).
+Built with support for 186 languages (1M or more speakers).
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 usage information.
@@ -200,7 +200,6 @@ This build supports the following languages:
 | [`nhn`](http://www-01.sil.org/iso639-3/documentation.asp?id=nhn) | Central Nahuatl | 1M |
 | [`dip`](http://www-01.sil.org/iso639-3/documentation.asp?id=dip) | Northeastern Dinka | 1M |
 | [`kde`](http://www-01.sil.org/iso639-3/documentation.asp?id=kde) | Makonde | 1M |
-| [`snn`](http://www-01.sil.org/iso639-3/documentation.asp?id=snn) | Siona | 1M |
 | [`kbp`](http://www-01.sil.org/iso639-3/documentation.asp?id=kbp) | Kabiyè | 1M |
 | [`tem`](http://www-01.sil.org/iso639-3/documentation.asp?id=tem) | Timne | 1M |
 | [`toi`](http://www-01.sil.org/iso639-3/documentation.asp?id=toi) | Tonga (Zambia) | 1M |

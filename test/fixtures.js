@@ -863,11 +863,6 @@ export const fixtures = {
     fixture:
       'Lisiku lya 10 Disemba 1948, Lukumbi Lukulu lwa Umoja wa Vilambo lunihaula na kuhumya lilove lya vilambo lya wasa wa vanu. Lilove alino lihumile baada ya chilambo chohechohe kupanyana ding’ondo ding’ulu dimbili. Lukumbi anelwo lulembedile kila chilambo chihumye lilove alino livahwikile vanu vake kwa kulangudya, kusomesa, kusomela, kuhaula n’disule na n’disehemu dinji kuvele na ilimu. Ili kuhinikiha kuchidono wasa wa vanu unawuniwa, na Tansania inaunila wasa anewo, lilove alino lihumile M’chimakonde ili valembela usoma vavike wasa wene mun’tima mwavo vene na vanu vanji. Koka chive chihinde cha kukonyelela kuwuniwa kwa wasa wene m’manu na lyene lipanda. Vanu vohevohe vavelekwa valendene na wasa wavo unalandana. Umoja wa Vilambo uhumije lilove alino m’malove lapeyapeya na lakakamadidye ili kila munu amale wasa wake. Wasa unang’owo wako. Uumale wasa wako, yangata uvahaulila vanji vanu na uwunile wasa wene muchi wako na wa vanji vanu.'
   },
-  snn: {
-    iso6393: 'snn',
-    fixture:
-      "\n        Case'bi deo'ye, co̱ñe gu̱i'ne jeoñe ba̱yë, ja̱je̱ sia'hue'ña ñase'erebare sa'nahuë\n        bayë sia'yëo̱uë maca jëaye ba'ye gu̱i'ne sioma'ñe baiji sia'bai̱ tsëcabëa̱ bai'ye.\n       \n        Ja̱je̱ baio̱uëreta'a goachayë ñama'ñebi gu̱i'ne oima'ñebi baiji sia'bai̱re, jabi ai\n        jaiye ñese sanihuesëji mai̱ baijë goachaye, gui'ne ja̱je̱ aijereba cahuesosicoa,\n        ja̱je̱ bai'na iye cato cocase'e cayë deo'ye bai'ye gu̱i'ne deo'ye bai'yë goachajë\n        sehuoyë iye.\n       \n        Ja̱je̱ baise're yure cato ñasicoai'reba bai'yë gu̱i'ne o̱uëcobacoa'i baiye baiji,\n        coa'ye bai'se'e jeo̱ni, ja̱macata̱'a̱ bai'ye bai'ji nejo̱sicoa'i beoye.\n       \n        Ja̱je̱ bai'macata'a ñese deo'ye saiyë sihuajë gu̱i'ne bai'yë yequëhue'ña\n        ñasicoa'ireba.\n       \n        Iye yequëhue'ña yijaña cato deo'yereba goachani gu̱inaoni cadëohuesëhuë.\n        Toya ja'huana bai̱ jëayebai'hua'i baija'ñe, deo'ye bai'ye gu̱i'ne ihuai'reba'ë\n        cajë, sia'yëquemaca ëmëhua'ti cui'ne domihu"
-  },
   kbp: {
     iso6393: 'kbp',
     fixture:

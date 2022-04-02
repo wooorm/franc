@@ -200,7 +200,6 @@ This build supports the following languages:
 | [`nhn`](http://www-01.sil.org/iso639-3/documentation.asp?id=nhn) | Central Nahuatl | 1M |
 | [`dip`](http://www-01.sil.org/iso639-3/documentation.asp?id=dip) | Northeastern Dinka | 1M |
 | [`kde`](http://www-01.sil.org/iso639-3/documentation.asp?id=kde) | Makonde | 1M |
-| [`snn`](http://www-01.sil.org/iso639-3/documentation.asp?id=snn) | Siona | 1M |
 | [`kbp`](http://www-01.sil.org/iso639-3/documentation.asp?id=kbp) | Kabiyè | 1M |
 | [`tem`](http://www-01.sil.org/iso639-3/documentation.asp?id=tem) | Timne | 1M |
 | [`toi`](http://www-01.sil.org/iso639-3/documentation.asp?id=toi) | Tonga (Zambia) | 1M |
@@ -393,6 +392,7 @@ This build supports the following languages:
 | [`mcd`](http://www-01.sil.org/iso639-3/documentation.asp?id=mcd) | Sharanahua | 950 |
 | [`amc`](http://www-01.sil.org/iso639-3/documentation.asp?id=amc) | Amahuaca | 720 |
 | [`amr`](http://www-01.sil.org/iso639-3/documentation.asp?id=amr) | Amarakaeri | 500 |
+| [`snn`](http://www-01.sil.org/iso639-3/documentation.asp?id=snn) | Siona | 500 |
 | [`cot`](http://www-01.sil.org/iso639-3/documentation.asp?id=cot) | Caquinte | 300 |
 | [`oaa`](http://www-01.sil.org/iso639-3/documentation.asp?id=oaa) | Orok | 295 |
 | [`ajg`](http://www-01.sil.org/iso639-3/documentation.asp?id=ajg) | Aja (Benin) | 200 |
