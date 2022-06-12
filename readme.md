@@ -257,4 +257,4 @@ respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 
 [iso-639-3]: https://github.com/wooorm/iso-639-3
 
-[iso-639-3-to-1]: https://github.com/wooorm/iso-639-3/blob/HEAD/to-1.json
+[iso-639-3-to-1]: https://github.com/wooorm/iso-639-3/blob/main/iso6393-to-1.js
