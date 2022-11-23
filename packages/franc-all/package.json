@@ -1,7 +1,7 @@
 {
   "name": "franc-all",
   "threshold": -1,
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "Detect the language of text",
   "license": "MIT",
   "keywords": [
