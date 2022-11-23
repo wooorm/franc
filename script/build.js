@@ -28,7 +28,7 @@ import parseAuthor from 'parse-author'
 import alphaSort from 'alpha-sort'
 import {min} from 'trigrams'
 // @ts-expect-error: untyped.
-import unicode from '@unicode/unicode-14.0.0'
+import unicode from '@unicode/unicode-15.0.0'
 import {customFixtures} from './custom-fixtures.js'
 
 const own = {}.hasOwnProperty
@@ -767,7 +767,7 @@ async function createExpressions() {
        * @param {string} script
        */
       (script) =>
-        import('@unicode/unicode-14.0.0/Script/' + script + '/regex.js').then(
+        import('@unicode/unicode-15.0.0/Script/' + script + '/regex.js').then(
           /**
            * @param {{default: RegExp}} mod
            */
