@@ -667,9 +667,12 @@ function createTopLanguages() {
       const scripts =
         code === 'jpn'
           ? ['Hiragana, Katakana, and Han']
+          : code === 'idu'
+          ? ['Latin'] // Mostly Latin.
           : Object.keys(scriptCounts)
 
       if (scripts.length > 1) {
+        console.log('scripts:', scriptCounts)
         throw new Error(
           'Woops, I found a declaration (`' +
             udhrKey +

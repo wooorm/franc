@@ -36,11 +36,11 @@
     "remark-stringify": "^10.0.0",
     "speakers": "^2.0.0",
     "tape": "^5.0.0",
-    "trigrams": "~5.0.0",
+    "trigrams": "^5.0.0",
     "type-coverage": "^2.0.0",
     "type-fest": "^3.0.0",
     "typescript": "^4.0.0",
-    "udhr": "~5.0.0",
+    "udhr": "^5.0.0",
     "unified": "^10.0.0",
     "xo": "^0.53.0"
   },
