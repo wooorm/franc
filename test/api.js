@@ -1,4 +1,5 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {franc, francAll} from '../packages/franc/index.js'
 import {fixtures} from './fixtures.js'
 
@@ -11,16 +12,24 @@ if (languageA === franc(fixtureB)) {
   throw new Error('a and b should not be equal...')
 }
 
-test('franc()', (t) => {
-  t.equal(typeof franc, 'function', 'should be of type `function`')
-  t.equal(typeof franc('XYZ'), 'string', 'should return a string')
-  t.equal(franc('XYZ'), 'und', 'should return "und" on an undetermined value')
-  t.equal(franc(), 'und', 'should return "und" on a missing value')
-  t.equal(franc('the the the the the '), 'sco', 'should work on weird values')
+test('franc()', () => {
+  assert.equal(typeof franc, 'function', 'should be of type `function`')
+  assert.equal(typeof franc('XYZ'), 'string', 'should return a string')
+  assert.equal(
+    franc('XYZ'),
+    'und',
+    'should return "und" on an undetermined value'
+  )
+  assert.equal(franc(), 'und', 'should return "und" on a missing value')
+  assert.equal(
+    franc('the the the the the '),
+    'sco',
+    'should work on weird values'
+  )
 
   /* Inspired by lifthrasiir on hackernews:
    * https://news.ycombinator.com/item?id=8405672 */
-  t.equal(
+  assert.equal(
     franc(
       [
         '한국어 문서가 전 세계 웹에서 차지하는 비중은 2004년에 4.1%로, 이는 영어(35.8%), ',
@@ -33,7 +42,7 @@ test('franc()', (t) => {
     'should work on unique-scripts with many latin characters (1)'
   )
 
-  t.equal(
+  assert.equal(
     franc(
       [
         '現行の学校文法では、英語にあるような「目的語」「補語」などの成分はないとする。',
@@ -46,13 +55,13 @@ test('franc()', (t) => {
     'should work on unique-scripts with many latin characters (2)'
   )
 
-  t.equal(
+  assert.equal(
     franc('すべての人は、生命、自由及び身体の安全に対する権利を有する。'),
     'jpn',
     'should detect Japanese even when Han ratio > 0.5 (udhr_jpn art 3) (1)'
   )
 
-  t.equal(
+  assert.equal(
     franc(
       [
         'すべての人は、憲法又は法律によって与えられた基本的権利を侵害する行為に対し、',
@@ -63,7 +72,7 @@ test('franc()', (t) => {
     'should detect Japanese even when Han ratio > 0.5 (udhr_jpn art 8) (2)'
   )
 
-  t.equal(
+  assert.equal(
     franc(
       [
         '成年の男女は、人種、国籍又は宗教によるいかなる制限をも受けることなく、婚姻し、',
@@ -76,58 +85,64 @@ test('franc()', (t) => {
     'should detect Japanese even when Han ratio > 0.5 (udhr_jpn art 16) (3)'
   )
 
-  t.notEqual(
+  assert.notEqual(
     franc(fixtureB, {ignore: [franc(fixtureB)]}),
     franc(fixtureB),
     'should accept `ignore`'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     franc(fixtures.aii.fixture, {ignore: ['aii']}),
     'und',
     'should support `ignore` if the script can only be in that language'
   )
 
-  t.equal(
+  assert.equal(
     franc(fixtureB, {only: [languageA]}),
     languageA,
     'should accept `only`'
   )
 
-  t.equal(
+  assert.equal(
     franc(hebrew, {only: ['eng']}),
     'und',
     'should accept `only` for different scripts'
   )
 
-  t.equal(franc('the', {minLength: 3}), 'sco', 'should accept `minLength` (1)')
-  t.equal(franc('the', {minLength: 4}), 'und', 'should accept `minLength` (2)')
+  assert.equal(
+    franc('the', {minLength: 3}),
+    'sco',
+    'should accept `minLength` (1)'
+  )
+  assert.equal(
+    franc('the', {minLength: 4}),
+    'und',
+    'should accept `minLength` (2)'
+  )
 
-  t.equal(
+  assert.equal(
     franc('987 654 321'),
     'und',
     'should return `und` for generic characters'
   )
-
-  t.end()
 })
 
-test('francAll()', (t) => {
-  t.equal(typeof francAll, 'function', 'should be of type `function`')
+test('francAll()', () => {
+  assert.equal(typeof francAll, 'function', 'should be of type `function`')
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('XYZ'),
     [['und', 1]],
     'should return an array containing language--probability tuples'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('פאר טסי'),
     [['und', 1]],
     'should return `[["und", 1]]` without matches (1)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('פאר טסי', {minLength: 3}),
     [
       ['heb', 0],
@@ -136,25 +151,25 @@ test('francAll()', (t) => {
     'should return `[["und", 1]]` without matches (2)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('xyz'),
     [['und', 1]],
     'should return `[["und", 1]]` without matches (3)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll(),
     [['und', 1]],
     'should return `[["und", 1]]` for a missing value'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('987 654 321'),
     [['und', 1]],
     'should return `[["und", 1]]` for generic characters'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('the the the the the ').slice(0, 2),
     [
       ['sco', 1],
@@ -163,7 +178,7 @@ test('francAll()', (t) => {
     'should work on weird values'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll(fixtureB, {ignore: [franc(fixtureB)]})
       .map((tuple) => {
         return tuple[0]
@@ -173,19 +188,19 @@ test('francAll()', (t) => {
     'should accept `ignore`'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll(fixtureB, {only: [languageA]}),
     [[languageA, 1]],
     'should accept `only`'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll(hebrew, {only: ['eng']}),
     [['und', 1]],
     'should accept `only` for different scripts'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('the', {minLength: 3}).slice(0, 2),
     [
       ['sco', 1],
@@ -194,16 +209,14 @@ test('francAll()', (t) => {
     'should accept `minLength` (1)'
   )
 
-  t.deepEqual(
+  assert.deepEqual(
     francAll('the', {minLength: 4}),
     [['und', 1]],
     'should accept `minLength` (2)'
   )
-
-  t.end()
 })
 
-test('algorithm', (t) => {
+test('algorithm', () => {
   const keys = Object.keys(fixtures)
 
   // Failing for some reason.
@@ -215,7 +228,7 @@ test('algorithm', (t) => {
 
     if (ignore.has(info.iso6393)) continue
 
-    t.equal(
+    assert.equal(
       francAll(info.fixture)[0][0],
       info.iso6393,
       info.fixture.replace(/\n/g, '\\n').slice(0, 20) +
@@ -224,6 +237,4 @@ test('algorithm', (t) => {
         ')'
     )
   }
-
-  t.end()
 })

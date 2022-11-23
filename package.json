@@ -15,8 +15,8 @@
   ],
   "devDependencies": {
     "@types/mdast": "^3.0.0",
+    "@types/node": "^18.0.0",
     "@types/parse-author": "^2.0.0",
-    "@types/tape": "^4.0.0",
     "@unicode/unicode-15.0.0": "^1.0.0",
     "alpha-sort": "^5.0.0",
     "c8": "^7.0.0",
@@ -36,7 +36,6 @@
     "remark-preset-wooorm": "^9.0.0",
     "remark-stringify": "^10.0.0",
     "speakers": "^2.0.0",
-    "tape": "^5.0.0",
     "trigrams": "^5.0.0",
     "type-coverage": "^2.0.0",
     "type-fest": "^3.0.0",
