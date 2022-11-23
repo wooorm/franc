@@ -3,11 +3,11 @@
  *
  * @typedef Options
  * @property {Array<string>} [only]
- *   allow languages
+ *   Languages to allow.
  * @property {Array<string>} [ignore]
- *   disallow languages
+ *   Languages to ignore.
  * @property {number} [minLength=10]
- *   minimum length to accept
+ *   Minimum length to accept.
  */
 
 /* Load `trigram-utils`. */

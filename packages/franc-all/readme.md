@@ -2,18 +2,18 @@
 
 # franc-all
 
-> Detect the language of text.
+Detect the language of text.
 
 Built with support for 414 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
-usage information.
+info on using them.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be
-`import`ed instead of `require`d.
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+In Node.js (version 14.14+, 16.0+), install with
+[npm](https://docs.npmjs.com/cli/install):
 
 npm:
 
@@ -21,7 +21,7 @@ npm:
 npm install franc-all
 ```
 
-## Support
+## Data
 
 This build supports the following languages:
 

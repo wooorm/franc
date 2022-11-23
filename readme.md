@@ -13,7 +13,8 @@ Detect the language of text.
     languages
 3.  **franc** has a CLI
 
-† - Based on the [UDHR][], the most translated document in the world.
+† - Based on the [UDHR][], the most translated copyright-free document in the
+world.
 
 ## What’s not so cool about franc?
 
@@ -23,97 +24,104 @@ Make sure to pass it big documents to get reliable results.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+> 👉 **Note**: this installs the [`franc`][m] package, with support for 187
+> languages (languages which have 1 million or more speakers).
+> [`franc-min`][s] (82 languages, 8m or more speakers) and [`franc-all`][l]
+> (all 414 possible languages) are also available.
+> Finally, use `franc-cli` to install the [CLI][].
 
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 14.14+, 16.0+), install with [npm][]:
 
 ```sh
 npm install franc
 ```
 
-This installs the [`franc`][m] package, with support for 187 languages
-(languages which have 1 million or more speakers).
-[`franc-min`][s] (82 languages, 8m or more speakers) and [`franc-all`][l] (all
-414 possible languages) are also available.
-Finally, use `franc-cli` to install the [CLI][].
+In Deno with [`esm.sh`][esmsh]:
 
-Browser builds for [`franc-min`][s], [`franc`][m], and [`franc-all`][l] are
-available on [GitHub Releases][releases].
+```js
+import {franc, francAll} from 'https://esm.sh/franc@6'
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {franc, francAll} from 'https://esm.sh/franc@6?bundle'
+</script>
+```
 
 ## Use
-
-This package exports the following identifiers: `franc`, `francAll`.
-There is no default export.
 
 ```js
 import {franc, francAll} from 'franc'
 
-franc('Alle menslike wesens word vry') // => 'afr'
-franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট') // => 'ben'
-franc('Alle menneske er fødde til fridom') // => 'nno'
+franc('Alle menslike wesens word vry') //=> 'afr'
+franc('এটি একটি ভাষা একক IBM স্ক্রিপ্ট') //=> 'ben'
+franc('Alle menneske er fødde til fridom') //=> 'nno'
 
-franc('') // => 'und' (language code that stands for undetermined)
+franc('') //=> 'und' (language code that stands for undetermined)
 
 // You can change what’s too short (default: 10):
-franc('the') // => 'und'
-franc('the', {minLength: 3}) // => 'sco'
-```
+franc('the') //=> 'und'
+franc('the', {minLength: 3}) //=> 'sco'
 
-###### `francAll`
-
-```js
 console.log(francAll('Considerando ser essencial que os direitos humanos'))
+//=> [['por', 1], ['glg', 0.771284519307895], ['spa', 0.6034146900423971], …123 more items]
+
+console.log(francAll('Considerando ser essencial que os direitos humanos', {only: ['por', 'spa']}))
+//=> [['por', 1 ], ['spa', 0.6034146900423971]]
+
+console.log(francAll('Considerando ser essencial que os direitos humanos', {ignore: ['spa', 'glg']}))
+//=> [['por', 1], ['cat', 0.5367251059928957], ['src', 0.47461899851037015], …121 more items]
 ```
 
-Yields:
+## API
 
-```js
-[
-  [ 'por', 1 ],
-  [ 'glg', 0.771284519307895 ],
-  [ 'spa', 0.6034146900423971 ],
-  [ 'cat', 0.5367251059928957 ],
-  [ 'src', 0.47461899851037015 ],
-  ... 122 more items ]
-```
+This package exports the identifiers `franc`, `francAll`.
+There is no default export.
 
-###### `only`
+### `franc(value[, options])`
 
-```js
-console.log(
-  francAll('Considerando ser essencial que os direitos humanos', {
-    only: ['por', 'spa']
-  })
-)
-```
+Get the most probable language for the given value.
 
-Yields:
+###### Parameters
 
-```js
-[ [ 'por', 1 ], [ 'spa', 0.6034146900423971 ] ]
-```
+*   `value` (`string`) — value to test
+*   `options` (`Options`, optional) — configuration
 
-###### `ignore`
+###### Returns
 
-```js
-console.log(
-  francAll('Considerando ser essencial que os direitos humanos', {
-    ignore: ['src', 'glg']
-  })
-)
-```
+The most probable language (`string`).
 
-Yields:
+### `francAll(value[, options])`
 
-```js
-[ [ 'por', 1 ],
-  [ 'spa', 0.6034146900423971 ],
-  [ 'cat', 0.5367251059928957 ],
-  [ 'ita', 0.4740460639394981 ],
-  [ 'fra', 0.44757648676521145 ],
-  ... 120 more items ]
-```
+Get the most probable language for the given value.
+
+###### Parameters
+
+*   `value` (`string`) — value to test
+*   `options` (`Options`, optional) — configuration
+
+###### Returns
+
+Array containing language—distance tuples (`Array<[string, number]>`).
+
+### `Options`
+
+Configuration (`Object`, optional) with the following fields:
+
+###### `options.only`
+
+Languages to allow (`Array<string>`, optional).
+
+###### `options.ignore`
+
+Languages to ignore (`Array<string>`, optional).
+
+###### `options.minLength`
+
+Minimum length to accept (`number`, default: `10`).
 
 ## CLI
 
@@ -158,7 +166,9 @@ $ echo "Alle mennesker er født frie og" | franc --only nob,dan
 # nob
 ```
 
-## Supported languages
+## Data
+
+###### Supported languages
 
 | Package | Languages | Speakers |
 | - | - | - |
@@ -166,17 +176,28 @@ $ echo "Alle mennesker er født frie og" | franc --only nob,dan
 | [`franc`][m] | 187 | 1M or more |
 | [`franc-all`][l] | 414 | - |
 
-### Language code
+###### Language code
 
-Note that franc returns [ISO 639-3][iso6393] codes (three letter codes).
-**Not** ISO 639-1 or ISO 639-2.
-See also [GH-10][] and [GH-30][].
+> 👉 **Note**: franc returns [ISO 639-3][iso6393] codes (three letter codes).
+> **Not** ISO 639-1 or ISO 639-2.
+> See also [GH-10][] and [GH-30][].
 
 To get more info about the languages represented by ISO 639-3, use
 [`iso-639-3`][iso-639-3].
 There is also an index available to map ISO 639-3 to ISO 639-1 codes,
 [`iso-639-3/to-1.json`][iso-639-3-to-1], but note that not all 639-3 codes can
 be represented in 639-1.
+
+## Types
+
+These packages are fully typed with [TypeScript][].
+They export the additional types `TrigramTuple` and `Options`.
+
+## Compatibility
+
+These package are at least compatible with all maintained versions of Node.js.
+As of now, that is Node.js 14.14+ and 16.0+.
+They also works in Deno and modern browsers.
 
 ## Ports
 
@@ -203,13 +224,20 @@ Their creators granted me the rights to distribute franc under the MIT license:
 respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 [Maciej Ceglowski][grant-1].
 
+## Contribute
+
+Yes please!
+See [How to Contribute to Open Source][contribute].
+
+## Security
+
+This package is safe.
+
 ## License
 
 [MIT][] © [Titus Wormer][home]
 
 <!-- Definitions -->
-
-[releases]: https://github.com/wooorm/franc/releases
 
 [logo]: https://raw.githubusercontent.com/wooorm/franc/a162cc0/logo.svg?sanitize=true
 
@@ -234,6 +262,14 @@ respectively, [Kent S. Johnson][grant-3], [Jacob R. Rideout][grant-2], and
 [grant-2]: https://github.com/wooorm/franc/issues/6#issuecomment-60196819
 
 [grant-3]: https://github.com/wooorm/franc/issues/6#issuecomment-59936827
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
+[contribute]: https://opensource.guide/how-to-contribute/
 
 [mit]: license
 

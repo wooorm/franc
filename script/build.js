@@ -384,13 +384,8 @@ function generateReadme(pack, list) {
         children: [{type: 'text', value: String(pack.name)}]
       },
       {
-        type: 'blockquote',
-        children: [
-          {
-            type: 'paragraph',
-            children: [{type: 'text', value: pack.description + '.'}]
-          }
-        ]
+        type: 'paragraph',
+        children: [{type: 'text', value: pack.description + '.'}]
       },
       {
         type: 'paragraph',
@@ -419,7 +414,7 @@ function generateReadme(pack, list) {
             url: String(mono.repository),
             children: [{type: 'text', value: 'monorepo'}]
           },
-          {type: 'text', value: ' for more packages and\nusage information.'}
+          {type: 'text', value: ' for more packages and\ninfo on using them.'}
         ]
       },
       {
@@ -438,12 +433,14 @@ function generateReadme(pack, list) {
           },
           {
             type: 'text',
-            value: ':\nNode 12+ is needed to use it and it must be\n'
+            value: '.\nIn Node.js (version 14.14+, 16.0+), install with\n'
           },
-          {type: 'inlineCode', value: 'import'},
-          {type: 'text', value: 'ed instead of '},
-          {type: 'inlineCode', value: 'require'},
-          {type: 'text', value: 'd.'}
+          {
+            type: 'link',
+            url: 'https://docs.npmjs.com/cli/install',
+            children: [{type: 'text', value: 'npm'}]
+          },
+          {type: 'text', value: ':'}
         ]
       },
       {type: 'paragraph', children: [{type: 'text', value: 'npm:'}]},
@@ -451,7 +448,7 @@ function generateReadme(pack, list) {
       {
         type: 'heading',
         depth: 2,
-        children: [{type: 'text', value: 'Support'}]
+        children: [{type: 'text', value: 'Data'}]
       },
       {
         type: 'paragraph',
