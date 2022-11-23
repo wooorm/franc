@@ -4,12 +4,14 @@
  */
 
 import process from 'node:process'
-import {createRequire} from 'node:module'
+import fs from 'node:fs/promises'
 import meow from 'meow'
 import {franc, francAll} from 'franc'
 
-const require = createRequire(import.meta.url)
-const pack = require('./package.json')
+/** @type {Record<string, unknown> & {bin: Record<string, string>}} */
+const pack = JSON.parse(
+  String(await fs.readFile(new URL('package.json', import.meta.url)))
+)
 
 const command = Object.keys(pack.bin)[0]
 

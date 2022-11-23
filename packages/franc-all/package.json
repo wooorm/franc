@@ -41,9 +41,7 @@
   "dependencies": {
     "trigram-utils": "^2.0.0"
   },
-  "scripts": {
-    "build": "rimraf \"*.d.ts\" && tsc && type-coverage"
-  },
+  "scripts": {},
   "xo": false,
   "typeCoverage": {
     "atLeast": 100,
