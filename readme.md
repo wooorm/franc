@@ -7,11 +7,11 @@ Detect the language of text.
 
 ## What’s so cool about franc?
 
-1.  **franc** can support more languages<sup>(†)</sup> than any other
-    library
-2.  **franc** is packaged with support for [82][s], [187][m], or [414][l]
-    languages
-3.  **franc** has a CLI
+1. **franc** can support more languages<sup>(†)</sup> than any other
+   library
+2. **franc** is packaged with support for [82][s], [186][m], or [419][l]
+   languages
+3. **franc** has a CLI
 
 † - Based on the [UDHR][], the most translated copyright-free document in the
 world.
@@ -87,8 +87,8 @@ Get the most probable language for the given value.
 
 ###### Parameters
 
-*   `value` (`string`) — value to test
-*   `options` (`Options`, optional) — configuration
+* `value` (`string`) — value to test
+* `options` (`Options`, optional) — configuration
 
 ###### Returns
 
@@ -100,8 +100,8 @@ Get the most probable language for the given value.
 
 ###### Parameters
 
-*   `value` (`string`) — value to test
-*   `options` (`Options`, optional) — configuration
+* `value` (`string`) — value to test
+* `options` (`Options`, optional) — configuration
 
 ###### Returns
 
@@ -203,14 +203,14 @@ They also works in Deno and modern browsers.
 
 Franc has been ported to several other programming languages.
 
-*   Elixir — [`paasaa`](https://github.com/minibikini/paasaa)
-*   Erlang — [`efranc`](https://github.com/G-Corp/efranc)
-*   Go — [`franco`](https://github.com/kapsteur/franco),
-    [`whatlanggo`](https://github.com/abadojack/whatlanggo)
-*   R — [`franc`](https://github.com/MangoTheCat/franc)
-*   Rust — [`whatlang-rs`](https://github.com/greyblake/whatlang-rs)
-*   Dart — [`francd`](https://github.com/svonidze/francd)
-*   Python — [`pyfranc`](https://github.com/cyb3rk0tik/pyfranc)
+* Elixir — [`paasaa`](https://github.com/minibikini/paasaa)
+* Erlang — [`efranc`](https://github.com/G-Corp/efranc)
+* Go — [`franco`](https://github.com/kapsteur/franco),
+  [`whatlanggo`](https://github.com/abadojack/whatlanggo)
+* R — [`franc`](https://github.com/MangoTheCat/franc)
+* Rust — [`whatlang-rs`](https://github.com/greyblake/whatlang-rs)
+* Dart — [`francd`](https://github.com/svonidze/francd)
+* Python — [`pyfranc`](https://github.com/cyb3rk0tik/pyfranc)
 
 The works franc is derived from have themselves also been ported to other
 languages.

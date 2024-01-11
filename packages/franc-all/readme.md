@@ -4,7 +4,7 @@
 
 Detect the language of text.
 
-Built with support for 414 languages.
+Built with support for 419 languages.
 
 View the [monorepo](https://github.com/wooorm/franc) for more packages and
 info on using them.
@@ -260,7 +260,6 @@ This build supports the following languages:
 | [`ltz`](http://www-01.sil.org/iso639-3/documentation.asp?id=ltz) | Luxembourgish | 336K |
 | [`lia`](http://www-01.sil.org/iso639-3/documentation.asp?id=lia) | West-Central Limba | 335K |
 | [`mlt`](http://www-01.sil.org/iso639-3/documentation.asp?id=mlt) | Maltese | 330K |
-| [`hna`](http://www-01.sil.org/iso639-3/documentation.asp?id=hna) | Mina (Cameroon) | 327K |
 | [`zdj`](http://www-01.sil.org/iso639-3/documentation.asp?id=zdj) | Ngazidja Comorian | 312K |
 | [`guc`](http://www-01.sil.org/iso639-3/documentation.asp?id=guc) | Wayuu | 305K |
 | [`qwh`](http://www-01.sil.org/iso639-3/documentation.asp?id=qwh) | Huaylas Ancash Quechua | 300K |
@@ -412,9 +411,12 @@ This build supports the following languages:
 | [`cfm`](http://www-01.sil.org/iso639-3/documentation.asp?id=cfm) | Falam Chin | unknown |
 | [`fat`](http://www-01.sil.org/iso639-3/documentation.asp?id=fat) | Fanti | unknown |
 | [`fvr`](http://www-01.sil.org/iso639-3/documentation.asp?id=fvr) | Fur | unknown |
+| [`gej`](http://www-01.sil.org/iso639-3/documentation.asp?id=gej) | Gen | unknown |
+| [`guk`](http://www-01.sil.org/iso639-3/documentation.asp?id=guk) | Gumuz | unknown |
 | [`ido`](http://www-01.sil.org/iso639-3/documentation.asp?id=ido) | Ido | unknown |
 | [`idu`](http://www-01.sil.org/iso639-3/documentation.asp?id=idu) | Idoma | unknown |
 | [`ina`](http://www-01.sil.org/iso639-3/documentation.asp?id=ina) | Interlingua (International Auxiliary Language Association) | unknown |
+| [`kbr`](http://www-01.sil.org/iso639-3/documentation.asp?id=kbr) | Kafa | unknown |
 | [`kaa`](http://www-01.sil.org/iso639-3/documentation.asp?id=kaa) | Kara-Kalpak | unknown |
 | [`kkh`](http://www-01.sil.org/iso639-3/documentation.asp?id=kkh) | Khün | unknown |
 | [`ktu`](http://www-01.sil.org/iso639-3/documentation.asp?id=ktu) | Kituba (Democratic Republic of Congo) | unknown |
@@ -430,6 +432,8 @@ This build supports the following languages:
 | [`niu`](http://www-01.sil.org/iso639-3/documentation.asp?id=niu) | Niuean | unknown |
 | [`kqs`](http://www-01.sil.org/iso639-3/documentation.asp?id=kqs) | Northern Kissi | unknown |
 | [`sey`](http://www-01.sil.org/iso639-3/documentation.asp?id=sey) | Secoya | unknown |
+| [`sid`](http://www-01.sil.org/iso639-3/documentation.asp?id=sid) | Sidamo | unknown |
+| [`azb`](http://www-01.sil.org/iso639-3/documentation.asp?id=azb) | South Azerbaijani | unknown |
 | [`ijs`](http://www-01.sil.org/iso639-3/documentation.asp?id=ijs) | Southeast Ijo | unknown |
 | [`gsw`](http://www-01.sil.org/iso639-3/documentation.asp?id=gsw) | Swiss German | unknown |
 | [`blt`](http://www-01.sil.org/iso639-3/documentation.asp?id=blt) | Tai Dam | unknown |
@@ -440,6 +444,7 @@ This build supports the following languages:
 | [`auc`](http://www-01.sil.org/iso639-3/documentation.asp?id=auc) | Waorani | unknown |
 | [`gaz`](http://www-01.sil.org/iso639-3/documentation.asp?id=gaz) | West Central Oromo | unknown |
 | [`pnb`](http://www-01.sil.org/iso639-3/documentation.asp?id=pnb) | Western Panjabi | unknown |
+| [`dje`](http://www-01.sil.org/iso639-3/documentation.asp?id=dje) | Zarma | unknown |
 | [`zro`](http://www-01.sil.org/iso639-3/documentation.asp?id=zro) | Záparo | unknown |
 
 ## License
