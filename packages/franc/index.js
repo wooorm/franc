@@ -12,11 +12,9 @@
 
 /* Load `trigram-utils`. */
 import {asTuples} from 'trigram-utils'
-
 /* Load `expressions` (regular expressions matching
  * scripts). */
 import {expressions} from './expressions.js'
-
 /* Load `data` (trigram information per language,
  * per script). */
 import {data} from './data.js'

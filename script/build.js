@@ -39,7 +39,7 @@ const scripts = unicode.Script
 
 const monorepo = new URL('../', import.meta.url)
 const packages = new URL('packages/', monorepo)
-const udhrBase = await resolve('udhr', import.meta.url)
+const udhrBase = resolve('udhr', import.meta.url)
 /** @type {PackageJson} */
 const mono = JSON.parse(
   String(await fs.readFile(new URL('package.json', monorepo)))
@@ -312,7 +312,7 @@ while (++index < files.length) {
 
       if (nodes.length === 0) {
         nodes = selectAll(
-          'body > :matches(h1, h2, h3, h4, h5, h6), header :matches(h1, h2, h3, h4, h5, h6)',
+          'body > :is(h1, h2, h3, h4, h5, h6), header :is(h1, h2, h3, h4, h5, h6)',
           tree
         )
       }
@@ -660,8 +660,8 @@ async function createTopLanguages() {
         code === 'jpn'
           ? ['Hiragana, Katakana, and Han']
           : code === 'idu'
-          ? ['Latin'] // Mostly Latin.
-          : Object.keys(scriptCounts)
+            ? ['Latin'] // Mostly Latin.
+            : Object.keys(scriptCounts)
 
       if (scripts.length > 1) {
         console.log('scripts:', scriptCounts)

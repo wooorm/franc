@@ -14,40 +14,40 @@
     "packages/franc-min"
   ],
   "devDependencies": {
-    "@types/mdast": "^3.0.0",
-    "@types/node": "^18.0.0",
+    "@types/mdast": "^4.0.0",
+    "@types/node": "^20.0.0",
     "@types/parse-author": "^2.0.0",
     "@unicode/unicode-15.0.0": "^1.0.0",
     "alpha-sort": "^5.0.0",
-    "c8": "^7.0.0",
-    "hast-util-from-html": "^1.0.0",
-    "hast-util-select": "^5.0.0",
-    "hast-util-to-string": "^2.0.0",
-    "import-meta-resolve": "^2.0.0",
+    "c8": "^9.0.0",
+    "hast-util-from-html": "^2.0.0",
+    "hast-util-select": "^6.0.0",
+    "hast-util-to-string": "^3.0.0",
+    "import-meta-resolve": "^4.0.0",
     "is-hidden": "^2.0.0",
     "iso-639-3": "^3.0.0",
     "parse-author": "^2.0.0",
-    "prettier": "^2.0.0",
-    "remark-cli": "^11.0.0",
-    "remark-gfm": "^3.0.0",
+    "prettier": "^3.0.0",
+    "remark-cli": "^12.0.0",
+    "remark-gfm": "^4.0.0",
     "remark-lint-no-heading-punctuation": "^3.0.0",
     "remark-lint-no-html": "^3.0.0",
     "remark-lint-table-pipe-alignment": "^3.0.0",
     "remark-preset-wooorm": "^9.0.0",
-    "remark-stringify": "^10.0.0",
+    "remark-stringify": "^11.0.0",
     "speakers": "^2.0.0",
     "trigrams": "^5.0.0",
     "type-coverage": "^2.0.0",
-    "type-fest": "^3.0.0",
-    "typescript": "^4.0.0",
+    "type-fest": "^4.0.0",
+    "typescript": "^5.0.0",
     "udhr": "^5.0.0",
-    "unified": "^10.0.0",
-    "xo": "^0.53.0"
+    "unified": "^11.0.0",
+    "xo": "^0.56.0"
   },
   "scripts": {
     "generate": "node --conditions development script/build.js",
     "build": "tsc --build --clean && tsc --build && type-coverage",
-    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
+    "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix",
     "test-api": "node --conditions development test/index.js",
     "test-coverage": "c8 --check-coverage --100 --reporter lcov npm run test-api",
     "test": "npm run generate && npm run build && npm run format && npm run test-coverage"
@@ -65,17 +65,26 @@
     "rules": {
       "camelcase": "off",
       "max-depth": "off",
-      "no-misleading-character-class": "off"
+      "no-misleading-character-class": "off",
+      "unicorn/prefer-string-replace-all": "off"
     }
   },
   "remarkConfig": {
     "plugins": [
       "remark-preset-wooorm",
       [
+        "remark-preset-wooorm/node_modules/remark-gfm/index.js",
+        false
+      ],
+      [
         "remark-gfm",
         {
           "tablePipeAlign": false
         }
+      ],
+      [
+        "remark-lint-list-item-indent",
+        "space"
       ],
       [
         "remark-lint-table-pipe-alignment",

@@ -42,7 +42,14 @@
     "trigram-utils": "^2.0.0"
   },
   "scripts": {},
-  "xo": false,
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "camelcase": "off",
+      "max-depth": "off",
+      "no-misleading-character-class": "off"
+    }
+  },
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
