@@ -1,16 +1,10 @@
 {
-  "name": "franc-www",
-  "private": true,
-  "license": "MIT",
-  "repository": "wooorm/franc",
-  "bugs": "https://github.com/wooorm/franc/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "bugs": "https://github.com/wooorm/franc/issues",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "type": "module",
   "devDependencies": {
-    "bail": "^2.0.0",
     "cssnano": "^6.0.0",
     "debounce": "^2.0.0",
     "esbuild": "^0.19.0",
@@ -26,38 +20,11 @@
     "stylelint": "^14.0.0",
     "stylelint-config-prettier": "^9.0.0",
     "stylelint-config-standard": "^28.0.0",
+    "undici": "^6.0.0",
     "xo": "^0.56.0"
   },
-  "scripts": {
-    "generate": "node build",
-    "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix && stylelint src/index.css --fix",
-    "build:js": "esbuild src/index.js --bundle --minify --target=es6 --outfile=dest/index.nomodule.js && esbuild src/index.js --bundle --minify --target=es2020 --format=esm --outfile=dest/index.module.js",
-    "build:css": "postcss src/index.css > dest/index.css",
-    "build:html": "rehype -u preset-minify -u prevent-favicon-request src -o dest",
-    "build": "npm run build:js && npm run build:css && npm run build:html",
-    "test": "npm run generate && npm run format && npm run build"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-prettier"
-    ]
-  },
-  "prettier": {
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
-    "bracketSpacing": false,
-    "semi": false,
-    "trailingComma": "none"
-  },
-  "xo": {
-    "prettier": true,
-    "ignore": [
-      "src/fixtures.js",
-      "src/to-name.js"
-    ]
-  },
+  "license": "MIT",
+  "name": "franc-www",
   "postcss": {
     "plugins": {
       "cssnano": {
@@ -65,9 +32,42 @@
       }
     }
   },
+  "prettier": {
+    "bracketSpacing": false,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "private": true,
   "remarkConfig": {
     "plugins": [
-      "preset-wooorm"
+      "remark-preset-wooorm"
+    ]
+  },
+  "repository": "wooorm/franc",
+  "scripts": {
+    "crawl": "node --conditions development crawl.js",
+    "format": "remark --frail --output --quiet -- . && prettier . --log-level warn --write && xo --fix && stylelint src/index.css --fix",
+    "generate:script": "esbuild src/index.js --bundle --minify --outfile=dest/index.nomodule.js --target=es6 && esbuild src/index.js --bundle --format=esm --minify --outfile=dest/index.module.js --target=es2020",
+    "generate:structure": "rehype -u rehype-preset-minify -u rehype-prevent-favicon-request src -o dest",
+    "generate:style": "postcss src/index.css > dest/index.css",
+    "generate": "npm run generate:script && npm run generate:style && npm run generate:structure",
+    "test": "npm run crawl && npm run format && npm run generate"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-prettier",
+      "stylelint-config-standard"
+    ]
+  },
+  "type": "module",
+  "xo": {
+    "prettier": true,
+    "ignore": [
+      "src/fixtures.js",
+      "src/to-name.js"
     ]
   }
 }
