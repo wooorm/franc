@@ -1,3 +1,5 @@
+*.d.ts
+*.d.ts.map
 *.log
 .DS_Store
 dest/

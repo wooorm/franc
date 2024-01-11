@@ -20,6 +20,8 @@
     "stylelint": "^14.0.0",
     "stylelint-config-prettier": "^9.0.0",
     "stylelint-config-standard": "^28.0.0",
+    "type-coverage": "^2.27.1",
+    "typescript": "^5.3.3",
     "undici": "^6.0.0",
     "xo": "^0.56.0"
   },
@@ -48,13 +50,14 @@
   },
   "repository": "wooorm/franc",
   "scripts": {
+    "build": "tsc --build --clean && tsc --build && type-coverage",
     "crawl": "node --conditions development crawl.js",
     "format": "remark --frail --output --quiet -- . && prettier . --log-level warn --write && xo --fix && stylelint src/index.css --fix",
     "generate:script": "esbuild src/index.js --bundle --minify --outfile=dest/index.nomodule.js --target=es6 && esbuild src/index.js --bundle --format=esm --minify --outfile=dest/index.module.js --target=es2020",
     "generate:structure": "rehype -u rehype-preset-minify -u rehype-prevent-favicon-request src -o dest",
     "generate:style": "postcss src/index.css > dest/index.css",
     "generate": "npm run generate:script && npm run generate:style && npm run generate:structure",
-    "test": "npm run crawl && npm run format && npm run generate"
+    "test": "npm run crawl && npm run build && npm run format && npm run generate"
   },
   "stylelint": {
     "extends": [
@@ -63,6 +66,12 @@
     ]
   },
   "type": "module",
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "strict": true
+  },
   "xo": {
     "prettier": true,
     "ignore": [

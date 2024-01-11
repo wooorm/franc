@@ -1,4 +1,5 @@
 /* eslint-env browser */
+
 import debounce from 'debounce'
 import {francAll} from 'franc'
 import {toName} from './to-name.js'
@@ -38,7 +39,7 @@ function oninputchange() {
     const c2 = document.createElement('td')
     c0.append(link)
     c1.textContent = toName[code]
-    c2.textContent = score
+    c2.textContent = String(score)
 
     $node.append(c0)
     $node.append(c1)
