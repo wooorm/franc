@@ -5,6 +5,7 @@
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "cssnano": "^6.0.0",
     "debounce": "^2.0.0",
     "esbuild": "^0.19.0",
