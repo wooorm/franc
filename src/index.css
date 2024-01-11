@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   font-family: system-ui;
-  background-color: hsl(0, 0%, 95%);
+  background-color: hsl(0deg 0% 95%);
   word-break: break-word;
 }
 
@@ -10,7 +10,7 @@ body {
 }
 
 main {
-  background-color: hsl(0, 0%, 97.5%);
+  background-color: hsl(0deg 0% 97.5%);
   position: relative;
   max-width: 40em;
   margin: 0 auto;
@@ -21,7 +21,7 @@ main {
   main {
     /* Go all Tschichold when supported */
     margin: 11.1vh 22.2vw 22.2vh 11.1vw;
-    border: 1px solid hsl(214, 13%, 90%);
+    border: 1px solid hsl(214deg 13% 90%);
     border-radius: 3px;
   }
 }
@@ -65,7 +65,7 @@ section:last-child {
 }
 
 .highlight {
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 100%);
 }
 
 * {
@@ -113,7 +113,12 @@ a:target {
 
 table,
 textarea {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+  font-family:
+    SFMono-Regular,
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
     monospace;
 }
 
@@ -140,25 +145,25 @@ textarea {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    background-color: hsl(214, 13%, 7.5%);
-    color: hsl(214, 13%, 95%);
+    background-color: hsl(214deg 13% 7.5%);
+    color: hsl(214deg 13% 95%);
   }
 
   main {
-    background-color: hsl(214, 13%, 5%);
+    background-color: hsl(214deg 13% 5%);
   }
 
   @media (min-width: 40em) and (min-height: 20em) {
     main {
-      border-color: hsl(214, 13%, 12.5%);
+      border-color: hsl(214deg 13% 12.5%);
     }
   }
 
   .highlight {
-    background-color: hsl(214, 13%, 2.5%);
+    background-color: hsl(214deg 13% 2.5%);
   }
 
   section {
-    border-color: hsl(214, 13%, 12.5%);
+    border-color: hsl(214deg 13% 12.5%);
   }
 }
